@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="my_alert">
+
+        //ค่าดัชนีมวลกาย
+        <item>น้ำหนักอยู่ในเกณฑ์ : ผอม</item>
+        <item>น้ำหนักอยู่ในเกณฑ์ : ปกติ</item>
+        <item>น้ำหนักอยู่ในเกณฑ์ : ท้วม</item>
+        <item>น้ำหนักอยู่ในเกณฑ์ : อ้วนปานกลาง</item>
+        <item>น้ำหนักอยู่ในเกณฑ์ : อ้วน</item>
+
+
+    </string-array>
+
+
+
+</resources>

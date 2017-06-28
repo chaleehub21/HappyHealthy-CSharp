@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jiraporn.nut.happyhealthy.Report"
+    android:background="#fdfbfb">
+
+
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="รายงาน"
+        android:id="@+id/textView23"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:onClick="ClickBackReMain" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center|center_horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/container_toolbar">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="180dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/my_bgdata"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:id="@+id/imageView54"
+                android:src="@drawable/datereport" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chooseDate"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="16dp"
+                android:hint="DD-MM-YYYY"
+                android:layout_marginLeft="15dp"
+                android:textStyle="bold"
+                android:textColor="#929292"
+                android:text="DD-MM-YYYY" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView55"
+                android:src="@drawable/calrories"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:id="@+id/foodcal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView75"
+                android:src="@drawable/listrf"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="5dp"
+                android:onClick="ClickFoodHis" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FoodCal"
+                android:id="@+id/tv_sum_food_cal"
+                android:textSize="14.5dp"
+                android:textColor="#f9a98a"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView56"
+                android:src="@drawable/unitcalfood"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView57"
+                android:src="@drawable/calexe"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView76"
+                android:src="@drawable/listrf2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="5dp"
+                android:onClick="ClickExeHis" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ExeCal"
+                android:id="@+id/tv_sum_ex_cal"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textSize="14.5dp"
+                android:textColor="#a4ddac"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView58"
+                android:src="@drawable/unitcalexe"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center_horizontal|right"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/protin"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="protain"
+                android:id="@+id/tv_sum_pro"
+                android:textSize="12dp"
+                android:layout_marginRight="45dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_marginTop="1dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(ควรบริโภค 30-50 กรัมต่อวัน )"
+                android:id="@+id/textView28"
+                android:layout_marginRight="10dp"
+                android:textSize="9dp"
+                android:textColor="#fefefe"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/carbohydate"
+            android:gravity="right|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="carbo"
+                android:id="@+id/tv_sum_car"
+                android:gravity="center_horizontal"
+                android:textSize="12dp"
+                android:autoText="false"
+                android:layout_marginRight="45dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_marginTop="1dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(ควรบริโภค 200-300 กรัมต่อวัน)"
+                android:id="@+id/textView29"
+                android:layout_marginRight="10dp"
+                android:textSize="9dp"
+                android:textColor="#fefefe"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/fat"
+            android:gravity="right|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fat"
+                android:id="@+id/tv_sum_fat"
+                android:layout_gravity="center_vertical|right"
+                android:textSize="12dp"
+                android:autoText="false"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="45dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(ควรบริโภค 66.6 กรัมต่อวัน)"
+                android:id="@+id/textView30"
+                android:layout_marginRight="10dp"
+                android:textSize="9dp"
+                android:textColor="#fefefe"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/sugar"
+            android:gravity="right|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sugar"
+                android:id="@+id/tv_sum_sugar"
+                android:layout_gravity="center_vertical|right"
+                android:gravity="center_horizontal"
+                android:textSize="12dp"
+                android:autoText="false"
+                android:layout_marginRight="45dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_marginTop="1dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(ไม่ควรบริโภคเกิน 40  กรัมต่อวัน)"
+                android:id="@+id/textView31"
+                android:layout_marginRight="10dp"
+                android:textSize="9dp"
+                android:textColor="#fefefe"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/sodium"
+            android:gravity="right|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sodium"
+                android:id="@+id/tv_sum_sodium"
+                android:layout_gravity="center_vertical|right"
+                android:gravity="center_horizontal"
+                android:textSize="12dp"
+                android:layout_marginRight="45dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_marginTop="1dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(ไม่ควรบริโภคเกิน 2,300 มิลลิกรัมต่อวัน)"
+                android:id="@+id/textView32"
+                android:layout_marginRight="10dp"
+                android:textSize="9dp"
+                android:textColor="#fefefe"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@drawable/sumtotal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TotalCal"
+                android:id="@+id/totalCal"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

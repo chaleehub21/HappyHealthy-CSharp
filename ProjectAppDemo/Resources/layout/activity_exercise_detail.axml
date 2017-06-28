@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jiraporn.nut.happyhealthy.FoodDetail"
+    android:background="#ffffff">
+
+
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbarexe" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/imageView45"
+        android:src="@drawable/arowback"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="3dp"
+        android:onClick="ClickBackExeDetailHome" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="บันทึกออกกำลังกาย"
+        android:id="@+id/textView26"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#ffffff" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="tv_exercise_name"
+            android:id="@+id/tv_exercise_name"
+            android:layout_weight="1"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:textColor="#a4ddac" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/my_bg_saveexe_name"
+        android:gravity="center_vertical|center_horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:text="tv_exercise_calories"
+            android:id="@+id/tv_exercise_calories"
+            android:textSize="20dp"
+            android:background="@drawable/my_bg_saveexe_name"
+            android:layout_gravity="center_vertical"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:gravity="center_vertical|center_horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="215dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/my_bg_saveexe_name"
+        android:id="@+id/linearLayout10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="พลังงาน(กิโลแคลอรี่)"
+            android:id="@+id/textView17"
+            android:textSize="13dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="3dp"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="214.5dp"
+        android:id="@+id/linearLayout4"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/my_bg_saveexe_name">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="เซท"
+            android:id="@+id/textView16"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/my_bg_saveexe_name"
+            android:layout_marginBottom="3dp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/my_bg_saveexe_name"
+        android:gravity="center_vertical|center_horizontal">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/et_exe2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="20dp"
+            android:background="@drawable/my_bg_saveexe_name"
+            android:text="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recExe"
+        android:src="@drawable/buttonsaveexe"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false"
+        android:orientation="vertical"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_exe_dis"
+            android:layout_gravity="bottom|center_horizontal"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#a4ddac" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false"
+        android:orientation="vertical"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_marginTop="110dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_exe_detail"
+            android:layout_gravity="bottom|center_horizontal"
+            android:textSize="13dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false"
+        android:orientation="vertical"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="7dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_exe_des"
+            android:layout_gravity="bottom|center_horizontal"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:text="ขอบคุณ : ข้อมูลจากแอพพลิเคชั่น FoodiEat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#a4ddac"
+        android:id="@+id/textView44"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_above="@+id/recExe"
+        android:layout_alignRight="@+id/linearLayout10"
+        android:layout_alignEnd="@+id/linearLayout10" />
+
+
+</RelativeLayout>

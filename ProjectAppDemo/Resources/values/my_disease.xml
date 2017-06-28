@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="my_disease">
+
+        //ค่าน้ำตาลในลือด
+
+        <item>พบแพทย์ทันที น้ำตาลในเลือดสูงมาก (อันตราย)</item>
+        <item>รีบปรึกษาแพทย์ น้ำตาลในเลือดสูง</item>
+        <item>ปรึกษาแพทย์ น้ำตาลในเลือดค่อนข้างสูง </item>
+        <item>น้ำตาลในเลือดปกติ</item>
+        <item>พบแพทย์ทันที น้ำตาลในเลือดต่ำ (อันตราย)</item>
+
+    </string-array>
+
+</resources>
