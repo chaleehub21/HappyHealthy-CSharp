@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("ProjectAppDemo.Resource", IsApplication=true)]
 
-namespace HappyHealthyCSharp
+namespace ProjectAppDemo
 {
 	
 	
