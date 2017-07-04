@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
+using SQLite;
 namespace HappyHealthyCSharp
 {
-    [Activity]
-    class User : Activity
+    class Database
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        public static string DB_NAME = "HHSQLITE.db3";
+        public static int DB_VERSION = 1;
+        public Database(Context context)
         {
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_user);
+
         }
     }
 }

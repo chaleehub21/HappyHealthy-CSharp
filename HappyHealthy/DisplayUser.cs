@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace ProjectAppDemo
+namespace HappyHealthyCSharp
 {
     [Activity]
     class DisplayUser : Activity
