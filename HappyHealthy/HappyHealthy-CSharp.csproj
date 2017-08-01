@@ -26,10 +26,12 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <AndroidSupportedAbis />
+    <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
@@ -83,11 +85,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidImageAdapter.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Develop.cs" />
     <Compile Include="Diabetes.cs" />
     <Compile Include="DisplayUser.cs" />
     <Compile Include="ExerciseType.cs" />
+    <Compile Include="FoodDetail.cs" />
+    <Compile Include="FoodHistoryTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />
     <Compile Include="Food_Type_1.cs" />
     <Compile Include="GlobalFunction.cs" />
@@ -99,6 +104,7 @@
     <Compile Include="Report.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashScreen.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +138,9 @@
     <AndroidResource Include="Resources\layout\activity_home.axml" />
     <AndroidResource Include="Resources\layout\activity_intro_healthy.axml" />
     <AndroidResource Include="Resources\layout\activity_kidney.axml" />
-    <AndroidResource Include="Resources\layout\activity_main.axml" />
+    <AndroidResource Include="Resources\layout\activity_main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_pressure.axml" />
     <AndroidResource Include="Resources\layout\activity_report.axml" />
     <AndroidResource Include="Resources\layout\activity_splash_screen.axml" />

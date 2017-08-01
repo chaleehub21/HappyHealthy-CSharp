@@ -9,16 +9,61 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.Util;
+using Java.Text;
 
 namespace HappyHealthyCSharp
 {
-    [Activity]
+    [Activity(Theme = "@style/MyMaterialTheme.Base")]
     class Report : Activity
     {
+        DatePickerDialog mDatePicker;
+        Calendar mCarlendar;
+        Calendar c;
+        SimpleDateFormat df_show, dfm, dfm_insert;
+        string sysDate;
+        string textDate;
+        TextView chooseDate, totalCal, totalFood, totalExe, protein, carbo, fat, sugar, sodium;
+        FoodHistoryTABLE foodHistoryTable;
+        Dictionary<string, string> data;
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            //SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             SetContentView(Resource.Layout.activity_report);
+            dfm = new SimpleDateFormat("dd-MMMM-yyyy");
+            dfm_insert = new SimpleDateFormat("yyyy-MM-dd");
+            c = Calendar.GetInstance(Java.Util.TimeZone.GetTimeZone("GMT+7"));
+            sysDate = dfm_insert.Format(c.Time) + "%";
+            textDate = dfm.Format(c.Time);
+            mCarlendar = Calendar.GetInstance(Java.Util.TimeZone.GetTimeZone("GMT+7"));
+            chooseDate = FindViewById<TextView>(Resource.Id.chooseDate);
+            totalCal = FindViewById<TextView>(Resource.Id.totalCal);
+            totalFood = FindViewById<TextView>(Resource.Id.tv_sum_food_cal);
+            totalExe = FindViewById<TextView>(Resource.Id.tv_sum_ex_cal);
+            protein = FindViewById<TextView>(Resource.Id.tv_sum_pro);
+            carbo = FindViewById<TextView>(Resource.Id.tv_sum_car);
+            fat = FindViewById<TextView>(Resource.Id.tv_sum_fat);
+            sugar = FindViewById<TextView>(Resource.Id.tv_sum_sugar);
+            sodium = FindViewById<TextView>(Resource.Id.tv_sum_sodium);
+            foodHistoryTable = new FoodHistoryTABLE();
+            setvalue(sysDate);
+            chooseDate.Click += delegate {
+                mDatePicker = new DatePickerDialog(this,delegate {
+                    mCarlendar.Set(mDatePicker.DatePicker.Year,mDatePicker.DatePicker.Month,mDatePicker.DatePicker.DayOfMonth);
+                    Date date = mCarlendar.Time;
+                    textDate = dfm.Format(date);
+                    sysDate = dfm_insert.Format(date) + "%";
+                    setvalue(sysDate);
+                }, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                mDatePicker.Show();
+            };
+            
+        }
+        public void setvalue(string dateChoose)
+        {
+            chooseDate.SetText(textDate.ToCharArray(), 0, textDate.Length);
         }
     }
 }

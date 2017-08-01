@@ -12,7 +12,7 @@ using Java.Interop;
 
 namespace HappyHealthyCSharp
 {
-    [Activity]
+    [Activity(Theme = "@style/MyMaterialTheme.Base")]
     class Home : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

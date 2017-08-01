@@ -3,10 +3,11 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using Android.Renderscripts;
+using System.IO;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Main Activity", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Happy Healthy (Alpha)", MainLauncher = false, Icon = "@drawable/icon")]
     
     public class MainActivity : TabActivity
     {
@@ -14,14 +15,13 @@ namespace HappyHealthyCSharp
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             base.OnCreate(bundle);
-            // Set our view from the "main" layout resource
-            // SetContentView (Resource.Layout.Main);
-            SetContentView(Resource.Layout.activity_main);
-            CreateTab(typeof(Home), "Home", "Home", Resource.Drawable.ic_home);
-            CreateTab(typeof(Report),"Report", "Report", Resource.Drawable.ic_report);
-            CreateTab(typeof(User), "FoodExe", "AlertHealthy", Resource.Drawable.ic_foodexe);
-            CreateTab(typeof(IntroHealthy), "SaveDia", "Intro", Resource.Drawable.ic_heart);
-            CreateTab(typeof(DisplayUser), "User", "User", Resource.Drawable.ic_user);
+            GlobalFunction.setPreference("dbPath", Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Database.DB_NAME), this);
+            GlobalFunction.dbPath = GlobalFunction.getPreference("dbPath", null, this);
+            CreateTab(typeof(Home), "Home", "", Resource.Drawable.ic_home);
+            CreateTab(typeof(Report), "Report", "", Resource.Drawable.ic_report);
+            CreateTab(typeof(User), "AlertHealthy", "", Resource.Drawable.ic_foodexe);
+            CreateTab(typeof(IntroHealthy), "Intro","" , Resource.Drawable.ic_heart);
+            CreateTab(typeof(DisplayUser), "User", "", Resource.Drawable.ic_user);
             #region FuckingComment
             /*
             var tabHost = FindViewById<TabHost>(Resource.Id.tabhost);                   

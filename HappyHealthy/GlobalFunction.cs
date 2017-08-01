@@ -9,11 +9,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
+using Android.Speech.Tts;
 namespace HappyHealthyCSharp
 {
-    public static class GlobalFunction
+    public class GlobalFunction
     {
+        public static string dbPath = "";
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
@@ -29,7 +30,6 @@ namespace HappyHealthyCSharp
                 .SetNegativeButton(cancelActionMessage, cancelAction);
             return nDLG;
         }
-        
         public static void setPreference(string key, string value, Context c)
         {
             ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(c);
@@ -82,6 +82,14 @@ namespace HappyHealthyCSharp
         {
             ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(c);
             prefs.Edit().Clear().Commit();
+        }
+        public static string stringValidation<T>(T t)
+        {
+            if (ReferenceEquals(t,null))
+            {
+                return "";
+            }
+            return t.ToString();
         }
     }
 }
