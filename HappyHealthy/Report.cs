@@ -11,12 +11,19 @@ using Android.Views;
 using Android.Widget;
 using Java.Util;
 using Java.Text;
+using OxyPlot.Xamarin.Android;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace HappyHealthyCSharp
 {
+    
     [Activity(Theme = "@style/MyMaterialTheme.Base")]
+    
     class Report : Activity
     {
+        #region deprecation_code
+        /*
         DatePickerDialog mDatePicker;
         Calendar mCarlendar;
         Calendar c;
@@ -65,5 +72,33 @@ namespace HappyHealthyCSharp
         {
             chooseDate.SetText(textDate.ToCharArray(), 0, textDate.Length);
         }
+        */
+        #endregion
+
+        public MyClass myClass;
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            RequestWindowFeature(WindowFeatures.NoTitle);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            sqlconn.Open();
+            var query = $@"SELECT food_carbohydrate FROM Food";
+            var tickets = new DataSet();
+            var adapter = new MySqlDataAdapter(query, sqlconn);
+            var float_Dataset = new List<double>();
+            adapter.Fill(tickets, "Food");
+            foreach (DataRow x in tickets.Tables["Food"].Rows)
+            {
+                float_Dataset.Add(Convert.ToDouble(x[0].ToString()));
+            }
+            myClass = new MyClass("ทดสอบส่งพารามิเตอร์ label",float_Dataset);
+            var plotView = new PlotView(this)
+            {
+                Model = myClass.MyModel
+            };
+            AddContentView(plotView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent));
+            //AddContentView(new PlotView(this) { Model = new MyClass().MyModel }, new ViewGroup.LayoutParams(200, 200));
+        }
     }
+    
 }

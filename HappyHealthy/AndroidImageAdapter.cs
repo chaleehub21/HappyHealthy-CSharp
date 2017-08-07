@@ -48,7 +48,6 @@ namespace HappyHealthyCSharp
         }
         public override void DestroyItem(View container, int position, Java.Lang.Object objectValue)
         {
-            GC.Collect();
             var viewPager = container.JavaCast<ViewPager>();
             viewPager.RemoveView(objectValue as View);
         }

@@ -10,7 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using SQLite;
+using MySql.Data.MySqlClient;
 using System.IO;
+using System.Data;
 
 namespace HappyHealthyCSharp
 {
@@ -49,8 +51,33 @@ namespace HappyHealthyCSharp
         }
         public JavaList<IDictionary<string,object>> getFoodList(string word,Context c = null)
         {
-            conn = new SQLiteConnection(GlobalFunction.dbPath);
+            //conn = new SQLiteConnection(GlobalFunction.dbPath);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            sqlconn.Open();
             var foodList = new JavaList<IDictionary<string, object>>();
+            var query = $@"SELECT * FROM Food where Food_NAME LIKE '%{word}%'";
+            var tickets = new DataSet();
+            var adapter = new MySqlDataAdapter(query, sqlconn);
+            adapter.Fill(tickets, "Food");
+            foreach(DataRow x in tickets.Tables["Food"].Rows)
+            {
+                var food = new JavaDictionary<string, object>();
+                food.Add("food_id", GlobalFunction.stringValidation(x[0].ToString()));
+                food.Add("food_name", GlobalFunction.stringValidation(x[1].ToString()));
+                food.Add("food_calories", GlobalFunction.stringValidation(x[3].ToString()));
+                food.Add("food_unit", GlobalFunction.stringValidation(x[4].ToString()));
+                food.Add("food_netweight", GlobalFunction.stringValidation(x[5].ToString()));
+                food.Add("food_netunit", GlobalFunction.stringValidation(x[6].ToString()));
+                food.Add("food_protein", GlobalFunction.stringValidation(x[7].ToString()));
+                food.Add("food_fat", GlobalFunction.stringValidation(x[8].ToString()));
+                food.Add("food_carbyhydrate", GlobalFunction.stringValidation(x[9].ToString()));
+                food.Add("food_sugars", GlobalFunction.stringValidation(x[10].ToString()));
+                food.Add("food_sodium", GlobalFunction.stringValidation(x[11].ToString()));
+                food.Add("food_detail", GlobalFunction.stringValidation(x[12].ToString()));
+                foodList.Add(food);
+            }
+            #region SQLiteMethodology
+            /*
             var query = $@"SELECT * FROM FoodTABLE where Food_NAME LIKE '%{word}%'";
             var backFromSQL = conn.Query<FoodTABLE>(query);
             backFromSQL.ForEach(x =>
@@ -71,6 +98,9 @@ namespace HappyHealthyCSharp
                 foodList.Add(food);
             });
             conn.Close();
+            */
+            #endregion
+            sqlconn.Close();
             return foodList;
         }
         public async void InsertToSQL(FoodTABLE foodinstance,string just_to_make_overload)
@@ -82,6 +112,8 @@ namespace HappyHealthyCSharp
         } //experiment method
         public Dictionary<string,string> selectDetailByID(int id)
         {
+            #region deprecated
+            /*
             conn = new SQLiteConnection(GlobalFunction.dbPath);
             var data = conn.Query<FoodTABLE>($@"SELECT * FROM FoodTABLE where Food_ID = {id}");
             var retValue = new Dictionary<string, string>() {
@@ -100,6 +132,34 @@ namespace HappyHealthyCSharp
 
             };
             conn.Close();
+            return retValue;
+            */
+            #endregion
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            sqlconn.Open();
+            var query = $@"SELECT * FROM Food where Food_ID = {id}";
+            var tickets = new DataSet();
+            var adapter = new MySqlDataAdapter(query, sqlconn);
+            adapter.Fill(tickets, "Food");
+            var retValue = new Dictionary<string, string>();
+            foreach (DataRow x in tickets.Tables["Food"].Rows)
+            {
+                retValue = new Dictionary<string, string>()
+                {
+                   {"food_id", GlobalFunction.stringValidation(x[0].ToString()) },
+                   {"food_name", GlobalFunction.stringValidation(x[1].ToString()) },
+                   {"food_calories", GlobalFunction.stringValidation(x[3].ToString()) },
+                   {"food_unit", GlobalFunction.stringValidation(x[4].ToString()) },
+                   {"food_netweight", GlobalFunction.stringValidation(x[5].ToString()) },
+                   {"food_netunit", GlobalFunction.stringValidation(x[6].ToString()) },
+                   {"food_protein", GlobalFunction.stringValidation(x[7].ToString()) },
+                   {"food_fat", GlobalFunction.stringValidation(x[8].ToString()) },
+                   {"food_carbohydrate", GlobalFunction.stringValidation(x[9].ToString()) },
+                   {"food_sugars", GlobalFunction.stringValidation(x[10].ToString()) },
+                   {"food_sodium", GlobalFunction.stringValidation(x[11].ToString())},
+                   { "food_detail", GlobalFunction.stringValidation(x[12].ToString())}
+            };
+            }
             return retValue;
         }
     }
