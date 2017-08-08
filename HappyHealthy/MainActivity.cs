@@ -1,4 +1,4 @@
-﻿//test comment
+﻿
 using Android.App;
 using Android.Widget;
 using Android.OS;
