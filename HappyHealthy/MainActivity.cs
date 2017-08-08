@@ -1,4 +1,4 @@
-﻿//this one is supposed to be visible at pull request
+﻿//asking one more time to merge pull request from fork repo
 using Android.App;
 using Android.Widget;
 using Android.OS;
