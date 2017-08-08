@@ -1,4 +1,4 @@
-﻿//comment
+﻿//this one is supposed to be visible at pull request
 using Android.App;
 using Android.Widget;
 using Android.OS;
