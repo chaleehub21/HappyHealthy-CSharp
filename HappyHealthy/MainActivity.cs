@@ -1,5 +1,4 @@
-﻿//asking one more time to merge pull request from fork repo
-using Android.App;
+﻿using Android.App;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
