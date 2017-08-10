@@ -224,7 +224,7 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/my_box_dis" />
+                android:background="@drawable/my_box_dis"/>
         </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"

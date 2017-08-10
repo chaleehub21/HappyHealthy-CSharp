@@ -256,7 +256,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:background="@drawable/my_box_dis"
                 android:layout_marginTop="0.0dp"
-                android:layout_marginBottom="0.0dp" />
+                android:layout_marginBottom="0.0dp"/>
         </LinearLayout>
         <ImageView
             android:layout_width="fill_parent"
