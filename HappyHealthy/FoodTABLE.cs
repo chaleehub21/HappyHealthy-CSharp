@@ -22,8 +22,8 @@ namespace HappyHealthyCSharp
         [PrimaryKey,AutoIncrement]
         public int Food_ID { get; set; }
         public string Food_NAME { get; set; }
-        public double Food_CAL { get; set; }
         public string Food_AMT { get; set; }
+        public double Food_CAL { get; set; }
         public string Food_UNIT { get; set; }
         public string Food_NET_WEIGHT { get; set; }
         public string Food_NET_UNIT { get; set; }
@@ -38,16 +38,32 @@ namespace HappyHealthyCSharp
         SQLiteConnection conn = null;
         public FoodTABLE()
         {
-            conn = new SQLiteConnection(GlobalFunction.dbPath);
-            conn.CreateTable<FoodTABLE>();
-            conn.Close();
+            //conn = new SQLiteConnection(GlobalFunction.dbPath);
+            //conn.CreateTable<FoodTABLE>();
+            //conn.Close();
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
-        public int InsertToSQL(FoodTABLE foodinstance)
+        public bool InsertToSQL(FoodTABLE foodinstance)
         {
+            #region deprecated
+            /*
             var conn = new SQLiteConnection(GlobalFunction.dbPath);
             conn.CreateTable<FoodTABLE>();
             return conn.Insert(foodinstance);
+            */
+            #endregion
+            try
+            {
+                var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+                var command = sqlconn.CreateCommand();
+                command.CommandText = $@"INSERT INTO FOOD VALUES(null,'{foodinstance.Food_NAME}',null,{foodinstance.Food_CAL},'{foodinstance.Food_UNIT}',{foodinstance.Food_NET_WEIGHT},'{foodinstance.Food_NET_UNIT}',{foodinstance.Food_PROTEIN},{foodinstance.Food_FAT},{foodinstance.Food_CARBOHYDRATE},{foodinstance.Food_SUGAR},{foodinstance.Food_SODIUM},'{foodinstance.Food_Detail}');";
+                sqlconn.Open();
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch {
+                return false;
+            }
         }
         public JavaList<IDictionary<string,object>> getFoodList(string word,Context c = null)
         {
@@ -70,13 +86,13 @@ namespace HappyHealthyCSharp
                 food.Add("food_netunit", GlobalFunction.stringValidation(x[6].ToString()));
                 food.Add("food_protein", GlobalFunction.stringValidation(x[7].ToString()));
                 food.Add("food_fat", GlobalFunction.stringValidation(x[8].ToString()));
-                food.Add("food_carbyhydrate", GlobalFunction.stringValidation(x[9].ToString()));
+                food.Add("food_carbohydrate", GlobalFunction.stringValidation(x[9].ToString()));
                 food.Add("food_sugars", GlobalFunction.stringValidation(x[10].ToString()));
                 food.Add("food_sodium", GlobalFunction.stringValidation(x[11].ToString()));
                 food.Add("food_detail", GlobalFunction.stringValidation(x[12].ToString()));
                 foodList.Add(food);
             }
-            #region SQLiteMethodology
+            #region deprecated
             /*
             var query = $@"SELECT * FROM FoodTABLE where Food_NAME LIKE '%{word}%'";
             var backFromSQL = conn.Query<FoodTABLE>(query);
@@ -103,12 +119,22 @@ namespace HappyHealthyCSharp
             sqlconn.Close();
             return foodList;
         }
-        public async void InsertToSQL(FoodTABLE foodinstance,string just_to_make_overload)
+        [System.Obsolete]
+        public void InsertToSQL(string insert_statement)
         {
+            #region deprecated
+            /*
             var conn = new SQLiteAsyncConnection(GlobalFunction.dbPath);
             await conn.CreateTableAsync<FoodTABLE>();
             int retRecord = await conn.InsertAsync(foodinstance);
-            
+            */
+            #endregion
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var command = sqlconn.CreateCommand();
+            command.CommandText = $@"INSERT INTO FOOD VALUES()";
+            sqlconn.Open();
+            command.ExecuteNonQuery();
+
         } //experiment method
         public Dictionary<string,string> selectDetailByID(int id)
         {
@@ -158,8 +184,9 @@ namespace HappyHealthyCSharp
                    {"food_sugars", GlobalFunction.stringValidation(x[10].ToString()) },
                    {"food_sodium", GlobalFunction.stringValidation(x[11].ToString())},
                    { "food_detail", GlobalFunction.stringValidation(x[12].ToString())}
-            };
+                };
             }
+            sqlconn.Close();
             return retValue;
         }
     }

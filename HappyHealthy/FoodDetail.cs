@@ -11,12 +11,14 @@ using Android.Views;
 using Android.Widget;
 using Java.Text;
 using Java.Util;
+using Android.Speech.Tts;
 
 namespace HappyHealthyCSharp
 {
     [Activity]
-    public class FoodDetail : Activity
+    public class FoodDetail : Activity 
     {
+        
         FoodTABLE foodTABLE;
         //FoodHistoryTABLE foodHistoryTABLE;
         Dictionary<string, string> detailFood;
@@ -29,6 +31,7 @@ namespace HappyHealthyCSharp
         TextView f_name, f_cal, f_unit, f_netweight, f_netunit, f_pro, f_fat, f_car, f_sugar, f_sodium, f_amount, f_detail;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_food_detail);
@@ -68,9 +71,11 @@ namespace HappyHealthyCSharp
                 SetFoodDetail(total);
             };
             detailFood = foodTABLE.selectDetailByID(Intent.GetIntExtra("food_id", 0));
+
             SetFoodDetail(total);
             //GlobalFunction.createDialog(this, Intent.GetIntExtra("food_id", 0).ToString()).Show();
             // Create your application here
+
         }
         public void SetFoodDetail(double t)
         {
@@ -85,6 +90,13 @@ namespace HappyHealthyCSharp
             f_sugar.Text = (Convert.ToDouble(detailFood["food_sugars"]) * t).ToString();
             f_sodium.Text = (Convert.ToDouble(detailFood["food_sodium"]) * t).ToString();
             f_detail.Text = detailFood["food_detail"];
+            
         }
+        protected override void OnPause()
+        {
+            base.OnPause();
+            Finish();
+        }
+
     }
 }

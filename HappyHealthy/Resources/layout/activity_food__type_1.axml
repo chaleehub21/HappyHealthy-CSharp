@@ -37,15 +37,6 @@
         android:textStyle="bold"
         android:textColor="#ffffff" />
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        app:srcCompat="@drawable/buttonadd"
-        android:id="@+id/imageViewfoodadd"
-        android:layout_marginRight="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:onClick="ClickAddFood" />
-    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/imageView44"
@@ -68,12 +59,12 @@
         android:layout_marginTop="10dp"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
-        android:layout_width="200dp" />
+        android:layout_width="225dp" />
     <Button
         android:id="@+id/bFoodSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ค้นหา"
+        android:text="เพิ่มรายการ"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_alignParentRight="true"

@@ -74,30 +74,45 @@ namespace HappyHealthyCSharp
         }
         */
         #endregion
+            
 
         public MyClass myClass;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             RequestWindowFeature(WindowFeatures.NoTitle);
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
-            sqlconn.Open();
-            var query = $@"SELECT food_carbohydrate FROM Food";
-            var tickets = new DataSet();
-            var adapter = new MySqlDataAdapter(query, sqlconn);
-            var float_Dataset = new List<double>();
-            adapter.Fill(tickets, "Food");
-            foreach (DataRow x in tickets.Tables["Food"].Rows)
+            try
             {
-                float_Dataset.Add(Convert.ToDouble(x[0].ToString()));
+                var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+                sqlconn.Open();
+                var query = $@"SELECT food_carbohydrate FROM Food";
+                var tickets = new DataSet();
+                var adapter = new MySqlDataAdapter(query, sqlconn);
+                var float_Dataset = new List<double>();
+                adapter.Fill(tickets, "Food");
+                foreach (DataRow x in tickets.Tables["Food"].Rows)
+                {
+                    float_Dataset.Add(Convert.ToDouble(x[0].ToString()));
+                }
+                myClass = new MyClass("ทดสอบส่งพารามิเตอร์ label", float_Dataset);
+                var plotView = new PlotView(this)
+                {
+                    Model = myClass.MyModel
+                };
+                AddContentView(plotView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent));
             }
-            myClass = new MyClass("ทดสอบส่งพารามิเตอร์ label",float_Dataset);
-            var plotView = new PlotView(this)
+            catch
             {
-                Model = myClass.MyModel
-            };
-            AddContentView(plotView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent));
+                GlobalFunction.createDialog(this, "กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต").Show();
+
+            }
+            
+            
             //AddContentView(new PlotView(this) { Model = new MyClass().MyModel }, new ViewGroup.LayoutParams(200, 200));
+        }
+        protected override void OnPause()
+        {
+            base.OnPause();
         }
     }
     

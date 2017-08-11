@@ -15,7 +15,8 @@ namespace HappyHealthyCSharp
     public class GlobalFunction
     {
         public static string dbPath = "";
-        public static string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";
+        public static string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
+        //public static string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
@@ -86,6 +87,10 @@ namespace HappyHealthyCSharp
         }
         public static string stringValidation<T>(T t)
         {
+            if(Double.TryParse(t.ToString(),out double val) == true)
+            {
+                return (Math.Round(Convert.ToDouble(t), 2)).ToString();
+            }
             if (ReferenceEquals(t,null))
             {
                 return "";
