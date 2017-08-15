@@ -119,7 +119,7 @@
             android:layout_height="90dp"
             android:id="@+id/imageView9"
             android:src="@drawable/menu_doctor"
-            android:onClick="ClickPill"
+            android:onClick="ClickDoc"
             android:layout_weight="1"
             android:layout_marginLeft="11.6dp"
             android:layout_marginRight="11.6dp" />

@@ -65,10 +65,10 @@
         android:orientation="vertical"
         android:textSize="18sp"
         android:background="@color/bgSearch"
-        android:layout_marginTop="57.0dp"
+        android:layout_marginTop="10dp"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
-        android:layout_width="225dp" />
+        android:layout_width="200dp" />
     <Button
         android:id="@+id/bFoodSearch"
         android:layout_width="wrap_content"
