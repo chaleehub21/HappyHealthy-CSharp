@@ -39,7 +39,7 @@
     <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
-        app:srcCompat="@drawable/buttonadd"
+        android:src="@drawable/buttonadd"
         android:id="@+id/imageViewfoodadd"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
@@ -65,7 +65,7 @@
         android:orientation="vertical"
         android:textSize="18sp"
         android:background="@color/bgSearch"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="57.0dp"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
         android:layout_width="200dp" />

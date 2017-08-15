@@ -95,15 +95,34 @@
         android:layout_alignParentLeft="false"
         android:layout_alignParentBottom="false"
         android:layout_alignParentRight="false"
-        android:layout_marginTop="370dp"
-        android:layout_weight="1">
+        android:layout_marginTop="360dp">
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="90dp"
-            android:id="@+id/imageView11"
-            android:src="@drawable/diiiiii"
-            android:onClick="ClickExe"
-            android:layout_weight="1" />
+            android:id="@+id/imageView8"
+            android:src="@drawable/menu_pill"
+            android:onClick="ClickPill"
+            android:layout_weight="1"
+            android:layout_marginLeft="11.6dp"
+            android:layout_marginRight="11.6dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/line6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_marginTop="430dp">
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="90dp"
+            android:id="@+id/imageView9"
+            android:src="@drawable/menu_doctor"
+            android:onClick="ClickPill"
+            android:layout_weight="1"
+            android:layout_marginLeft="11.6dp"
+            android:layout_marginRight="11.6dp" />
     </LinearLayout>
     <ImageView
         android:layout_width="wrap_content"
