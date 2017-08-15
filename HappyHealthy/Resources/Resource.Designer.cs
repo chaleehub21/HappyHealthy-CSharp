@@ -2607,8 +2607,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0c00f1
 			public const int imageView43 = 2131493105;
 			
-			// aapt resource value: 0x7f0c00f5
-			public const int imageView44 = 2131493109;
+			// aapt resource value: 0x7f0c00f6
+			public const int imageView44 = 2131493110;
 			
 			// aapt resource value: 0x7f0c0053
 			public const int imageView45 = 2131492947;
@@ -2724,8 +2724,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0c011c
 			public const int imageView9 = 2131493148;
 			
-			// aapt resource value: 0x7f0c00f6
-			public const int imageViewfoodadd = 2131493110;
+			// aapt resource value: 0x7f0c00f5
+			public const int imageViewfoodadd = 2131493109;
 			
 			// aapt resource value: 0x7f0c00c6
 			public const int imageViewsugatafter = 2131493062;
