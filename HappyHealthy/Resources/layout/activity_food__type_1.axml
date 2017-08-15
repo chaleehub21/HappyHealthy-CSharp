@@ -37,6 +37,15 @@
         android:textStyle="bold"
         android:textColor="#ffffff" />
     <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/buttonadd"
+        android:id="@+id/imageViewfoodadd"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:onClick="ClickAddFood" />
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/imageView44"
@@ -56,7 +65,7 @@
         android:orientation="vertical"
         android:textSize="18sp"
         android:background="@color/bgSearch"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="57.0dp"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
         android:layout_width="225dp" />
