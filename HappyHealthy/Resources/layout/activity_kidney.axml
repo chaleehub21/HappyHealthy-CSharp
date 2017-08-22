@@ -104,7 +104,7 @@
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/K_costGFR"
+                android:id="@+id/ckd_gfr"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
@@ -140,7 +140,7 @@
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/K_BUN"
+                android:id="@+id/ckd_bun"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
@@ -176,7 +176,7 @@
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/K_creatinine"
+                android:id="@+id/ckd_creatinine"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
@@ -212,7 +212,7 @@
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/K_potassium"
+                android:id="@+id/ckd_potassium"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
@@ -233,7 +233,7 @@
             <TextView
                 android:layout_width="80.0dp"
                 android:layout_height="30.0dp"
-                android:text="ค่า Phosphorus"
+                android:text="ค่า Sodium"
                 android:id="@+id/textViewPhos"
                 android:layout_centerHorizontal="true"
                 android:textSize="10dp"
@@ -248,7 +248,7 @@
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/K_sodium"
+                android:id="@+id/ckd_sodium"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
@@ -256,7 +256,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:background="@drawable/my_box_dis"
                 android:layout_marginTop="0.0dp"
-                android:layout_marginBottom="0.0dp"/>
+                android:layout_marginBottom="0.0dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="fill_parent"
