@@ -36,7 +36,7 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_display_user);
             //instatantiate widget control
-            conn = new SQLiteConnection(GlobalFunction.dbPath);
+            //conn = new SQLiteConnection(GlobalFunction.dbPath);
             TVName = FindViewById<EditText>(Resource.Id.tv_Name);
             TVAge = FindViewById<EditText>(Resource.Id.tv_Age);
             TVWeight = FindViewById<EditText>(Resource.Id.tv_Weight);

@@ -27,25 +27,20 @@ namespace HappyHealthyCSharp
         {
             StartActivity(new Intent(this, typeof(Food_Type_1)));
         }
-        [Export("ClickExe")]
-        public void ClickExe(View v)
-        {
-            StartActivity(new Intent(this, typeof(ExerciseType)));
-        }
         [Export("ClickDiabetes")]
         public void ClickDiabetes(View v)
         {
-            StartActivity(new Intent(this, typeof(Diabetes)));
+            StartActivity(new Intent(this, typeof(History_Diabetes)));
         }
         [Export("ClickKidney")]
         public void ClickKidney(View v)
         {
-            StartActivity(new Intent(this, typeof(Kidney)));
+            StartActivity(new Intent(this, typeof(History_Kidney)));
         }
         [Export("ClickPressure")]
         public void ClickPressure(View v)
         {
-            StartActivity(new Intent(this, typeof(Pressure)));
+            StartActivity(new Intent(this, typeof(History_Pressure)));
         }
         [Export("ClickDevelop")]
         public void ClickDevelop(View v)

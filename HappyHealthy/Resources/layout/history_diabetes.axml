@@ -2,14 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#f9eefb">
-
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -19,7 +16,6 @@
             android:src="@drawable/calender"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp" />
-
         <TextView
             android:id="@+id/date"
             android:layout_width="match_parent"
@@ -34,12 +30,4 @@
             android:hint="DD-MM-YYYY  HH:MM"
             android:textColor="#8e8e8e" />
     </LinearLayout>
-
-
 </RelativeLayout>
-
-
-
-
-
-
