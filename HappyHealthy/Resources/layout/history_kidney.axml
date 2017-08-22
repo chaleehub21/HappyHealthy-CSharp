@@ -3,15 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal">
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#f7fafb"
         android:layout_marginTop="2dp">
-
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -21,7 +18,6 @@
             android:src="@drawable/calender"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp" />
-
         <TextView
             android:id="@+id/dateKidney"
             android:layout_width="wrap_content"
@@ -36,9 +32,4 @@
             android:hint="DD-MM-YYYY  HH:MM"
             android:textColor="#8e8e8e" />
     </LinearLayout>
-
-
 </RelativeLayout>
-
-
-

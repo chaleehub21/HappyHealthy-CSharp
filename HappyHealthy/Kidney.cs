@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.Interop;
 
 namespace HappyHealthyCSharp
 {
@@ -22,5 +23,11 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_kidney);
             // Create your application here
         }
+        [Export("ClickBackKidHome")]
+        public void ClickBackKidHome(View v)
+        {
+            this.Finish();
+        }
     }
+   
 }

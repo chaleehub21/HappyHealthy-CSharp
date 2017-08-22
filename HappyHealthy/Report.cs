@@ -14,12 +14,15 @@ using Java.Text;
 using OxyPlot.Xamarin.Android;
 using MySql.Data.MySqlClient;
 using System.Data;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 
 namespace HappyHealthyCSharp
 {
-    
+
     [Activity(Theme = "@style/MyMaterialTheme.Base")]
-    
+
     class Report : Activity
     {
         #region deprecation_code
@@ -74,12 +77,26 @@ namespace HappyHealthyCSharp
         }
         */
         #endregion
-            
 
+        
         public MyClass myClass;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            RequestWindowFeature(WindowFeatures.NoTitle);
+            SetContentView(Resource.Layout.activity_report);
+            PlotView view = FindViewById<PlotView>(Resource.Id.plot_view);
+            PlotView view2 = FindViewById<PlotView>(Resource.Id.plot_view2);
+            PlotView view3 = FindViewById<PlotView>(Resource.Id.plot_view3);
+            PlotView view4 = FindViewById<PlotView>(Resource.Id.plot_view4);
+            PlotView view5 = FindViewById<PlotView>(Resource.Id.plot_view5);
+            view.Model = CreatePlotModel("กราฟ A");
+            view2.Model = CreatePlotModel("กราฟ B");
+            view3.Model = CreatePlotModel("กราฟ C");
+            view4.Model = CreatePlotModel("กราฟ D");
+            view5.Model = CreatePlotModel("กราฟ E");
+            #region FullPagePlotView
+            /*
             RequestWindowFeature(WindowFeatures.NoTitle);
             try
             {
@@ -114,6 +131,33 @@ namespace HappyHealthyCSharp
         {
             base.OnPause();
         }
+        */
+            #endregion
+        }
+        private PlotModel CreatePlotModel(string title)
+        {
+            var plotModel = new PlotModel { Title = title };
+
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom });
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Maximum = 10, Minimum = 0 });
+
+            var series1 = new LineSeries
+            {
+                MarkerType = MarkerType.Circle,
+                MarkerSize = 4,
+                MarkerStroke = OxyColors.White
+            };
+            var r = new System.Random();
+            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            plotModel.Series.Add(series1);
+            System.Threading.Thread.Sleep(300);
+            return plotModel;
+        }
     }
-    
 }

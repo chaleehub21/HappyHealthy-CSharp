@@ -53,18 +53,6 @@ namespace HappyHealthyCSharp
             f_sugar = FindViewById<TextView>(Resource.Id.food_sugar2);
             f_sodium = FindViewById<TextView>(Resource.Id.food_sodium2);
             f_detail = FindViewById<TextView>(Resource.Id.tv_food_detail);
-            rec = FindViewById<ImageView>(Resource.Id.imageView30);
-#region incomplete
-            rec.Click += delegate {
-                df_show = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                c = Calendar.GetInstance(Java.Util.TimeZone.GetTimeZone("GMT+7"));
-                var intent = new Intent(this, typeof(Report));
-                intent.AddFlags(ActivityFlags.ClearTop);
-                StartActivity(intent);
-                Finish();
-                //function incomplete
-            };
-#endregion
             editCal_Total = FindViewById<EditText>(Resource.Id.et_exe2);
             editCal_Total.Click += delegate {
                 total = Convert.ToDouble(editCal_Total.Text);

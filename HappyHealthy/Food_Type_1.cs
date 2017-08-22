@@ -10,13 +10,13 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 using Android.Speech.Tts;
+using Java.Interop;
 
 namespace HappyHealthyCSharp
 {
     [Activity]
     public class Food_Type_1 : ListActivity
     {
-        ListView listViewFood1;
         FoodTABLE foodTable;
         //List<Dictionary<string, string>> foodList;
         JavaList<IDictionary<string, object>> foodList;
@@ -36,9 +36,6 @@ namespace HappyHealthyCSharp
             var img_back = FindViewById<ImageView>(Resource.Id.imageView44);
             foodTable = new FoodTABLE();
             btn_search.Click += delegate {
-                StartActivity(new Intent(this, typeof(Add_Food)));
-            };
-            txt_search.TextChanged += delegate {
                 setListFood(txt_search.Text);
             };
             img_back.Click += delegate {
@@ -73,6 +70,11 @@ namespace HappyHealthyCSharp
         protected override void OnDestroy()
         {
             base.OnDestroy();
+        }
+        [Export("ClickAddFood")]
+        public void ClickAddFood(View v)
+        {
+            StartActivity(new Intent(this, typeof(Add_Food)));
         }
         public void setListFood(string what_to_search)
         {

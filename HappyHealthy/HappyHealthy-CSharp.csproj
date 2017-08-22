@@ -130,9 +130,13 @@
     <Compile Include="ExerciseType.cs" />
     <Compile Include="FoodDetail.cs" />
     <Compile Include="FoodHistoryTABLE.cs" />
+    <Compile Include="DiabetesTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />
     <Compile Include="Food_Type_1.cs" />
     <Compile Include="GlobalFunction.cs" />
+    <Compile Include="History_Pressure.cs" />
+    <Compile Include="History_Kidney.cs" />
+    <Compile Include="History_Diabetes.cs" />
     <Compile Include="Home.cs" />
     <Compile Include="IntroHealthy.cs" />
     <Compile Include="Kidney.cs" />
@@ -163,7 +167,9 @@
     <AndroidResource Include="Resources\layout\activity_display_disease.axml" />
     <AndroidResource Include="Resources\layout\activity_display_kidney.axml" />
     <AndroidResource Include="Resources\layout\activity_display_pressure.axml" />
-    <AndroidResource Include="Resources\layout\activity_display_user.axml" />
+    <AndroidResource Include="Resources\layout\activity_display_user.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_exercise_detail.axml" />
     <AndroidResource Include="Resources\layout\activity_exercise_type.axml" />
     <AndroidResource Include="Resources\layout\activity_food__type_1.axml">
@@ -172,9 +178,15 @@
     <AndroidResource Include="Resources\layout\activity_food_detail.axml" />
     <AndroidResource Include="Resources\layout\activity_history__exe.axml" />
     <AndroidResource Include="Resources\layout\activity_history__food.axml" />
-    <AndroidResource Include="Resources\layout\activity_history_diabetes.axml" />
-    <AndroidResource Include="Resources\layout\activity_history_kidney.axml" />
-    <AndroidResource Include="Resources\layout\activity_history_pressure.axml" />
+    <AndroidResource Include="Resources\layout\activity_history_diabetes.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_history_kidney.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_history_pressure.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_home.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -184,15 +196,23 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_pressure.axml" />
-    <AndroidResource Include="Resources\layout\activity_report.axml" />
+    <AndroidResource Include="Resources\layout\activity_report.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_splash_screen.axml" />
     <AndroidResource Include="Resources\layout\activity_user.axml" />
     <AndroidResource Include="Resources\layout\exercise_type.axml" />
     <AndroidResource Include="Resources\layout\food_1.axml" />
-    <AndroidResource Include="Resources\layout\history_diabetes.axml" />
+    <AndroidResource Include="Resources\layout\history_diabetes.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\history_food.axml" />
-    <AndroidResource Include="Resources\layout\history_kidney.axml" />
-    <AndroidResource Include="Resources\layout\history_pressure.axml" />
+    <AndroidResource Include="Resources\layout\history_kidney.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\history_pressure.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\toolbar.axml" />
     <AndroidResource Include="Resources\layout\toolbardevelop.axml" />
     <AndroidResource Include="Resources\layout\toolbardiabetes.axml" />

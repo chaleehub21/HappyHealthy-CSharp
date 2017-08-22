@@ -26,15 +26,6 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff" />
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:id="@+id/imageView26"
-        android:src="@drawable/listhistory"
-        android:onClick="ClickHistoryKidney"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp" />
-    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/imageView12"
@@ -256,7 +247,7 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:background="@drawable/my_box_dis"
                 android:layout_marginTop="0.0dp"
-                android:layout_marginBottom="0.0dp"/>
+                android:layout_marginBottom="0.0dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="fill_parent"

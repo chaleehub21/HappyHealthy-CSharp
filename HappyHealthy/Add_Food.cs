@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
+using Java.Interop;
 
 namespace HappyHealthyCSharp
 {
@@ -22,6 +23,11 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_add__food);
             // Create your application here
+        }
+        [Export("ClickAddFoodBack")]
+        public void ClickAddFoodBack(View v)
+        {
+            this.Finish();
         }
     }
 }
