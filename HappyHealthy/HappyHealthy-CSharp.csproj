@@ -178,18 +178,16 @@
     <AndroidResource Include="Resources\layout\activity_food_detail.axml" />
     <AndroidResource Include="Resources\layout\activity_history__exe.axml" />
     <AndroidResource Include="Resources\layout\activity_history__food.axml" />
-    <AndroidResource Include="Resources\layout\activity_history_diabetes.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_history_diabetes.axml" />
     <AndroidResource Include="Resources\layout\activity_history_kidney.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_history_pressure.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_home.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+
+    <AndroidResource Include="Resources\layout\activity_home.axml" />
+
     <AndroidResource Include="Resources\layout\activity_intro_healthy.axml" />
     <AndroidResource Include="Resources\layout\activity_kidney.axml" />
     <AndroidResource Include="Resources\layout\activity_main.axml">
@@ -221,6 +219,9 @@
     <AndroidResource Include="Resources\layout\toolbarhome.axml" />
     <AndroidResource Include="Resources\layout\toolbarkidney.axml" />
     <AndroidResource Include="Resources\layout\toolbarpre.axml" />
+    <AndroidResource Include="Resources\layout\login_test.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
