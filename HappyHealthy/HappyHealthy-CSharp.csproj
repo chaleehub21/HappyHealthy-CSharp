@@ -193,7 +193,9 @@
     <AndroidResource Include="Resources\layout\history_food.axml" />
     <AndroidResource Include="Resources\layout\history_kidney.axml" />
     <AndroidResource Include="Resources\layout\history_pressure.axml" />
-    <AndroidResource Include="Resources\layout\toolbar.axml" />
+    <AndroidResource Include="Resources\layout\toolbar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\toolbardevelop.axml" />
     <AndroidResource Include="Resources\layout\toolbardiabetes.axml" />
     <AndroidResource Include="Resources\layout\toolbarexe.axml" />
@@ -202,6 +204,9 @@
     <AndroidResource Include="Resources\layout\toolbarkidney.axml" />
     <AndroidResource Include="Resources\layout\toolbarpre.axml" />
     <AndroidResource Include="Resources\layout\login_test.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\regis_test.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

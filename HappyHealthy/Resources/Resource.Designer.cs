@@ -2625,11 +2625,11 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07003c
 			public const int action_mode_close_button = 2131165244;
 			
-			// aapt resource value: 0x7f07019b
-			public const int action_search = 2131165595;
+			// aapt resource value: 0x7f07019e
+			public const int action_search = 2131165598;
 			
-			// aapt resource value: 0x7f07019c
-			public const int action_settings = 2131165596;
+			// aapt resource value: 0x7f07019f
+			public const int action_settings = 2131165599;
 			
 			// aapt resource value: 0x7f070069
 			public const int activity_add__exe = 2131165289;
@@ -2765,6 +2765,9 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f07000e
 			public const int disableHome = 2131165198;
+			
+			// aapt resource value: 0x7f07019c
+			public const int du_email = 2131165596;
 			
 			// aapt resource value: 0x7f070070
 			public const int e_cal = 2131165296;
@@ -3261,6 +3264,9 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f070189
 			public const int linearLayoutLogin = 2131165577;
 			
+			// aapt resource value: 0x7f07019a
+			public const int linearLayoutRegis = 2131165594;
+			
 			// aapt resource value: 0x7f07000b
 			public const int listMode = 2131165195;
 			
@@ -3417,8 +3423,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f070045
 			public const int spacer = 2131165253;
 			
-			// aapt resource value: 0x7f07019a
-			public const int splashAnimation = 2131165594;
+			// aapt resource value: 0x7f07019d
+			public const int splashAnimation = 2131165597;
 			
 			// aapt resource value: 0x7f070008
 			public const int split_action_bar = 2131165192;
@@ -3590,6 +3596,9 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f070138
 			public const int textViewCre = 2131165496;
+			
+			// aapt resource value: 0x7f07019b
+			public const int textViewEmail = 2131165595;
 			
 			// aapt resource value: 0x7f0700b9
 			public const int textViewEmailKampoo = 2131165369;
@@ -4038,40 +4047,43 @@ namespace HappyHealthyCSharp
 			public const int notification_template_part_time = 2130968653;
 			
 			// aapt resource value: 0x7f04004e
-			public const int select_dialog_item_material = 2130968654;
+			public const int regis_test = 2130968654;
 			
 			// aapt resource value: 0x7f04004f
-			public const int select_dialog_multichoice_material = 2130968655;
+			public const int select_dialog_item_material = 2130968655;
 			
 			// aapt resource value: 0x7f040050
-			public const int select_dialog_singlechoice_material = 2130968656;
+			public const int select_dialog_multichoice_material = 2130968656;
 			
 			// aapt resource value: 0x7f040051
-			public const int support_simple_spinner_dropdown_item = 2130968657;
+			public const int select_dialog_singlechoice_material = 2130968657;
 			
 			// aapt resource value: 0x7f040052
-			public const int toolbar = 2130968658;
+			public const int support_simple_spinner_dropdown_item = 2130968658;
 			
 			// aapt resource value: 0x7f040053
-			public const int toolbardevelop = 2130968659;
+			public const int toolbar = 2130968659;
 			
 			// aapt resource value: 0x7f040054
-			public const int toolbardiabetes = 2130968660;
+			public const int toolbardevelop = 2130968660;
 			
 			// aapt resource value: 0x7f040055
-			public const int toolbarexe = 2130968661;
+			public const int toolbardiabetes = 2130968661;
 			
 			// aapt resource value: 0x7f040056
-			public const int toolbarfood = 2130968662;
+			public const int toolbarexe = 2130968662;
 			
 			// aapt resource value: 0x7f040057
-			public const int toolbarhome = 2130968663;
+			public const int toolbarfood = 2130968663;
 			
 			// aapt resource value: 0x7f040058
-			public const int toolbarkidney = 2130968664;
+			public const int toolbarhome = 2130968664;
 			
 			// aapt resource value: 0x7f040059
-			public const int toolbarpre = 2130968665;
+			public const int toolbarkidney = 2130968665;
+			
+			// aapt resource value: 0x7f04005a
+			public const int toolbarpre = 2130968666;
 			
 			static Layout()
 			{
