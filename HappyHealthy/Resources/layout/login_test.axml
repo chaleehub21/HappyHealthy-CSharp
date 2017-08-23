@@ -11,7 +11,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbardiabetes" />
+            layout="@layout/toolbardiabetes"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
