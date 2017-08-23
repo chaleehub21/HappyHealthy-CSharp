@@ -33,12 +33,25 @@ namespace HappyHealthyCSharp
             ListView.ItemClick += onItemClick;
             setDiabetesList();
         }
-
+        protected override void OnResume()
+        {
+            base.OnResume();
+            setDiabetesList();
+        }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            GlobalFunction.createDialog(this, e.Position.ToString()).Show();
+            diabList[e.Position].TryGetValue("fbs_fbs", out object fbsValue);
+            diabList[e.Position].TryGetValue("fbs_id", out object fbsID);
+            GlobalFunction.createDialog(this, $@"The value for this one : {fbsValue.ToString()}",null,
+                delegate {
+                    GlobalFunction.createDialog(this, "Do you want to delete this row?", delegate {
+                        var diaTable = new DiabetesTABLE();
+                        diaTable.deleteFbsFromSQL(fbsID.ToString());
+                        setDiabetesList();
+                    },delegate { },"Yes","No").Show();
+            },"OK","Delete").Show();
         }
-
+        
         [Export("ClickAddDia")]
         public void ClickAddDia(View v)
         {
@@ -51,8 +64,8 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            diabList = diaTable.getDiabetesList();
-            ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_diabetes, new string[] { "D_DateTime" }, new int[] { Resource.Id.date }); //"D_DateTime",date
+            diabList = diaTable.getDiabetesList("SELECT * FROM FBS ORDER BY FBS_TIME");
+            ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_diabetes, new string[] { "fbs_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)
             var data = new JavaList<IDictionary<string, object>>();

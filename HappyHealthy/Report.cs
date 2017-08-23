@@ -136,10 +136,23 @@ namespace HappyHealthyCSharp
         }
         private PlotModel CreatePlotModel(string title)
         {
-            var plotModel = new PlotModel { Title = title };
+            var diaTable = new DiabetesTABLE();
+            var datalist = diaTable.getDiabetesList("SELECT * FROM FBS ORDER BY FBS_TIME");
+            var datalength = datalist.Count();
 
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom });
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Maximum = 10, Minimum = 0 });
+            var plotModel = new PlotModel { Title = title };
+            //var x = new LinearAxis { Position = AxisPosition.Bottom };
+            var y = new LinearAxis { Position = AxisPosition.Left, Maximum = 100, Minimum = 0 };
+            y.IsPanEnabled = false;
+            y.IsZoomEnabled = false;
+            //datetime axis
+            var startDate = DateTime.Now.AddDays(-7);
+            var endDate = DateTime.Now;
+            var minValue = DateTimeAxis.ToDouble(startDate);
+            var maxValue = DateTimeAxis.ToDouble(endDate);
+            var x = new DateTimeAxis { Position = AxisPosition.Bottom,Minimum = minValue,Maximum = maxValue,StringFormat = "d-MMMM"};
+            plotModel.Axes.Add(x);
+            plotModel.Axes.Add(y);
 
             var series1 = new LineSeries
             {
@@ -148,15 +161,26 @@ namespace HappyHealthyCSharp
                 MarkerStroke = OxyColors.White
             };
             var r = new System.Random();
-            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(r.Next(0,10), r.Next(0,10)));
+            /*
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-7)), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-6)), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-5)), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-4)), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-3)), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-2)), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-1)), r.Next(0,10)));
+            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), r.Next(0, 10)));
+            */
+            for(var i = 0; i < datalength; i++)
+            {
+                datalist[i].TryGetValue("fbs_time", out object fbsTime);
+                datalist[i].TryGetValue("fbs_fbs", out object fbsValue);
+                DateTime.TryParse(fbsTime.ToString(), out DateTime dateResult);
+                var value = Convert.ToDouble(fbsValue.ToString());
+                series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult.Year > 2100?dateResult.AddYears(-543):dateResult), value));
+            }
             plotModel.Series.Add(series1);
-            System.Threading.Thread.Sleep(300);
+            System.Threading.Thread.Sleep(100);
             return plotModel;
         }
     }

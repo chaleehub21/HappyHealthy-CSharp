@@ -45,7 +45,8 @@ namespace HappyHealthyCSharp
             imageView.StartAnimation(view_animation);
             view_animation.AnimationEnd += delegate {
                 textToSpeech.Speak("น้องโยแม่งเงี่ยน ไปเที่ยวโพไซดอนทุกวันเลย", QueueMode.Flush, null);
-                StartActivity(typeof(MainActivity));
+                //StartActivity(typeof(MainActivity));
+                StartActivity(typeof(Login));
             };
         }
         #region Experiment TTS methods
