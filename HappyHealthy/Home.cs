@@ -45,7 +45,9 @@ namespace HappyHealthyCSharp
         [Export("ClickDevelop")]
         public void ClickDevelop(View v)
         {
-            StartActivity(new Intent(this, typeof(Develop)));
+            //StartActivity(new Intent(this, typeof(Develop)));
+            GlobalFunction.createDialog(this, "Not implemented").Show();
         }
+
     }
 }

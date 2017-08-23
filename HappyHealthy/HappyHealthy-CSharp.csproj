@@ -140,6 +140,7 @@
     <Compile Include="Home.cs" />
     <Compile Include="IntroHealthy.cs" />
     <Compile Include="Kidney.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="Pressure.cs" />
@@ -217,6 +218,9 @@
     <AndroidResource Include="Resources\layout\toolbarhome.axml" />
     <AndroidResource Include="Resources\layout\toolbarkidney.axml" />
     <AndroidResource Include="Resources\layout\toolbarpre.axml" />
+    <AndroidResource Include="Resources\layout\login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
