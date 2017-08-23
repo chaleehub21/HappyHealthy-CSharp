@@ -16,27 +16,36 @@ using System.Data;
 
 namespace HappyHealthyCSharp
 {
-    class FoodTABLE
+    class DiabetesTABLE
     {
-        public string Food { get; set; }
+        private string strLastDate;
+        public string Diabetes { get; set; }
         [PrimaryKey,AutoIncrement]
-        public int Food_ID { get; set; }
-        public string Food_NAME { get; set; }
-        public string Food_AMT { get; set; }
-        public double Food_CAL { get; set; }
-        public string Food_UNIT { get; set; }
-        public string Food_NET_WEIGHT { get; set; }
-        public string Food_NET_UNIT { get; set; }
-        public string Food_PROTEIN { get; set; }
-        public string Food_FAT { get; set; }
-        public string Food_CARBOHYDRATE { get; set; }
-        public string Food_SUGAR { get; set; }
-        public string Food_SODIUM { get; set; }
-        public string Food_Detail { get; set; }
-        //private string localPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-        //private string dbPath = "";
+        public string D_Id { get; set; }
+        public string D_DateTime { get; set; }
+        public string D_CostSugar { get; set; }
+        public string D_Level { get; set; }
+        public string D_Status { get; set; }
+        public string D_People { get; set; }
+        public string User_Id { get; set; }
+
+        public string Kidney { get; set; }
+        public string K_Id { get; set; }
+        public string K_DateTime { get; set; }
+        public string K_CostGFR { get; set; }
+        public string K_LevelCostGFR { get; set; }
+
+        public string Pressure { get; set; }
+        public string P_Id { get; set; }
+        public string P_DateTime { get; set; }
+        public string P_CostPressureDown { get; set; }
+        public string P_CostPressureTop { get; set; }
+        public string P_Cost_Level_Down { get; set; }
+        public string P_Cost_Level_Top { get; set; }
+        public string P_HeartRate { get; set; }
+        public string P_HeartRate_Level { get; set; }
         SQLiteConnection conn = null;
-        public FoodTABLE()
+        public DiabetesTABLE()
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);
             //conn.CreateTable<FoodTABLE>();
@@ -65,19 +74,20 @@ namespace HappyHealthyCSharp
                 return false;
             }
         }
-        public JavaList<IDictionary<string,object>> getFoodList(string word,Context c = null)
+        public JavaList<IDictionary<string,object>> getDiabetesList(Context c = null)
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);
             var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
             sqlconn.Open();
             var foodList = new JavaList<IDictionary<string, object>>();
-            var query = $@"SELECT * FROM Food where Food_NAME LIKE '%{word}%'";
+            var query = $@"SELECT * FROM Food";
             var tickets = new DataSet();
             var adapter = new MySqlDataAdapter(query, sqlconn);
             adapter.Fill(tickets, "Food");
             foreach(DataRow x in tickets.Tables["Food"].Rows)
             {
                 var food = new JavaDictionary<string, object>();
+                food.Add("D_DateTime", GlobalFunction.stringValidation(DateTime.Now));
                 food.Add("food_id", GlobalFunction.stringValidation(x[0].ToString()));
                 food.Add("food_name", GlobalFunction.stringValidation(x[1].ToString()));
                 food.Add("food_calories", GlobalFunction.stringValidation(x[3].ToString()));

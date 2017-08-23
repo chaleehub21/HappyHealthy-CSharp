@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.Interop;
 
 namespace HappyHealthyCSharp
 {
@@ -21,6 +22,11 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_pressure);
             // Create your application here
+        }
+        [Export("ClickBackPreHome")]
+        public void ClickBackPreHome(View v)
+        {
+            this.Finish();
         }
     }
 }
