@@ -25,7 +25,7 @@ namespace HappyHealthyCSharp
             // Create your application here
             var id = FindViewById<EditText>(Resource.Id.userID);
             var pw = FindViewById<EditText>(Resource.Id.userPW);
-            var login = FindViewById<Button>(Resource.Id.loginBtt);
+            var login = FindViewById<ImageView>(Resource.Id.loginBtt);
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
             login.Click += delegate {
