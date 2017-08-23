@@ -35,4 +35,17 @@
             android:layout_height="150dp"/>
     </LinearLayout>
    </ScrollView>
+  <include
+    android:id="@+id/toolbar"
+    layout="@layout/toolbar" />
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="กราฟแสดงผล"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 </RelativeLayout>

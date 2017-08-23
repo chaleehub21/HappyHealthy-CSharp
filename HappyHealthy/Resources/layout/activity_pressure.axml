@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1"
     android:background="#fef9f9">
-
-
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbarpre" />
     </LinearLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,20 +25,6 @@
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:textColor="#ffffff" />
-
-    <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:id="@+id/imageView26"
-        android:src="@drawable/listhistory"
-        android:onClick="ClickHisPre"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp" />
-
-
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -52,8 +33,6 @@
         android:layout_marginRight="25dp"
         android:layout_marginTop="115dp"
         android:background="@drawable/my_box_pre">
-
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -62,7 +41,6 @@
             android:foregroundGravity="center_vertical|center_horizontal"
             android:gravity="center_vertical|center_horizontal"
             android:layout_gravity="center_vertical">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,13 +54,11 @@
                 android:textStyle="bold"
                 android:gravity="center_horizontal" />
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
-
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="30dp"
@@ -90,9 +66,7 @@
                 android:src="@drawable/txtpretop"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp" />
-
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="300dp"
@@ -100,13 +74,11 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical|center_horizontal"
             android:layout_marginLeft="7dp">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:id="@+id/imageView66"
                 android:src="@drawable/top2" />
-
             <EditText
                 android:layout_width="126dp"
                 android:layout_height="match_parent"
@@ -120,7 +92,6 @@
                 android:background="@drawable/my_box_dis"
                 android:gravity="center_vertical|center_horizontal"
                 android:textStyle="bold" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,17 +100,12 @@
                 android:src="@drawable/mlpre"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="5dp" />
-
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-
-        </LinearLayout>
-
+            android:layout_marginTop="5dp" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="300dp"
@@ -148,13 +114,11 @@
             android:gravity="center_vertical|center_horizontal"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="7dp">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:id="@+id/imageView63"
                 android:src="@drawable/down2" />
-
             <EditText
                 android:layout_width="126dp"
                 android:layout_height="match_parent"
@@ -168,7 +132,6 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:textStyle="bold" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,16 +140,12 @@
                 android:src="@drawable/mlpre"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="5dp" />
-
         </LinearLayout>
-
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
-
+            android:layout_marginTop="10dp">
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="30dp"
@@ -194,14 +153,12 @@
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/textheart" />
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="165dp"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/my_box_dis">
-
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -216,8 +173,6 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:textStyle="bold" />
         </LinearLayout>
-
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="32dp"
@@ -225,7 +180,6 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/mlh"
             android:layout_marginLeft="5dp" />
-
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
@@ -234,9 +188,7 @@
             android:onClick="ClickDisLevelsPre"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="7dp" />
-
     </LinearLayout>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -244,6 +196,5 @@
         android:src="@drawable/arowback"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="3dp"
-        android:onClick="ClickBackRreHome" />
+        android:onClick="ClickBackPreHome" />
 </RelativeLayout>
-

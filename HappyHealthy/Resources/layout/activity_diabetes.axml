@@ -33,15 +33,6 @@
         android:layout_marginLeft="3dp"
         android:onClick="ClickBackDiaHome"
         android:adjustViewBounds="false" />
-    <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:id="@+id/imageView26"
-        android:src="@drawable/listhistory"
-        android:onClick="ClickHistoryDiabetes"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -169,28 +160,6 @@
                     android:buttonTint="#5d5d5d" />
             </RadioGroup>
         </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="250dp"
-            android:layout_height="35dp"
-            android:weightSum="1"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp">
-            <EditText
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:inputType="numberDecimal"
-                android:ems="10"
-                android:id="@+id/D_costSugar"
-                android:textColor="#6f6f6f"
-                android:layout_gravity="center_vertical"
-                android:textSize="20dp"
-                android:layout_marginLeft="5dp"
-                android:textStyle="bold"
-                android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/my_box_dis" />
-        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
@@ -217,14 +186,14 @@
                 android:layout_height="match_parent"
                 android:inputType="numberDecimal"
                 android:ems="10"
-                android:id="@+id/HA_value"
+                android:id="@+id/sugar_value"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="20dp"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/my_box_dis"/>
+                android:background="@drawable/my_box_dis" />
         </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"

@@ -4,20 +4,16 @@
     android:id="@+id/activity_add__food"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jiraporn.nut.happyhealthy.Add_Food"
     android:background="#ffffff">
-
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbarfood" />
     </LinearLayout>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -26,7 +22,6 @@
         android:layout_marginTop="7dp"
         android:layout_marginLeft="3dp"
         android:onClick="ClickAddFoodBack" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,30 +32,25 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="#ffffff" />
-
     <LinearLayout
         android:layout_width="200dp"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:layout_height="55dp">
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/f_name"
             android:layout_weight="1"
             android:textStyle="bold"
-
             android:layout_gravity="center_horizontal"
             android:foregroundGravity="center_horizontal"
             android:gravity="center_vertical"
             android:textColor="#f9a98a"
             android:hint="ชื่ออาหาร"
-            android:textSize="25sp"
-             />
+            android:textSize="25sp" />
     </LinearLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="130dp"
@@ -70,7 +60,6 @@
         android:layout_marginLeft="20dp"
         android:background="@drawable/my_bg_savefood_name"
         android:id="@+id/linearLayout8">
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -85,9 +74,7 @@
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="20dp" />
-
     </LinearLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -95,7 +82,6 @@
         android:layout_alignParentRight="false"
         android:layout_marginTop="215dp"
         android:layout_marginLeft="45dp">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,7 +90,6 @@
             android:textSize="13dp"
             android:textStyle="bold" />
     </LinearLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -114,7 +99,6 @@
         android:layout_marginRight="70dp"
         android:layout_marginLeft="170dp"
         android:id="@+id/linearLayout9">
-
         <EditText
             android:layout_height="wrap_content"
             android:id="@+id/f_netweight"
@@ -125,7 +109,6 @@
             android:textStyle="bold"
             android:layout_width="50dp" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,7 +117,6 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="180dp"
         android:orientation="vertical">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -144,14 +126,12 @@
             android:layout_marginLeft="50dp"
             android:text="กรัม" />
     </LinearLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,51 +140,43 @@
             android:textSize="14dp"
             android:textStyle="bold" />
     </LinearLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="270dp"
-        android:layout_marginLeft="50dp" >
-
+        android:layout_marginLeft="50dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView49"
             android:layout_marginTop="12dp"
             android:src="@drawable/dodo" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView50"
             android:layout_marginTop="14dp"
             android:src="@drawable/dodo" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView51"
             android:layout_marginTop="18dp"
             android:src="@drawable/dodo" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView52"
             android:layout_marginTop="14dp"
             android:src="@drawable/dodo" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView53"
             android:layout_marginTop="14dp"
             android:src="@drawable/dodo" />
-
     </LinearLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -212,7 +184,6 @@
         android:layout_marginTop="270dp"
         android:layout_marginLeft="70dp"
         android:id="@+id/linearLayout11">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -221,7 +192,6 @@
             android:layout_marginTop="8dp"
             android:layout_gravity="left"
             android:textSize="13dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -230,7 +200,6 @@
             android:layout_marginTop="9dp"
             android:layout_gravity="left"
             android:textSize="13dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -239,7 +208,6 @@
             android:layout_marginTop="9dp"
             android:layout_gravity="left"
             android:textSize="13dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -248,7 +216,6 @@
             android:layout_marginTop="9dp"
             android:layout_gravity="left"
             android:textSize="13dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -258,7 +225,6 @@
             android:layout_gravity="left"
             android:textSize="13dp" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -267,7 +233,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="105dp"
         android:orientation="vertical">
-
         <EditText
             android:layout_height="wrap_content"
             android:background="@drawable/my_bg_savefood_name"
@@ -278,7 +243,6 @@
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:layout_width="50dp" />
-
         <EditText
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -289,7 +253,6 @@
             android:textColor="#ffffff"
             android:background="@drawable/my_bg_savefood_name"
             android:textStyle="bold" />
-
         <EditText
             android:layout_height="match_parent"
             android:id="@+id/f_carbohydrate"
@@ -300,7 +263,6 @@
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:layout_width="50dp" />
-
         <EditText
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -311,7 +273,6 @@
             android:textSize="18dp"
             android:textColor="#ffffff"
             android:textStyle="bold" />
-
         <EditText
             android:layout_height="wrap_content"
             android:id="@+id/f_sodium"
@@ -323,7 +284,6 @@
             android:textStyle="bold"
             android:layout_width="50dp" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -332,7 +292,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="42dp"
         android:layout_weight="1">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -341,7 +300,6 @@
             android:layout_marginTop="8.5dp"
             android:textSize="13dp"
             android:textColor="#f9a98a" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -350,7 +308,6 @@
             android:layout_marginTop="9dp"
             android:textSize="13dp"
             android:textColor="#f9a98a" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -359,7 +316,6 @@
             android:layout_marginTop="9dp"
             android:textSize="13dp"
             android:textColor="#f9a98a" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -368,7 +324,6 @@
             android:layout_marginTop="9dp"
             android:textSize="13dp"
             android:textColor="#f9a98a" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -378,7 +333,6 @@
             android:textSize="13dp"
             android:textColor="#f9a98a" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -386,10 +340,7 @@
         android:orientation="vertical"
         android:gravity="bottom|center_vertical|center_horizontal"
         android:layout_marginBottom="90dp"
-        android:layout_centerHorizontal="true">
-
-    </LinearLayout>
-
+        android:layout_centerHorizontal="true" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -398,7 +349,6 @@
         android:onClick="ClickSaveFood"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp" />
-
     <LinearLayout
         android:layout_width="130dp"
         android:layout_height="wrap_content"
@@ -407,10 +357,7 @@
         android:background="@drawable/my_bg_savefood_name"
         android:layout_alignBottom="@+id/linearLayout7"
         android:layout_alignLeft="@+id/linearLayout8"
-        android:layout_alignStart="@+id/linearLayout8">
-
-    </LinearLayout>
-
+        android:layout_alignStart="@+id/linearLayout8" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -422,7 +369,6 @@
         android:layout_alignBottom="@+id/f_unit"
         android:layout_alignRight="@+id/linearLayout12"
         android:layout_alignEnd="@+id/linearLayout12">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -434,7 +380,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="3dp" />
     </LinearLayout>
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -450,7 +395,6 @@
         android:layout_alignStart="@+id/linearLayout8"
         android:layout_alignRight="@+id/linearLayout11"
         android:layout_alignEnd="@+id/linearLayout11" />
-
     <LinearLayout
         android:layout_width="130dp"
         android:layout_height="50dp"
@@ -460,7 +404,6 @@
         android:layout_alignTop="@+id/linearLayout8"
         android:layout_alignLeft="@+id/linearLayout9"
         android:layout_alignStart="@+id/linearLayout9">
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -472,5 +415,4 @@
             android:textColor="#ffffff"
             android:textStyle="bold" />
     </LinearLayout>
-
 </RelativeLayout>
