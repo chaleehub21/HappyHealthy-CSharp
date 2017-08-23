@@ -11,7 +11,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbardiabetes"/>
+            layout="@layout/toolbardiabetes" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:text="Username"
-                android:id="@+id/textViewUsername"
+                android:id="@+id/userID"
                 android:layout_centerHorizontal="true"
                 android:textSize="16dp"
                 android:textStyle="bold"
@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:ems="10"
-                android:id="@+id/HA_value"
+                android:id="@+id/ud_email"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="20dp"
@@ -94,7 +94,7 @@
                 android:layout_height="match_parent"
                 android:inputType="numberDecimal"
                 android:ems="10"
-                android:id="@+id/HA_value"
+                android:id="@+id/userPW"
                 android:textColor="#6f6f6f"
                 android:layout_gravity="center_vertical"
                 android:textSize="20dp"
@@ -135,7 +135,7 @@
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:id="@+id/imageView3"
-            android:onClick="CLickLogin"
+            android:onClick="@+id/loginBtt"
             android:src="@drawable/loginbutton"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="20.5dp" />

@@ -20,7 +20,8 @@ namespace HappyHealthyCSharp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.login);
+            SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
+            SetContentView(Resource.Layout.activity_login);
             // Create your application here
             var id = FindViewById<EditText>(Resource.Id.userID);
             var pw = FindViewById<EditText>(Resource.Id.userPW);
@@ -48,7 +49,7 @@ namespace HappyHealthyCSharp
                     {
                         GlobalFunction.createDialog(this, "Access Denied").Show();
                     }
-                    //GlobalFunction.createDialog(this, comm.CommandText).Show();
+                    GlobalFunction.createDialog(this, comm.CommandText).Show();
                 }
                 else
                 {
