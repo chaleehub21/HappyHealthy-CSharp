@@ -2625,11 +2625,11 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07003c
 			public const int action_mode_close_button = 2131165244;
 			
-			// aapt resource value: 0x7f07019e
-			public const int action_search = 2131165598;
+			// aapt resource value: 0x7f0701a0
+			public const int action_search = 2131165600;
 			
-			// aapt resource value: 0x7f07019f
-			public const int action_settings = 2131165599;
+			// aapt resource value: 0x7f0701a1
+			public const int action_settings = 2131165601;
 			
 			// aapt resource value: 0x7f070069
 			public const int activity_add__exe = 2131165289;
@@ -2768,6 +2768,9 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f07019c
 			public const int du_email = 2131165596;
+			
+			// aapt resource value: 0x7f07019e
+			public const int du_pass = 2131165598;
 			
 			// aapt resource value: 0x7f070070
 			public const int e_cal = 2131165296;
@@ -3423,8 +3426,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f070045
 			public const int spacer = 2131165253;
 			
-			// aapt resource value: 0x7f07019d
-			public const int splashAnimation = 2131165597;
+			// aapt resource value: 0x7f07019f
+			public const int splashAnimation = 2131165599;
 			
 			// aapt resource value: 0x7f070008
 			public const int split_action_bar = 2131165192;
@@ -3611,6 +3614,9 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f070134
 			public const int textViewGFR = 2131165492;
+			
+			// aapt resource value: 0x7f07019d
+			public const int textViewPass = 2131165597;
 			
 			// aapt resource value: 0x7f07018c
 			public const int textViewPassword = 2131165580;
