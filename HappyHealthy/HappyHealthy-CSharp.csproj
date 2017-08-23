@@ -185,9 +185,7 @@
     <AndroidResource Include="Resources\layout\activity_history_pressure.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-
     <AndroidResource Include="Resources\layout\activity_home.axml" />
-
     <AndroidResource Include="Resources\layout\activity_intro_healthy.axml" />
     <AndroidResource Include="Resources\layout\activity_kidney.axml" />
     <AndroidResource Include="Resources\layout\activity_main.axml">
@@ -219,10 +217,10 @@
     <AndroidResource Include="Resources\layout\toolbarhome.axml" />
     <AndroidResource Include="Resources\layout\toolbarkidney.axml" />
     <AndroidResource Include="Resources\layout\toolbarpre.axml" />
-    <AndroidResource Include="Resources\layout\login_test.axml">
+    <AndroidResource Include="Resources\layout\activity_login.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\regis_test.axml">
+    <AndroidResource Include="Resources\layout\activity_register.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
