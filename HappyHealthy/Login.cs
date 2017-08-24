@@ -53,7 +53,7 @@ namespace HappyHealthyCSharp
                 {
                     GlobalFunction.createDialog(this, "Access Denied").Show();
                 }   
-            }; 
+            };
         }
     }
 }
