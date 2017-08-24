@@ -3684,20 +3684,20 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07011c
 			public const int tv_food_detail = 2131165468;
 			
+			// aapt resource value: 0x7f070141
+			public const int ud_email = 2131165505;
+			
 			// aapt resource value: 0x7f070009
 			public const int up = 2131165193;
 			
 			// aapt resource value: 0x7f070014
 			public const int useLogo = 2131165204;
 			
-			// aapt resource value: 0x7f070141
-			public const int userID = 2131165505;
+			// aapt resource value: 0x7f070140
+			public const int userID = 2131165504;
 			
 			// aapt resource value: 0x7f070143
 			public const int userPW = 2131165507;
-			
-			// aapt resource value: 0x7f070140
-			public const int usernameText = 2131165504;
 			
 			// aapt resource value: 0x7f070131
 			public const int viewPageAndroid = 2131165489;
