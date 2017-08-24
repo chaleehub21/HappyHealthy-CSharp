@@ -26,8 +26,6 @@ namespace HappyHealthyCSharp
             var id = FindViewById<EditText>(Resource.Id.userID);
             var pw = FindViewById<EditText>(Resource.Id.userPW);
             var login = FindViewById<ImageView>(Resource.Id.loginBtt);
-            id.Text = "kunvutloveza@hotmail.com";
-            pw.Text = "123456";
             login.Click += delegate {
                 var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
                 var comm = sqlconn.CreateCommand();
@@ -54,8 +52,8 @@ namespace HappyHealthyCSharp
                 else
                 {
                     GlobalFunction.createDialog(this, "Access Denied").Show();
-                }    
-            };
+                }   
+            }; 
         }
     }
 }

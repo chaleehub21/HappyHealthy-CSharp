@@ -82,7 +82,7 @@
         android:background="@color/bgSearch"
         android:layout_alignBottom="@+id/tv_Sfood"
         android:layout_alignTop="@+id/tv_Sfood" />
-  <ImageView
+    <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:id="@+id/imageView40"
