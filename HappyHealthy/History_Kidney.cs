@@ -16,12 +16,8 @@ namespace HappyHealthyCSharp
     [Activity(Label = "History_Diabetes")]
     public class History_Kidney : ListActivity
     {
-        ListView listView;
-        DiabetesTABLE diaTable;
-        JavaList<IDictionary<string, object>> diabList;
-        string[] Choice;
-        string DateDiabetes, Level, CostStatus, People;
-        int D_id, Cost1Diabetes;
+        KidneyTABLE kidneyTable;
+        JavaList<IDictionary<string, object>> kidneyList;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,18 +25,30 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_history_kidney);
             //ListView = FindViewById<ListView>(Resource.Id.listView);
-            diaTable = new DiabetesTABLE();
+            kidneyTable = new KidneyTABLE();
             ListView.ItemClick += onItemClick;
 
             // Create your application here
             setKidneyList();
         }
-
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            GlobalFunction.createDialog(this, e.Position.ToString()).Show();
+            kidneyList[e.Position].TryGetValue("ckd_gfr_level", out object gfrLevel);
+            kidneyList[e.Position].TryGetValue("ckd_id", out object ckdID);
+            GlobalFunction.createDialog(this, $@"The value for this one : {gfrLevel.ToString()}", null,
+                delegate {
+                    GlobalFunction.createDialog(this, "Do you want to delete this row?", delegate {
+                        var ckdTable = new KidneyTABLE();
+                        ckdTable.deleteKidneyFromSQL(ckdID.ToString());
+                        setKidneyList();
+                    }, delegate { }, "Yes", "No").Show();
+                }, "OK", "Delete").Show();
         }
-
+        protected override void OnResume()
+        {
+            base.OnResume();
+            setKidneyList();
+        }
         [Export("ClickAddKid")]
         public void ClickAddKid(View v)
         {
@@ -53,8 +61,8 @@ namespace HappyHealthyCSharp
         }
         public void setKidneyList()
         {
-            diabList = diaTable.getDiabetesList(); //must changed
-            ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_kidney, new string[] { "D_DateTime" }, new int[] { Resource.Id.dateKidney }); //"D_DateTime",date
+            kidneyList = kidneyTable.getKidneyList(); //must changed
+            ListAdapter = new SimpleAdapter(this, kidneyList, Resource.Layout.history_kidney, new string[] { "ckd_time" }, new int[] { Resource.Id.dateKidney }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)
