@@ -126,6 +126,7 @@
     <Compile Include="Database.cs" />
     <Compile Include="Develop.cs" />
     <Compile Include="Diabetes.cs" />
+    <Compile Include="PressureTABLE.cs" />
     <Compile Include="KidneyTABLE.cs" />
     <Compile Include="DisplayUser.cs" />
     <Compile Include="ExerciseType.cs" />
@@ -193,7 +194,9 @@
     <AndroidResource Include="Resources\layout\activity_main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_pressure.axml" />
+    <AndroidResource Include="Resources\layout\activity_pressure.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_report.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -222,7 +225,9 @@
     <AndroidResource Include="Resources\layout\login.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_login.axml" />
+    <AndroidResource Include="Resources\layout\activity_login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
