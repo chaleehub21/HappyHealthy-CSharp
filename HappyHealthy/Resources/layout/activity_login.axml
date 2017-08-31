@@ -78,8 +78,8 @@
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="สมัคเข้าใช้งาน"
+            android:layout_height="30dp"
+            android:text="สมัครเข้าใช้งาน"
             android:id="@+id/textViewRegis"
             android:onClick="CLickRegis"
             android:layout_centerHorizontal="true"
@@ -92,7 +92,7 @@
             android:layout_marginTop="22.5dp" />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:text="ลืมรหัสผ่าน"
             android:id="@+id/textViewForget"
             android:onClick="CLickForget"
@@ -103,7 +103,7 @@
             android:textColor="#59564a"
             android:layout_marginBottom="0.0dp"
             android:layout_marginRight="0.0dp"
-            android:layout_marginTop="22.5dp" />
+            android:layout_marginTop="9.5dp" />
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
