@@ -97,28 +97,30 @@
         android:layout_alignParentRight="false"
         android:layout_marginTop="370dp">
         <ImageView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="90dp"
             android:id="@+id/imageView8"
             android:src="@drawable/menu_pill"
             android:onClick="ClickPill"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/line6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="false"
         android:layout_alignParentBottom="false"
         android:layout_alignParentRight="false"
-        android:layout_marginTop="450dp">
+        android:layout_marginTop="450dp"
+        android:minWidth="25px"
+        android:minHeight="25px">
         <ImageView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="90dp"
             android:id="@+id/imageView9"
             android:src="@drawable/menu_doctor"
             android:onClick="ClickDoctor"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
     <ImageView
         android:layout_width="wrap_content"
