@@ -26,6 +26,7 @@ namespace HappyHealthyCSharp
             var id = FindViewById<EditText>(Resource.Id.userID);
             var pw = FindViewById<EditText>(Resource.Id.userPW);
             var login = FindViewById<ImageView>(Resource.Id.loginBtt);
+            var register = FindViewById<TextView>(Resource.Id.textViewRegis);
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
             login.Click += delegate {
@@ -61,6 +62,9 @@ namespace HappyHealthyCSharp
                 catch {
                     GlobalFunction.createDialog(this,"Database is not available").Show();
                 }
+            };
+            register.Click += delegate {
+                StartActivity(new Intent(this, typeof(Register)));
             };
         }
     }
