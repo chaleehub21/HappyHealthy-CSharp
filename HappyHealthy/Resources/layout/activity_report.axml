@@ -5,34 +5,36 @@
     android:layout_height="match_parent"
     tools:context="com.jiraporn.nut.happyhealthy.Report"
     android:background="#fdfbfb">
-   <ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/container_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-      <OxyPlot.Xamarin.Android.PlotView
-          android:id="@+id/plot_view"
-          android:layout_width="match_parent"
-          android:layout_height="150dp" />
-      <OxyPlot.Xamarin.Android.PlotView
-          android:id="@+id/plot_view2"
-          android:layout_width="match_parent"
-          android:layout_height="150dp" />
-      <OxyPlot.Xamarin.Android.PlotView
-          android:id="@+id/plot_view3"
-          android:layout_width="match_parent"
-          android:layout_height="150dp"/>
-      <OxyPlot.Xamarin.Android.PlotView
-          android:id="@+id/plot_view4"
-          android:layout_width="match_parent"
-          android:layout_height="150dp"/>
-      <OxyPlot.Xamarin.Android.PlotView
-            android:id="@+id/plot_view5"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/container_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
-    </LinearLayout>
-   </ScrollView>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <OxyPlot.Xamarin.Android.PlotView
+                android:id="@+id/plot_view"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+               />
+            <OxyPlot.Xamarin.Android.PlotView
+                android:id="@+id/plot_view2"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                />
+            <OxyPlot.Xamarin.Android.PlotView
+                android:id="@+id/plot_view3"
+                android:layout_width="match_parent"
+                android:layout_height="150sp" />
+            <OxyPlot.Xamarin.Android.PlotView
+                android:id="@+id/plot_view4"
+                android:layout_width="match_parent"
+                android:layout_height="150sp" />
+            <OxyPlot.Xamarin.Android.PlotView
+                android:id="@+id/plot_view5"
+                android:layout_width="match_parent"
+                android:layout_height="150sp" />
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

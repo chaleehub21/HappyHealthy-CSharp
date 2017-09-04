@@ -43,10 +43,10 @@ namespace HappyHealthyCSharp
             diabList[e.Position].TryGetValue("fbs_fbs", out object fbsValue);
             diabList[e.Position].TryGetValue("fbs_id", out object fbsID);
             GlobalFunction.createDialog(this, $@"The value for this one : {fbsValue.ToString()}",null,
-                delegate {
-                    GlobalFunction.createDialog(this, "Do you want to delete this row?", delegate {
+(EventHandler<DialogClickEventArgs>)delegate {
+    GlobalFunction.createDialog(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
                         var diaTable = new DiabetesTABLE();
-                        diaTable.deleteFbsFromSQL(fbsID.ToString());
+                        diaTable.deleteFbsFromSQL((string)fbsID.ToString());
                         setDiabetesList();
                     },delegate { },"Yes","No").Show();
             },"OK","Delete").Show();

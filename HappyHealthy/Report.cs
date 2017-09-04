@@ -17,6 +17,7 @@ using System.Data;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using OxyPlot.Annotations;
 
 namespace HappyHealthyCSharp
 {
@@ -90,11 +91,8 @@ namespace HappyHealthyCSharp
             PlotView view3 = FindViewById<PlotView>(Resource.Id.plot_view3);
             PlotView view4 = FindViewById<PlotView>(Resource.Id.plot_view4);
             PlotView view5 = FindViewById<PlotView>(Resource.Id.plot_view5);
-            view.Model = CreatePlotModel("กราฟ A");
-            view2.Model = CreatePlotModel("กราฟ B");
-            view3.Model = CreatePlotModel("กราฟ C");
-            view4.Model = CreatePlotModel("กราฟ D");
-            view5.Model = CreatePlotModel("กราฟ E");
+            view.Model = CreatePlotModel("กราฟ FBS",new DiabetesTABLE().getDiabetesList("SELECT * FROM FBS ORDER BY FBS_TIME"),"fbs_time","fbs_fbs");
+            view2.Model = CreatePlotModel("กราฟ CKD",new KidneyTABLE().getKidneyList("SELECT * FROM CKD ORDER BY CKD_TIME"),"ckd_time","ckd_gfr");
             #region FullPagePlotView
             /*
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -134,53 +132,43 @@ namespace HappyHealthyCSharp
         */
             #endregion
         }
-        private PlotModel CreatePlotModel(string title)
+        private PlotModel CreatePlotModel(string title,JavaList<IDictionary<string,object>> dataset,string key_time,string key_value)
         {
-            var diaTable = new DiabetesTABLE();
-            var datalist = diaTable.getDiabetesList("SELECT * FROM FBS ORDER BY FBS_TIME");
-            var datalength = datalist.Count();
-
-            var plotModel = new PlotModel { Title = title };
+            var datalength = dataset.Count();
+            var plotModel = new PlotModel { Title = title};
             //var x = new LinearAxis { Position = AxisPosition.Bottom };
+            dataset.Last().TryGetValue(key_time, out object LastDateOnDataset);
+            //var startDate = DateTime.Now.AddDays(-7);
+            //var endDate = DateTime.Now();
+            var startDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(-7);
+            var endDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(0.1); 
+            var minValue = DateTimeAxis.ToDouble(startDate);
+            var maxValue = DateTimeAxis.ToDouble(endDate);
+            Console.WriteLine($@"{minValue}/{maxValue}");
+            var x = new DateTimeAxis { Position = AxisPosition.Bottom,Minimum = minValue,Maximum = maxValue,MajorStep = 10,StringFormat = "d-MMMM"};
             var y = new LinearAxis { Position = AxisPosition.Left, Maximum = 100, Minimum = 0 };
             y.IsPanEnabled = false;
             y.IsZoomEnabled = false;
-            //datetime axis
-            var startDate = DateTime.Now.AddDays(-7);
-            var endDate = DateTime.Now;
-            var minValue = DateTimeAxis.ToDouble(startDate);
-            var maxValue = DateTimeAxis.ToDouble(endDate);
-            var x = new DateTimeAxis { Position = AxisPosition.Bottom,Minimum = minValue,Maximum = maxValue,StringFormat = "d-MMMM"};
             plotModel.Axes.Add(x);
             plotModel.Axes.Add(y);
-
             var series1 = new LineSeries
             {
                 MarkerType = MarkerType.Circle,
                 MarkerSize = 4,
-                MarkerStroke = OxyColors.White
+                MarkerStroke = OxyColors.White,
+                Color = OxyColors.Red,
             };
-            var r = new System.Random();
-            /*
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-7)), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-6)), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-5)), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-4)), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-3)), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-2)), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now.AddDays(-1)), r.Next(0,10)));
-            series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), r.Next(0, 10)));
-            */
             for(var i = 0; i < datalength; i++)
             {
-                datalist[i].TryGetValue("fbs_time", out object fbsTime);
-                datalist[i].TryGetValue("fbs_fbs", out object fbsValue);
-                DateTime.TryParse(fbsTime.ToString(), out DateTime dateResult);
-                var value = Convert.ToDouble(fbsValue.ToString());
-                series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult.Year > 2100?dateResult.AddYears(-543):dateResult), value));
+                dataset[i].TryGetValue(key_time, out object Time);
+                dataset[i].TryGetValue(key_value, out object Value);
+                DateTime.TryParse(Time.ToString(), out DateTime dateResult);
+                double value = Convert.ToDouble(Value.ToString());
+                series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult.Year > 2100 ? dateResult.AddYears(-543) : dateResult), value));
+                var textAnnotations = new TextAnnotation() {TextPosition = new DataPoint(series1.Points.Last().X, series1.Points.Last().Y),Text = value.ToString(),Stroke = OxyColors.White };
+                plotModel.Annotations.Add(textAnnotations);
             }
             plotModel.Series.Add(series1);
-            System.Threading.Thread.Sleep(100);
             return plotModel;
         }
     }
