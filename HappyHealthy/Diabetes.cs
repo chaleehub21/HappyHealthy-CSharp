@@ -18,6 +18,7 @@ namespace HappyHealthyCSharp
     {
         ListView listview;
         EditText BloodValue;
+        TextView date;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -25,6 +26,8 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_diabetes);
             // Create your application here
             BloodValue = FindViewById<EditText>(Resource.Id.sugar_value);
+            date = FindViewById<TextView>(Resource.Id.D_date);
+            date.Text = DateTime.Now.ToString("yyyy-MM-dd H:mm:ss");
         }
         [Export("ClickDisLevelsSugar")]
         public void ClickDisLevelsSugar(View v)

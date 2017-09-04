@@ -26,6 +26,8 @@ namespace HappyHealthyCSharp
             var id = FindViewById<EditText>(Resource.Id.userID);
             var pw = FindViewById<EditText>(Resource.Id.userPW);
             var login = FindViewById<ImageView>(Resource.Id.loginBtt);
+            id.Text = "kunvutloveza@hotmail.com";
+            pw.Text = "123456";
             login.Click += delegate {
                 var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
                 var comm = sqlconn.CreateCommand();
@@ -34,25 +36,31 @@ namespace HappyHealthyCSharp
                 comm.CommandText = sqlQuery;
                 comm.Parameters.AddWithValue("@id", id.Text);
                 comm.Parameters.AddWithValue("@pw", pw.Text);
-                sqlconn.Open();
-                var reader = comm.ExecuteReader();
-                if (reader.HasRows)
+                try
                 {
-                    reader.Read();
-                    if (Convert.ToInt32(reader.GetString(0)) == 1)
+                    sqlconn.Open();
+                    var reader = comm.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        StartActivity(typeof(MainActivity));
+                        reader.Read();
+                        if (Convert.ToInt32(reader.GetString(0)) == 1)
+                        {
+                            StartActivity(typeof(MainActivity));
+                            this.Finish();
+                        }
+                        else
+                        {
+                            GlobalFunction.createDialog(this, "Access Denied").Show();
+                        }
                     }
                     else
                     {
                         GlobalFunction.createDialog(this, "Access Denied").Show();
                     }
-                    GlobalFunction.createDialog(this, comm.CommandText).Show();
                 }
-                else
-                {
-                    GlobalFunction.createDialog(this, "Access Denied").Show();
-                }   
+                catch {
+                    GlobalFunction.createDialog(this,"Database is not available").Show();
+                }
             };
         }
     }

@@ -17,11 +17,8 @@ namespace HappyHealthyCSharp
     public class History_Pressure : ListActivity
     {
         ListView listView;
-        DiabetesTABLE diaTable;
-        JavaList<IDictionary<string, object>> diabList;
-        string[] Choice;
-        string DateDiabetes, Level, CostStatus, People;
-        int D_id, Cost1Diabetes;
+        PressureTABLE bpTable;
+        JavaList<IDictionary<string, object>> bpList;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,42 +26,42 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_history_pressure);
             //ListView = FindViewById<ListView>(Resource.Id.listView);
-            diaTable = new DiabetesTABLE();
+            bpTable = new PressureTABLE();
             ListView.ItemClick += onItemClick;
-
-            // Create your application here
-            setPressureList();
+            setDiabetesList();
         }
-
+        protected override void OnResume()
+        {
+            base.OnResume();
+            setDiabetesList();
+        }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            GlobalFunction.createDialog(this,
-                e.Position.ToString(),
-                delegate
-                {
-                    GlobalFunction.createDialog(this, "Yes!").Show();
-                }, delegate
-                {
-                    GlobalFunction.createDialog(this, "No...").Show();
-                }
-                ).Show();
-            // }
+            bpList[e.Position].TryGetValue("bp_up", out object bpValue);
+            bpList[e.Position].TryGetValue("bp_id", out object bpID);
+            GlobalFunction.createDialog(this, $@"The value for this one : {bpValue.ToString()}", null,(EventHandler<DialogClickEventArgs>)delegate {
+                    GlobalFunction.createDialog(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
+                        var bpTable = new PressureTABLE();
+                        bpTable.deletePressureFromSQL((string)bpID.ToString());
+                        setDiabetesList();
+                    }, delegate { }, "Yes", "No").Show();
+                }, "OK", "Delete").Show();
         }
 
         [Export("ClickAddPre")]
-        public void ClickAddPre(View v)
+        public void ClickAddDia(View v)
         {
             StartActivity(new Intent(this, typeof(Pressure)));
         }
         [Export("ClickBackHisPreHome")]
-        public void ClickBackHisPreHome(View v)
+        public void ClickBackHisDiaHome(View v)
         {
             this.Finish();
         }
-        public void setPressureList()
+        public void setDiabetesList()
         {
-            diabList = diaTable.getDiabetesList();
-            ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_pressure, new string[] { "D_DateTime" }, new int[] { Resource.Id.datePre }); //"D_DateTime",date
+            bpList = bpTable.getPressureList("SELECT * FROM BP ORDER BY BP_TIME");
+            ListAdapter = new SimpleAdapter(this, bpList, Resource.Layout.history_diabetes, new string[] { "bp_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)
             var data = new JavaList<IDictionary<string, object>>();
