@@ -4,16 +4,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fbf3fc">
-  <LinearLayout
+    <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbarregis"/>
-  </LinearLayout>
-  <TextView
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbarregis" />
+    </LinearLayout>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="สมัครเข้าใช้งาน"
@@ -23,15 +23,15 @@
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff" />
-  <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="40dp"
-      android:id="@+id/imageView12"
-      android:src="@drawable/arowback"
-      android:layout_marginTop="7dp"
-      android:layout_marginLeft="3dp"
-      android:onClick="ClickBackHome" />
+        android:textColor="#5d5d5d" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/register_back_btt"
+        android:src="@drawable/arowback"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="3dp"
+        android:onClick="ClickBackHome" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -65,7 +65,6 @@
                 android:inputType="text"
                 android:ems="10"
                 android:id="@+id/userID"
-                
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:hint="อีเมลล์ผู้ใช้งาน"
@@ -137,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:text="ชาย"
-                    android:id="@+id/men"
+                    android:id="@+id/register_radio_male"
                     android:textColor="#5d5d5d"
                     android:layout_weight="1"
                     android:checked="false"
@@ -152,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:text="หญิง"
-                    android:id="@+id/women"
+                    android:id="@+id/register_radio_female"
                     android:textColor="#5d5d5d"
                     android:layout_weight="1"
                     android:textSize="15dp"
@@ -191,7 +190,7 @@
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
-            android:id="@+id/imageView3"
+            android:id="@+id/register_button"
             android:onClick="CLickLogin"
             android:src="@drawable/regisbutton"
             android:layout_marginTop="15dp"
