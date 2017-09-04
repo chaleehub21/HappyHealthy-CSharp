@@ -4,6 +4,34 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fbf3fc">
+  <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbarregis"/>
+  </LinearLayout>
+  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="สมัครเข้าใช้งาน"
+        android:id="@+id/textView18"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="40dp"
+      android:id="@+id/imageView12"
+      android:src="@drawable/arowback"
+      android:layout_marginTop="7dp"
+      android:layout_marginLeft="3dp"
+      android:onClick="ClickBackHome" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -37,11 +65,12 @@
                 android:inputType="text"
                 android:ems="10"
                 android:id="@+id/userID"
-                android:textColor="#6f6f6f"
+                
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:hint="อีเมลล์ผู้ใช้งาน"
                 android:textSize="20dp"
+                android:textColor="#6f6f6f"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:background="@drawable/my_box_dis" />
@@ -63,6 +92,7 @@
                 android:paddingLeft="10dp"
                 android:hint="รหัสผ่าน"
                 android:textSize="20dp"
+                android:textColor="#6f6f6f"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:background="@drawable/my_box_dis" />
@@ -84,6 +114,7 @@
                 android:paddingLeft="10dp"
                 android:hint="ชื่อผู้ใช้งาน"
                 android:textSize="20dp"
+                android:textColor="#6f6f6f"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:background="@drawable/my_box_dis" />
@@ -100,13 +131,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/register_sex"
+                android:id="@+id/D_People"
                 android:layout_gravity="center_horizontal">
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:text="ชาย"
-                    android:id="@+id/register_radio_male"
+                    android:id="@+id/men"
                     android:textColor="#5d5d5d"
                     android:layout_weight="1"
                     android:checked="false"
@@ -121,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:text="หญิง"
-                    android:id="@+id/register_radio_female"
+                    android:id="@+id/women"
                     android:textColor="#5d5d5d"
                     android:layout_weight="1"
                     android:textSize="15dp"
@@ -148,7 +179,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:text="วันเกิดผู้ใช้งาน"
+                android:text="กดเพื่อเลือกวันเกิดของผู้ใช้งาน"
                 android:id="@+id/chooseBirthday"
                 android:layout_centerHorizontal="true"
                 android:textSize="15dp"
@@ -160,8 +191,8 @@
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
-            android:id="@+id/register_btt"
-            android:onClick="CLickRegister"
+            android:id="@+id/imageView3"
+            android:onClick="CLickLogin"
             android:src="@drawable/regisbutton"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="20.5dp" />
