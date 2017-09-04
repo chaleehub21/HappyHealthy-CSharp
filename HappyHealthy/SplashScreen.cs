@@ -25,13 +25,17 @@ namespace HappyHealthyCSharp
         Java.Util.Locale lang;
         ImageView imageView;
         Animation view_animation;
+        TTS t2sEngine;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            /*
             textToSpeech = new TextToSpeech(this, this, "com.google.android.tts");
             textToSpeech.SetLanguage(Java.Util.Locale.Default);
             textToSpeech.SetPitch(1f);
             textToSpeech.SetSpeechRate(1f);
+            */
+            t2sEngine = new TTS(this);
         }
         public override void OnBackPressed() { } //override back button to prevent loading process cancellation
         protected override void OnResume()
@@ -44,7 +48,10 @@ namespace HappyHealthyCSharp
             view_animation = AnimationUtils.LoadAnimation(this, Resource.Animation.fade_in);
             imageView.StartAnimation(view_animation);
             view_animation.AnimationEnd += delegate {
+                /*
                 textToSpeech.Speak("น้องโยแม่งเงี่ยน ไปเที่ยวโพไซดอนทุกวันเลย", QueueMode.Flush, null);
+                */
+                t2sEngine.speak("Hello World!");
                 //StartActivity(typeof(MainActivity));
                 StartActivity(typeof(Login));
             };

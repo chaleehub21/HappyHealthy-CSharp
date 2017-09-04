@@ -15,8 +15,8 @@ namespace HappyHealthyCSharp
     public class GlobalFunction
     {
         public static string dbPath = "server=10.0.2.2;port=3306;database=happyhealthydb;User Id=root;Password=lovelove12;charset=utf8";
-        //public static string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
-        public static string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
+        public static string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
+        //public static string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
