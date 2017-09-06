@@ -71,50 +71,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10.5dp">
             <ImageView
                 android:id="@+id/imageView17"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginLeft="48dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="1.5dp"
                 android:src="@drawable/da6" />
-            <RadioGroup
-                android:id="@+id/User_Gender"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="7dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:id="@+id/male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="ชาย"
-                    android:textColor="#505050"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:onClick="chooseSex" />
-                <RadioButton
-                    android:id="@+id/female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:text="หญิง"
-                    android:textColor="#505050"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:onClick="chooseSex" />
-            </RadioGroup>
+            <EditText
+                android:id="@+id/ud_gen"
+                android:layout_width="130dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="0.0dp"
+                android:autoText="false"
+                android:background="@drawable/my_border_box"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:numeric="integer"
+                android:textColor="#505050"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10.5dp">
+            <ImageView
+                android:id="@+id/imageViewIden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1.5dp"
+                android:src="@drawable/ic_iden" />
+            <EditText
+                android:id="@+id/ud_iden"
+                android:layout_width="130dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="0.0dp"
+                android:autoText="false"
+                android:background="@drawable/my_border_box"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:numeric="integer"
+                android:textColor="#505050"
+                android:textSize="15dp"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10.0dp"
                 android:src="@drawable/da7" />
             <EditText
                 android:id="@+id/tv_Age"
@@ -159,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginLeft="36dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12.5dp"
                 android:src="@drawable/da8" />
             <EditText
                 android:id="@+id/tv_Weight"
@@ -191,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginLeft="36dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="11.0dp"
                 android:src="@drawable/da9" />
             <EditText
                 android:id="@+id/tv_Height"
@@ -217,87 +224,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal">
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="20.0dp">
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/clearData"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:layout_marginLeft="53dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/bmr" />
-            <TextView
-                android:id="@+id/tv_BMR"
-                android:layout_width="160dp"
-                android:layout_height="27dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="11dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical|center_horizontal"
-                android:textColor="#505050"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/imageView65"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/disbmr" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:onClick="ClickDeleteDataUser"
+                android:src="@drawable/buttondelete" />
             <ImageView
-                android:id="@+id/imageView21"
+                android:id="@+id/logout"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:layout_marginLeft="58dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/bmi" />
-            <TextView
-                android:id="@+id/tv_BMI"
-                android:layout_width="160dp"
-                android:layout_height="27dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="13dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical|center_horizontal"
-                android:textColor="#505050"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:onClick="ClickLogout"
+                android:src="@drawable/ButtonLogout" />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/imageView64"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="3dp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="5dp">
-            <TextView
-                android:id="@+id/weightStdTextView"
-                android:layout_width="240dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
-                android:gravity="center_vertical|center_horizontal"
-                android:textColor="#505050"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/clearData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:onClick="ClickDeleteDataUser"
-            android:src="@drawable/buttondelete" />
     </LinearLayout>
 </RelativeLayout>

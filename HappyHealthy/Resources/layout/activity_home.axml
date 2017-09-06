@@ -22,6 +22,9 @@
         android:layout_marginTop="15dp"
         android:textSize="20dp"
         android:textStyle="bold" />
+  <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/line1"
         android:layout_width="match_parent"
@@ -119,15 +122,16 @@
             android:id="@+id/imageView9"
             android:src="@drawable/menu_doctor"
             android:onClick="ClickDoctor"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView4"
-        android:src="@drawable/develop"
-        android:onClick="ClickDevelop"
-        android:layout_marginTop="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp" />
+  </ScrollView>
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/imageView4"
+      android:src="@drawable/develop"
+      android:onClick="ClickDevelop"
+      android:layout_marginTop="15dp"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="15dp" />
 </RelativeLayout>
