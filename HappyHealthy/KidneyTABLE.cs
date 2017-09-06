@@ -18,33 +18,6 @@ namespace HappyHealthyCSharp
 {
     class KidneyTABLE
     {
-        private string strLastDate;
-        public string Diabetes { get; set; }
-        [PrimaryKey,AutoIncrement]
-        public string D_Id { get; set; }
-        public string D_DateTime { get; set; }
-        public string D_CostSugar { get; set; }
-        public string D_Level { get; set; }
-        public string D_Status { get; set; }
-        public string D_People { get; set; }
-        public string User_Id { get; set; }
-
-        public string Kidney { get; set; }
-        public string K_Id { get; set; }
-        public string K_DateTime { get; set; }
-        public string K_CostGFR { get; set; }
-        public string K_LevelCostGFR { get; set; }
-
-        public string Pressure { get; set; }
-        public string P_Id { get; set; }
-        public string P_DateTime { get; set; }
-        public string P_CostPressureDown { get; set; }
-        public string P_CostPressureTop { get; set; }
-        public string P_Cost_Level_Down { get; set; }
-        public string P_Cost_Level_Top { get; set; }
-        public string P_HeartRate { get; set; }
-        public string P_HeartRate_Level { get; set; }
-        SQLiteConnection conn = null;
         public KidneyTABLE()
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);

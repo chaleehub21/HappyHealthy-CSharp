@@ -64,7 +64,7 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            diabList = diaTable.getDiabetesList("SELECT * FROM FBS ORDER BY FBS_TIME");
+            diabList = diaTable.getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME");
             ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_diabetes, new string[] { "fbs_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)
