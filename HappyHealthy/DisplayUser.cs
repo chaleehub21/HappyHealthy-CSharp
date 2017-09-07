@@ -41,9 +41,9 @@ namespace HappyHealthyCSharp
             TVAge = FindViewById<EditText>(Resource.Id.tv_Age);
             TVWeight = FindViewById<EditText>(Resource.Id.tv_Weight);
             TVHeigh = FindViewById<EditText>(Resource.Id.tv_Height);
-            TVBMR = FindViewById<TextView>(Resource.Id.tv_BMR);
-            TVBMI = FindViewById<TextView>(Resource.Id.tv_BMI);
-            weightStdtextview = FindViewById<TextView>(Resource.Id.weightStdTextView);
+            //TVBMR = FindViewById<TextView>(Resource.Id.tv_BMR);
+            //TVBMI = FindViewById<TextView>(Resource.Id.tv_BMI);
+            //weightStdtextview = FindViewById<TextView>(Resource.Id.weightStdTextView);
             male = FindViewById<RadioButton>(Resource.Id.male);
             female = FindViewById<RadioButton>(Resource.Id.female);
             User_gender = FindViewById<RadioGroup>(Resource.Id.User_Gender);

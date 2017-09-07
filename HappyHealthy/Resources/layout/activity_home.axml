@@ -1,137 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <LinearLayout
-        android:id="@+id/container_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbarhome" />
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Happy Healthy"
-        android:id="@+id/textView18"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-  <ScrollView
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_marginTop="52dp">
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:id="@+id/container_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbarhome" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Happy Healthy"
+            android:id="@+id/textView18"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="52dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/imageView16"
+                android:src="@drawable/dii"
+                android:onClick="ClickDiabetes"
+                android:nestedScrollingEnabled="false"
+                android:layout_weight="1"
+                android:layout_height="90dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="132dp">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="90dp"
+                android:id="@+id/imageView"
+                android:src="@drawable/diii"
+                android:onClick="ClickKidney"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="211dp">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="90dp"
+                android:id="@+id/imageView5"
+                android:src="@drawable/diiii"
+                android:onClick="ClickPressure"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="290dp">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="90dp"
+                android:id="@+id/imageView7"
+                android:src="@drawable/diiiii"
+                android:onClick="ClickFood"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="370dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:id="@+id/imageView8"
+                android:src="@drawable/menu_pill"
+                android:onClick="ClickPill"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line6"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="450dp"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:id="@+id/imageView9"
+                android:src="@drawable/menu_doctor"
+                android:onClick="ClickDoctor"
+                android:layout_weight="1" />
+        </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"
-            android:id="@+id/imageView16"
-            android:src="@drawable/dii"
-            android:onClick="ClickDiabetes"
-            android:nestedScrollingEnabled="false"
-            android:layout_weight="1"
-            android:layout_height="90dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_marginTop="132dp">
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="90dp"
-            android:id="@+id/imageView"
-            android:src="@drawable/diii"
-            android:onClick="ClickKidney"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/line3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_marginTop="211dp">
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="90dp"
-            android:id="@+id/imageView5"
-            android:src="@drawable/diiii"
-            android:onClick="ClickPressure"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/line4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_marginTop="290dp">
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="90dp"
-            android:id="@+id/imageView7"
-            android:src="@drawable/diiiii"
-            android:onClick="ClickFood"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/line5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_marginTop="370dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:id="@+id/imageView8"
-            android:src="@drawable/menu_pill"
-            android:onClick="ClickPill"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/line6"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_marginTop="450dp"
-        android:minWidth="25px"
-        android:minHeight="25px">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:id="@+id/imageView9"
-            android:src="@drawable/menu_doctor"
-            android:onClick="ClickDoctor"
-            android:layout_weight="1" />
-    </LinearLayout>
-  </ScrollView>
-  <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/imageView4"
-      android:src="@drawable/develop"
-      android:onClick="ClickDevelop"
-      android:layout_marginTop="15dp"
-      android:layout_alignParentRight="true"
-      android:layout_marginRight="15dp" />
-</RelativeLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView4"
+            android:src="@drawable/develop"
+            android:onClick="ClickDevelop"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp" />
+    </RelativeLayout>
+</ScrollView>
