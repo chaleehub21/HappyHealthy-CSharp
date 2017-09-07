@@ -15,20 +15,19 @@
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="สมัครเข้าใช้งาน"
         android:id="@+id/textView18"
         android:layout_centerHorizontal="true"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical|center_horizontal"
         android:textColor="#5d5d5d" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/register_back_btt"
-        android:src="@drawable/arowback"
+        android:src="@drawable/arowbackB"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="3dp"
         android:onClick="ClickBackHome" />
