@@ -101,8 +101,8 @@ namespace HappyHealthyCSharp
         public void ClickPressure(View v)
         {
             StartActivity(new Intent(this, typeof(History_Pressure)));
-            GlobalFunction.createDialog(this, "Not implemented").Show();
         }
+
         [Export("ClickDevelop")]
         public void ClickDevelop(View v)
         {
