@@ -175,7 +175,9 @@
     <AndroidResource Include="Resources\layout\activity_add__food.axml" />
     <AndroidResource Include="Resources\layout\activity_data_user.axml" />
     <AndroidResource Include="Resources\layout\activity_develop.axml" />
-    <AndroidResource Include="Resources\layout\activity_diabetes.axml" />
+    <AndroidResource Include="Resources\layout\activity_diabetes.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_display_disease.axml" />
     <AndroidResource Include="Resources\layout\activity_display_kidney.axml" />
     <AndroidResource Include="Resources\layout\activity_display_pressure.axml" />
@@ -247,6 +249,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\toolbarregis.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_forget_password.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_history_pill.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\history_pill.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -1010,7 +1021,19 @@
     <AndroidResource Include="Resources\drawable\my_bg_pill.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ButtonLogout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_iden.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\buttonsavepill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\arowbackB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_pill.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\buttonsavepicpill.png" />
