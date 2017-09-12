@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Plugin.LocalNotifications;
 
 namespace HappyHealthyCSharp
 {
@@ -88,12 +89,11 @@ namespace HappyHealthyCSharp
                     }
                     
                 });
-                Thread.Start();
-                
-                var notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
-                notificationManager.Notify(ButtonClickNotificationId, Notification.setNotification(this, $"Password recovery email has been sent to {id.Text}", typeof(Login)).Build());
-               
+                //Thread.Start();
 
+                //var notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
+                //notificationManager.Notify(ButtonClickNotificationId, Notification.setNotification(this, $"Password recovery email has been sent to {id.Text}", typeof(Login)).Build());
+                CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }
       

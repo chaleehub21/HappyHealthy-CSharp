@@ -16,7 +16,7 @@ using System.Data;
 
 namespace HappyHealthyCSharp
 {
-    class UserTABLE
+    class UserTABLE : DatabaseConnectorInterface
     {
         public int ud_id { get; set; }
         public string ud_iden_number { get; set; }
@@ -107,6 +107,21 @@ namespace HappyHealthyCSharp
             }
             conn.Close();
             return false;
+        }
+
+        public override bool Insert(string idNo, string name, char gender, string birthdate, string email, string password, Context c)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool ViewAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }
