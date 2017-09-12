@@ -37,6 +37,7 @@ namespace HappyHealthyCSharp
             else
                 imageView.Click += delegate
                 {
+                    /*
                     isRecording = !isRecording;
                     if (isRecording)
                     {
@@ -50,6 +51,8 @@ namespace HappyHealthyCSharp
                         voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
                         StartActivityForResult(voiceIntent, VOICE);
                     }
+                    */
+                    GlobalFunction.createDialog(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
 
 
@@ -98,8 +101,8 @@ namespace HappyHealthyCSharp
         public void ClickPressure(View v)
         {
             StartActivity(new Intent(this, typeof(History_Pressure)));
-            GlobalFunction.createDialog(this, "Not implemented").Show();
         }
+
         [Export("ClickDevelop")]
         public void ClickDevelop(View v)
         {

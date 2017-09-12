@@ -91,8 +91,8 @@ namespace HappyHealthyCSharp
             PlotView view3 = FindViewById<PlotView>(Resource.Id.plot_view3);
             PlotView view4 = FindViewById<PlotView>(Resource.Id.plot_view4);
             PlotView view5 = FindViewById<PlotView>(Resource.Id.plot_view5);
-            view.Model = CreatePlotModel("กราฟ FBS",new DiabetesTABLE().getDiabetesList("SELECT * FROM FBS ORDER BY FBS_TIME"),"fbs_time","fbs_fbs");
-            view2.Model = CreatePlotModel("กราฟ CKD",new KidneyTABLE().getKidneyList("SELECT * FROM CKD ORDER BY CKD_TIME"),"ckd_time","ckd_gfr");
+            view.Model = CreatePlotModel("กราฟ FBS",new DiabetesTABLE().getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id","",this)} ORDER BY FBS_TIME"),"fbs_time","fbs_fbs");
+            view2.Model = CreatePlotModel("กราฟ CKD",new KidneyTABLE().getKidneyList($"SELECT * FROM CKD WHERE UD_ID = {GlobalFunction.getPreference("ud_id","",this)} ORDER BY CKD_TIME"),"ckd_time","ckd_gfr");
             #region FullPagePlotView
             /*
             RequestWindowFeature(WindowFeatures.NoTitle);

@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using SQLite;
 using Java.Text;
+using MySql.Data.MySqlClient;
 
 namespace HappyHealthyCSharp
 {
@@ -18,51 +19,36 @@ namespace HappyHealthyCSharp
     [Activity(Theme = "@style/MyMaterialTheme.Base")]
     class DisplayUser : Activity
     {
-        SQLiteConnection conn = null;
-        private EditText TVName, TVAge, TVWeight, TVHeigh;
-        private TextView TVBMR, TVBMI, weightStdtextview;
-        private string strBMR, strBMI, weightStdstring, strChoseGender;
-        private RadioButton male, female;
-        private RadioGroup User_gender;
-        double dBMR, dBMI;
-        int userID;
-        Dictionary<string, string> dataUser, dataHistory;
-        SimpleDateFormat df_show;
-        CalendarView c;
-       
+        EditText txtName, txtAge;
+        RadioButton mRadio, fRadio;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_display_user);
-            //instatantiate widget control
-            //conn = new SQLiteConnection(GlobalFunction.dbPath);
-            TVName = FindViewById<EditText>(Resource.Id.tv_Name);
-            TVAge = FindViewById<EditText>(Resource.Id.tv_Age);
-            TVWeight = FindViewById<EditText>(Resource.Id.tv_Weight);
-            TVHeigh = FindViewById<EditText>(Resource.Id.tv_Height);
-            //TVBMR = FindViewById<TextView>(Resource.Id.tv_BMR);
-            //TVBMI = FindViewById<TextView>(Resource.Id.tv_BMI);
-            //weightStdtextview = FindViewById<TextView>(Resource.Id.weightStdTextView);
-            male = FindViewById<RadioButton>(Resource.Id.male);
-            female = FindViewById<RadioButton>(Resource.Id.female);
-            User_gender = FindViewById<RadioGroup>(Resource.Id.User_Gender);
-            //do the jobs
-            
-            
-
+            txtName = FindViewById<EditText>(Resource.Id.tv_Name);
+            txtAge = FindViewById<EditText>(Resource.Id.tv_Age);
+            mRadio = FindViewById<RadioButton>(Resource.Id.male);
+            fRadio = FindViewById<RadioButton>(Resource.Id.female);
+            var tempLogOut = FindViewById<ImageView>(Resource.Id.clearData);
+            tempLogOut.Click += delegate {
+                StartActivity(new Intent(this, typeof(Login)));
+                this.Finish();
+            };
+            InitializeUserData();
         }
-        private void defaultValue()
+
+        private void InitializeUserData()
         {
-            //then clear its value
-            TVName.Text = "";
-            TVHeigh.Text = "";
-            TVWeight.Text = "";
-            TVBMI.Text = "";
-            TVBMR.Text = "";
-            TVAge.Text = "";
-            weightStdtextview.Text = "";
-            User_gender.ClearCheck();
+            var user = new UserTABLE();
+            user = user.getUserDetail(GlobalFunction.getPreference("ud_id", "", this));
+            txtAge.Text = (DateTime.Now.Year - user.ud_birthdate.Year).ToString();
+            txtName.Text = user.ud_name;
+            if (user.ud_gender == 'M')
+                mRadio.Checked = true;
+            else if (user.ud_gender == 'F')
+                fRadio.Checked = true;
+
         }
     }
 }

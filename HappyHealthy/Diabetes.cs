@@ -33,7 +33,7 @@ namespace HappyHealthyCSharp
         public void ClickDisLevelsSugar(View v)
         {
             var diaTable = new DiabetesTABLE();
-            diaTable.InsertFbsToSQL(BloodValue.Text, 1);
+            diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             GlobalFunction.createDialog(this, $@"Inserted",delegate { this.Finish(); }).Show();
 
         }

@@ -35,7 +35,7 @@ namespace HappyHealthyCSharp
             saveButton.Click += delegate
             {
                 var KidneyTable = new KidneyTABLE();
-                KidneyTable.InsertKidneyToSQL(field_gfr.Text, field_creatinine.Text, field_bun.Text, field_sodium.Text, field_potassium.Text, field_albumin_blood.Text, field_albumin_urine.Text, field_phosphorus_blood.Text, 1);
+                KidneyTable.InsertKidneyToSQL(field_gfr.Text, field_creatinine.Text, field_bun.Text, field_sodium.Text, field_potassium.Text, field_albumin_blood.Text, field_albumin_urine.Text, field_phosphorus_blood.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
                 GlobalFunction.createDialog(this, $@"Inserted", delegate { this.Finish(); }).Show();
             };
             // Create your application here

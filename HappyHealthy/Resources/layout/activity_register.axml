@@ -118,6 +118,28 @@
                 android:background="@drawable/my_box_dis" />
         </LinearLayout>
         <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="280dp"
+                android:layout_height="30dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number" 
+                    android:ems="10"
+                    android:id="@+id/identificationNumber"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:hint="รหัสบัตรประชาชน"
+                    android:textSize="20dp"
+                    android:textColor="#6f6f6f"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/my_box_dis" />
+      </LinearLayout>
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -61,7 +61,7 @@ namespace HappyHealthyCSharp
         }
         public void setKidneyList()
         {
-            kidneyList = kidneyTable.getKidneyList(); //must changed
+            kidneyList = kidneyTable.getKidneyList($"SELECT * FROM CKD WHERE UD_ID = {GlobalFunction.getPreference("ud_id","",this)}"); //must changed
             ListAdapter = new SimpleAdapter(this, kidneyList, Resource.Layout.history_kidney, new string[] { "ckd_time" }, new int[] { Resource.Id.dateKidney }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             

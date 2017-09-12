@@ -36,14 +36,14 @@ namespace HappyHealthyCSharp
         public void ClickDisLevelsPre(View v)
         {
             var bpTable = new PressureTABLE();
-            bpTable.InsertPressureToSQL(BPUp.Text, BPLow.Text, HeartRate.Text, 1);
+            bpTable.InsertPressureToSQL(BPUp.Text, BPLow.Text, HeartRate.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id","",this)));
             GlobalFunction.createDialog(this, $@"Inserted", delegate { this.Finish(); }).Show();
 
         }
         public void ClickDisLevelsPre(object sender, EventArgs e)
         {
             var bpTable = new PressureTABLE();
-            bpTable.InsertPressureToSQL(BPUp.Text, BPLow.Text, HeartRate.Text, 1);
+            bpTable.InsertPressureToSQL(BPUp.Text, BPLow.Text, HeartRate.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             GlobalFunction.createDialog(this, $@"Inserted", delegate { this.Finish(); }).Show();
 
         }

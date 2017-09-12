@@ -60,7 +60,7 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            bpList = bpTable.getPressureList("SELECT * FROM BP ORDER BY BP_TIME");
+            bpList = bpTable.getPressureList($"SELECT * FROM BP WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME");
             ListAdapter = new SimpleAdapter(this, bpList, Resource.Layout.history_diabetes, new string[] { "bp_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)

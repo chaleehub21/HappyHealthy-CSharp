@@ -10,13 +10,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Speech.Tts;
+using System.Net.Mail;
+using System.Net;
+
 namespace HappyHealthyCSharp
 {
     public class GlobalFunction
     {
         public static string dbPath = "server=10.0.2.2;port=3306;database=happyhealthydb;User Id=root;Password=lovelove12;charset=utf8";
-        public static string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
-        //public static string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
+        //public static string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
+        public static string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
@@ -102,5 +105,57 @@ namespace HappyHealthyCSharp
             }
             return t.ToString();
         }
+#region Test
+        // '' <summary>
+        // '' Send email using SMTP can be use with @hotmail,@outlook,@gmail and @icloud and return True when send complete, return False when failed to send.
+        // '' </summary>
+        // '' <param name="sendfrom">Email address sender</param>
+        // '' <param name="psswd">Password for sender (Recommend to use MailLib.Security.Encode() with password if you don't have any encryption for this parameter to grab some secure)</param>
+        // '' <param name="sendto">Type both address and email-provider for receiver (ie. someone@somewhere.com)</param>
+        // '' <param name="subject">Email subject</param>
+        // '' <param name="body">Email body</param>
+        // '' <param name="fileloc">Email attachment file location</param>
+        public static bool SendMail(string sendfrom, string psswd, string sendto, string subject, string body)
+        {
+            try
+            {
+                MailMessage Msg = new MailMessage() {
+                    From = new MailAddress(sendfrom),
+                    Subject = subject,
+                    IsBodyHtml = true,
+                    Body = body
+                };
+                Msg.To.Add(new MailAddress(sendto));
+                SmtpClient smtpserver = new SmtpClient();
+                if (((sendfrom.Substring(sendfrom.IndexOf("@")) == "@hotmail.com")
+                || (sendfrom.Substring(sendfrom.IndexOf("@")) == "@outlook.com")))
+                {
+                    smtpserver = new SmtpClient("smtp.live.com", 587);
+                }
+                else if ((sendfrom.Substring(sendfrom.IndexOf("@")) == "@icloud.com"))
+                {
+                    smtpserver = new SmtpClient("smtp.mail.me.com", 587);
+                }
+                else if ((sendfrom.Substring(sendfrom.IndexOf("@")) == "@gmail.com"))
+                {
+                    smtpserver = new SmtpClient("smtp.gmail.com", 587);
+                }
+
+                smtpserver.UseDefaultCredentials = false;
+                smtpserver.Credentials = new NetworkCredential(sendfrom, psswd);
+                smtpserver.EnableSsl = true;
+                smtpserver.Send(Msg);
+                Msg = null;
+                smtpserver = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($@"*#*:{ex.ToString()}");
+                return false;
+            }
+
+        }
+#endregion
     }
 }
