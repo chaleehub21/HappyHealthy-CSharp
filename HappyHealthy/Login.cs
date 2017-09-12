@@ -89,11 +89,12 @@ namespace HappyHealthyCSharp
                     }
                     
                 });
+                StartActivity(new Intent(this, typeof(Forgot)));
                 //Thread.Start();
 
                 //var notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
                 //notificationManager.Notify(ButtonClickNotificationId, Notification.setNotification(this, $"Password recovery email has been sent to {id.Text}", typeof(Login)).Build());
-                CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
+                //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }
       

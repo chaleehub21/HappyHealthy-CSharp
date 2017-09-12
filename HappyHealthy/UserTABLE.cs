@@ -16,7 +16,7 @@ using System.Data;
 
 namespace HappyHealthyCSharp
 {
-    class UserTABLE : DatabaseConnectorInterface
+    class UserTABLE
     {
         public int ud_id { get; set; }
         public string ud_iden_number { get; set; }
@@ -76,7 +76,7 @@ namespace HappyHealthyCSharp
             command.ExecuteNonQuery();
             sqlconn.Close();
         }
-        public static bool InsertUserToSQL(string idNo, string name, char gender, string birthdate, string email, string password, Context c)
+        public static bool InsertUserToSQL(string name, char gender, string birthdate, string email, string password, Context c)
         {
             #region deprecated
             /*
@@ -89,7 +89,7 @@ namespace HappyHealthyCSharp
             conn.Open();
             var sqlCommand = conn.CreateCommand();
             //sqlCommand.CommandText = $@"insert into fbs values(null,'{System.DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
-            sqlCommand.CommandText = $@"INSERT INTO `user_detail`(`ud_iden_number`,`ud_name`,`ud_gender`,`ud_birthdate`,`ud_email`,`ud_pass`)VALUES({idNo},'{name}','{gender}','{birthdate}','{email}','{password}');";
+            sqlCommand.CommandText = $@"INSERT INTO `user_detail`(`ud_name`,`ud_gender`,`ud_birthdate`,`ud_email`,`ud_pass`)VALUES('{name}','{gender}','{birthdate}','{email}','{password}');";
             try
             {
                 Console.WriteLine(sqlCommand.CommandText);
@@ -107,21 +107,6 @@ namespace HappyHealthyCSharp
             }
             conn.Close();
             return false;
-        }
-
-        public override bool Insert(string idNo, string name, char gender, string birthdate, string email, string password, Context c)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool ViewAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

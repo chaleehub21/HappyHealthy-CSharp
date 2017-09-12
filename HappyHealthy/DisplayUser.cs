@@ -28,8 +28,6 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_display_user);
             txtName = FindViewById<EditText>(Resource.Id.tv_Name);
             txtAge = FindViewById<EditText>(Resource.Id.tv_Age);
-            mRadio = FindViewById<RadioButton>(Resource.Id.male);
-            fRadio = FindViewById<RadioButton>(Resource.Id.female);
             var tempLogOut = FindViewById<ImageView>(Resource.Id.clearData);
             tempLogOut.Click += delegate {
                 StartActivity(new Intent(this, typeof(Login)));
@@ -44,10 +42,6 @@ namespace HappyHealthyCSharp
             user = user.getUserDetail(GlobalFunction.getPreference("ud_id", "", this));
             txtAge.Text = (DateTime.Now.Year - user.ud_birthdate.Year).ToString();
             txtName.Text = user.ud_name;
-            if (user.ud_gender == 'M')
-                mRadio.Checked = true;
-            else if (user.ud_gender == 'F')
-                fRadio.Checked = true;
 
         }
     }
