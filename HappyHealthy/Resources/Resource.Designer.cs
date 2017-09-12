@@ -2274,262 +2274,265 @@ namespace HappyHealthyCSharp
 			public const int my_bg_bordar_datauser = 2130837693;
 			
 			// aapt resource value: 0x7f0200be
-			public const int my_bg_pill = 2130837694;
+			public const int my_bg_doc = 2130837694;
 			
 			// aapt resource value: 0x7f0200bf
-			public const int my_bg_saveexe_name = 2130837695;
+			public const int my_bg_pill = 2130837695;
 			
 			// aapt resource value: 0x7f0200c0
-			public const int my_bg_savefood_name = 2130837696;
+			public const int my_bg_saveexe_name = 2130837696;
 			
 			// aapt resource value: 0x7f0200c1
-			public const int my_bgdata = 2130837697;
+			public const int my_bg_savefood_name = 2130837697;
 			
 			// aapt resource value: 0x7f0200c2
-			public const int my_border_black = 2130837698;
+			public const int my_bgdata = 2130837698;
 			
 			// aapt resource value: 0x7f0200c3
-			public const int my_border_box = 2130837699;
+			public const int my_border_black = 2130837699;
 			
 			// aapt resource value: 0x7f0200c4
-			public const int my_border_his = 2130837700;
+			public const int my_border_box = 2130837700;
 			
 			// aapt resource value: 0x7f0200c5
-			public const int my_border_waring = 2130837701;
+			public const int my_border_his = 2130837701;
 			
 			// aapt resource value: 0x7f0200c6
-			public const int my_box_diabetes = 2130837702;
+			public const int my_border_waring = 2130837702;
 			
 			// aapt resource value: 0x7f0200c7
-			public const int my_box_dis = 2130837703;
+			public const int my_box_diabetes = 2130837703;
 			
 			// aapt resource value: 0x7f0200c8
-			public const int my_box_kid = 2130837704;
+			public const int my_box_dis = 2130837704;
 			
 			// aapt resource value: 0x7f0200c9
-			public const int my_box_kidney = 2130837705;
+			public const int my_box_kid = 2130837705;
 			
 			// aapt resource value: 0x7f0200ca
-			public const int my_box_pre = 2130837706;
+			public const int my_box_kidney = 2130837706;
 			
 			// aapt resource value: 0x7f0200cb
-			public const int my_box_text_dis = 2130837707;
+			public const int my_box_pre = 2130837707;
 			
 			// aapt resource value: 0x7f0200cc
-			public const int my_detail_food = 2130837708;
+			public const int my_box_text_dis = 2130837708;
 			
 			// aapt resource value: 0x7f0200cd
-			public const int my_login = 2130837709;
+			public const int my_detail_food = 2130837709;
 			
 			// aapt resource value: 0x7f0200ce
-			public const int my_re_di = 2130837710;
+			public const int my_login = 2130837710;
 			
 			// aapt resource value: 0x7f0200cf
-			public const int my_re_kid = 2130837711;
+			public const int my_re_di = 2130837711;
 			
 			// aapt resource value: 0x7f0200d0
-			public const int my_re_pre = 2130837712;
-			
-			// aapt resource value: 0x7f020113
-			public const int notification_template_icon_bg = 2130837779;
+			public const int my_re_kid = 2130837712;
 			
 			// aapt resource value: 0x7f0200d1
-			public const int pre1 = 2130837713;
+			public const int my_re_pre = 2130837713;
+			
+			// aapt resource value: 0x7f020114
+			public const int notification_template_icon_bg = 2130837780;
 			
 			// aapt resource value: 0x7f0200d2
-			public const int pre2 = 2130837714;
+			public const int pre1 = 2130837714;
 			
 			// aapt resource value: 0x7f0200d3
-			public const int pre3 = 2130837715;
+			public const int pre2 = 2130837715;
 			
 			// aapt resource value: 0x7f0200d4
-			public const int pre4 = 2130837716;
+			public const int pre3 = 2130837716;
 			
 			// aapt resource value: 0x7f0200d5
-			public const int pre5 = 2130837717;
+			public const int pre4 = 2130837717;
 			
 			// aapt resource value: 0x7f0200d6
-			public const int pre6 = 2130837718;
+			public const int pre5 = 2130837718;
 			
 			// aapt resource value: 0x7f0200d7
-			public const int pressure = 2130837719;
+			public const int pre6 = 2130837719;
 			
 			// aapt resource value: 0x7f0200d8
-			public const int prodiaafter1 = 2130837720;
+			public const int pressure = 2130837720;
 			
 			// aapt resource value: 0x7f0200d9
-			public const int prodiaafter2 = 2130837721;
+			public const int prodiaafter1 = 2130837721;
 			
 			// aapt resource value: 0x7f0200da
-			public const int prodiaafter3 = 2130837722;
+			public const int prodiaafter2 = 2130837722;
 			
 			// aapt resource value: 0x7f0200db
-			public const int prodiabefore1 = 2130837723;
+			public const int prodiaafter3 = 2130837723;
 			
 			// aapt resource value: 0x7f0200dc
-			public const int prodiabefore2 = 2130837724;
+			public const int prodiabefore1 = 2130837724;
 			
 			// aapt resource value: 0x7f0200dd
-			public const int prodiabefore3 = 2130837725;
+			public const int prodiabefore2 = 2130837725;
 			
 			// aapt resource value: 0x7f0200de
-			public const int proheart1 = 2130837726;
+			public const int prodiabefore3 = 2130837726;
 			
 			// aapt resource value: 0x7f0200df
-			public const int proheart2 = 2130837727;
+			public const int proheart1 = 2130837727;
 			
 			// aapt resource value: 0x7f0200e0
-			public const int proheart3 = 2130837728;
+			public const int proheart2 = 2130837728;
 			
 			// aapt resource value: 0x7f0200e1
-			public const int proheart4 = 2130837729;
+			public const int proheart3 = 2130837729;
 			
 			// aapt resource value: 0x7f0200e2
-			public const int proheart5 = 2130837730;
+			public const int proheart4 = 2130837730;
 			
 			// aapt resource value: 0x7f0200e3
-			public const int prokid1 = 2130837731;
+			public const int proheart5 = 2130837731;
 			
 			// aapt resource value: 0x7f0200e4
-			public const int prokid2 = 2130837732;
+			public const int prokid1 = 2130837732;
 			
 			// aapt resource value: 0x7f0200e5
-			public const int prokid3 = 2130837733;
+			public const int prokid2 = 2130837733;
 			
 			// aapt resource value: 0x7f0200e6
-			public const int prokid4 = 2130837734;
+			public const int prokid3 = 2130837734;
 			
 			// aapt resource value: 0x7f0200e7
-			public const int prokid5 = 2130837735;
+			public const int prokid4 = 2130837735;
 			
 			// aapt resource value: 0x7f0200e8
-			public const int protin = 2130837736;
+			public const int prokid5 = 2130837736;
 			
 			// aapt resource value: 0x7f0200e9
-			public const int regisbutton = 2130837737;
+			public const int protin = 2130837737;
 			
 			// aapt resource value: 0x7f0200ea
-			public const int savedatauser = 2130837738;
+			public const int regisbutton = 2130837738;
 			
 			// aapt resource value: 0x7f0200eb
-			public const int sodium = 2130837739;
+			public const int savedatauser = 2130837739;
 			
 			// aapt resource value: 0x7f0200ec
-			public const int splashlist = 2130837740;
+			public const int sodium = 2130837740;
 			
 			// aapt resource value: 0x7f0200ed
-			public const int sugar = 2130837741;
+			public const int splashlist = 2130837741;
 			
 			// aapt resource value: 0x7f0200ee
-			public const int sumtotal = 2130837742;
+			public const int sugar = 2130837742;
 			
 			// aapt resource value: 0x7f0200ef
-			public const int textheart = 2130837743;
+			public const int sumtotal = 2130837743;
 			
 			// aapt resource value: 0x7f0200f0
-			public const int textleveldi1 = 2130837744;
+			public const int textheart = 2130837744;
 			
 			// aapt resource value: 0x7f0200f1
-			public const int textleveldi2 = 2130837745;
+			public const int textleveldi1 = 2130837745;
 			
 			// aapt resource value: 0x7f0200f2
-			public const int textleveldi3 = 2130837746;
+			public const int textleveldi2 = 2130837746;
 			
 			// aapt resource value: 0x7f0200f3
-			public const int textleveldi4 = 2130837747;
+			public const int textleveldi3 = 2130837747;
 			
 			// aapt resource value: 0x7f0200f4
-			public const int textleveldi5 = 2130837748;
+			public const int textleveldi4 = 2130837748;
 			
 			// aapt resource value: 0x7f0200f5
-			public const int textlevelheart1 = 2130837749;
+			public const int textleveldi5 = 2130837749;
 			
 			// aapt resource value: 0x7f0200f6
-			public const int textlevelheart2 = 2130837750;
+			public const int textlevelheart1 = 2130837750;
 			
 			// aapt resource value: 0x7f0200f7
-			public const int textlevelheart3 = 2130837751;
+			public const int textlevelheart2 = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
-			public const int textlevelheart4 = 2130837752;
+			public const int textlevelheart3 = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
-			public const int textlevelheart5 = 2130837753;
+			public const int textlevelheart4 = 2130837753;
 			
 			// aapt resource value: 0x7f0200fa
-			public const int textlevelkid1 = 2130837754;
+			public const int textlevelheart5 = 2130837754;
 			
 			// aapt resource value: 0x7f0200fb
-			public const int textlevelkid2 = 2130837755;
+			public const int textlevelkid1 = 2130837755;
 			
 			// aapt resource value: 0x7f0200fc
-			public const int textlevelkid3 = 2130837756;
+			public const int textlevelkid2 = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int textlevelkid4 = 2130837757;
+			public const int textlevelkid3 = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int textlevelkid5 = 2130837758;
+			public const int textlevelkid4 = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int textlevelnormal = 2130837759;
+			public const int textlevelkid5 = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int textlevelnormal1 = 2130837760;
+			public const int textlevelnormal = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int textlevelnormal2 = 2130837761;
+			public const int textlevelnormal1 = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int textlevelpre1 = 2130837762;
+			public const int textlevelnormal2 = 2130837762;
 			
 			// aapt resource value: 0x7f020103
-			public const int textlevelpre2 = 2130837763;
+			public const int textlevelpre1 = 2130837763;
 			
 			// aapt resource value: 0x7f020104
-			public const int textlevelpre3 = 2130837764;
+			public const int textlevelpre2 = 2130837764;
 			
 			// aapt resource value: 0x7f020105
-			public const int textlevelpre4 = 2130837765;
+			public const int textlevelpre3 = 2130837765;
 			
 			// aapt resource value: 0x7f020106
-			public const int textlevelpre5 = 2130837766;
+			public const int textlevelpre4 = 2130837766;
 			
 			// aapt resource value: 0x7f020107
-			public const int textlevelpre6 = 2130837767;
+			public const int textlevelpre5 = 2130837767;
 			
 			// aapt resource value: 0x7f020108
-			public const int textlevelpre7 = 2130837768;
+			public const int textlevelpre6 = 2130837768;
 			
 			// aapt resource value: 0x7f020109
-			public const int top = 2130837769;
+			public const int textlevelpre7 = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int top2 = 2130837770;
+			public const int top = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int tstsugarbefore = 2130837771;
+			public const int top2 = 2130837771;
 			
 			// aapt resource value: 0x7f02010c
-			public const int txtgfr = 2130837772;
+			public const int tstsugarbefore = 2130837772;
 			
 			// aapt resource value: 0x7f02010d
-			public const int txtpredown = 2130837773;
+			public const int txtgfr = 2130837773;
 			
 			// aapt resource value: 0x7f02010e
-			public const int txtpretop = 2130837774;
+			public const int txtpredown = 2130837774;
 			
 			// aapt resource value: 0x7f02010f
-			public const int unitcalexe = 2130837775;
+			public const int txtpretop = 2130837775;
 			
 			// aapt resource value: 0x7f020110
-			public const int unitcalfood = 2130837776;
+			public const int unitcalexe = 2130837776;
 			
 			// aapt resource value: 0x7f020111
-			public const int warning = 2130837777;
+			public const int unitcalfood = 2130837777;
 			
 			// aapt resource value: 0x7f020112
-			public const int year = 2130837778;
+			public const int warning = 2130837778;
+			
+			// aapt resource value: 0x7f020113
+			public const int year = 2130837779;
 			
 			static Drawable()
 			{
@@ -2559,8 +2562,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f070179
 			public const int Cost_PreTop = 2131165561;
 			
-			// aapt resource value: 0x7f0700ab
-			public const int D_People = 2131165355;
+			// aapt resource value: 0x7f0700ac
+			public const int D_People = 2131165356;
 			
 			// aapt resource value: 0x7f0700d3
 			public const int D_Status = 2131165395;
@@ -2664,11 +2667,11 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0700c2
 			public const int activity_develop = 2131165378;
 			
-			// aapt resource value: 0x7f0700ae
-			public const int af_food = 2131165358;
+			// aapt resource value: 0x7f0700af
+			public const int af_food = 2131165359;
 			
-			// aapt resource value: 0x7f0700aa
-			public const int af_sleep = 2131165354;
+			// aapt resource value: 0x7f0700ab
+			public const int af_sleep = 2131165355;
 			
 			// aapt resource value: 0x7f0700d5
 			public const int after = 2131165397;
@@ -2691,14 +2694,14 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07001a
 			public const int beginning = 2131165210;
 			
-			// aapt resource value: 0x7f0700ac
-			public const int bf_food = 2131165356;
+			// aapt resource value: 0x7f0700ad
+			public const int bf_food = 2131165357;
 			
 			// aapt resource value: 0x7f07002a
 			public const int bottom = 2131165226;
 			
-			// aapt resource value: 0x7f0700a6
-			public const int breakfast = 2131165350;
+			// aapt resource value: 0x7f0700a7
+			public const int breakfast = 2131165351;
 			
 			// aapt resource value: 0x7f070044
 			public const int buttonPanel = 2131165252;
@@ -2808,8 +2811,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0700d2
 			public const int diabetes = 2131165394;
 			
-			// aapt resource value: 0x7f0700a9
-			public const int dinner = 2131165353;
+			// aapt resource value: 0x7f0700aa
+			public const int dinner = 2131165354;
 			
 			// aapt resource value: 0x7f07000e
 			public const int disableHome = 2131165198;
@@ -3021,8 +3024,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0700d7
 			public const int imageView23 = 2131165399;
 			
-			// aapt resource value: 0x7f0700b0
-			public const int imageView25 = 2131165360;
+			// aapt resource value: 0x7f0700a5
+			public const int imageView25 = 2131165349;
 			
 			// aapt resource value: 0x7f070166
 			public const int imageView27 = 2131165542;
@@ -3297,8 +3300,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07010a
 			public const int logout = 2131165450;
 			
-			// aapt resource value: 0x7f0700a7
-			public const int lunch = 2131165351;
+			// aapt resource value: 0x7f0700a8
+			public const int lunch = 2131165352;
 			
 			// aapt resource value: 0x7f0700a4
 			public const int ma_desc = 2131165348;
@@ -3309,11 +3312,11 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0700b9
 			public const int male = 2131165369;
 			
-			// aapt resource value: 0x7f0700a5
-			public const int med_time = 2131165349;
+			// aapt resource value: 0x7f0700a6
+			public const int med_time = 2131165350;
 			
-			// aapt resource value: 0x7f0700a8
-			public const int med_time2 = 2131165352;
+			// aapt resource value: 0x7f0700a9
+			public const int med_time2 = 2131165353;
 			
 			// aapt resource value: 0x7f07019c
 			public const int media_actions = 2131165596;
@@ -3684,11 +3687,11 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07009e
 			public const int textViewpill = 2131165342;
 			
-			// aapt resource value: 0x7f0700af
-			public const int text_af_food = 2131165359;
+			// aapt resource value: 0x7f0700b0
+			public const int text_af_food = 2131165360;
 			
-			// aapt resource value: 0x7f0700ad
-			public const int text_bf_food = 2131165357;
+			// aapt resource value: 0x7f0700ae
+			public const int text_bf_food = 2131165358;
 			
 			// aapt resource value: 0x7f07019e
 			public const int time = 2131165598;
@@ -3939,217 +3942,223 @@ namespace HappyHealthyCSharp
 			public const int activity_add__food = 2130968602;
 			
 			// aapt resource value: 0x7f04001b
-			public const int activity_add_pill = 2130968603;
+			public const int activity_add_doc = 2130968603;
 			
 			// aapt resource value: 0x7f04001c
-			public const int activity_data_user = 2130968604;
+			public const int activity_add_pill = 2130968604;
 			
 			// aapt resource value: 0x7f04001d
-			public const int activity_develop = 2130968605;
+			public const int activity_data_user = 2130968605;
 			
 			// aapt resource value: 0x7f04001e
-			public const int activity_diabetes = 2130968606;
+			public const int activity_develop = 2130968606;
 			
 			// aapt resource value: 0x7f04001f
-			public const int activity_display_disease = 2130968607;
+			public const int activity_diabetes = 2130968607;
 			
 			// aapt resource value: 0x7f040020
-			public const int activity_display_kidney = 2130968608;
+			public const int activity_display_disease = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int activity_display_pressure = 2130968609;
+			public const int activity_display_kidney = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int activity_display_user = 2130968610;
+			public const int activity_display_pressure = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int activity_exercise_detail = 2130968611;
+			public const int activity_display_user = 2130968611;
 			
 			// aapt resource value: 0x7f040024
-			public const int activity_exercise_type = 2130968612;
+			public const int activity_exercise_detail = 2130968612;
 			
 			// aapt resource value: 0x7f040025
-			public const int activity_food__type_1 = 2130968613;
+			public const int activity_exercise_type = 2130968613;
 			
 			// aapt resource value: 0x7f040026
-			public const int activity_food_detail = 2130968614;
+			public const int activity_food__type_1 = 2130968614;
 			
 			// aapt resource value: 0x7f040027
-			public const int activity_forget_password = 2130968615;
+			public const int activity_food_detail = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int activity_history__exe = 2130968616;
+			public const int activity_forget_password = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int activity_history__food = 2130968617;
+			public const int activity_history__exe = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int activity_history_diabetes = 2130968618;
+			public const int activity_history__food = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int activity_history_kidney = 2130968619;
+			public const int activity_history_diabetes = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int activity_history_pill = 2130968620;
+			public const int activity_history_kidney = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int activity_history_pressure = 2130968621;
+			public const int activity_history_pill = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int activity_home = 2130968622;
+			public const int activity_history_pressure = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int activity_intro_healthy = 2130968623;
+			public const int activity_home = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int activity_kidney = 2130968624;
+			public const int activity_intro_healthy = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int activity_login = 2130968625;
+			public const int activity_kidney = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int activity_main = 2130968626;
+			public const int activity_login = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int activity_pressure = 2130968627;
+			public const int activity_main = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int activity_register = 2130968628;
+			public const int activity_pressure = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int activity_report = 2130968629;
+			public const int activity_register = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int activity_splash_screen = 2130968630;
+			public const int activity_report = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int activity_user = 2130968631;
+			public const int activity_splash_screen = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int design_layout_snackbar = 2130968632;
+			public const int activity_user = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int design_layout_snackbar_include = 2130968633;
+			public const int design_layout_snackbar = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int design_layout_tab_icon = 2130968634;
+			public const int design_layout_snackbar_include = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int design_layout_tab_text = 2130968635;
+			public const int design_layout_tab_icon = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int design_menu_item_action_area = 2130968636;
+			public const int design_layout_tab_text = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int design_navigation_item = 2130968637;
+			public const int design_menu_item_action_area = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int design_navigation_item_header = 2130968638;
+			public const int design_navigation_item = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int design_navigation_item_separator = 2130968639;
+			public const int design_navigation_item_header = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int design_navigation_item_subheader = 2130968640;
+			public const int design_navigation_item_separator = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int design_navigation_menu = 2130968641;
+			public const int design_navigation_item_subheader = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int design_navigation_menu_item = 2130968642;
+			public const int design_navigation_menu = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int exercise_type = 2130968643;
+			public const int design_navigation_menu_item = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int food_1 = 2130968644;
+			public const int exercise_type = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int history_diabetes = 2130968645;
+			public const int food_1 = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int history_food = 2130968646;
+			public const int history_diabetes = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int history_kidney = 2130968647;
+			public const int history_food = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int history_pill = 2130968648;
+			public const int history_kidney = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int history_pressure = 2130968649;
+			public const int history_pill = 2130968649;
 			
 			// aapt resource value: 0x7f04004a
-			public const int login = 2130968650;
+			public const int history_pressure = 2130968650;
 			
 			// aapt resource value: 0x7f04004b
-			public const int Main = 2130968651;
+			public const int login = 2130968651;
 			
 			// aapt resource value: 0x7f04004c
-			public const int notification_media_action = 2130968652;
+			public const int Main = 2130968652;
 			
 			// aapt resource value: 0x7f04004d
-			public const int notification_media_cancel_action = 2130968653;
+			public const int notification_media_action = 2130968653;
 			
 			// aapt resource value: 0x7f04004e
-			public const int notification_template_big_media = 2130968654;
+			public const int notification_media_cancel_action = 2130968654;
 			
 			// aapt resource value: 0x7f04004f
-			public const int notification_template_big_media_narrow = 2130968655;
+			public const int notification_template_big_media = 2130968655;
 			
 			// aapt resource value: 0x7f040050
-			public const int notification_template_lines = 2130968656;
+			public const int notification_template_big_media_narrow = 2130968656;
 			
 			// aapt resource value: 0x7f040051
-			public const int notification_template_media = 2130968657;
+			public const int notification_template_lines = 2130968657;
 			
 			// aapt resource value: 0x7f040052
-			public const int notification_template_part_chronometer = 2130968658;
+			public const int notification_template_media = 2130968658;
 			
 			// aapt resource value: 0x7f040053
-			public const int notification_template_part_time = 2130968659;
+			public const int notification_template_part_chronometer = 2130968659;
 			
 			// aapt resource value: 0x7f040054
-			public const int select_dialog_item_material = 2130968660;
+			public const int notification_template_part_time = 2130968660;
 			
 			// aapt resource value: 0x7f040055
-			public const int select_dialog_multichoice_material = 2130968661;
+			public const int select_dialog_item_material = 2130968661;
 			
 			// aapt resource value: 0x7f040056
-			public const int select_dialog_singlechoice_material = 2130968662;
+			public const int select_dialog_multichoice_material = 2130968662;
 			
 			// aapt resource value: 0x7f040057
-			public const int support_simple_spinner_dropdown_item = 2130968663;
+			public const int select_dialog_singlechoice_material = 2130968663;
 			
 			// aapt resource value: 0x7f040058
-			public const int toolbar = 2130968664;
+			public const int support_simple_spinner_dropdown_item = 2130968664;
 			
 			// aapt resource value: 0x7f040059
-			public const int toolbardevelop = 2130968665;
+			public const int toolbar = 2130968665;
 			
 			// aapt resource value: 0x7f04005a
-			public const int toolbardiabetes = 2130968666;
+			public const int toolbardevelop = 2130968666;
 			
 			// aapt resource value: 0x7f04005b
-			public const int toolbarexe = 2130968667;
+			public const int toolbardiabetes = 2130968667;
 			
 			// aapt resource value: 0x7f04005c
-			public const int toolbarfood = 2130968668;
+			public const int toolbardoctor = 2130968668;
 			
 			// aapt resource value: 0x7f04005d
-			public const int toolbarhome = 2130968669;
+			public const int toolbarexe = 2130968669;
 			
 			// aapt resource value: 0x7f04005e
-			public const int toolbarkidney = 2130968670;
+			public const int toolbarfood = 2130968670;
 			
 			// aapt resource value: 0x7f04005f
-			public const int toolbarpill = 2130968671;
+			public const int toolbarhome = 2130968671;
 			
 			// aapt resource value: 0x7f040060
-			public const int toolbarpre = 2130968672;
+			public const int toolbarkidney = 2130968672;
 			
 			// aapt resource value: 0x7f040061
-			public const int toolbarregis = 2130968673;
+			public const int toolbarpill = 2130968673;
+			
+			// aapt resource value: 0x7f040062
+			public const int toolbarpre = 2130968674;
+			
+			// aapt resource value: 0x7f040063
+			public const int toolbarregis = 2130968675;
 			
 			static Layout()
 			{
