@@ -4072,97 +4072,100 @@ namespace HappyHealthyCSharp
 			public const int design_navigation_menu_item = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int exercise_type = 2130968643;
+			public const int Empty = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int food_1 = 2130968644;
+			public const int exercise_type = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int history_diabetes = 2130968645;
+			public const int food_1 = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int history_food = 2130968646;
+			public const int history_diabetes = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int history_kidney = 2130968647;
+			public const int history_food = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int history_pill = 2130968648;
+			public const int history_kidney = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int history_pressure = 2130968649;
+			public const int history_pill = 2130968649;
 			
 			// aapt resource value: 0x7f04004a
-			public const int login = 2130968650;
+			public const int history_pressure = 2130968650;
 			
 			// aapt resource value: 0x7f04004b
-			public const int Main = 2130968651;
+			public const int login = 2130968651;
 			
 			// aapt resource value: 0x7f04004c
-			public const int notification_media_action = 2130968652;
+			public const int Main = 2130968652;
 			
 			// aapt resource value: 0x7f04004d
-			public const int notification_media_cancel_action = 2130968653;
+			public const int notification_media_action = 2130968653;
 			
 			// aapt resource value: 0x7f04004e
-			public const int notification_template_big_media = 2130968654;
+			public const int notification_media_cancel_action = 2130968654;
 			
 			// aapt resource value: 0x7f04004f
-			public const int notification_template_big_media_narrow = 2130968655;
+			public const int notification_template_big_media = 2130968655;
 			
 			// aapt resource value: 0x7f040050
-			public const int notification_template_lines = 2130968656;
+			public const int notification_template_big_media_narrow = 2130968656;
 			
 			// aapt resource value: 0x7f040051
-			public const int notification_template_media = 2130968657;
+			public const int notification_template_lines = 2130968657;
 			
 			// aapt resource value: 0x7f040052
-			public const int notification_template_part_chronometer = 2130968658;
+			public const int notification_template_media = 2130968658;
 			
 			// aapt resource value: 0x7f040053
-			public const int notification_template_part_time = 2130968659;
+			public const int notification_template_part_chronometer = 2130968659;
 			
 			// aapt resource value: 0x7f040054
-			public const int select_dialog_item_material = 2130968660;
+			public const int notification_template_part_time = 2130968660;
 			
 			// aapt resource value: 0x7f040055
-			public const int select_dialog_multichoice_material = 2130968661;
+			public const int select_dialog_item_material = 2130968661;
 			
 			// aapt resource value: 0x7f040056
-			public const int select_dialog_singlechoice_material = 2130968662;
+			public const int select_dialog_multichoice_material = 2130968662;
 			
 			// aapt resource value: 0x7f040057
-			public const int support_simple_spinner_dropdown_item = 2130968663;
+			public const int select_dialog_singlechoice_material = 2130968663;
 			
 			// aapt resource value: 0x7f040058
-			public const int toolbar = 2130968664;
+			public const int support_simple_spinner_dropdown_item = 2130968664;
 			
 			// aapt resource value: 0x7f040059
-			public const int toolbardevelop = 2130968665;
+			public const int toolbar = 2130968665;
 			
 			// aapt resource value: 0x7f04005a
-			public const int toolbardiabetes = 2130968666;
+			public const int toolbardevelop = 2130968666;
 			
 			// aapt resource value: 0x7f04005b
-			public const int toolbarexe = 2130968667;
+			public const int toolbardiabetes = 2130968667;
 			
 			// aapt resource value: 0x7f04005c
-			public const int toolbarfood = 2130968668;
+			public const int toolbarexe = 2130968668;
 			
 			// aapt resource value: 0x7f04005d
-			public const int toolbarhome = 2130968669;
+			public const int toolbarfood = 2130968669;
 			
 			// aapt resource value: 0x7f04005e
-			public const int toolbarkidney = 2130968670;
+			public const int toolbarhome = 2130968670;
 			
 			// aapt resource value: 0x7f04005f
-			public const int toolbarpill = 2130968671;
+			public const int toolbarkidney = 2130968671;
 			
 			// aapt resource value: 0x7f040060
-			public const int toolbarpre = 2130968672;
+			public const int toolbarpill = 2130968672;
 			
 			// aapt resource value: 0x7f040061
-			public const int toolbarregis = 2130968673;
+			public const int toolbarpre = 2130968673;
+			
+			// aapt resource value: 0x7f040062
+			public const int toolbarregis = 2130968674;
 			
 			static Layout()
 			{
