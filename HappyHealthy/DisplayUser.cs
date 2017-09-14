@@ -28,7 +28,7 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_display_user);
             txtName = FindViewById<EditText>(Resource.Id.tv_Name);
             txtAge = FindViewById<EditText>(Resource.Id.tv_Age);
-            var tempLogOut = FindViewById<ImageView>(Resource.Id.clearData);
+            var tempLogOut = FindViewById<ImageView>(Resource.Id.logout);
             tempLogOut.Click += delegate {
                 StartActivity(new Intent(this, typeof(Login)));
                 this.Finish();

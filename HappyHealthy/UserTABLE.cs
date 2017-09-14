@@ -89,7 +89,7 @@ namespace HappyHealthyCSharp
             conn.Open();
             var sqlCommand = conn.CreateCommand();
             //sqlCommand.CommandText = $@"insert into fbs values(null,'{System.DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
-            sqlCommand.CommandText = $@"INSERT INTO `user_detail`(`ud_name`,`ud_gender`,`ud_birthdate`,`ud_email`,`ud_pass`)VALUES('{name}','{gender}','{birthdate}','{email}','{password}');";
+            sqlCommand.CommandText = $@"INSERT INTO `user_detail`(`ud_iden_number`,`ud_name`,`ud_gender`,`ud_birthdate`,`ud_email`,`ud_pass`)VALUES(0,'{name}','{gender}','{birthdate}','{email}','{password}');";
             try
             {
                 Console.WriteLine(sqlCommand.CommandText);
@@ -99,7 +99,8 @@ namespace HappyHealthyCSharp
             catch (MySqlException sqlex)
             {
                 Console.WriteLine(sqlex.ToString());
-                GlobalFunction.createDialog(c, "ไม่สามารถสมัครสมาชิกด้วยข้อมูลที่คุณระบุได้ กรุณาตรวจสอบข้อมูลอีกครั้ง").Show();
+                GlobalFunction.createDialog(c,sqlex.ToString()).Show();
+                //GlobalFunction.createDialog(c, "ไม่สามารถสมัครสมาชิกด้วยข้อมูลที่คุณระบุได้ กรุณาตรวจสอบข้อมูลอีกครั้ง").Show();
             }
             catch (Exception e)
             {

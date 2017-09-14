@@ -21,6 +21,10 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_history_pill);
             // Create your application here
+            var backbtt = FindViewById<ImageView>(Resource.Id.imageViewbackpill);
+            backbtt.Click += delegate {
+                this.Finish();
+            };
         }
     }
 }
