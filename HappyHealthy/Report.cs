@@ -87,12 +87,22 @@ namespace HappyHealthyCSharp
             RequestWindowFeature(WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.activity_report);
             PlotView view = FindViewById<PlotView>(Resource.Id.plot_view);
-            PlotView view2 = FindViewById<PlotView>(Resource.Id.plot_view2);
-            PlotView view3 = FindViewById<PlotView>(Resource.Id.plot_view3);
-            PlotView view4 = FindViewById<PlotView>(Resource.Id.plot_view4);
-            PlotView view5 = FindViewById<PlotView>(Resource.Id.plot_view5);
-            view.Model = CreatePlotModel("กราฟ FBS",new DiabetesTABLE().getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id","",this)} ORDER BY FBS_TIME"),"fbs_time","fbs_fbs");
-            view2.Model = CreatePlotModel("กราฟ CKD",new KidneyTABLE().getKidneyList($"SELECT * FROM CKD WHERE UD_ID = {GlobalFunction.getPreference("ud_id","",this)} ORDER BY CKD_TIME"),"ckd_time","ckd_gfr");
+            var fbs = FindViewById<RadioButton>(Resource.Id.report_fbs);
+            var ckd = FindViewById<RadioButton>(Resource.Id.report_ckd);
+            var bp = FindViewById<RadioButton>(Resource.Id.report_bp);
+            
+            fbs.Click += delegate {
+                view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME"), "fbs_time", "fbs_fbs");
+            };
+            ckd.Click += delegate
+            {
+                view.Model = CreatePlotModel("กราฟ CKD", new KidneyTABLE().getKidneyList($@"SELECT * FROM CKD WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY CKD_TIME"), "ckd_time", "ckd_gfr");
+            };
+            bp.Click += delegate {
+                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().getPressureList($@"SELECT * FROM BP WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME"), "bp_time", "bp_up");
+            };
+            fbs.Checked = true;
+            view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME"), "fbs_time", "fbs_fbs");
             #region FullPagePlotView
             /*
             RequestWindowFeature(WindowFeatures.NoTitle);

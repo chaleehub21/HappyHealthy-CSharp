@@ -2590,6 +2590,9 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07015c
 			public const int P_date = 2131165532;
 			
+			// aapt resource value: 0x7f07016f
+			public const int RadioPlot = 2131165551;
+			
 			// aapt resource value: 0x7f0700bc
 			public const int User_Age = 2131165372;
 			
@@ -3361,20 +3364,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f070029
 			public const int pin = 2131165225;
 			
-			// aapt resource value: 0x7f07016f
-			public const int plot_view = 2131165551;
-			
-			// aapt resource value: 0x7f070170
-			public const int plot_view2 = 2131165552;
-			
-			// aapt resource value: 0x7f070171
-			public const int plot_view3 = 2131165553;
-			
-			// aapt resource value: 0x7f070172
-			public const int plot_view4 = 2131165554;
-			
 			// aapt resource value: 0x7f070173
-			public const int plot_view5 = 2131165555;
+			public const int plot_view = 2131165555;
 			
 			// aapt resource value: 0x7f0700e0
 			public const int prodia = 2131165408;
@@ -3414,6 +3405,15 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f07016a
 			public const int register_radio_male = 2131165546;
+			
+			// aapt resource value: 0x7f070172
+			public const int report_bp = 2131165554;
+			
+			// aapt resource value: 0x7f070171
+			public const int report_ckd = 2131165553;
+			
+			// aapt resource value: 0x7f070170
+			public const int report_fbs = 2131165552;
 			
 			// aapt resource value: 0x7f070030
 			public const int right = 2131165232;
