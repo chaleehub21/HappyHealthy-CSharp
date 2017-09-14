@@ -113,7 +113,8 @@ namespace HappyHealthyCSharp
         [Export("ClickPill")]
         public void ClickPill(View v)
         {
-            GlobalFunction.createDialog(this, "Not implemented").Show();
+            //GlobalFunction.createDialog(this, "Not implemented").Show();
+            StartActivity(new Intent(this, typeof(Pill)));
         }
         [Export("ClickDoctor")]
         public void ClickDoctor(View v)

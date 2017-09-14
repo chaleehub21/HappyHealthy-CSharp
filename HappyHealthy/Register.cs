@@ -37,7 +37,6 @@ namespace HappyHealthyCSharp
             email = FindViewById<EditText>(Resource.Id.userID);
             pw = FindViewById<EditText>(Resource.Id.userPW);
             name = FindViewById<EditText>(Resource.Id.userName);
-            idNo = FindViewById<EditText>(Resource.Id.identificationNumber);
             mRadio = FindViewById<RadioButton>(Resource.Id.register_radio_male);
             fRadio = FindViewById<RadioButton>(Resource.Id.register_radio_female);
             register = FindViewById<ImageView>(Resource.Id.register_button);
@@ -62,7 +61,7 @@ namespace HappyHealthyCSharp
             register.Click += delegate {
                 if (isFieldValid())
                 {
-                    if(UserTABLE.InsertUserToSQL(idNo.Text, name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
+                    if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
                     {
                         GlobalFunction.createDialog(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
                         {
