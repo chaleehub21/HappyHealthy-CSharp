@@ -22,7 +22,7 @@ namespace HappyHealthyCSharp
         {
             base.OnCreate(savedInstanceState);
         }
-        public static NotificationCompat.Builder setNotification(Context c,string content,Type secondActivity)
+        private static NotificationCompat.Builder setNotification(Context c,string content,Type secondActivity)
         {
             var stackBuilder = TaskStackBuilder.Create(c);
             var valuesForActivity = new Bundle();
@@ -40,6 +40,11 @@ namespace HappyHealthyCSharp
                 .SetContentText(content);                
             return builder;
             
+        }
+        public static void Show(Context c,string content,Type target)
+        {
+            var notificationManager = (NotificationManager)c.GetSystemService(Context.NotificationService);
+            notificationManager.Notify(ButtonClickNotificationId, Notification.setNotification(c, content, target).Build());
         }
     }
 }

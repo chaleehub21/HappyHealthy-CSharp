@@ -72,10 +72,7 @@ namespace HappyHealthyCSharp
             };
             forgot.Click += delegate {
                 StartActivity(new Intent(this, typeof(Forgot)));
-                //Thread.Start();
-
-                //var notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
-                //notificationManager.Notify(ButtonClickNotificationId, Notification.setNotification(this, $"Password recovery email has been sent to {id.Text}", typeof(Login)).Build());
+                Notification.Show(this, "Sender!", typeof(EmptyDemo));
                 //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }
