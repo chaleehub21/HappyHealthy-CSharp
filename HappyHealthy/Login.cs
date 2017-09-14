@@ -71,24 +71,6 @@ namespace HappyHealthyCSharp
                 StartActivity(new Intent(this, typeof(Register)));
             };
             forgot.Click += delegate {
-                var Thread = new System.Threading.Thread(()=> {
-                    var conn = new MySqlConnection(GlobalFunction.remoteaccess);
-                    object result = null;
-                    try
-                    {
-                        conn.Open();
-                        var sql = $@"SELECT ud_pass FROM user_detail WHERE ud_email = '{(id.Text)}'";
-                        var cmd = new MySqlCommand(sql, conn);
-                        cmd.CommandText = sql;
-                        result = cmd.ExecuteScalar();
-                        GlobalFunction.SendMail("securapp.assist@gmail.com", "securapp7421", id.Text, "Hello", $@"<body><h2>Password for <b>{id.Text}</b></h2><br><h2>{(string)result}</h2></body>");
-                    }
-                    catch
-                    {
-                        return;
-                    }
-                    
-                });
                 StartActivity(new Intent(this, typeof(Forgot)));
                 //Thread.Start();
 
