@@ -30,6 +30,7 @@ namespace HappyHealthyCSharp
             txtAge = FindViewById<EditText>(Resource.Id.tv_Age);
             var tempLogOut = FindViewById<ImageView>(Resource.Id.logout);
             tempLogOut.Click += delegate {
+                GlobalFunction.clearAllPreference(this);
                 StartActivity(new Intent(this, typeof(Login)));
                 this.Finish();
             };

@@ -16,6 +16,7 @@ namespace HappyHealthyCSharp
     [Activity(Label = "Forgot")]
     public class Forgot : Activity
     {
+        const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -36,11 +37,14 @@ namespace HappyHealthyCSharp
                     try
                     {
                         conn.Open();
-                        var sql = $@"SELECT ud_pass FROM user_detail WHERE ud_email = '{(email.Text)}'";
+                        var r = new Random();
+                        var newPassword = new string(Enumerable.Repeat(chars, 10).Select(s => s[r.Next(s.Length)]).ToArray());
+                        var sql = $@"UPDATE user_detail SET ud_pass = '{newPassword}' WHERE ud_email = '{(email.Text)}'";
+                        Console.WriteLine(sql);
                         var cmd = new MySqlCommand(sql, conn);
                         cmd.CommandText = sql;
-                        result = cmd.ExecuteScalar();
-                        GlobalFunction.SendMail("securapp.assist@gmail.com", "securapp7421", email.Text, "Hello", $@"<body><h2>Password for <b>{email.Text}</b></h2><br><h2>{(string)result}</h2></body>");
+                        cmd.ExecuteScalar();
+                        GlobalFunction.SendMail("securapp.assist@gmail.com", "securapp7421", email.Text, "Hello", $@"<body><h2>Password for your account has been changed to <b>{newPassword}.<br>Use this password to login and update your password using HappyHealthy application.</b></h2><br><h2>{(string)result}</h2></body>");
                     }
                     catch
                     {

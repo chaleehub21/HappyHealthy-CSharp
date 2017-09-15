@@ -41,11 +41,8 @@ namespace HappyHealthyCSharp
             fRadio = FindViewById<RadioButton>(Resource.Id.register_radio_female);
             register = FindViewById<ImageView>(Resource.Id.register_button);
             backbtt = FindViewById<ImageView>(Resource.Id.register_back_btt);
-            //var regisTable = new RegisterTABLE();
-            //Code go here
+            //Code goes here
             mRadio.Checked = true;
-            
-            //var dfm = new SimpleDateFormat("dd-MMMM-yyyy");
             mCarlendar = Calendar.GetInstance(Java.Util.TimeZone.GetTimeZone("GMT+7"));
             bdate.Click += delegate {
                 mDatePicker = new DatePickerDialog(this, delegate {
@@ -67,8 +64,7 @@ namespace HappyHealthyCSharp
                         {
                             this.Finish();
                         }).Show();
-                    }
-                    
+                    }      
                 }
             };
             // Create your application here

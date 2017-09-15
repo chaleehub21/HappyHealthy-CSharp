@@ -78,13 +78,6 @@ namespace HappyHealthyCSharp
         }
         public static bool InsertUserToSQL(string name, char gender, string birthdate, string email, string password, Context c)
         {
-            #region deprecated
-            /*
-            var conn = new SQLiteAsyncConnection(GlobalFunction.dbPath);
-            await conn.CreateTableAsync<FoodTABLE>();
-            int retRecord = await conn.InsertAsync(foodinstance);
-            */
-            #endregion
             var conn = new MySqlConnection(GlobalFunction.remoteaccess);
             conn.Open();
             var sqlCommand = conn.CreateCommand();

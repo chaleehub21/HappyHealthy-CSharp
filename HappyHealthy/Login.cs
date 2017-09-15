@@ -18,13 +18,19 @@ namespace HappyHealthyCSharp
     [Activity(Label = "Login")]
     public class Login : Activity
     {
-        private static readonly int ButtonClickNotificationId = 1000;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             SetContentView(Resource.Layout.activity_login);
             // Create your application here
+
+            //is Cache data available?
+            if ((GlobalFunction.getPreference("ud_id",string.Empty,this) != string.Empty))
+            {
+                StartActivity(typeof(MainActivity));
+            }
+            //
             var id = FindViewById<EditText>(Resource.Id.userID);
             var pw = FindViewById<EditText>(Resource.Id.userPW);
             var login = FindViewById<ImageView>(Resource.Id.loginBtt);
@@ -49,6 +55,8 @@ namespace HappyHealthyCSharp
                         reader.Read();
                         if (Convert.ToInt32(reader.GetString(0)) == 1)
                         {
+                            GlobalFunction.setPreference("ud_email",id.Text, this);
+                            GlobalFunction.setPreference("ud_pass", pw.Text, this);
                             GlobalFunction.setPreference("ud_id", reader.GetString(1),this);
                             StartActivity(typeof(MainActivity));
                             this.Finish();
