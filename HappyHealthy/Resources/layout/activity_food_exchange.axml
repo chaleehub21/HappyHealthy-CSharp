@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/lib/com.ProjectAppDemo.name"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.jiraporn.nut.happyhealthy.Food_Type_1"
+    android:background="#faffffff">
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbarfood" />
+    </LinearLayout>
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@android:id/list"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="103dp"
+        android:drawSelectorOnTop="false" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="รายการอาหารทดแทน"
+        android:id="@+id/foodEx"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6.5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#ffffff" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/imageView44"
+        android:src="@drawable/arowback"
+        android:onClick="ClickBackFoodHome"
+        android:layout_alignBottom="@+id/imageViewfoodadd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

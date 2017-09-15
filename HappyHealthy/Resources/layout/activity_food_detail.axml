@@ -421,6 +421,16 @@
             android:textColor="#f9a98a"
             android:layout_marginLeft="50dp" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:id="@+id/imageView25"
+        android:src="@drawable/buttonlistfoodex"
+        android:onClick="ClickDisLevelsGFR"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20.5dp"
+        android:layout_above="@+id/imageView30" />
     <TextView
         android:text="ขอบคุณ : ข้อมูลจากแอพพลิเคชั่น FoodiEat"
         android:layout_width="wrap_content"
