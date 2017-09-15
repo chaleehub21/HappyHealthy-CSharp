@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Java.Util;
 using Android.Speech.Tts;
+using Java.IO;
+
 namespace HappyHealthyCSharp
 {
     class TTS : UtteranceProgressListener, TextToSpeech.IOnInitListener, TextToSpeech.IOnUtteranceCompletedListener
@@ -70,7 +72,6 @@ namespace HappyHealthyCSharp
                 startSpeak();
             }
         }
-
         private void startSpeak()
         {
             speakCount++;

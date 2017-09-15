@@ -12,14 +12,16 @@ using Android.Widget;
 using Android.Speech.Tts;
 using System.Net.Mail;
 using System.Net;
+using System.IO;
 
 namespace HappyHealthyCSharp
 {
     public class GlobalFunction
     {
-        public static string dbPath = "server=10.0.2.2;port=3306;database=happyhealthydb;User Id=root;Password=lovelove12;charset=utf8";
-        //public static string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
-        public static string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
+        public static readonly string dbPath = "server=10.0.2.2;port=3306;database=happyhealthydb;User Id=root;Password=lovelove12;charset=utf8";
+        //public static readonly string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
+        public static readonly string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
+        public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
@@ -104,6 +106,10 @@ namespace HappyHealthyCSharp
                 return "";
             }
             return t.ToString();
+        }
+        public static string GetValidPathForFileStore(string filename)
+        {
+            return Path.Combine(fileStorePath,filename);
         }
 #region Test
         // '' <summary>

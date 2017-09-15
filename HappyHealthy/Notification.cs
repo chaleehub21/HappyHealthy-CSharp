@@ -12,6 +12,7 @@ using Android.Widget;
 using NotificationCompat = Android.Support.V4.App.NotificationCompat;
 using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 using Java.Lang;
+using Android.Media;
 
 namespace HappyHealthyCSharp
 {
@@ -41,10 +42,19 @@ namespace HappyHealthyCSharp
             return builder;
             
         }
-        public static void Show(Context c,string content,Type target)
+        public static void Show(Context c,string content,Type target,int customSoundResourceID = -9999)
         {
+            var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
+            if(customSoundResourceID != -9999)
+            {
+                filePath = Android.Net.Uri.Parse($@"android.resource://{c.PackageName}/{customSoundResourceID}");
+            }
             var notificationManager = (NotificationManager)c.GetSystemService(Context.NotificationService);
-            notificationManager.Notify(ButtonClickNotificationId, Notification.setNotification(c, content, target).Build());
+            notificationManager.Notify(ButtonClickNotificationId, Notification.setNotification(c, content, target)
+                //.SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Alarm))
+                //.SetSound(Android.Net.Uri.Parse(c.Resources.GetResourceName(Resource.Raw.notialert)))
+                .SetSound(filePath)
+                .Build());
         }
     }
 }

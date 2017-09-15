@@ -52,7 +52,8 @@ namespace HappyHealthyCSharp
                     }
 
                 });
-                Thread.Start();
+                //Toast.MakeText(this, this.Resources.GetResourceName(Resource.Raw.notialert), ToastLength.Long).Show();
+                //Thread.Start();
                 Toast.MakeText(this, $@"Email has been send to {email.Text}",ToastLength.Short).Show();
             };
         }
