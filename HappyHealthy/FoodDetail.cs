@@ -54,6 +54,10 @@ namespace HappyHealthyCSharp
             f_sodium = FindViewById<TextView>(Resource.Id.food_sodium2);
             f_detail = FindViewById<TextView>(Resource.Id.tv_food_detail);
             editCal_Total = FindViewById<EditText>(Resource.Id.et_exe2);
+            var foodExchange = FindViewById<ImageView>(Resource.Id.foodExchangeBtt);
+            foodExchange.Click += delegate {
+                StartActivity(typeof(FoodExchange));
+            };
             editCal_Total.Click += delegate {
                 total = Convert.ToDouble(editCal_Total.Text);
                 SetFoodDetail(total);
@@ -83,7 +87,7 @@ namespace HappyHealthyCSharp
         protected override void OnPause()
         {
             base.OnPause();
-            Finish();
+            //Finish();
         }
 
     }

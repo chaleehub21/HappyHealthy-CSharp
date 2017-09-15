@@ -20,12 +20,8 @@ namespace HappyHealthyCSharp
         FoodTABLE foodTable;
         //List<Dictionary<string, string>> foodList;
         JavaList<IDictionary<string, object>> foodList;
-        string foodName, foodUnit, foodNetUnit, foodDetail;
-        double foodCalories, foodNetweight, foodProtein, foodFat, foodCarbohydrate, foodSugars, foodSodium;
-        int foodAmt, foodId;
         Button btn_search;
         EditText txt_search;
-        string word_search;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
