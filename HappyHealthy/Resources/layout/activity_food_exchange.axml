@@ -24,7 +24,7 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentRight="false"
         android:layout_alignParentEnd="false"
-        android:layout_marginTop="103dp"
+        android:layout_marginTop="60dp"
         android:drawSelectorOnTop="false" />
     <TextView
         android:layout_width="wrap_content"
@@ -39,9 +39,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/imageView44"
+        android:id="@+id/backBttFoodExchange"
         android:src="@drawable/arowback"
-        android:onClick="ClickBackFoodHome"
         android:layout_alignBottom="@+id/imageViewfoodadd"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

@@ -133,6 +133,7 @@
     <Compile Include="Develop.cs" />
     <Compile Include="Diabetes.cs" />
     <Compile Include="EmptyDemo.cs" />
+    <Compile Include="FoodExchange.cs" />
     <Compile Include="Forgot.cs" />
     <Compile Include="Pill.cs" />
     <Compile Include="UserTABLE.cs" />
