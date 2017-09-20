@@ -5,159 +5,307 @@
     android:orientation="vertical"
     android:weightSum="1"
     android:background="#fcfdff">
-  <LinearLayout
-      android:id="@+id/container_toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbarpill" />
-  </LinearLayout>
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="ยา"
-      android:id="@+id/textViewpill"
-      android:layout_centerHorizontal="true"
-      android:textSize="20dp"
-      android:textStyle="bold"
-      android:layout_marginTop="5dp"
-      android:layout_gravity="center_horizontal"
-      android:textColor="#ffffff" />
-  <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="40dp"
-      android:id="@+id/imageView12"
-      android:src="@drawable/arowback"
-      android:layout_marginTop="7dp"
-      android:layout_marginLeft="3dp"
-      android:onClick="ClickBackKidHome" />
-  <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginRight="25dp"
-      android:layout_marginTop="58.5dp"
-      android:background="@drawable/my_bg_pill">
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbardoc" />
+    </LinearLayout>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px">
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:inputType="date"
-          android:ems="10"
-          android:id="@+id/K_date"
-          android:textColor="#FFFFFF"
-          android:layout_gravity="top|center_vertical"
-          android:textSize="22dp"
-          android:autoText="false"
-          android:hint="DD-MM-YYYY  HH:MM"
-          android:textStyle="bold"
-          android:layout_marginLeft="5dp"
-          android:gravity="center_horizontal"
-          android:background="#faf9c5" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="5dp"
+        android:text="ยา"
+        android:id="@+id/textViewpill"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_marginTop="5dp"
-        android:gravity="center_vertical|center_horizontal">
-      <TextView
-          android:layout_width="80.0dp"
-          android:layout_height="30.0dp"
-          android:text="ชื่อยา"
-          android:id="@+id/textViewPillname"
-          android:layout_centerHorizontal="true"
-          android:textSize="12dp"
-          android:textStyle="bold"
-          android:textColor="#5d5d5d"
-          android:gravity="center_vertical"
-          android:layout_marginTop="0.0dp"
-          android:layout_marginBottom="0.0dp"
-          android:layout_marginRight="3.0dp" />
-      <EditText
-          android:layout_width="150dp"
-          android:layout_height="wrap_content"
-          android:inputType="text"
-          android:ems="10"
-          android:id="@+id/ma_name"
-          android:textColor="#6f6f6f"
-          android:layout_gravity="center_vertical"
-          android:textSize="19dp"
-          android:textStyle="bold"
-          android:gravity="center_vertical|center_horizontal"
-          android:background="@drawable/my_box_dis"
-          android:layout_marginTop="0.0dp"
-          android:layout_marginBottom="0.0dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical|center_horizontal">
-      <TextView
-          android:layout_width="80.0dp"
-          android:layout_height="30.0dp"
-          android:text="รายละเอียดยา"
-          android:id="@+id/textViewPilldesc"
-          android:layout_centerHorizontal="true"
-          android:textSize="12dp"
-          android:textStyle="bold"
-          android:textColor="#5d5d5d"
-          android:layout_marginTop="0.0dp"
-          android:layout_marginBottom="0.0dp"
-          android:layout_marginRight="3.0dp" />
-      <EditText
-          android:layout_width="150dp"
-          android:layout_height="wrap_content"
-          android:inputType="textMultiLine"
-          android:lines="1"
-          android:minLines="4"
-          android:maxLines="5"
-          android:ems="10"
-          android:id="@+id/ma_desc"
-          android:textColor="#6f6f6f"
-          android:layout_gravity="center_vertical"
-          android:textSize="19dp"
-          android:textStyle="bold"
-          android:gravity="center_vertical|center_horizontal"
-          android:background="@drawable/my_box_dis"
-          android:layout_marginTop="0.0dp"
-          android:layout_marginBottom="0.0dp" />
+        android:layout_height="40dp"
+        android:id="@+id/imageView12"
+        android:src="@drawable/arowback"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="3dp"
+        android:onClick="ClickBackKidHome" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="35.0dp"
+        android:background="@drawable/my_bg_doc">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="วันที่นัดพบแพทย์"
+                android:gravity="center_vertical"
+                android:layout_marginRight="10.0dp"
+                android:layout_marginLeft="10dp" />
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:id="@+id/imageView22"
+                android:src="@drawable/datereport"
+                android:layout_marginTop="0.0dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DD-MM-YYYY"
+                android:id="@+id/chooseDate"
+                android:textColor="#797979"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/container_toolbar"
+                android:layout_marginLeft="5.0dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="ชื่อแพทย์"
+                android:id="@+id/namedoc"
+                android:gravity="center_vertical"
+                android:layout_marginRight="46.5dp"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:layout_width="119.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="text"
+                android:ems="10"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:id="@+id/da_name"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="แผนกที่นัด"
+                android:id="@+id/deptdoc"
+                android:gravity="center_vertical"
+                android:layout_marginRight="37.5dp"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:layout_width="119.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="text"
+                android:ems="10"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:id="@+id/da_dept"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="เวลาลงทะเบียน"
+                android:id="@+id/regtime"
+                android:gravity="center_vertical"
+                android:layout_marginRight="10.0dp"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:layout_width="119.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="text"
+                android:ems="10"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:id="@+id/da_reg_time"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="เวลาเข้าตรวจ"
+                android:id="@+id/appttime"
+                android:gravity="center_vertical"
+                android:layout_marginRight="20.5dp"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:layout_width="119.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="text"
+                android:ems="10"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:id="@+id/da_appt_time"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis"
+                android:layout_marginLeft="0.0dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="สถานที่นัดพบแพทย์"
+                android:id="@+id/place"
+                android:gravity="center_vertical"
+                android:layout_marginRight="49.5dp"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:layout_width="119.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="text"
+                android:ems="10"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:id="@+id/da_place"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="โรงพยาบาลที่นัดพบแพทย์"
+                android:id="@+id/hospital"
+                android:gravity="center_vertical"
+                android:layout_marginRight="10.0dp"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:layout_width="119.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="text"
+                android:ems="10"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:id="@+id/da_hospital"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:text="คำแนะนำก่อนพบแพทย์"
+                android:id="@+id/comment"
+                android:gravity="center_vertical"
+                android:layout_marginRight="27.5dp"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:layout_width="119.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="textMultiLine"
+                android:lines="1"
+                android:minLines="4"
+                android:maxLines="5"
+                android:ems="10"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#797979"
+                android:id="@+id/da_comment"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:id="@+id/buttonsavepicdoc"
+            android:src="@drawable/buttonsavepicdoc"
+            android:onClick="ClickSavepicpill"
+            android:layout_marginTop="11.5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="11.0dp" />
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/imageView25"
+            android:src="@drawable/buttonsavedoc"
+            android:onClick="Click"
+            android:layout_marginTop="3.5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10.5dp" />
     </LinearLayout>
-    
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView25"
-        android:src="@drawable/buttonsavepicpill"
-        android:onClick="ClickSavepicpill"
-        android:layout_marginTop="9.0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="11.0dp" />
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:id="@+id/imageView25"
-        android:src="@drawable/buttonsavepill"
-        android:onClick="Click"
-        android:layout_marginTop="10.0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20.5dp" />
-  </LinearLayout>
 </RelativeLayout>
