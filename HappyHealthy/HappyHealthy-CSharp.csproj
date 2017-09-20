@@ -129,12 +129,14 @@
   <ItemGroup>
     <Compile Include="Add_Food.cs" />
     <Compile Include="AndroidImageAdapter.cs" />
+    <Compile Include="BitmapHelpers.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Develop.cs" />
     <Compile Include="Diabetes.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
     <Compile Include="Forgot.cs" />
+    <Compile Include="History_Pill.cs" />
     <Compile Include="Pill.cs" />
     <Compile Include="UserTABLE.cs" />
     <Compile Include="Notification.cs" />
@@ -203,7 +205,9 @@
     <AndroidResource Include="Resources\layout\activity_history_pressure.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_home.axml" />
+    <AndroidResource Include="Resources\layout\activity_home.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_intro_healthy.axml" />
     <AndroidResource Include="Resources\layout\activity_kidney.axml" />
     <AndroidResource Include="Resources\layout\activity_main.axml">

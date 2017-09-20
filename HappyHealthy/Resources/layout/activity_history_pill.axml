@@ -45,9 +45,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/imageViewbackpill"
+        android:id="@+id/imageViewAddPill"
         android:src="@drawable/buttonadd"
         android:layout_marginTop="7dp"
-        android:layout_marginLeft="315.5dp"
-        android:onClick="Clickaddpill" />
+        android:layout_marginLeft="315.5dp"/>
 </RelativeLayout>
