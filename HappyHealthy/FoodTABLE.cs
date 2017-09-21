@@ -78,18 +78,18 @@ namespace HappyHealthyCSharp
             foreach(DataRow x in tickets.Tables["Food"].Rows)
             {
                 var food = new JavaDictionary<string, object>();
-                food.Add("food_id", GlobalFunction.stringValidation(x[0].ToString()));
-                food.Add("food_name", GlobalFunction.stringValidation(x[1].ToString()));
-                food.Add("food_calories", GlobalFunction.stringValidation(x[3].ToString()));
-                food.Add("food_unit", GlobalFunction.stringValidation(x[4].ToString()));
-                food.Add("food_netweight", GlobalFunction.stringValidation(x[5].ToString()));
-                food.Add("food_netunit", GlobalFunction.stringValidation(x[6].ToString()));
-                food.Add("food_protein", GlobalFunction.stringValidation(x[7].ToString()));
-                food.Add("food_fat", GlobalFunction.stringValidation(x[8].ToString()));
-                food.Add("food_carbohydrate", GlobalFunction.stringValidation(x[9].ToString()));
-                food.Add("food_sugars", GlobalFunction.stringValidation(x[10].ToString()));
-                food.Add("food_sodium", GlobalFunction.stringValidation(x[11].ToString()));
-                food.Add("food_detail", GlobalFunction.stringValidation(x[12].ToString()));
+                food.Add("food_id", GlobalFunction.StringValidation(x[0].ToString()));
+                food.Add("food_name", GlobalFunction.StringValidation(x[1].ToString()));
+                food.Add("food_calories", GlobalFunction.StringValidation(x[3].ToString()));
+                food.Add("food_unit", GlobalFunction.StringValidation(x[4].ToString()));
+                food.Add("food_netweight", GlobalFunction.StringValidation(x[5].ToString()));
+                food.Add("food_netunit", GlobalFunction.StringValidation(x[6].ToString()));
+                food.Add("food_protein", GlobalFunction.StringValidation(x[7].ToString()));
+                food.Add("food_fat", GlobalFunction.StringValidation(x[8].ToString()));
+                food.Add("food_carbohydrate", GlobalFunction.StringValidation(x[9].ToString()));
+                food.Add("food_sugars", GlobalFunction.StringValidation(x[10].ToString()));
+                food.Add("food_sodium", GlobalFunction.StringValidation(x[11].ToString()));
+                food.Add("food_detail", GlobalFunction.StringValidation(x[12].ToString()));
                 foodList.Add(food);
             }
             #region deprecated
@@ -172,18 +172,18 @@ namespace HappyHealthyCSharp
             {
                 retValue = new Dictionary<string, string>()
                 {
-                   {"food_id", GlobalFunction.stringValidation(x[0].ToString()) },
-                   {"food_name", GlobalFunction.stringValidation(x[1].ToString()) },
-                   {"food_calories", GlobalFunction.stringValidation(x[3].ToString()) },
-                   {"food_unit", GlobalFunction.stringValidation(x[4].ToString()) },
-                   {"food_netweight", GlobalFunction.stringValidation(x[5].ToString()) },
-                   {"food_netunit", GlobalFunction.stringValidation(x[6].ToString()) },
-                   {"food_protein", GlobalFunction.stringValidation(x[7].ToString()) },
-                   {"food_fat", GlobalFunction.stringValidation(x[8].ToString()) },
-                   {"food_carbohydrate", GlobalFunction.stringValidation(x[9].ToString()) },
-                   {"food_sugars", GlobalFunction.stringValidation(x[10].ToString()) },
-                   {"food_sodium", GlobalFunction.stringValidation(x[11].ToString())},
-                   { "food_detail", GlobalFunction.stringValidation(x[12].ToString())}
+                   {"food_id", GlobalFunction.StringValidation(x[0].ToString()) },
+                   {"food_name", GlobalFunction.StringValidation(x[1].ToString()) },
+                   {"food_calories", GlobalFunction.StringValidation(x[3].ToString()) },
+                   {"food_unit", GlobalFunction.StringValidation(x[4].ToString()) },
+                   {"food_netweight", GlobalFunction.StringValidation(x[5].ToString()) },
+                   {"food_netunit", GlobalFunction.StringValidation(x[6].ToString()) },
+                   {"food_protein", GlobalFunction.StringValidation(x[7].ToString()) },
+                   {"food_fat", GlobalFunction.StringValidation(x[8].ToString()) },
+                   {"food_carbohydrate", GlobalFunction.StringValidation(x[9].ToString()) },
+                   {"food_sugars", GlobalFunction.StringValidation(x[10].ToString()) },
+                   {"food_sodium", GlobalFunction.StringValidation(x[11].ToString())},
+                   { "food_detail", GlobalFunction.StringValidation(x[12].ToString())}
                 };
             }
             sqlconn.Close();

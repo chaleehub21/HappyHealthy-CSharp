@@ -348,7 +348,7 @@
       <ImageView
           android:layout_width="fill_parent"
           android:layout_height="45dp"
-          android:id="@+id/imageView25"
+          android:id="@+id/pill_save_button"
           android:src="@drawable/buttonsavepill"
           android:onClick="Click"
           android:layout_marginTop="10.0dp"
