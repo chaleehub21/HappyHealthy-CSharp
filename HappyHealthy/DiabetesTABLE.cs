@@ -38,11 +38,11 @@ namespace HappyHealthyCSharp
             foreach(DataRow x in tickets.Tables["FBS"].Rows)
             {
                 var fbs = new JavaDictionary<string, object>();
-                fbs.Add("fbs_id", GlobalFunction.stringValidation(x[0].ToString()));
-                fbs.Add("fbs_time", GlobalFunction.stringValidation(x[1].ToString()));
-                fbs.Add("fbs_fbs", GlobalFunction.stringValidation(x[2].ToString()));
-                fbs.Add("fbs_fbs_lvl", GlobalFunction.stringValidation(x[3].ToString()));
-                fbs.Add("ud_id", GlobalFunction.stringValidation(x[4].ToString()));
+                fbs.Add("fbs_id", GlobalFunction.StringValidation(x[0].ToString()));
+                fbs.Add("fbs_time", GlobalFunction.StringValidation(x[1].ToString()));
+                fbs.Add("fbs_fbs", GlobalFunction.StringValidation(x[2].ToString()));
+                fbs.Add("fbs_fbs_lvl", GlobalFunction.StringValidation(x[3].ToString()));
+                fbs.Add("ud_id", GlobalFunction.StringValidation(x[4].ToString()));
                 fbsList.Add(fbs);
             }
             #region deprecated

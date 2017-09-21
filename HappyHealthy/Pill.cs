@@ -37,13 +37,28 @@ namespace HappyHealthyCSharp
                 medImage = FindViewById<ImageView>(Resource.Id.imageView1);
                 //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
+            var addMed = FindViewById<ImageView>(Resource.Id.pill_save_button);
+            var pillTable = new PillTABLE();
+            addMed.Click += delegate {
+                var medName = FindViewById<EditText>(Resource.Id.ma_name);
+                var medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
+                var picPath = string.Empty;
+                if(App._file != null)
+                {
+                    picPath = App._file.AbsolutePath;
+                }
+                pillTable.InsertPillToSQL(medName.Text, medDesc.Text, DateTime.Now,picPath , GlobalFunction.getPreference("ud_id", "", this));
+                this.Finish();
+            };
             // Create your application here
         }
 
         private void cameraClickEvent(object sender, EventArgs e)
         {
             var intent = new Intent(MediaStore.ActionImageCapture);
-            App._file = new File(App._dir, string.Format($@"HappyHealthyCS_{Guid.NewGuid()}.jpg"));
+            //App._file = new File(App._dir, string.Format($@"HappyHealthyCS_{Guid.NewGuid()}.jpg"));
+            var filePath = System.IO.Path.Combine(App._dir.AbsolutePath, $@"HappyHealthyCS_{Guid.NewGuid()}.jpg");
+            App._file = new File(filePath);
             intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(App._file));
             StartActivityForResult(intent, 0);
         }

@@ -38,14 +38,14 @@ namespace HappyHealthyCSharp
             foreach(DataRow x in tickets.Tables["BP"].Rows)
             {
                 var bp = new JavaDictionary<string, object>();
-                bp.Add("bp_id", GlobalFunction.stringValidation(x[0].ToString()));
-                bp.Add("bp_time", GlobalFunction.stringValidation(x[1].ToString()));
-                bp.Add("bp_up", GlobalFunction.stringValidation(x[2].ToString()));
-                bp.Add("bp_lo", GlobalFunction.stringValidation(x[3].ToString()));
-                bp.Add("bp_hr", GlobalFunction.stringValidation(x[4].ToString()));
-                bp.Add("bp_up_lvl", GlobalFunction.stringValidation(x[5].ToString()));
-                bp.Add("bp_lo_lvl", GlobalFunction.stringValidation(x[6].ToString()));
-                bp.Add("bp_hr_lvl", GlobalFunction.stringValidation(x[7].ToString()));
+                bp.Add("bp_id", GlobalFunction.StringValidation(x[0].ToString()));
+                bp.Add("bp_time", GlobalFunction.StringValidation(x[1].ToString()));
+                bp.Add("bp_up", GlobalFunction.StringValidation(x[2].ToString()));
+                bp.Add("bp_lo", GlobalFunction.StringValidation(x[3].ToString()));
+                bp.Add("bp_hr", GlobalFunction.StringValidation(x[4].ToString()));
+                bp.Add("bp_up_lvl", GlobalFunction.StringValidation(x[5].ToString()));
+                bp.Add("bp_lo_lvl", GlobalFunction.StringValidation(x[6].ToString()));
+                bp.Add("bp_hr_lvl", GlobalFunction.StringValidation(x[7].ToString()));
                 bpList.Add(bp);
             }
             #region deprecated

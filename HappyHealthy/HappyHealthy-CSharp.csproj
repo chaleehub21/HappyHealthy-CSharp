@@ -138,6 +138,7 @@
     <Compile Include="Forgot.cs" />
     <Compile Include="History_Pill.cs" />
     <Compile Include="Pill.cs" />
+    <Compile Include="PillTABLE.cs" />
     <Compile Include="UserTABLE.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="PressureTABLE.cs" />

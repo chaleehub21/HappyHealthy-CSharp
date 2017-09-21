@@ -16,7 +16,7 @@ using System.IO;
 
 namespace HappyHealthyCSharp
 {
-    public class GlobalFunction
+    public static class GlobalFunction
     {
         public static readonly string dbPath = "server=10.0.2.2;port=3306;database=happyhealthydb;User Id=root;Password=lovelove12;charset=utf8";
         //public static readonly string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
@@ -95,7 +95,7 @@ namespace HappyHealthyCSharp
             ISharedPreferences prefs = Android.Preferences.PreferenceManager.GetDefaultSharedPreferences(c);
             prefs.Edit().Clear().Commit();
         }
-        public static string stringValidation<T>(T t)
+        public static string StringValidation<T>(this T t)
         {
             if(Double.TryParse(t.ToString(),out double val) == true)
             {
