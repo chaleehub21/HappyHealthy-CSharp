@@ -39,7 +39,7 @@ namespace HappyHealthyCSharp
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
             login.Click += delegate {
-                var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+                var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
                 var comm = sqlconn.CreateCommand();
                 var userRow = new JavaList<IDictionary<string, object>>();
                 var sqlQuery = $@"select count(ud_id),ud_id from user_detail where ud_email = @id and ud_pass = @pw";
@@ -63,16 +63,16 @@ namespace HappyHealthyCSharp
                         }
                         else
                         {
-                            GlobalFunction.createDialog(this, "Access Denied").Show();
+                            GlobalFunction.CreateDialogue(this, "Access Denied").Show();
                         }
                     }
                     else
                     {
-                        GlobalFunction.createDialog(this, "Access Denied").Show();
+                        GlobalFunction.CreateDialogue(this, "Access Denied").Show();
                     }
                 }
                 catch {
-                    GlobalFunction.createDialog(this,"Database is not available").Show();
+                    GlobalFunction.CreateDialogue(this,"Database is not available").Show();
                 }
             };
             register.Click += delegate {

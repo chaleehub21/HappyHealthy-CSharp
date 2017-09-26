@@ -35,9 +35,9 @@ namespace HappyHealthyCSharp
         {
             kidneyList[e.Position].TryGetValue("ckd_gfr_level", out object gfrLevel);
             kidneyList[e.Position].TryGetValue("ckd_id", out object ckdID);
-            GlobalFunction.createDialog(this, $@"The value for this one : {gfrLevel.ToString()}", null,
+            GlobalFunction.CreateDialogue(this, $@"The value for this one : {gfrLevel.ToString()}", null,
                 delegate {
-                    GlobalFunction.createDialog(this, "Do you want to delete this row?", delegate {
+                    GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", delegate {
                         var ckdTable = new KidneyTABLE();
                         ckdTable.deleteKidneyFromSQL(ckdID.ToString());
                         setKidneyList();

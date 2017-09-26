@@ -54,7 +54,7 @@ namespace HappyHealthyCSharp
             #endregion
             try
             {
-                var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+                var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
                 var command = sqlconn.CreateCommand();
                 command.CommandText = $@"INSERT INTO FOOD VALUES(null,'{foodinstance.Food_NAME}',null,{foodinstance.Food_CAL},'{foodinstance.Food_UNIT}',{foodinstance.Food_NET_WEIGHT},'{foodinstance.Food_NET_UNIT}',{foodinstance.Food_PROTEIN},{foodinstance.Food_FAT},{foodinstance.Food_CARBOHYDRATE},{foodinstance.Food_SUGAR},{foodinstance.Food_SODIUM},'{foodinstance.Food_Detail}');";
                 sqlconn.Open();
@@ -68,7 +68,7 @@ namespace HappyHealthyCSharp
         public JavaList<IDictionary<string,object>> getFoodList(string word,Context c = null)
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var foodList = new JavaList<IDictionary<string, object>>();
             var query = $@"SELECT * FROM Food where Food_NAME LIKE '%{word}%'";
@@ -129,7 +129,7 @@ namespace HappyHealthyCSharp
             int retRecord = await conn.InsertAsync(foodinstance);
             */
             #endregion
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             var command = sqlconn.CreateCommand();
             command.CommandText = $@"INSERT INTO FOOD VALUES()";
             sqlconn.Open();
@@ -161,7 +161,7 @@ namespace HappyHealthyCSharp
             return retValue;
             */
             #endregion
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var query = $@"SELECT * FROM Food where Food_ID = {id}";
             var tickets = new DataSet();

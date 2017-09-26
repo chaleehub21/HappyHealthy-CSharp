@@ -19,15 +19,15 @@ namespace HappyHealthyCSharp
     public static class GlobalFunction
     {
         public static readonly string dbPath = "server=10.0.2.2;port=3306;database=happyhealthydb;User Id=root;Password=lovelove12;charset=utf8";
-        //public static readonly string remoteaccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
-        public static readonly string remoteaccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
+        //public static readonly string remoteAccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
+        public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
         /// <param name="t">Base Caller</param>
         /// <param name="message">Dialog Message</param>
-        public static AlertDialog.Builder createDialog(Context t, string message, EventHandler<DialogClickEventArgs> action = null, EventHandler<DialogClickEventArgs> cancelAction = null, string actionMessage = "OK", string cancelActionMessage = "Cancel")
+        public static AlertDialog.Builder CreateDialogue(Context t, string message, EventHandler<DialogClickEventArgs> action = null, EventHandler<DialogClickEventArgs> cancelAction = null, string actionMessage = "OK", string cancelActionMessage = "Cancel")
         {
             var isCancelAble = cancelAction == null ? false : true; //is cancel action function defined? if yes then the cancel button should be available.
             var nDLG = new AlertDialog.Builder(t);
@@ -41,6 +41,13 @@ namespace HappyHealthyCSharp
                 .SetNegativeButton(cancelActionMessage, cancelAction);
             }
             return nDLG;
+        }
+        public static DateTime ToThaiLocale(this DateTime n)
+        {
+            var thaiCalendar = new System.Globalization.ThaiBuddhistCalendar();
+            var now = DateTime.Now;
+            var thaiTime = new DateTime(thaiCalendar.GetYear(now), thaiCalendar.GetMonth(now), now.Day, now.Hour, now.Minute, now.Second);
+            return thaiTime;
         }
         public static void setPreference(string key, string value, Context c)
         {

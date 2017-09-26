@@ -27,7 +27,7 @@ namespace HappyHealthyCSharp
         public JavaList<IDictionary<string,object>> getPillList(string queryCustomized = "SELECT * FROM MED_ALERT")
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var pillList = new JavaList<IDictionary<string, object>>();
             var query = queryCustomized;
@@ -56,7 +56,7 @@ namespace HappyHealthyCSharp
         }
         public void deletePillFromSQL(string id)
         {
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var command = sqlconn.CreateCommand();
             command.CommandText = $@"DELETE FROM MED_ALERT WHERE MA_ID = {id}";
@@ -72,10 +72,10 @@ namespace HappyHealthyCSharp
             int retRecord = await conn.InsertAsync(foodinstance);
             */
             #endregion
-            var conn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var conn = new MySqlConnection(GlobalFunction.remoteAccess);
             conn.Open();
             var sqlCommand = conn.CreateCommand();
-            sqlCommand.CommandText = $@"insert into med_alert values(null,'{medName}','{medDesc}','{medTime.ToString("H:mm:ss")}','{picPath}',{userID})";
+            sqlCommand.CommandText = $@"insert into med_alert values(null,'{medName}','{medDesc}','{medTime.ToThaiLocale().ToString("H:mm:ss")}','{picPath}',{userID})";
             sqlCommand.ExecuteNonQuery();
             conn.Close();
 

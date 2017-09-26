@@ -60,7 +60,7 @@ namespace HappyHealthyCSharp
                 {
                     if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
                     {
-                        GlobalFunction.createDialog(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
+                        GlobalFunction.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
                         {
                             this.Finish();
                         }).Show();

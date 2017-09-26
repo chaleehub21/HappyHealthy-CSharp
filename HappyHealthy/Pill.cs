@@ -30,6 +30,10 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_add_pill);
             var camerabtt = FindViewById<ImageView>(Resource.Id.cameraImageView);
+            var backbtt = FindViewById<ImageView>(Resource.Id.pill_back_button);
+            backbtt.Click += delegate {
+                this.Finish();
+            };
             if (IsAppToTakePicturesAvailable())
             {
                 CreateDirForPictures();

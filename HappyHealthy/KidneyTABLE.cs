@@ -28,7 +28,7 @@ namespace HappyHealthyCSharp
         public JavaList<IDictionary<string,object>> getKidneyList(string queryCustomized = "SELECT * FROM CKD")
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var ckdList = new JavaList<IDictionary<string, object>>();
             var query = queryCustomized;
@@ -81,7 +81,7 @@ namespace HappyHealthyCSharp
         }
         public void deleteKidneyFromSQL(string id)
         {
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var command = sqlconn.CreateCommand();
             command.CommandText = $@"DELETE FROM CKD WHERE CKD_ID = {id}";
@@ -97,7 +97,7 @@ namespace HappyHealthyCSharp
             int retRecord = await conn.InsertAsync(foodinstance);
             */
             #endregion
-            var conn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var conn = new MySqlConnection(GlobalFunction.remoteAccess);
             conn.Open();
             var sqlCommand = conn.CreateCommand();
             var gfrLevel = 0;
@@ -116,7 +116,7 @@ namespace HappyHealthyCSharp
                                     `ud_id`)
                                     VALUES
                                     (null,
-                                    '{System.DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',
+                                    '{System.DateTime.Now.ToThaiLocale().ToString("yyyy-MM-dd H:mm:ss")}',
                                     {gfr},
                                     {gfrLevel},
                                     {creatinine},

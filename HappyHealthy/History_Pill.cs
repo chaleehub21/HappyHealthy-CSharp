@@ -45,8 +45,8 @@ namespace HappyHealthyCSharp
         {
             pillList[e.Position].TryGetValue("ma_name", out object pillValue);
             pillList[e.Position].TryGetValue("ma_id", out object pillID);
-            GlobalFunction.createDialog(this, $@"The value for this one : {pillValue.ToString()}", null, (EventHandler<DialogClickEventArgs>)delegate {
-                GlobalFunction.createDialog(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
+            GlobalFunction.CreateDialogue(this, $@"The value for this one : {pillValue.ToString()}", null, (EventHandler<DialogClickEventArgs>)delegate {
+                GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
                     var pillTable = new PillTABLE();
                     pillTable.deletePillFromSQL((string)pillID.ToString());
                     setPillList();

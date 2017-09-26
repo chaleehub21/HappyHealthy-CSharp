@@ -28,7 +28,7 @@ namespace HappyHealthyCSharp
         public JavaList<IDictionary<string,object>> getPressureList(string queryCustomized = "SELECT * FROM BP")
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var bpList = new JavaList<IDictionary<string, object>>();
             var query = queryCustomized;
@@ -77,7 +77,7 @@ namespace HappyHealthyCSharp
         }
         public void deletePressureFromSQL(string id)
         {
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var command = sqlconn.CreateCommand();
             command.CommandText = $@"DELETE FROM BP WHERE bp_id = {id}";
@@ -93,13 +93,13 @@ namespace HappyHealthyCSharp
             int retRecord = await conn.InsertAsync(foodinstance);
             */
             #endregion
-            var conn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var conn = new MySqlConnection(GlobalFunction.remoteAccess);
             conn.Open();
             var sqlCommand = conn.CreateCommand();
             sqlCommand.CommandText = $@"INSERT INTO BP
                                         VALUES
                                         (null,
-                                        '{DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',
+                                        '{DateTime.Now.ToThaiLocale().ToString("yyyy-MM-dd H:mm:ss")}',
                                         {up},
                                         {low},
                                         {heart_rate},
@@ -107,7 +107,7 @@ namespace HappyHealthyCSharp
                                         {low},
                                         {heart_rate},
                                         {userID});";
-            Console.WriteLine($@"INSERT INTO BP VALUES(null,'{DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',{up},{low},{heart_rate},{up },{low},{heart_rate},{userID});");
+            Console.WriteLine($@"INSERT INTO BP VALUES(null,'{DateTime.Now.ToThaiLocale().ToString("yyyy-MM-dd H:mm:ss")}',{up},{low},{heart_rate},{up },{low},{heart_rate},{userID});");
             sqlCommand.ExecuteNonQuery();
             conn.Close();
 

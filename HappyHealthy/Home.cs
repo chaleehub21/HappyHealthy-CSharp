@@ -32,7 +32,7 @@ namespace HappyHealthyCSharp
             if (rec != "android.hardware.microphone")
             {
                 // no microphone, no recording. Disable the button and output an alert
-                GlobalFunction.createDialog(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
+                GlobalFunction.CreateDialogue(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
             }
             else
                 imageView.Click += delegate
@@ -52,7 +52,7 @@ namespace HappyHealthyCSharp
                         StartActivityForResult(voiceIntent, VOICE);
                     }
                     */
-                    GlobalFunction.createDialog(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
+                    GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
 
 
@@ -72,10 +72,10 @@ namespace HappyHealthyCSharp
                         if (textInput.Length > 500)
                             textInput = textInput.Substring(0, 500);
                         //GlobalFunction.createDialog(this, textInput).Show();
-                        GlobalFunction.createDialog(this, textInput).Show();
+                        GlobalFunction.CreateDialogue(this, textInput).Show();
                     }
                     else
-                        GlobalFunction.createDialog(this, "unrecognized").Show();
+                        GlobalFunction.CreateDialogue(this, "unrecognized").Show();
                 }
             }
             base.OnActivityResult(requestCode, resultVal, data);
@@ -119,7 +119,7 @@ namespace HappyHealthyCSharp
         [Export("ClickDoctor")]
         public void ClickDoctor(View v)
         {
-            GlobalFunction.createDialog(this, "Not implemented").Show();
+            GlobalFunction.CreateDialogue(this, "Not implemented").Show();
         }
     }
 }

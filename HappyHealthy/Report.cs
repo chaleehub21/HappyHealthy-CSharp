@@ -174,7 +174,8 @@ namespace HappyHealthyCSharp
                 dataset[i].TryGetValue(key_value, out object Value);
                 DateTime.TryParse(Time.ToString(), out DateTime dateResult);
                 double value = Convert.ToDouble(Value.ToString());
-                series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult.Year > 2100 ? dateResult.AddYears(-543) : dateResult), value));
+                //series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult.Year > 2100 ? dateResult.AddYears(-543) : dateResult), value));
+                series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult), value));
                 var textAnnotations = new TextAnnotation() {TextPosition = new DataPoint(series1.Points.Last().X, series1.Points.Last().Y),Text = value.ToString(),Stroke = OxyColors.White };
                 plotModel.Annotations.Add(textAnnotations);
             }

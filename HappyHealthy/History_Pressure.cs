@@ -39,8 +39,8 @@ namespace HappyHealthyCSharp
         {
             bpList[e.Position].TryGetValue("bp_up", out object bpValue);
             bpList[e.Position].TryGetValue("bp_id", out object bpID);
-            GlobalFunction.createDialog(this, $@"The value for this one : {bpValue.ToString()}", null,(EventHandler<DialogClickEventArgs>)delegate {
-                    GlobalFunction.createDialog(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
+            GlobalFunction.CreateDialogue(this, $@"The value for this one : {bpValue.ToString()}", null,(EventHandler<DialogClickEventArgs>)delegate {
+                    GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
                         var bpTable = new PressureTABLE();
                         bpTable.deletePressureFromSQL((string)bpID.ToString());
                         setDiabetesList();

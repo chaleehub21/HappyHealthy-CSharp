@@ -34,7 +34,7 @@ namespace HappyHealthyCSharp
         }
         public UserTABLE getUserDetail(object ud_id)
         {
-            var conn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var conn = new MySqlConnection(GlobalFunction.remoteAccess);
             var sql = $"select * from user_detail where ud_id = @ud_id";
             var cmd = conn.CreateCommand();
             cmd.CommandText = sql;
@@ -68,7 +68,7 @@ namespace HappyHealthyCSharp
         }
         public void deleteUserFromSQL(string id)
         {
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var command = sqlconn.CreateCommand();
             command.CommandText = $@"DELETE FROM USER_DETAIL WHERE USER_DETAIL = @ud_id";
@@ -78,7 +78,7 @@ namespace HappyHealthyCSharp
         }
         public static bool InsertUserToSQL(string name, char gender, string birthdate, string email, string password, Context c)
         {
-            var conn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var conn = new MySqlConnection(GlobalFunction.remoteAccess);
             conn.Open();
             var sqlCommand = conn.CreateCommand();
             //sqlCommand.CommandText = $@"insert into fbs values(null,'{System.DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
@@ -92,12 +92,12 @@ namespace HappyHealthyCSharp
             catch (MySqlException sqlex)
             {
                 Console.WriteLine(sqlex.ToString());
-                GlobalFunction.createDialog(c,sqlex.ToString()).Show();
+                GlobalFunction.CreateDialogue(c,sqlex.ToString()).Show();
                 //GlobalFunction.createDialog(c, "ไม่สามารถสมัครสมาชิกด้วยข้อมูลที่คุณระบุได้ กรุณาตรวจสอบข้อมูลอีกครั้ง").Show();
             }
             catch (Exception e)
             {
-                GlobalFunction.createDialog(c, e.ToString()).Show();
+                GlobalFunction.CreateDialogue(c, e.ToString()).Show();
             }
             conn.Close();
             return false;

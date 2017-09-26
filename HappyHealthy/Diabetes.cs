@@ -34,7 +34,7 @@ namespace HappyHealthyCSharp
         {
             var diaTable = new DiabetesTABLE();
             diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
-            GlobalFunction.createDialog(this, $@"Inserted",delegate { this.Finish(); }).Show();
+            GlobalFunction.CreateDialogue(this, $@"Inserted",delegate { this.Finish(); }).Show();
 
         }
         [Export("ClickBackDiaHome")]

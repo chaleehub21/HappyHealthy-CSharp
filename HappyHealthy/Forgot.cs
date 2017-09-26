@@ -32,7 +32,7 @@ namespace HappyHealthyCSharp
             };
             mailSend.Click += delegate {
                 var Thread = new System.Threading.Thread(() => {
-                    var conn = new MySqlConnection(GlobalFunction.remoteaccess);
+                    var conn = new MySqlConnection(GlobalFunction.remoteAccess);
                     object result = null;
                     try
                     {

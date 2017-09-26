@@ -28,7 +28,7 @@ namespace HappyHealthyCSharp
         public JavaList<IDictionary<string,object>> getDiabetesList(string queryCustomized = "SELECT * FROM FBS")
         {
             //conn = new SQLiteConnection(GlobalFunction.dbPath);
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var fbsList = new JavaList<IDictionary<string, object>>();
             var query = queryCustomized;
@@ -74,7 +74,7 @@ namespace HappyHealthyCSharp
         }
         public void deleteFbsFromSQL(string id)
         {
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var command = sqlconn.CreateCommand();
             command.CommandText = $@"DELETE FROM FBS WHERE fbs_id = {id}";
@@ -90,10 +90,10 @@ namespace HappyHealthyCSharp
             int retRecord = await conn.InsertAsync(foodinstance);
             */
             #endregion
-            var conn = new MySqlConnection(GlobalFunction.remoteaccess);
+            var conn = new MySqlConnection(GlobalFunction.remoteAccess);
             conn.Open();
             var sqlCommand = conn.CreateCommand();
-            sqlCommand.CommandText = $@"insert into fbs values(null,'{System.DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
+            sqlCommand.CommandText = $@"insert into fbs values(null,'{DateTime.Now.ToThaiLocale().ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
             sqlCommand.ExecuteNonQuery();
             conn.Close();
 
