@@ -40,6 +40,7 @@ namespace HappyHealthyCSharp
                 var fbs = new JavaDictionary<string, object>();
                 fbs.Add("fbs_id", GlobalFunction.StringValidation(x[0].ToString()));
                 fbs.Add("fbs_time", GlobalFunction.StringValidation(x[1].ToString()));
+                Console.WriteLine(GlobalFunction.StringValidation(((DateTime)x[1]).ToThaiLocale().ToString()));
                 fbs.Add("fbs_fbs", GlobalFunction.StringValidation(x[2].ToString()));
                 fbs.Add("fbs_fbs_lvl", GlobalFunction.StringValidation(x[3].ToString()));
                 fbs.Add("ud_id", GlobalFunction.StringValidation(x[4].ToString()));
@@ -94,6 +95,7 @@ namespace HappyHealthyCSharp
             conn.Open();
             var sqlCommand = conn.CreateCommand();
             sqlCommand.CommandText = $@"insert into fbs values(null,'{DateTime.Now.ToThaiLocale().ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
+            //sqlCommand.CommandText = $@"insert into fbs values(null,'{DateTime.Now.ToThaiLocale().ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
             sqlCommand.ExecuteNonQuery();
             conn.Close();
 

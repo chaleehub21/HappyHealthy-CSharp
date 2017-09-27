@@ -29,6 +29,8 @@ namespace HappyHealthyCSharp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            var en_USLocale = new System.Globalization.CultureInfo("en-US");
+            System.Threading.Thread.CurrentThread.CurrentCulture = en_USLocale;
             /*
             textToSpeech = new TextToSpeech(this, this, "com.google.android.tts");
             textToSpeech.SetLanguage(Java.Util.Locale.Default);

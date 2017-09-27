@@ -13,6 +13,7 @@ using Android.Speech.Tts;
 using System.Net.Mail;
 using System.Net;
 using System.IO;
+using System.Globalization;
 
 namespace HappyHealthyCSharp
 {
@@ -41,13 +42,6 @@ namespace HappyHealthyCSharp
                 .SetNegativeButton(cancelActionMessage, cancelAction);
             }
             return nDLG;
-        }
-        public static DateTime ToThaiLocale(this DateTime n)
-        {
-            var thaiCalendar = new System.Globalization.ThaiBuddhistCalendar();
-            var now = DateTime.Now;
-            var thaiTime = new DateTime(thaiCalendar.GetYear(now), thaiCalendar.GetMonth(now), now.Day, now.Hour, now.Minute, now.Second);
-            return thaiTime;
         }
         public static void setPreference(string key, string value, Context c)
         {
@@ -113,6 +107,22 @@ namespace HappyHealthyCSharp
                 return "";
             }
             return t.ToString();
+        }
+        public static DateTime ToThaiLocale(this DateTime n)
+        {
+            //var ids = Java.Util.TimeZone.GetAvailableIDs(7 * 60 * 60 * 1000);
+            //var utc = new Java.Util.SimpleTimeZone(7 * 60 * 60 * 1000, ids[0]);
+            //var gCalendar = new Java.Util.GregorianCalendar(utc);
+            //gCalendar.Time = new Java.Util.Date();
+            //test section above
+            //var dateParamENLocale = n.ToString("yyyy-MM-dd H:mm:ss",new CultureInfo("en-US"));
+            //DateTime.TryParse(dateParamENLocale,out var newN);
+            //Console.WriteLine($"{dateParamENLocale}\n{newN.ToString()}");
+            var thaiCalendar = new System.Globalization.ThaiBuddhistCalendar();
+            var now = n;
+            var thaiTime = new DateTime(thaiCalendar.GetYear(now), thaiCalendar.GetMonth(now), thaiCalendar.GetDayOfMonth(now), thaiCalendar.GetHour(now), thaiCalendar.GetMinute(now), thaiCalendar.GetSecond(now));
+            return thaiTime;
+
         }
         public static string GetValidPathForFileStore(string filename)
         {
