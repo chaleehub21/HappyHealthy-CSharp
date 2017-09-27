@@ -74,7 +74,7 @@ namespace HappyHealthyCSharp
             calendar.Set(Android.Icu.Util.CalendarField.Minute, 10);
             calendar.Set(Android.Icu.Util.CalendarField.Second, 0);
             //alarmManager.SetInexactRepeating(AlarmType.ElapsedRealtimeWakeup, SystemClock.ElapsedRealtime(),AlarmManager.IntervalDay, pendingIntent);
-            alarmManager.SetInexactRepeating(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime() + AlarmManager.IntervalDay, AlarmManager.IntervalDay,pendingIntent);
+            alarmManager.SetInexactRepeating(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime() + AlarmManager.IntervalFifteenMinutes, AlarmManager.IntervalFifteenMinutes,pendingIntent);
             //alarmManager.Set(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime()  + 5 * 1000, pendingIntent);
             //alarmManager.Cancel(pendingIntent);
             //pendingIntent.Cancel();
