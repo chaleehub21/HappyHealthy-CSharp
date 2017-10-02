@@ -16,6 +16,7 @@ namespace HappyHealthyCSharp
     [Activity(Theme = "@style/MyMaterialTheme.Base")]
     class Home : Activity
     {
+        TextView labelTest;
         #region Experimental Section
         private bool isRecording;
         private readonly int VOICE = 10;
@@ -37,7 +38,6 @@ namespace HappyHealthyCSharp
             else
                 imageView.Click += delegate
                 {
-                    /*
                     isRecording = !isRecording;
                     if (isRecording)
                     {
@@ -51,8 +51,7 @@ namespace HappyHealthyCSharp
                         voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
                         StartActivityForResult(voiceIntent, VOICE);
                     }
-                    */
-                    GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
+                    //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
 
 
@@ -72,10 +71,12 @@ namespace HappyHealthyCSharp
                         if (textInput.Length > 500)
                             textInput = textInput.Substring(0, 500);
                         //GlobalFunction.createDialog(this, textInput).Show();
-                        GlobalFunction.CreateDialogue(this, textInput).Show();
+                        Toast.MakeText(this, textInput, ToastLength.Short);
+                        labelTest = FindViewById<TextView>(Resource.Id.textView18);
+                        labelTest.Text = textInput;
                     }
                     else
-                        GlobalFunction.CreateDialogue(this, "unrecognized").Show();
+                        Toast.MakeText(this, "Unrecognized", ToastLength.Short);
                 }
             }
             base.OnActivityResult(requestCode, resultVal, data);

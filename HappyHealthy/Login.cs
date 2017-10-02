@@ -80,7 +80,7 @@ namespace HappyHealthyCSharp
             };
             forgot.Click += delegate {
                 StartActivity(new Intent(this, typeof(Forgot)));
-                CustomNotification.Show(this, "Sender!", typeof(EmptyDemo),Resource.Raw.notialert);
+                CustomNotification.Show(this, "Sender!", DateTime.Now,Resource.Raw.notialert);
                 //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }

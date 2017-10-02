@@ -43,7 +43,7 @@ namespace HappyHealthyCSharp
             return builder;
             
         }
-        public static void Show(Context c,string content,Type target,int customSoundResourceID = -9999)
+        public static void Show(Context c,string content,DateTime alertTime,int customSoundResourceID = -9999)
         {
             /*
             var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
@@ -68,16 +68,14 @@ namespace HappyHealthyCSharp
             alarmIntent.PutExtra("title", "HappyHealthy");
             alarmIntent.PutExtra("sound", filePath);
             var pendingIntent = PendingIntent.GetBroadcast(c, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
-            var alarmManager = c.GetSystemService(AlarmService).JavaCast<AlarmManager>();
-            var calendar = Calendar.GetInstance(Android.Icu.Util.TimeZone.Default);
-            calendar.Set(Android.Icu.Util.CalendarField.HourOfDay, 13);
-            calendar.Set(Android.Icu.Util.CalendarField.Minute, 10);
-            calendar.Set(Android.Icu.Util.CalendarField.Second, 0);
-            //alarmManager.SetInexactRepeating(AlarmType.ElapsedRealtimeWakeup, SystemClock.ElapsedRealtime(),AlarmManager.IntervalDay, pendingIntent);
-            alarmManager.SetInexactRepeating(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime() + AlarmManager.IntervalFifteenMinutes, AlarmManager.IntervalFifteenMinutes,pendingIntent);
-            //alarmManager.Set(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime()  + 5 * 1000, pendingIntent);
-            //alarmManager.Cancel(pendingIntent);
-            //pendingIntent.Cancel();
+            var time = alertTime.AddSeconds(5);
+            var manager = (AlarmManager)c.GetSystemService(Context.AlarmService);
+            var calendar = Java.Util.Calendar.Instance;
+            calendar.TimeInMillis = Java.Lang.JavaSystem.CurrentTimeMillis();
+            calendar.Set(time.Year, time.Month - 1, time.Day, time.Hour, time.Minute, time.Second);
+            //var halfMin = (long)(30 * 1000);
+            manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
+            //reference : https://stackoverflow.com/questions/42237920/xamarin-android-how-to-schedule-and-alarm-with-a-broadcastreceiver
         }
     }
     [BroadcastReceiver]
@@ -89,7 +87,7 @@ namespace HappyHealthyCSharp
             var title = intent.GetStringExtra("title");
             var sPath = intent.GetStringExtra("sound");
             var soundPath = Android.Net.Uri.Parse(sPath);
-            var resultIntent = new Intent(context, typeof(MainActivity));
+            var resultIntent = new Intent(context, typeof(EmptyDemo));
             resultIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
             var pending = PendingIntent.GetActivity(context, 0,resultIntent,PendingIntentFlags.CancelCurrent);
             var builder = new Notification.Builder(context)

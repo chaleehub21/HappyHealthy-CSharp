@@ -55,9 +55,20 @@ namespace HappyHealthyCSharp
             var datalength = dataset.Count();
             var plotModel = new PlotModel { Title = title};
             var LastDateOnDataset = new object();
+            var maxValue = 100.0;
+            var minValue = 0.0;
             if (datalength > 0)
             {
                 dataset.Last().TryGetValue(key_time, out LastDateOnDataset);
+                for (var index = 0; index < datalength; index++) //try extract list to determine min/max value first
+                {
+                    dataset[index].TryGetValue(key_value, out object candidateValue);
+                    var dCandidateValue = Convert.ToDouble(candidateValue);
+                    if (dCandidateValue > maxValue)
+                        maxValue = dCandidateValue;
+                    if (dCandidateValue < minValue)
+                        minValue = dCandidateValue;
+                }
             }
             else
             {
@@ -65,11 +76,11 @@ namespace HappyHealthyCSharp
             }
             var startDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(-7);
             var endDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(0.1);
-            var minValue = DateTimeAxis.ToDouble(startDate);
-            var maxValue = DateTimeAxis.ToDouble(endDate);
+            var minDate = DateTimeAxis.ToDouble(startDate);
+            var maxDate = DateTimeAxis.ToDouble(endDate);
             Console.WriteLine($@"{minValue}/{maxValue}");
-            var x = new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minValue, Maximum = maxValue, MajorStep = 10, StringFormat = "d-MMMM" };
-            var y = new LinearAxis { Position = AxisPosition.Left, Maximum = 100, Minimum = 0 };
+            var x = new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minDate, Maximum = maxDate, MajorStep = 10, StringFormat = "d-MMMM" };
+            var y = new LinearAxis { Position = AxisPosition.Left, Maximum = maxValue, Minimum = minValue };
             y.IsPanEnabled = false;
             y.IsZoomEnabled = false;
             plotModel.Axes.Add(x);
