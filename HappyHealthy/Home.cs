@@ -53,8 +53,6 @@ namespace HappyHealthyCSharp
                     }
                     //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
-
-
         }
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
         {

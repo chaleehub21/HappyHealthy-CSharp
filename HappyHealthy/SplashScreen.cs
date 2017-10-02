@@ -31,13 +31,13 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             var en_USLocale = new System.Globalization.CultureInfo("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = en_USLocale;
-            /*
-            textToSpeech = new TextToSpeech(this, this, "com.google.android.tts");
-            textToSpeech.SetLanguage(Java.Util.Locale.Default);
-            textToSpeech.SetPitch(1f);
-            textToSpeech.SetSpeechRate(1f);
-            */
             t2sEngine = new TTS(this);
+            new UserTABLE();
+            new DiabetesTABLE();
+            new KidneyTABLE();
+            new PressureTABLE();
+            new FoodTABLE();
+            
         }
         public override void OnBackPressed() { } //override back button to prevent loading process cancellation
         protected override void OnResume()

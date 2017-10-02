@@ -12,22 +12,35 @@ using Android.Widget;
 using Java.Text;
 using Java.Util;
 using Android.Speech.Tts;
+using SQLite;
+using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {
     [Activity]
     public class FoodDetail : Activity 
     {
-        
+        [PrimaryKey]
+        public int food_id { get; set; }
+        public string food_name { get; set; }
+        public int food_amt { get; set; }
+        public decimal food_cal { get; set; }
+        public string food_unit { get; set; }
+        public decimal food_netweight { get; set; }
+        public string food_netunit { get; set; }
+        public decimal food_protein { get; set; }
+        public decimal food_fat { get; set; }
+        public decimal food_carbohydrate { get; set; }
+        public decimal food_sugars { get; set; }
+        public decimal food_sodium { get; set; }
+        public string food_detail { get; set; }
+        public int food_is_allow { get; set; }
+        public int food_for_ckd { get; set; }
+        //reconstruct of sqlite keys + attributes
         FoodTABLE foodTABLE;
-        //FoodHistoryTABLE foodHistoryTABLE;
         Dictionary<string, string> detailFood;
         double total;
         EditText editCal_Total;
-        Button bCal_Total;
-        SimpleDateFormat df_show;
-        Calendar c;
-        ImageView rec;
         TextView f_name, f_cal, f_unit, f_netweight, f_netunit, f_pro, f_fat, f_car, f_sugar, f_sodium, f_amount, f_detail;
         protected override void OnCreate(Bundle savedInstanceState)
         {

@@ -35,8 +35,14 @@ namespace HappyHealthyCSharp
         public void ClickDisLevelsPre(object sender, EventArgs e)
         {
             var bpTable = new PressureTABLE();
-            bpTable.InsertPressureToSQL(BPUp.Text, BPLow.Text, HeartRate.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
-            GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
+            //bpTable.InsertPressureToSQL(BPUp.Text, BPLow.Text, HeartRate.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
+            bpTable.bp_up = Convert.ToDecimal(BPUp.Text);
+            bpTable.bp_lo = Convert.ToDecimal(BPLow.Text);
+            bpTable.bp_hr = Convert.ToInt32(HeartRate.Text);
+            bpTable.bp_time = DateTime.Now.ToThaiLocale();
+            bpTable.ud_id = Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this));
+            bpTable.InsertPressureToSQL(bpTable);
+            //GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
 
         }
         [Export("ClickBackPreHome")]

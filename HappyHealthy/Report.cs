@@ -38,17 +38,17 @@ namespace HappyHealthyCSharp
             var bp = FindViewById<RadioButton>(Resource.Id.report_bp);
             
             fbs.Click += delegate {
-                view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME"), "fbs_time", "fbs_fbs");
+                view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().getDiabetesList($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME"), "fbs_time", "fbs_fbs");
             };
             ckd.Click += delegate
             {
-                view.Model = CreatePlotModel("กราฟ CKD", new KidneyTABLE().getKidneyList($@"SELECT * FROM CKD WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY CKD_TIME"), "ckd_time", "ckd_gfr");
+                view.Model = CreatePlotModel("กราฟ CKD", new KidneyTABLE().getKidneyList($@"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY CKD_TIME"), "ckd_time", "ckd_gfr");
             };
             bp.Click += delegate {
-                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().getPressureList($@"SELECT * FROM BP WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME"), "bp_time", "bp_up");
+                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().getPressureList($@"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME"), "bp_time", "bp_up");
             };
             fbs.Checked = true;
-            view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME"), "fbs_time", "fbs_fbs");
+            view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().getDiabetesList($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME"), "fbs_time", "fbs_fbs");
         }
         private PlotModel CreatePlotModel(string title,JavaList<IDictionary<string,object>> dataset,string key_time,string key_value)
         {

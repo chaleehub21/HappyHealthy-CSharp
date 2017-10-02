@@ -27,6 +27,8 @@ namespace HappyHealthyCSharp
 		public static void UpdateIdValues()
 		{
 			global::Plugin.LocalNotifications.Resource.Drawable.plugin_lc_smallicon = global::HappyHealthyCSharp.Resource.Drawable.plugin_lc_smallicon;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::HappyHealthyCSharp.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::HappyHealthyCSharp.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::HappyHealthyCSharp.Resource.Attribute.actionBarSize;
 		}
 		
@@ -4363,6 +4365,12 @@ namespace HappyHealthyCSharp
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f0b0017
+			public const int ApplicationName = 2131427351;
+			
+			// aapt resource value: 0x7f0b0016
+			public const int Hello = 2131427350;
+			
 			// aapt resource value: 0x7f0b0000
 			public const int abc_action_bar_home_description = 2131427328;
 			
@@ -4420,14 +4428,14 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0b0012
 			public const int abc_toolbar_collapse_description = 2131427346;
 			
+			// aapt resource value: 0x7f0b001a
+			public const int action_search = 2131427354;
+			
+			// aapt resource value: 0x7f0b0019
+			public const int action_settings = 2131427353;
+			
 			// aapt resource value: 0x7f0b0018
-			public const int action_search = 2131427352;
-			
-			// aapt resource value: 0x7f0b0017
-			public const int action_settings = 2131427351;
-			
-			// aapt resource value: 0x7f0b0016
-			public const int app_name = 2131427350;
+			public const int app_name = 2131427352;
 			
 			// aapt resource value: 0x7f0b0014
 			public const int appbar_scrolling_view_behavior = 2131427348;
@@ -4435,32 +4443,32 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0b0015
 			public const int character_counter_pattern = 2131427349;
 			
-			// aapt resource value: 0x7f0b001a
-			public const int drawer_close = 2131427354;
-			
-			// aapt resource value: 0x7f0b0019
-			public const int drawer_open = 2131427353;
-			
 			// aapt resource value: 0x7f0b001c
-			public const int nav_item_friends = 2131427356;
+			public const int drawer_close = 2131427356;
 			
 			// aapt resource value: 0x7f0b001b
-			public const int nav_item_home = 2131427355;
+			public const int drawer_open = 2131427355;
+			
+			// aapt resource value: 0x7f0b001e
+			public const int nav_item_friends = 2131427358;
 			
 			// aapt resource value: 0x7f0b001d
-			public const int nav_item_notifications = 2131427357;
+			public const int nav_item_home = 2131427357;
+			
+			// aapt resource value: 0x7f0b001f
+			public const int nav_item_notifications = 2131427359;
 			
 			// aapt resource value: 0x7f0b0013
 			public const int status_bar_notification_info_overflow = 2131427347;
 			
-			// aapt resource value: 0x7f0b001f
-			public const int title_friends = 2131427359;
+			// aapt resource value: 0x7f0b0021
+			public const int title_friends = 2131427361;
+			
+			// aapt resource value: 0x7f0b0022
+			public const int title_home = 2131427362;
 			
 			// aapt resource value: 0x7f0b0020
-			public const int title_home = 2131427360;
-			
-			// aapt resource value: 0x7f0b001e
-			public const int title_messages = 2131427358;
+			public const int title_messages = 2131427360;
 			
 			static String()
 			{

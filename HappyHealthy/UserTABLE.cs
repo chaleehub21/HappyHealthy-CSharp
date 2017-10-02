@@ -13,24 +13,40 @@ using SQLite;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
+using SQLiteNetExtensions.Attributes;
+using SQLite.Net.Attributes;
+using SQLite.Net;
+using SQLite.Net.Platform.XamarinAndroid;
 
 namespace HappyHealthyCSharp
 {
     class UserTABLE
     {
+        SQLitePlatformAndroid platform = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
+        [PrimaryKey,AutoIncrement]
         public int ud_id { get; set; }
         public string ud_iden_number { get; set; }
         public string ud_name { get; set; }
-        public char ud_gender { get; set; }
+        public string ud_gender { get; set; }
         public DateTime ud_birthdate { get; set; }
         public DateTime ud_bf_time { get; set; }
         public DateTime ud_lu_time { get; set; }
         public DateTime ud_dn_time { get; set; }
         public DateTime ud_usually_meal_time { get; set; }
         public string ud_email { get; set; }
+        [OneToMany]
+        public List<DiabetesTABLE> diabetesList { get; set; }
+        [OneToMany]
+        public List<KidneyTABLE> kidneyList { get; set; }
+        [OneToMany]
+        public List<PillTABLE> pillList { get; set; }
+        [OneToMany]
+        public List<PressureTABLE> pressureList { get; set; }
         public UserTABLE()
         {
-            
+            var sqliteConn = new SQLiteConnection(platform,GlobalFunction.sqliteDBPath);
+            sqliteConn.CreateTable<UserTABLE>();
+            sqliteConn.Close();
         }
         public UserTABLE getUserDetail(object ud_id)
         {
@@ -50,7 +66,7 @@ namespace HappyHealthyCSharp
                     rUser.ud_id = reader.IsDBNull(0) ? 0 : Convert.ToInt32(reader.GetString(0));
                     rUser.ud_iden_number = reader.IsDBNull(1)?null: reader.GetString(1);
                     rUser.ud_name = reader.IsDBNull(2) ? null : reader.GetString(2);
-                    rUser.ud_gender = reader.IsDBNull(3) ? ' ' : Convert.ToChar(reader.GetString(3));
+                    rUser.ud_gender = reader.IsDBNull(3) ? "" : Convert.ToString(reader.GetString(3).StringValidation());
                     rUser.ud_birthdate = reader.IsDBNull(4)? DateTime.Now: DateTime.Parse(reader.GetString(4));
                     rUser.ud_bf_time = reader.IsDBNull(5) ? DateTime.Now : DateTime.Parse(reader.GetString(5));
                     rUser.ud_dn_time = reader.IsDBNull(6) ? DateTime.Now : DateTime.Parse(reader.GetString(6));
@@ -93,6 +109,36 @@ namespace HappyHealthyCSharp
             {
                 Console.WriteLine(sqlex.ToString());
                 GlobalFunction.CreateDialogue(c,sqlex.ToString()).Show();
+                //GlobalFunction.createDialog(c, "ไม่สามารถสมัครสมาชิกด้วยข้อมูลที่คุณระบุได้ กรุณาตรวจสอบข้อมูลอีกครั้ง").Show();
+            }
+            catch (Exception e)
+            {
+                GlobalFunction.CreateDialogue(c, e.ToString()).Show();
+            }
+            conn.Close();
+            return false;
+        }
+        public static bool UpdateUserToSQL(string name, char gender, string identification_no, string email, string password, Context c)
+        {
+            var conn = new MySqlConnection(GlobalFunction.remoteAccess);
+            conn.Open();
+            var sqlCommand = conn.CreateCommand();
+            //sqlCommand.CommandText = $@"insert into fbs values(null,'{System.DateTime.Now.ToString("yyyy-MM-dd H:mm:ss")}',{BloodValue},1,{userID})";
+            sqlCommand.CommandText = $@"update user_detail
+                                     set ud_iden_number = '{identification_no}'
+                                     ,ud_name = '{name}'
+                                     ,ud_gender = '{gender}'
+                                     where ud_id = {GlobalFunction.getPreference("ud_id", "", c)};";
+            try
+            {
+                Console.WriteLine(sqlCommand.CommandText);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException sqlex)
+            {
+                Console.WriteLine(sqlex.ToString());
+                GlobalFunction.CreateDialogue(c, sqlex.ToString()).Show();
                 //GlobalFunction.createDialog(c, "ไม่สามารถสมัครสมาชิกด้วยข้อมูลที่คุณระบุได้ กรุณาตรวจสอบข้อมูลอีกครั้ง").Show();
             }
             catch (Exception e)

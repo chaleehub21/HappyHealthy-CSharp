@@ -13,6 +13,8 @@ using SQLite;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
+using SQLite.Net.Platform.XamarinAndroid;
+using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {
@@ -35,23 +37,15 @@ namespace HappyHealthyCSharp
         public string Food_Detail { get; set; }
         //private string localPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         //private string dbPath = "";
-        SQLiteConnection conn = null;
         public FoodTABLE()
         {
-            //conn = new SQLiteConnection(GlobalFunction.dbPath);
-            //conn.CreateTable<FoodTABLE>();
-            //conn.Close();
+            var sqliteConn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), GlobalFunction.sqliteDBPath);
+            sqliteConn.CreateTable<FoodTABLE>();
+            sqliteConn.Close();
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
         public bool InsertToSQL(FoodTABLE foodinstance)
         {
-            #region deprecated
-            /*
-            var conn = new SQLiteConnection(GlobalFunction.dbPath);
-            conn.CreateTable<FoodTABLE>();
-            return conn.Insert(foodinstance);
-            */
-            #endregion
             try
             {
                 var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
@@ -67,7 +61,6 @@ namespace HappyHealthyCSharp
         }
         public JavaList<IDictionary<string,object>> getFoodList(string word,Context c = null)
         {
-            //conn = new SQLiteConnection(GlobalFunction.dbPath);
             var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
             sqlconn.Open();
             var foodList = new JavaList<IDictionary<string, object>>();
@@ -92,50 +85,9 @@ namespace HappyHealthyCSharp
                 food.Add("food_detail", GlobalFunction.StringValidation(x[12].ToString()));
                 foodList.Add(food);
             }
-            #region deprecated
-            /*
-            var query = $@"SELECT * FROM FoodTABLE where Food_NAME LIKE '%{word}%'";
-            var backFromSQL = conn.Query<FoodTABLE>(query);
-            backFromSQL.ForEach(x =>
-            {
-                var food = new JavaDictionary<string, object>();
-                food.Add("food_id", GlobalFunction.stringValidation(x.Food_ID));
-                food.Add("food_name", GlobalFunction.stringValidation(x.Food_NAME));
-                food.Add("food_calories", GlobalFunction.stringValidation(x.Food_CAL));
-                food.Add("food_unit", GlobalFunction.stringValidation(x.Food_UNIT));
-                food.Add("food_netweight", GlobalFunction.stringValidation(x.Food_NET_WEIGHT));
-                food.Add("food_netunit", GlobalFunction.stringValidation(x.Food_NET_UNIT));
-                food.Add("food_protein", GlobalFunction.stringValidation(x.Food_PROTEIN));
-                food.Add("food_fat", GlobalFunction.stringValidation(x.Food_FAT));
-                food.Add("food_carbyhydrate", GlobalFunction.stringValidation(x.Food_CARBOHYDRATE));
-                food.Add("food_sugars", GlobalFunction.stringValidation(x.Food_SUGAR));
-                food.Add("food_sodium", GlobalFunction.stringValidation(x.Food_SODIUM));
-                food.Add("food_detail", GlobalFunction.stringValidation(x.Food_Detail));
-                foodList.Add(food);
-            });
-            conn.Close();
-            */
-            #endregion
             sqlconn.Close();
             return foodList;
         }
-        [System.Obsolete]
-        public void InsertToSQL(string insert_statement)
-        {
-            #region deprecated
-            /*
-            var conn = new SQLiteAsyncConnection(GlobalFunction.dbPath);
-            await conn.CreateTableAsync<FoodTABLE>();
-            int retRecord = await conn.InsertAsync(foodinstance);
-            */
-            #endregion
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
-            var command = sqlconn.CreateCommand();
-            command.CommandText = $@"INSERT INTO FOOD VALUES()";
-            sqlconn.Open();
-            command.ExecuteNonQuery();
-
-        } //experiment method
         public Dictionary<string,string> selectDetailByID(int id)
         {
             #region deprecated

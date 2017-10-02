@@ -63,7 +63,7 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            diabList = diaTable.getDiabetesList($"SELECT * FROM FBS WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME");
+            diabList = diaTable.getDiabetesList($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME");
             foreach(var v in diabList)
             {
                 v.TryGetValue("fbs_time", out object fbsTime);

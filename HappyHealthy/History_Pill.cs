@@ -55,7 +55,7 @@ namespace HappyHealthyCSharp
         }
         public void setPillList()
         {
-            pillList = pillTable.getPillList($"SELECT * FROM MED_ALERT WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}");
+            pillList = pillTable.getPillList($"SELECT * FROM PillTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}");
             ListAdapter = new SimpleAdapter(this, pillList, Resource.Layout.history_pill, new string[] { "ma_name","ma_desc" }, new int[] { Resource.Id.his_pill_name,Resource.Id.his_pill_desc }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)
