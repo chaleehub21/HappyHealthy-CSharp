@@ -81,9 +81,9 @@ namespace HappyHealthyCSharp
             var diaTable = new DiabetesTABLE();
             //diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             diaTable.fbs_fbs = (decimal)double.Parse(BloodValue.Text);
-            diaTable.ud_id = int.Parse(GlobalFunction.getPreference("ud_id", "", this));
+            diaTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
             diaTable.fbs_time = DateTime.Now.ToThaiLocale();
-            diaTable.InsertFbsToSQL(diaTable);
+            diaTable.Insert(diaTable);
             this.Finish();
 
         }

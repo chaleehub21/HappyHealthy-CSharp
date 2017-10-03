@@ -12,6 +12,8 @@ using Android.Widget;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Plugin.LocalNotifications;
+using SQLite.Net.Platform.XamarinAndroid;
+using SQLite.Net;
 
 namespace HappyHealthyCSharp
 {
@@ -26,7 +28,8 @@ namespace HappyHealthyCSharp
             // Create your application here
 
             //is Cache data available?
-            if ((GlobalFunction.getPreference("ud_id",string.Empty,this) != string.Empty))
+
+            if ((GlobalFunction.getPreference("ud_id",0,this) != 0))
             {
                 StartActivity(typeof(MainActivity));
             }
@@ -39,6 +42,7 @@ namespace HappyHealthyCSharp
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
             login.Click += delegate {
+                /*
                 var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
                 var comm = sqlconn.CreateCommand();
                 var userRow = new JavaList<IDictionary<string, object>>();
@@ -74,6 +78,23 @@ namespace HappyHealthyCSharp
                 catch {
                     GlobalFunction.CreateDialogue(this,"Database is not available").Show();
                 }
+                */
+                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), GlobalFunction.sqliteDBPath);
+                var sql = $@"select * from UserTABLE where ud_email = '{id.Text}' and ud_pass = '{pw.Text}'";
+                var result = conn.Query<UserTABLE>(sql);
+                if (result.Count == 1)
+                {
+                    GlobalFunction.setPreference("ud_email", result[0].ud_email, this);
+                    GlobalFunction.setPreference("ud_pass", result[0].ud_pass, this);
+                    GlobalFunction.setPreference("ud_id", result[0].ud_id, this);
+                    StartActivity(typeof(MainActivity));
+                    this.Finish();
+                }
+                else
+                {
+                    GlobalFunction.CreateDialogue(this, "Access Denied").Show();
+                }
+
             };
             register.Click += delegate {
                 StartActivity(new Intent(this, typeof(Register)));

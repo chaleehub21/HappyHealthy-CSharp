@@ -58,7 +58,15 @@ namespace HappyHealthyCSharp
             register.Click += delegate {
                 if (isFieldValid())
                 {
-                    if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
+                    var user = new UserTABLE() {
+                        ud_name = name.Text
+                        , ud_gender = mRadio.Checked ? "M" : "F"
+                        , ud_birthdate = DateTime.Parse(insertDate)
+                        ,ud_email = email.Text
+                        ,ud_pass = pw.Text
+                    };
+                    //if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
+                    if(new UserTABLE().Insert<UserTABLE>(user))
                     {
                         GlobalFunction.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
                         {

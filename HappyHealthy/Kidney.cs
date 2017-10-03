@@ -32,20 +32,21 @@ namespace HappyHealthyCSharp
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView25);
             saveButton.Click += delegate
             {
-                var KidneyTable = new KidneyTABLE();
+                var kidney = new KidneyTABLE();
                 //KidneyTable.InsertKidneyToSQL(field_gfr.Text, field_creatinine.Text, field_bun.Text, field_sodium.Text, field_potassium.Text, field_albumin_blood.Text, field_albumin_urine.Text, field_phosphorus_blood.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
-                KidneyTable.ckd_gfr = Convert.ToDecimal(field_gfr.Text);
-                KidneyTable.ckd_creatinine = Convert.ToDecimal(field_creatinine.Text);
-                KidneyTable.ckd_bun = Convert.ToDecimal(field_bun.Text);
-                KidneyTable.ckd_sodium = Convert.ToDecimal(field_sodium.Text);
-                KidneyTable.ckd_potassium = Convert.ToDecimal(field_potassium.Text);
-                KidneyTable.ckd_albumin_blood = Convert.ToDecimal(field_albumin_blood.Text);
-                KidneyTable.ckd_albumin_urine = Convert.ToDecimal(field_albumin_urine.Text);
-                KidneyTable.ckd_phosphorus_blood = Convert.ToDecimal(field_phosphorus_blood.Text);
-                KidneyTable.ckd_time = DateTime.Now.ToThaiLocale();
-                KidneyTable.ud_id = Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this));
-                KidneyTable.InsertKidneyToSQL(KidneyTable);
-                GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
+                kidney.ckd_gfr = Convert.ToDecimal(field_gfr.Text);
+                kidney.ckd_creatinine = Convert.ToDecimal(field_creatinine.Text);
+                kidney.ckd_bun = Convert.ToDecimal(field_bun.Text);
+                kidney.ckd_sodium = Convert.ToDecimal(field_sodium.Text);
+                kidney.ckd_potassium = Convert.ToDecimal(field_potassium.Text);
+                kidney.ckd_albumin_blood = Convert.ToDecimal(field_albumin_blood.Text);
+                kidney.ckd_albumin_urine = Convert.ToDecimal(field_albumin_urine.Text);
+                kidney.ckd_phosphorus_blood = Convert.ToDecimal(field_phosphorus_blood.Text);
+                kidney.ckd_time = DateTime.Now.ToThaiLocale();
+                kidney.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
+                kidney.Insert<KidneyTABLE>(kidney);
+                //GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
+                this.Finish();
             };
             // Create your application here
         }

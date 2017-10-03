@@ -42,7 +42,7 @@ namespace HappyHealthyCSharp
             GlobalFunction.CreateDialogue(this, $@"The value for this one : {bpValue.ToString()}", null,(EventHandler<DialogClickEventArgs>)delegate {
                     GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
                         var bpTable = new PressureTABLE();
-                        bpTable.deletePressureFromSQL((string)bpID.ToString());
+                        bpTable.Delete<PressureTABLE>(Convert.ToInt32((string)bpID.ToString()));
                         setDiabetesList();
                     }, delegate { }, "Yes", "No").Show();
                 }, "OK", "Delete").Show();
@@ -60,7 +60,8 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            bpList = bpTable.getPressureList($"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME");
+            bpList = bpTable.GetJavaList<PressureTABLE>($"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",bpTable.Column);
+            //bpList = bpTable.getPressureList($"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME");
             ListAdapter = new SimpleAdapter(this, bpList, Resource.Layout.history_diabetes, new string[] { "bp_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)

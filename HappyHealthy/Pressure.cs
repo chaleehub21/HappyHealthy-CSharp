@@ -40,9 +40,10 @@ namespace HappyHealthyCSharp
             bpTable.bp_lo = Convert.ToDecimal(BPLow.Text);
             bpTable.bp_hr = Convert.ToInt32(HeartRate.Text);
             bpTable.bp_time = DateTime.Now.ToThaiLocale();
-            bpTable.ud_id = Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this));
-            bpTable.InsertPressureToSQL(bpTable);
+            bpTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
+            bpTable.Insert<PressureTABLE>(bpTable);
             //GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
+            this.Finish();
 
         }
         [Export("ClickBackPreHome")]

@@ -45,13 +45,19 @@ namespace HappyHealthyCSharp
 
         private void UpdateUserInfo(object sender, EventArgs e)
         {
-            UserTABLE.UpdateUserToSQL(txtName.Text, txtSex.Text[0], txtIdenNo.Text,null, null, this);
+            //UserTABLE.UpdateUserToSQL(txtName.Text, txtSex.Text[0], txtIdenNo.Text,null, null, this);
+            var user = new UserTABLE().Select<UserTABLE>($@"SELECT * FROM UserTABLE WHERE UD_ID = '{GlobalFunction.getPreference("ud_id", 0, this)}'")[0];
+            user.ud_name = txtName.Text;
+            user.ud_iden_number = txtIdenNo.Text;
+            user.ud_gender = txtSex.Text;
+            user.Update(user);
+            
         }
 
         private void InitializeUserData()
         {
-            var user = new UserTABLE();
-            user = user.getUserDetail(GlobalFunction.getPreference("ud_id", "", this));
+            var user = new UserTABLE().Select<UserTABLE>($@"SELECT * FROM UserTABLE WHERE UD_ID = '{GlobalFunction.getPreference("ud_id", 0, this)}'")[0];
+            //user = user.getUserDetail(GlobalFunction.getPreference("ud_id", string.Empty, this));
             txtAge.Text = (DateTime.Now.Year - user.ud_birthdate.Year).ToString();
             txtName.Text = user.ud_name;
             txtIdenNo.Text = user.ud_iden_number;

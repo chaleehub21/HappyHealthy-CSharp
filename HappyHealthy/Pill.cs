@@ -56,8 +56,8 @@ namespace HappyHealthyCSharp
                 pillTable.ma_desc = medDesc.Text;
                 pillTable.ma_set_time = DateTime.Now.ToThaiLocale();
                 pillTable.ma_pic = picPath;
-                pillTable.ud_id = Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this));
-                pillTable.InsertPillToSQL(pillTable);
+                pillTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
+                pillTable.Insert<PillTABLE>(pillTable);
                 this.Finish();
             };
             // Create your application here

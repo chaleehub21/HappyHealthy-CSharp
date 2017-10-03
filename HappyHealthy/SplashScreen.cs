@@ -50,11 +50,7 @@ namespace HappyHealthyCSharp
             view_animation = AnimationUtils.LoadAnimation(this, Resource.Animation.fade_in);
             imageView.StartAnimation(view_animation);
             view_animation.AnimationEnd += delegate {
-                /*
-                textToSpeech.Speak("น้องโยแม่งเงี่ยน ไปเที่ยวโพไซดอนทุกวันเลย", QueueMode.Flush, null);
-                */
                 t2sEngine.speak("Hello World!");
-                //StartActivity(typeof(MainActivity));
                 StartActivity(typeof(Login));
             };
         }
