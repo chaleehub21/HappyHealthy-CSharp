@@ -39,7 +39,7 @@ namespace HappyHealthyCSharp
                 delegate {
                     GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", delegate {
                         var ckdTable = new KidneyTABLE();
-                        ckdTable.deleteKidneyFromSQL(ckdID.ToString());
+                        ckdTable.Delete<KidneyTABLE>(Convert.ToInt32(ckdID.ToString()));
                         setKidneyList();
                     }, delegate { }, "Yes", "No").Show();
                 }, "OK", "Delete").Show();
@@ -61,7 +61,8 @@ namespace HappyHealthyCSharp
         }
         public void setKidneyList()
         {
-            kidneyList = kidneyTable.getKidneyList($"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id","",this)}"); //must changed
+            //kidneyList = kidneyTable.getKidneyList($"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}"); //must changed
+            kidneyList = kidneyTable.GetJavaList<KidneyTABLE>($"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id",0,this)}",new KidneyTABLE().Column); //must changed
             ListAdapter = new SimpleAdapter(this, kidneyList, Resource.Layout.history_kidney, new string[] { "ckd_time" }, new int[] { Resource.Id.dateKidney }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             
@@ -69,7 +70,7 @@ namespace HappyHealthyCSharp
             var data = new JavaList<IDictionary<string, object>>();
             data.Add(new JavaDictionary<string, object> {
                 {"name","Bruce Banner" },{ "status","Bruce Banner feels like SMASHING!"}
-            });
+            });/*
             var adapter = new SimpleAdapter(this, data, Android.Resource.Layout.SimpleListItem1, new[] { "name","status" }, new[] { Android.Resource.Id.Text1,Android.Resource.Id.Text2 });
             ListView.Adapter = adapter;
             */

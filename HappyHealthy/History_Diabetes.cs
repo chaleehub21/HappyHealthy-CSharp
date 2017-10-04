@@ -45,7 +45,7 @@ namespace HappyHealthyCSharp
             GlobalFunction.CreateDialogue(this, $@"The value for this one : {fbsValue.ToString()}",null,(EventHandler<DialogClickEventArgs>)delegate {
                 GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
                         var diaTable = new DiabetesTABLE();
-                        diaTable.deleteFbsFromSQL((string)fbsID.ToString());
+                        diaTable.Delete<DiabetesTABLE>(Convert.ToInt32((string)fbsID.ToString()));
                         setDiabetesList();
                     },delegate { },"Yes","No").Show();
             },"OK","Delete").Show();
@@ -63,12 +63,14 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            diabList = diaTable.getDiabetesList($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY FBS_TIME");
-            foreach(var v in diabList)
+            diabList = diaTable.GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new List<string>
             {
-                v.TryGetValue("fbs_time", out object fbsTime);
-                Console.WriteLine(fbsTime);
-            }
+                "fbs_id",
+                "fbs_time", 
+                "fbs_fbs", 
+                "fbs_fbs_lvl",
+                "ud_id"
+            });
             ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_diabetes, new string[] { "fbs_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)

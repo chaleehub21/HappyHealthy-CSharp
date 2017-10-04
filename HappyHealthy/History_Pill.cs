@@ -48,14 +48,15 @@ namespace HappyHealthyCSharp
             GlobalFunction.CreateDialogue(this, $@"The value for this one : {pillValue.ToString()}", null, (EventHandler<DialogClickEventArgs>)delegate {
                 GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
                     var pillTable = new PillTABLE();
-                    pillTable.deletePillFromSQL((string)pillID.ToString());
+                    pillTable.Delete<PillTABLE>(Convert.ToInt32((string)pillID.ToString()));
                     setPillList();
                 }, delegate { }, "Yes", "No").Show();
             }, "OK", "Delete").Show();
         }
         public void setPillList()
         {
-            pillList = pillTable.getPillList($"SELECT * FROM PillTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}");
+            pillList = pillTable.GetJavaList<PillTABLE>($"SELECT * FROM PillTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)}",new PillTABLE().Column);
+            //pillList = pillTable.getPillList($"SELECT * FROM PillTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}");
             ListAdapter = new SimpleAdapter(this, pillList, Resource.Layout.history_pill, new string[] { "ma_name","ma_desc" }, new int[] { Resource.Id.his_pill_name,Resource.Id.his_pill_desc }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)

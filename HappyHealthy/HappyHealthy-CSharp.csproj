@@ -128,6 +128,7 @@
     <Compile Include="FoodExchange.cs" />
     <Compile Include="Forgot.cs" />
     <Compile Include="History_Pill.cs" />
+    <Compile Include="IDatabaseHelper.cs" />
     <Compile Include="Pill.cs" />
     <Compile Include="PillTABLE.cs" />
     <Compile Include="UserTABLE.cs" />
