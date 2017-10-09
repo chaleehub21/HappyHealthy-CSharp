@@ -23,6 +23,7 @@ namespace HappyHealthyCSharp
 {
     class UserTABLE : DatabaseHelper
     {
+        public override List<string> Column => throw new NotImplementedException();
         SQLitePlatformAndroid platform = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
         [PrimaryKey,AutoIncrement]
         public int ud_id { get; set; }
@@ -41,14 +42,13 @@ namespace HappyHealthyCSharp
         [OneToMany]
         public List<KidneyTABLE> kidneyList { get; set; }
         [OneToMany]
-        public List<PillTABLE> pillList { get; set; }
+        public List<MedicineTABLE> pillList { get; set; }
         [OneToMany]
         public List<PressureTABLE> pressureList { get; set; }
         public UserTABLE()
         {
-            var sqliteConn = new SQLiteConnection(platform,GlobalFunction.sqliteDBPath);
-            sqliteConn.CreateTable<UserTABLE>();
-            sqliteConn.Close();
+
         }    
+
     }
 }

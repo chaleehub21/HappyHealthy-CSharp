@@ -16,7 +16,7 @@ namespace HappyHealthyCSharp
     [Activity(Label = "Pill")]
     public class History_Pill : ListActivity
     {
-        PillTABLE pillTable;
+        MedicineTABLE pillTable;
         JavaList<IDictionary<string, object>> pillList;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,7 +34,7 @@ namespace HappyHealthyCSharp
                 StartActivity(typeof(Pill));
             };
             ListView.ItemClick += onItemClick;
-            pillTable = new PillTABLE();
+            pillTable = new MedicineTABLE();
         }
         protected override void OnResume()
         {
@@ -45,17 +45,17 @@ namespace HappyHealthyCSharp
         {
             pillList[e.Position].TryGetValue("ma_name", out object pillValue);
             pillList[e.Position].TryGetValue("ma_id", out object pillID);
-            GlobalFunction.CreateDialogue(this, $@"The value for this one : {pillValue.ToString()}", null, (EventHandler<DialogClickEventArgs>)delegate {
-                GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
-                    var pillTable = new PillTABLE();
-                    pillTable.Delete<PillTABLE>(Convert.ToInt32((string)pillID.ToString()));
+            Extension.CreateDialogue(this, $@"The value for this one : {pillValue.ToString()}", null, (EventHandler<DialogClickEventArgs>)delegate {
+                Extension.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
+                    var pillTable = new MedicineTABLE();
+                    pillTable.Delete<MedicineTABLE>(Convert.ToInt32((string)pillID.ToString()));
                     setPillList();
                 }, delegate { }, "Yes", "No").Show();
             }, "OK", "Delete").Show();
         }
         public void setPillList()
         {
-            pillList = pillTable.GetJavaList<PillTABLE>($"SELECT * FROM PillTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)}",new PillTABLE().Column);
+            pillList = pillTable.GetJavaList<MedicineTABLE>($"SELECT * FROM PillTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)}",new MedicineTABLE().Column);
             //pillList = pillTable.getPillList($"SELECT * FROM PillTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}");
             ListAdapter = new SimpleAdapter(this, pillList, Resource.Layout.history_pill, new string[] { "ma_name","ma_desc" }, new int[] { Resource.Id.his_pill_name,Resource.Id.his_pill_desc }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;

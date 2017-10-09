@@ -28,8 +28,7 @@ namespace HappyHealthyCSharp
             // Create your application here
 
             //is Cache data available?
-
-            if ((GlobalFunction.getPreference("ud_id",0,this) != 0))
+            if ((Extension.getPreference("ud_id",0,this) != 0))
             {
                 StartActivity(typeof(MainActivity));
             }
@@ -79,20 +78,20 @@ namespace HappyHealthyCSharp
                     GlobalFunction.CreateDialogue(this,"Database is not available").Show();
                 }
                 */
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), GlobalFunction.sqliteDBPath);
+                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                 var sql = $@"select * from UserTABLE where ud_email = '{id.Text}' and ud_pass = '{pw.Text}'";
                 var result = conn.Query<UserTABLE>(sql);
                 if (result.Count == 1)
                 {
-                    GlobalFunction.setPreference("ud_email", result[0].ud_email, this);
-                    GlobalFunction.setPreference("ud_pass", result[0].ud_pass, this);
-                    GlobalFunction.setPreference("ud_id", result[0].ud_id, this);
+                    Extension.setPreference("ud_email", result[0].ud_email, this);
+                    Extension.setPreference("ud_pass", result[0].ud_pass, this);
+                    Extension.setPreference("ud_id", result[0].ud_id, this);
                     StartActivity(typeof(MainActivity));
                     this.Finish();
                 }
                 else
                 {
-                    GlobalFunction.CreateDialogue(this, "Access Denied").Show();
+                    Extension.CreateDialogue(this, "Access Denied").Show();
                 }
 
             };
@@ -100,7 +99,7 @@ namespace HappyHealthyCSharp
                 StartActivity(new Intent(this, typeof(Register)));
             };
             forgot.Click += delegate {
-                StartActivity(new Intent(this, typeof(Forgot)));
+                StartActivity(new Intent(this, typeof(PasswordResetActivity)));
                 CustomNotification.Show(this, "Sender!", DateTime.Now,Resource.Raw.notialert);
                 //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };

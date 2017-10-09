@@ -33,7 +33,7 @@ namespace HappyHealthyCSharp
             if (rec != "android.hardware.microphone")
             {
                 // no microphone, no recording. Disable the button and output an alert
-                GlobalFunction.CreateDialogue(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
+                Extension.CreateDialogue(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
             }
             else
                 imageView.Click += delegate
@@ -118,7 +118,7 @@ namespace HappyHealthyCSharp
         [Export("ClickDoctor")]
         public void ClickDoctor(View v)
         {
-            GlobalFunction.CreateDialogue(this, "Not implemented").Show();
+            Extension.CreateDialogue(this, "Not implemented").Show();
         }
     }
 }

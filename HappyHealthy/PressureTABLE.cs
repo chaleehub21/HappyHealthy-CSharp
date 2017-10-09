@@ -24,7 +24,7 @@ namespace HappyHealthyCSharp
     
     class PressureTABLE : DatabaseHelper
     {
-        public List<string> Column = new List<string>()
+        public override List<string> Column => new List<string>()
         {
             "bp_id",
             "bp_time",
@@ -38,11 +38,17 @@ namespace HappyHealthyCSharp
         [PrimaryKey,AutoIncrement]
         public int bp_id { get; set; }
         public DateTime bp_time { get; set; }
+        [MaxLength(3)]
         public decimal bp_up { get; set; }
+        [MaxLength(3)]
         public decimal bp_lo { get; set; }
+        [MaxLength(3)]
         public int bp_hr { get; set; }
+        [MaxLength(4)]
         public int bp_up_lvl { get; set; }
+        [MaxLength(4)]
         public int bp_lo_lvl { get; set; }
+        [MaxLength(4)]
         public int bp_hr_lvl { get; set; }
         [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
@@ -51,9 +57,7 @@ namespace HappyHealthyCSharp
         //reconstruct of sqlite keys + attributes
         public PressureTABLE()
         {
-            var sqliteConn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), GlobalFunction.sqliteDBPath);
-            sqliteConn.CreateTable<PressureTABLE>();
-            sqliteConn.Close();
+
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
     }

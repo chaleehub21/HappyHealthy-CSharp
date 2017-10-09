@@ -20,7 +20,7 @@ namespace HappyHealthyCSharp
     {
         
         EditText BloodValue;
-        ImageView micButton;
+        ImageView micButton,saveButton;
         private bool isRecording;
         private readonly int VOICE = 10;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -31,11 +31,12 @@ namespace HappyHealthyCSharp
             // Create your application here
             BloodValue = FindViewById<EditText>(Resource.Id.sugar_value);
             micButton = FindViewById<ImageView>(Resource.Id.ic_micro);
+            saveButton = FindViewById<ImageView>(Resource.Id.saveDiabetes);
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
             if (rec != "android.hardware.microphone")
             {
                 // no microphone, no recording. Disable the button and output an alert
-                GlobalFunction.CreateDialogue(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
+                Extension.CreateDialogue(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
             }
             else
                 micButton.Click += delegate
@@ -81,7 +82,7 @@ namespace HappyHealthyCSharp
             var diaTable = new DiabetesTABLE();
             //diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             diaTable.fbs_fbs = (decimal)double.Parse(BloodValue.Text);
-            diaTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
+            diaTable.ud_id = Extension.getPreference("ud_id", 0, this);
             diaTable.fbs_time = DateTime.Now.ToThaiLocale();
             diaTable.Insert(diaTable);
             this.Finish();

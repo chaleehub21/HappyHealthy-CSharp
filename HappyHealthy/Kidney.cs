@@ -43,7 +43,7 @@ namespace HappyHealthyCSharp
                 kidney.ckd_albumin_urine = Convert.ToDecimal(field_albumin_urine.Text);
                 kidney.ckd_phosphorus_blood = Convert.ToDecimal(field_phosphorus_blood.Text);
                 kidney.ckd_time = DateTime.Now.ToThaiLocale();
-                kidney.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
+                kidney.ud_id = Extension.getPreference("ud_id", 0, this);
                 kidney.Insert<KidneyTABLE>(kidney);
                 //GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
                 this.Finish();

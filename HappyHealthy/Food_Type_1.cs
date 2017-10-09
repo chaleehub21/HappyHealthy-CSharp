@@ -60,7 +60,7 @@ namespace HappyHealthyCSharp
             var foodDetailIntent = new Intent(this, typeof(FoodDetail));
             foodDetailIntent.PutExtra("food_id", intFoodID);
             foodDetailIntent.AddFlags(ActivityFlags.ClearTop);
-            TTS.GetInstance(this).speak(FoodName.ToString());
+            TTS.GetInstance(this).Speak(FoodName.ToString());
             StartActivity(foodDetailIntent);
         }
         protected override void OnDestroy()

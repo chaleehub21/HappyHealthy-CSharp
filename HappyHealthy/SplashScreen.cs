@@ -32,12 +32,7 @@ namespace HappyHealthyCSharp
             var en_USLocale = new System.Globalization.CultureInfo("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = en_USLocale;
             t2sEngine = new TTS(this);
-            new UserTABLE();
-            new DiabetesTABLE();
-            new KidneyTABLE();
-            new PressureTABLE();
-            new FoodTABLE();
-            
+            DatabaseHelperExtension.CreateSQLiteTableIfNotExists();
         }
         public override void OnBackPressed() { } //override back button to prevent loading process cancellation
         protected override void OnResume()
@@ -50,7 +45,7 @@ namespace HappyHealthyCSharp
             view_animation = AnimationUtils.LoadAnimation(this, Resource.Animation.fade_in);
             imageView.StartAnimation(view_animation);
             view_animation.AnimationEnd += delegate {
-                t2sEngine.speak("Hello World!");
+                t2sEngine.Speak("Hello World!");
                 StartActivity(typeof(Login));
             };
         }

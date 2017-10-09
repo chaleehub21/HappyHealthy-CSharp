@@ -10,11 +10,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
+using SQLite.Net;
+using SQLite.Net.Platform.XamarinAndroid;
 
 namespace HappyHealthyCSharp
 {
     [Activity(Label = "Forgot")]
-    public class Forgot : Activity
+    public class PasswordResetActivity : Activity
     {
         const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         protected override void OnCreate(Bundle savedInstanceState)
@@ -32,6 +34,7 @@ namespace HappyHealthyCSharp
             };
             mailSend.Click += delegate {
                 var Thread = new System.Threading.Thread(() => {
+                    /*
                     var conn = new MySqlConnection(GlobalFunction.remoteAccess);
                     object result = null;
                     try
@@ -50,10 +53,26 @@ namespace HappyHealthyCSharp
                     {
                         return;
                     }
+                    */
+                    try
+                    {
+                        object result = null;
+                        var r = new Random();
+                        var newPassword = new string(Enumerable.Repeat(chars, 6).Select(s => s[r.Next(s.Length)]).ToArray());
+                        var user = new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE where ud_email = '{email.Text}'").First();
+                        user.ud_pass = newPassword;
+                        if(Extension.SendMail("securapp.assist@gmail.com", "securapp7421", email.Text, "Hello", $@"<body><h2>Password for your account has been changed to <b>{newPassword}.<br>Use this password to login and update your password using HappyHealthy application.</b></h2><br><h2>{(string)result}</h2></body>"))
+                            user.Update();
+                        Console.WriteLine("send completed");
+                    }
+                    catch
+                    {
+                        return;
+                    }
 
                 });
                 //Toast.MakeText(this, this.Resources.GetResourceName(Resource.Raw.notialert), ToastLength.Long).Show();
-                //Thread.Start();
+                Thread.Start();
                 Toast.MakeText(this, $@"Email has been send to {email.Text}",ToastLength.Short).Show();
             };
         }

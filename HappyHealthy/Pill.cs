@@ -42,7 +42,7 @@ namespace HappyHealthyCSharp
                 //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
             var addMed = FindViewById<ImageView>(Resource.Id.pill_save_button);
-            var pillTable = new PillTABLE();
+            var pillTable = new MedicineTABLE();
             addMed.Click += delegate {
                 var medName = FindViewById<EditText>(Resource.Id.ma_name);
                 var medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
@@ -56,8 +56,8 @@ namespace HappyHealthyCSharp
                 pillTable.ma_desc = medDesc.Text;
                 pillTable.ma_set_time = DateTime.Now.ToThaiLocale();
                 pillTable.ma_pic = picPath;
-                pillTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
-                pillTable.Insert<PillTABLE>(pillTable);
+                pillTable.ud_id = Extension.getPreference("ud_id", 0, this);
+                pillTable.Insert<MedicineTABLE>(pillTable);
                 this.Finish();
             };
             // Create your application here

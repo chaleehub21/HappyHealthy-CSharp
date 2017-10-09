@@ -42,13 +42,13 @@ namespace HappyHealthyCSharp
         {
             diabList[e.Position].TryGetValue("fbs_fbs", out object fbsValue);
             diabList[e.Position].TryGetValue("fbs_id", out object fbsID);
-            GlobalFunction.CreateDialogue(this, $@"The value for this one : {fbsValue.ToString()}",null,(EventHandler<DialogClickEventArgs>)delegate {
-                GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
-                        var diaTable = new DiabetesTABLE();
-                        diaTable.Delete<DiabetesTABLE>(Convert.ToInt32((string)fbsID.ToString()));
-                        setDiabetesList();
-                    },delegate { },"Yes","No").Show();
-            },"OK","Delete").Show();
+            Extension.CreateDialogue(this, $@"The value for this one : {fbsValue.ToString()}",null,(EventHandler<DialogClickEventArgs>)delegate {
+                var diaObject = new DiabetesTABLE();
+                diaObject = diaObject.Select<DiabetesTABLE>($@"SELECT * FROM DiabetesTABLE WHERE fbs_id = {e.Position}")[0];
+                var diabetesIntent = new Intent(this, typeof(Diabetes));
+                //diabetesIntent.PutExtra("fbs_id", $"{diaObject.fbs_id}");
+                //diabetesIntent.PutExtra("fbs_fbs", $"{diaObject.fbs_fbs}");
+            },"OK","Edit").Show();
         }
         
         [Export("ClickAddDia")]
@@ -63,14 +63,7 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            diabList = diaTable.GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new List<string>
-            {
-                "fbs_id",
-                "fbs_time", 
-                "fbs_fbs", 
-                "fbs_fbs_lvl",
-                "ud_id"
-            });
+            diabList = diaTable.GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME",new DiabetesTABLE().Column);
             ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_diabetes, new string[] { "fbs_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)

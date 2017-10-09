@@ -39,8 +39,8 @@ namespace HappyHealthyCSharp
         {
             bpList[e.Position].TryGetValue("bp_up", out object bpValue);
             bpList[e.Position].TryGetValue("bp_id", out object bpID);
-            GlobalFunction.CreateDialogue(this, $@"The value for this one : {bpValue.ToString()}", null,(EventHandler<DialogClickEventArgs>)delegate {
-                    GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
+            Extension.CreateDialogue(this, $@"The value for this one : {bpValue.ToString()}", null,(EventHandler<DialogClickEventArgs>)delegate {
+                    Extension.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
                         var bpTable = new PressureTABLE();
                         bpTable.Delete<PressureTABLE>(Convert.ToInt32((string)bpID.ToString()));
                         setDiabetesList();
@@ -60,7 +60,7 @@ namespace HappyHealthyCSharp
         }
         public void setDiabetesList()
         {
-            bpList = bpTable.GetJavaList<PressureTABLE>($"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",bpTable.Column);
+            bpList = bpTable.GetJavaList<PressureTABLE>($"SELECT * FROM PressureTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",bpTable.Column);
             //bpList = bpTable.getPressureList($"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME");
             ListAdapter = new SimpleAdapter(this, bpList, Resource.Layout.history_diabetes, new string[] { "bp_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;

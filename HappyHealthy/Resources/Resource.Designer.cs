@@ -3150,9 +3150,6 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f08017e
 			public const int imageView29 = 2131231102;
 			
-			// aapt resource value: 0x7f0800ec
-			public const int imageView3 = 2131230956;
-			
 			// aapt resource value: 0x7f080098
 			public const int imageView30 = 2131230872;
 			
@@ -3536,6 +3533,9 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f080030
 			public const int right = 2131230768;
+			
+			// aapt resource value: 0x7f0800ec
+			public const int saveDiabetes = 2131230956;
 			
 			// aapt resource value: 0x7f080112
 			public const int savedatauser = 2131230994;
