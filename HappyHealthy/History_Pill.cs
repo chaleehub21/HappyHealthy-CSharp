@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
+using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
@@ -43,19 +44,21 @@ namespace HappyHealthyCSharp
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            pillList[e.Position].TryGetValue("ma_name", out object pillValue);
+            //pillList[e.Position].TryGetValue("ma_name", out object pillValue);
             pillList[e.Position].TryGetValue("ma_id", out object pillID);
-            Extension.CreateDialogue(this, $@"The value for this one : {pillValue.ToString()}", null, (EventHandler<DialogClickEventArgs>)delegate {
-                Extension.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
-                    var pillTable = new MedicineTABLE();
-                    pillTable.Delete<MedicineTABLE>(Convert.ToInt32((string)pillID.ToString()));
-                    setPillList();
-                }, delegate { }, "Yes", "No").Show();
-            }, "OK", "Delete").Show();
+            var pillObject = new MedicineTABLE();
+            pillObject = pillObject.Select<MedicineTABLE>($"SELECT * From MedicineTABLE where ma_id = {pillID}")[0];
+            Extension.CreateDialogue(this, $@"The value for this one : {pillObject.ma_desc}", null, delegate
+            {
+                var jsonObject = JsonConvert.SerializeObject(pillObject);
+                var Intent = new Intent(this, typeof(Pill));
+                Intent.PutExtra("targetObject", jsonObject);
+                StartActivity(Intent);
+            }, "OK", "Edit").Show();
         }
         public void setPillList()
         {
-            pillList = pillTable.GetJavaList<MedicineTABLE>($"SELECT * FROM PillTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)}",new MedicineTABLE().Column);
+            pillList = pillTable.GetJavaList<MedicineTABLE>($"SELECT * FROM MedicineTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)}",new MedicineTABLE().Column);
             //pillList = pillTable.getPillList($"SELECT * FROM PillTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}");
             ListAdapter = new SimpleAdapter(this, pillList, Resource.Layout.history_pill, new string[] { "ma_name","ma_desc" }, new int[] { Resource.Id.his_pill_name,Resource.Id.his_pill_desc }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;

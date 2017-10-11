@@ -12,6 +12,7 @@ using Android.Widget;
 using Java.Interop;
 using MySql.Data.MySqlClient;
 using Android.Speech;
+using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
@@ -23,15 +24,30 @@ namespace HappyHealthyCSharp
         ImageView micButton,saveButton;
         private bool isRecording;
         private readonly int VOICE = 10;
+        DiabetesTABLE diaObject = null;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_diabetes);
-            // Create your application here
             BloodValue = FindViewById<EditText>(Resource.Id.sugar_value);
             micButton = FindViewById<ImageView>(Resource.Id.ic_micro);
             saveButton = FindViewById<ImageView>(Resource.Id.saveDiabetes);
+            // Create your application here
+            var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
+            diaObject = string.IsNullOrEmpty(flagObjectJson) ? new DiabetesTABLE() { fbs_fbs = -9521 } : JsonConvert.DeserializeObject<DiabetesTABLE>(flagObjectJson);
+            if (diaObject.fbs_fbs == -9521)
+            {
+                //saveButton.Visibility = ViewStates.Invisible;
+                saveButton.Click += SaveValue;
+            }
+            else
+            {
+                InitialValueForUpdateEvent();
+                saveButton.Click += UpdateValue;
+            }
+            //end
+            
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
             if (rec != "android.hardware.microphone")
             {
@@ -57,6 +73,22 @@ namespace HappyHealthyCSharp
                     //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
         }
+
+        private void InitialValueForUpdateEvent()
+        {
+            BloodValue.Text = diaObject.fbs_fbs.ToString();
+        }
+
+        private void UpdateValue(object sender, EventArgs e)
+        {
+            //diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
+            diaObject.fbs_fbs = (decimal)double.Parse(BloodValue.Text);
+            diaObject.ud_id = Extension.getPreference("ud_id", 0, this);
+            diaObject.fbs_time = DateTime.Now.ToThaiLocale();
+            diaObject.Update();
+            this.Finish();
+        }
+
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
         {
             if (requestCode == VOICE)
@@ -76,8 +108,7 @@ namespace HappyHealthyCSharp
             }
             base.OnActivityResult(requestCode, resultVal, data);
         }
-        [Export("ClickDisLevelsSugar")]
-        public void ClickDisLevelsSugar(View v)
+        public void SaveValue(object sender, EventArgs e)
         {
             var diaTable = new DiabetesTABLE();
             //diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));

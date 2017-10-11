@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
+using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
@@ -33,16 +34,17 @@ namespace HappyHealthyCSharp
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            kidneyList[e.Position].TryGetValue("ckd_gfr_level", out object gfrLevel);
+            //kidneyList[e.Position].TryGetValue("ckd_gfr_level", out object gfrLevel);
             kidneyList[e.Position].TryGetValue("ckd_id", out object ckdID);
-            Extension.CreateDialogue(this, $@"The value for this one : {gfrLevel.ToString()}", null,
-                delegate {
-                    Extension.CreateDialogue(this, "Do you want to delete this row?", delegate {
-                        var ckdTable = new KidneyTABLE();
-                        ckdTable.Delete<KidneyTABLE>(Convert.ToInt32(ckdID.ToString()));
-                        setKidneyList();
-                    }, delegate { }, "Yes", "No").Show();
-                }, "OK", "Delete").Show();
+            var kidneyObject = new KidneyTABLE();
+            kidneyObject = kidneyObject.Select<KidneyTABLE>($"SELECT * From KidneyTABLE where ckd_id = {ckdID}")[0];
+            Extension.CreateDialogue(this, $@"The value for this one : {kidneyObject.ckd_gfr}", null, delegate
+            {
+                var jsonObject = JsonConvert.SerializeObject(kidneyObject);
+                var Intent = new Intent(this, typeof(Kidney));
+                Intent.PutExtra("targetObject", jsonObject);
+                StartActivity(Intent);
+            }, "OK", "Edit").Show();
         }
         protected override void OnResume()
         {

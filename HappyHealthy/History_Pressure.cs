@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
+using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
@@ -37,15 +38,17 @@ namespace HappyHealthyCSharp
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            bpList[e.Position].TryGetValue("bp_up", out object bpValue);
+            //bpList[e.Position].TryGetValue("bp_up", out object bpValue);
             bpList[e.Position].TryGetValue("bp_id", out object bpID);
-            Extension.CreateDialogue(this, $@"The value for this one : {bpValue.ToString()}", null,(EventHandler<DialogClickEventArgs>)delegate {
-                    Extension.CreateDialogue(this, "Do you want to delete this row?", (EventHandler<DialogClickEventArgs>)delegate {
-                        var bpTable = new PressureTABLE();
-                        bpTable.Delete<PressureTABLE>(Convert.ToInt32((string)bpID.ToString()));
-                        setDiabetesList();
-                    }, delegate { }, "Yes", "No").Show();
-                }, "OK", "Delete").Show();
+            var pressureObject = new PressureTABLE();
+            pressureObject = pressureObject.Select<PressureTABLE>($"SELECT * From PressureTABLE where bp_id = {bpID}")[0];
+            Extension.CreateDialogue(this, $@"The value for this one : {pressureObject.bp_hr}", null, delegate
+            {
+                var jsonObject = JsonConvert.SerializeObject(pressureObject);
+                var Intent = new Intent(this, typeof(Pressure));
+                Intent.PutExtra("targetObject", jsonObject);
+                StartActivity(Intent);
+            }, "OK", "Edit").Show();
         }
 
         [Export("ClickAddPre")]

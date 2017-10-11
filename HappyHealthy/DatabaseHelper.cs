@@ -137,9 +137,6 @@ namespace HappyHealthyCSharp
                 return false;
             }
         }
-        /// <summary>
-        /// Create Triggers for Initial Tables.
-        /// </summary>
         private static void CreateTriggers(SQLiteConnection c)
         {
             c.Execute("CREATE TABLE `TEMP_DiabetesTABLE` ( `fbs_time_new` bigint, `fbs_time_old` bigint, `fbs_fbs_new` float, `fbs_fbs_old` float, `fbs_fbs_lvl_new` integer, `fbs_fbs_lvl_old` integer, `MODE` TEXT )");

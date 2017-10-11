@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
+using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
@@ -40,12 +41,15 @@ namespace HappyHealthyCSharp
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            diabList[e.Position].TryGetValue("fbs_fbs", out object fbsValue);
+            //diabList[e.Position].TryGetValue("fbs_fbs", out object fbsValue);
             diabList[e.Position].TryGetValue("fbs_id", out object fbsID);
-            Extension.CreateDialogue(this, $@"The value for this one : {fbsValue.ToString()}",null,(EventHandler<DialogClickEventArgs>)delegate {
-                var diaObject = new DiabetesTABLE();
-                diaObject = diaObject.Select<DiabetesTABLE>($@"SELECT * FROM DiabetesTABLE WHERE fbs_id = {e.Position}")[0];
+            var diaObject = new DiabetesTABLE();
+            diaObject = diaObject.Select<DiabetesTABLE>($@"SELECT * FROM DiabetesTABLE WHERE fbs_id = {fbsID}")[0];
+            Extension.CreateDialogue(this, $@"The value for this one : {diaObject.fbs_fbs}",null,(EventHandler<DialogClickEventArgs>)delegate {
+                var jsonObject = JsonConvert.SerializeObject(diaObject);
                 var diabetesIntent = new Intent(this, typeof(Diabetes));
+                diabetesIntent.PutExtra("targetObject", jsonObject);
+                StartActivity(diabetesIntent);
                 //diabetesIntent.PutExtra("fbs_id", $"{diaObject.fbs_id}");
                 //diabetesIntent.PutExtra("fbs_fbs", $"{diaObject.fbs_fbs}");
             },"OK","Edit").Show();
