@@ -43,9 +43,8 @@ namespace HappyHealthyCSharp
             return builder;
             
         }
-        public static void Show(Context c,string content,DateTime alertTime,int customSoundResourceID = -9999)
+        public static void Show(Context c,string content,Type target,int customSoundResourceID = -9999)
         {
-            /*
             var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
             if(customSoundResourceID != -9999)
             {
@@ -57,7 +56,10 @@ namespace HappyHealthyCSharp
                 //.SetSound(Android.Net.Uri.Parse(c.Resources.GetResourceName(Resource.Raw.notialert)))
                 .SetSound(filePath)
                 .Build());
-             */
+        }
+        public static void SetAlarmManager(Context c,string content,DateTime alertTime,int customSoundResourceID = -9999)
+        {
+            
             var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification).Path;
             if (customSoundResourceID != -9999)
             {

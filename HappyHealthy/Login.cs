@@ -41,6 +41,7 @@ namespace HappyHealthyCSharp
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
             login.Click += delegate {
+                #region MySQLLogin
                 /*
                 var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
                 var comm = sqlconn.CreateCommand();
@@ -78,6 +79,7 @@ namespace HappyHealthyCSharp
                     GlobalFunction.CreateDialogue(this,"Database is not available").Show();
                 }
                 */
+#endregion
                 var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                 var sql = $@"select * from UserTABLE where ud_email = '{id.Text}' and ud_pass = '{pw.Text}'";
                 var result = conn.Query<UserTABLE>(sql);
@@ -100,7 +102,7 @@ namespace HappyHealthyCSharp
             };
             forgot.Click += delegate {
                 StartActivity(new Intent(this, typeof(PasswordResetActivity)));
-                CustomNotification.Show(this, "Sender!", DateTime.Now,Resource.Raw.notialert);
+                CustomNotification.SetAlarmManager(this, "Sender!", DateTime.Now,Resource.Raw.notialert);
                 //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }
