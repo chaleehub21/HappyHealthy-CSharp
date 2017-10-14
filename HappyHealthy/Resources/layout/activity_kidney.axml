@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="54.0dp"
+        android:layout_marginTop="80.0dp"
         android:background="@drawable/my_box_kidney">
         <LinearLayout
             android:orientation="horizontal"
