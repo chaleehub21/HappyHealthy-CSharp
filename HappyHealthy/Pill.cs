@@ -42,25 +42,31 @@ namespace HappyHealthyCSharp
                 //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
             var addMed = FindViewById<ImageView>(Resource.Id.pill_save_button);
-            var pillTable = new PillTABLE();
-            addMed.Click += delegate {
-                var medName = FindViewById<EditText>(Resource.Id.ma_name);
-                var medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
-                var picPath = string.Empty;
-                if(App._file != null)
-                {
-                    picPath = App._file.AbsolutePath;
-                }
-                //pillTable.InsertPillToSQL(medName.Text, medDesc.Text, DateTime.Now,picPath , GlobalFunction.getPreference("ud_id", "", this));
-                pillTable.ma_name = medName.Text;
-                pillTable.ma_desc = medDesc.Text;
-                pillTable.ma_set_time = DateTime.Now.ToThaiLocale();
-                pillTable.ma_pic = picPath;
-                pillTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
-                pillTable.Insert<PillTABLE>(pillTable);
-                this.Finish();
-            };
+            
+            addMed.Click += AddMedicine;
             // Create your application here
+        }
+
+        private void AddMedicine(object sender, EventArgs e)
+        {
+            var medName = FindViewById<EditText>(Resource.Id.ma_name);
+            var medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
+            var picPath = string.Empty;
+            if (App._file != null)
+            {
+                picPath = App._file.AbsolutePath;
+            }
+            //pillTable.InsertPillToSQL(medName.Text, medDesc.Text, DateTime.Now,picPath , GlobalFunction.getPreference("ud_id", "", this));
+            var currentUser = new UserTABLE();
+            currentUser.Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_id = {GlobalFunction.getPreference("ud_id",string.Empty,this)}");
+            var pillTable = new PillTABLE();
+            pillTable.ma_name = medName.Text;
+            pillTable.ma_desc = medDesc.Text;
+            pillTable.ma_set_time = currentUser.ud_usually_meal_time.ToThaiLocale();
+            pillTable.ma_pic = picPath;
+            pillTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
+            pillTable.Insert<PillTABLE>(pillTable);
+            this.Finish();
         }
 
         private void cameraClickEvent(object sender, EventArgs e)
