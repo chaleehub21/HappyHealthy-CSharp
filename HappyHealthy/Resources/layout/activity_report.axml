@@ -3,36 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fdfbfb">
-        <LinearLayout
-            android:id="@+id/container_toolbar"
+    android:background="#ffffff">
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-          <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/RadioPlot"
-                android:layout_gravity="center_horizontal">
-              <RadioButton
+            android:orientation="horizontal"
+            android:id="@+id/RadioPlot"
+            android:layout_gravity="center_horizontal">
+            <RadioButton
                 android:id="@+id/report_fbs"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"/>
-                
-              <RadioButton
+                android:layout_height="35dp"
+                android:text="เบาหวาน"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="#5d5d5d" />
+            <RadioButton
                 android:id="@+id/report_ckd"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"/>
-              <RadioButton
+                android:layout_height="35dp"
+                android:text="ไต"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="#5d5d5d"
+                android:layout_marginLeft="12.0dp" />
+            <RadioButton
                 android:id="@+id/report_bp"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"/>
-          </RadioGroup>
-            <OxyPlot.Xamarin.Android.PlotView
-                android:id="@+id/plot_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-               />
-        </LinearLayout>
+                android:layout_height="35dp"
+                android:text="ความดัน"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="#5d5d5d"
+                android:layout_marginLeft="12.0dp" />
+        </RadioGroup>
+        <OxyPlot.Xamarin.Android.PlotView
+            android:id="@+id/plot_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </RelativeLayout>

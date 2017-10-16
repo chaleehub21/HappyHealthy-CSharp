@@ -53,6 +53,7 @@ namespace HappyHealthyCSharp
                     }
                     //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
+            //Toast.MakeText(this, CustomNotification.CancelAllAlarmManager(this, new Intent(this, typeof(AlarmReceiver))) ? "TRUE" : "FALSE", ToastLength.Long).Show();
         }
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
         {
