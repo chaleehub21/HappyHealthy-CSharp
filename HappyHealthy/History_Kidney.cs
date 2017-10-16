@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
+using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
@@ -33,16 +34,17 @@ namespace HappyHealthyCSharp
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            kidneyList[e.Position].TryGetValue("ckd_gfr_level", out object gfrLevel);
+            //kidneyList[e.Position].TryGetValue("ckd_gfr_level", out object gfrLevel);
             kidneyList[e.Position].TryGetValue("ckd_id", out object ckdID);
-            GlobalFunction.CreateDialogue(this, $@"The value for this one : {gfrLevel.ToString()}", null,
-                delegate {
-                    GlobalFunction.CreateDialogue(this, "Do you want to delete this row?", delegate {
-                        var ckdTable = new KidneyTABLE();
-                        ckdTable.Delete<KidneyTABLE>(Convert.ToInt32(ckdID.ToString()));
-                        setKidneyList();
-                    }, delegate { }, "Yes", "No").Show();
-                }, "OK", "Delete").Show();
+            var kidneyObject = new KidneyTABLE();
+            kidneyObject = kidneyObject.Select<KidneyTABLE>($"SELECT * From KidneyTABLE where ckd_id = {ckdID}")[0];
+            Extension.CreateDialogue(this, $@"The value for this one : {kidneyObject.ckd_gfr}", null, delegate
+            {
+                var jsonObject = JsonConvert.SerializeObject(kidneyObject);
+                var Intent = new Intent(this, typeof(Kidney));
+                Intent.PutExtra("targetObject", jsonObject);
+                StartActivity(Intent);
+            }, "OK", "Edit").Show();
         }
         protected override void OnResume()
         {
@@ -62,7 +64,7 @@ namespace HappyHealthyCSharp
         public void setKidneyList()
         {
             //kidneyList = kidneyTable.getKidneyList($"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}"); //must changed
-            kidneyList = kidneyTable.GetJavaList<KidneyTABLE>($"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id",0,this)}",new KidneyTABLE().Column); //must changed
+            kidneyList = kidneyTable.GetJavaList<KidneyTABLE>($"SELECT * FROM KidneyTABLE WHERE UD_ID = {Extension.getPreference("ud_id",0,this)}",new KidneyTABLE().Column); //must changed
             ListAdapter = new SimpleAdapter(this, kidneyList, Resource.Layout.history_kidney, new string[] { "ckd_time" }, new int[] { Resource.Id.dateKidney }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
             

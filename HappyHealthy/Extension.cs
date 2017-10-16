@@ -17,9 +17,8 @@ using System.Globalization;
 
 namespace HappyHealthyCSharp
 {
-    public static class GlobalFunction
+    public static class Extension
     {
-
         //public static readonly string remoteAccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
         public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
@@ -111,19 +110,10 @@ namespace HappyHealthyCSharp
         }
         public static DateTime ToThaiLocale(this DateTime n)
         {
-            //var ids = Java.Util.TimeZone.GetAvailableIDs(7 * 60 * 60 * 1000);
-            //var utc = new Java.Util.SimpleTimeZone(7 * 60 * 60 * 1000, ids[0]);
-            //var gCalendar = new Java.Util.GregorianCalendar(utc);
-            //gCalendar.Time = new Java.Util.Date();
-            //test section above
-            //var dateParamENLocale = n.ToString("yyyy-MM-dd H:mm:ss",new CultureInfo("en-US"));
-            //DateTime.TryParse(dateParamENLocale,out var newN);
-            //Console.WriteLine($"{dateParamENLocale}\n{newN.ToString()}");
             var thaiCalendar = new System.Globalization.ThaiBuddhistCalendar();
             var now = n;
             var thaiTime = new DateTime(thaiCalendar.GetYear(now), thaiCalendar.GetMonth(now), thaiCalendar.GetDayOfMonth(now), thaiCalendar.GetHour(now), thaiCalendar.GetMinute(now), thaiCalendar.GetSecond(now));
             return thaiTime;
-
         }
 
         public static string GetValidPathForFileStore(string filename)
@@ -181,6 +171,15 @@ namespace HappyHealthyCSharp
             }
 
         }
-#endregion
+        #endregion
+        public static bool IsValidEmailFormat(this string email)
+        {
+            var emailRegex = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+            if (System.Text.RegularExpressions.Regex.IsMatch(email, emailRegex))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

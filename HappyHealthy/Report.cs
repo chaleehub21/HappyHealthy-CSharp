@@ -26,7 +26,6 @@ namespace HappyHealthyCSharp
 
     class Report : Activity
     {
-        public MyClass myClass;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -38,31 +37,17 @@ namespace HappyHealthyCSharp
             var bp = FindViewById<RadioButton>(Resource.Id.report_bp);
             
             fbs.Click += delegate {
-                view.Model = CreatePlotModel("กราฟ FBS",new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new List<string>
-            {
-                "fbs_id",
-                "fbs_time",
-                "fbs_fbs",
-                "fbs_fbs_lvl",
-                "ud_id"
-            }), "fbs_time", "fbs_fbs");
+                view.Model = CreatePlotModel("กราฟ FBS",new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new DiabetesTABLE().Column), "fbs_time", "fbs_fbs");
             };
             ckd.Click += delegate
             {
-                view.Model = CreatePlotModel("กราฟ CKD", new KidneyTABLE().GetJavaList<KidneyTABLE>($@"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY CKD_TIME",new KidneyTABLE().Column), "ckd_time", "ckd_gfr");
+                view.Model = CreatePlotModel("กราฟ CKD", new KidneyTABLE().GetJavaList<KidneyTABLE>($@"SELECT * FROM KidneyTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY CKD_TIME",new KidneyTABLE().Column), "ckd_time", "ckd_gfr");
             };
             bp.Click += delegate {
-                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().GetJavaList<PressureTABLE>($@"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",new PressureTABLE().Column), "bp_time", "bp_up");
+                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().GetJavaList<PressureTABLE>($@"SELECT * FROM PressureTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",new PressureTABLE().Column), "bp_time", "bp_up");
             };
             fbs.Checked = true;
-            view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new List<string>
-            {
-                "fbs_id",
-                "fbs_time",
-                "fbs_fbs",
-                "fbs_fbs_lvl",
-                "ud_id"
-            }), "fbs_time", "fbs_fbs");
+            view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new DiabetesTABLE().Column), "fbs_time", "fbs_fbs");
         }
         private PlotModel CreatePlotModel(string title,JavaList<IDictionary<string,object>> dataset,string key_time,string key_value)
         {

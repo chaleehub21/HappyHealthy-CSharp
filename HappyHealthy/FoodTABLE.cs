@@ -39,7 +39,7 @@ namespace HappyHealthyCSharp
         //private string dbPath = "";
         public FoodTABLE()
         {
-            var sqliteConn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), GlobalFunction.sqliteDBPath);
+            var sqliteConn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
             sqliteConn.CreateTable<FoodTABLE>();
             sqliteConn.Close();
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
@@ -48,7 +48,7 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
+                var sqlconn = new MySqlConnection(Extension.remoteAccess);
                 var command = sqlconn.CreateCommand();
                 command.CommandText = $@"INSERT INTO FOOD VALUES(null,'{foodinstance.Food_NAME}',null,{foodinstance.Food_CAL},'{foodinstance.Food_UNIT}',{foodinstance.Food_NET_WEIGHT},'{foodinstance.Food_NET_UNIT}',{foodinstance.Food_PROTEIN},{foodinstance.Food_FAT},{foodinstance.Food_CARBOHYDRATE},{foodinstance.Food_SUGAR},{foodinstance.Food_SODIUM},'{foodinstance.Food_Detail}');";
                 sqlconn.Open();
@@ -61,7 +61,7 @@ namespace HappyHealthyCSharp
         }
         public JavaList<IDictionary<string,object>> getFoodList(string word,Context c = null)
         {
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
+            var sqlconn = new MySqlConnection(Extension.remoteAccess);
             sqlconn.Open();
             var foodList = new JavaList<IDictionary<string, object>>();
             var query = $@"SELECT * FROM Food where Food_NAME LIKE '%{word}%'";
@@ -71,18 +71,18 @@ namespace HappyHealthyCSharp
             foreach(DataRow x in tickets.Tables["Food"].Rows)
             {
                 var food = new JavaDictionary<string, object>();
-                food.Add("food_id", GlobalFunction.StringValidation(x[0].ToString()));
-                food.Add("food_name", GlobalFunction.StringValidation(x[1].ToString()));
-                food.Add("food_calories", GlobalFunction.StringValidation(x[3].ToString()));
-                food.Add("food_unit", GlobalFunction.StringValidation(x[4].ToString()));
-                food.Add("food_netweight", GlobalFunction.StringValidation(x[5].ToString()));
-                food.Add("food_netunit", GlobalFunction.StringValidation(x[6].ToString()));
-                food.Add("food_protein", GlobalFunction.StringValidation(x[7].ToString()));
-                food.Add("food_fat", GlobalFunction.StringValidation(x[8].ToString()));
-                food.Add("food_carbohydrate", GlobalFunction.StringValidation(x[9].ToString()));
-                food.Add("food_sugars", GlobalFunction.StringValidation(x[10].ToString()));
-                food.Add("food_sodium", GlobalFunction.StringValidation(x[11].ToString()));
-                food.Add("food_detail", GlobalFunction.StringValidation(x[12].ToString()));
+                food.Add("food_id", Extension.StringValidation(x[0].ToString()));
+                food.Add("food_name", Extension.StringValidation(x[1].ToString()));
+                food.Add("food_calories", Extension.StringValidation(x[3].ToString()));
+                food.Add("food_unit", Extension.StringValidation(x[4].ToString()));
+                food.Add("food_netweight", Extension.StringValidation(x[5].ToString()));
+                food.Add("food_netunit", Extension.StringValidation(x[6].ToString()));
+                food.Add("food_protein", Extension.StringValidation(x[7].ToString()));
+                food.Add("food_fat", Extension.StringValidation(x[8].ToString()));
+                food.Add("food_carbohydrate", Extension.StringValidation(x[9].ToString()));
+                food.Add("food_sugars", Extension.StringValidation(x[10].ToString()));
+                food.Add("food_sodium", Extension.StringValidation(x[11].ToString()));
+                food.Add("food_detail", Extension.StringValidation(x[12].ToString()));
                 foodList.Add(food);
             }
             sqlconn.Close();
@@ -113,7 +113,7 @@ namespace HappyHealthyCSharp
             return retValue;
             */
             #endregion
-            var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
+            var sqlconn = new MySqlConnection(Extension.remoteAccess);
             sqlconn.Open();
             var query = $@"SELECT * FROM Food where Food_ID = {id}";
             var tickets = new DataSet();
@@ -124,18 +124,18 @@ namespace HappyHealthyCSharp
             {
                 retValue = new Dictionary<string, string>()
                 {
-                   {"food_id", GlobalFunction.StringValidation(x[0].ToString()) },
-                   {"food_name", GlobalFunction.StringValidation(x[1].ToString()) },
-                   {"food_calories", GlobalFunction.StringValidation(x[3].ToString()) },
-                   {"food_unit", GlobalFunction.StringValidation(x[4].ToString()) },
-                   {"food_netweight", GlobalFunction.StringValidation(x[5].ToString()) },
-                   {"food_netunit", GlobalFunction.StringValidation(x[6].ToString()) },
-                   {"food_protein", GlobalFunction.StringValidation(x[7].ToString()) },
-                   {"food_fat", GlobalFunction.StringValidation(x[8].ToString()) },
-                   {"food_carbohydrate", GlobalFunction.StringValidation(x[9].ToString()) },
-                   {"food_sugars", GlobalFunction.StringValidation(x[10].ToString()) },
-                   {"food_sodium", GlobalFunction.StringValidation(x[11].ToString())},
-                   { "food_detail", GlobalFunction.StringValidation(x[12].ToString())}
+                   {"food_id", Extension.StringValidation(x[0].ToString()) },
+                   {"food_name", Extension.StringValidation(x[1].ToString()) },
+                   {"food_calories", Extension.StringValidation(x[3].ToString()) },
+                   {"food_unit", Extension.StringValidation(x[4].ToString()) },
+                   {"food_netweight", Extension.StringValidation(x[5].ToString()) },
+                   {"food_netunit", Extension.StringValidation(x[6].ToString()) },
+                   {"food_protein", Extension.StringValidation(x[7].ToString()) },
+                   {"food_fat", Extension.StringValidation(x[8].ToString()) },
+                   {"food_carbohydrate", Extension.StringValidation(x[9].ToString()) },
+                   {"food_sugars", Extension.StringValidation(x[10].ToString()) },
+                   {"food_sodium", Extension.StringValidation(x[11].ToString())},
+                   { "food_detail", Extension.StringValidation(x[12].ToString())}
                 };
             }
             sqlconn.Close();

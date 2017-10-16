@@ -22,31 +22,31 @@ using System.Threading;
 
 namespace HappyHealthyCSharp
 {
-    [Table("DiabetesTABLE")]
-    class DiabetesTABLE : DatabaseHelper
+    [Table("SummaryDiabetesTABLE")]
+    class SummaryDiabetesTABLE : DatabaseHelper
     {
         public override List<string> Column => new List<string>()
         {
-            "fbs_id",
-            "fbs_time",
-            "fbs_fbs",
-            "fbs_fbs_lvl",
+            "sfbs_id",
+            "sfbs_time",
+            "sfbs_sfbs",
+            "sfbs_sfbs_lvl",
             "ud_id"
         };
         [PrimaryKey, AutoIncrement]
-        public int fbs_id { get; set; }
-        public DateTime fbs_time { get; set; }
+        public int sfbs_id { get; set; }
+        public DateTime sfbs_time { get; set; }
         [MaxLength(3)]
-        public decimal fbs_fbs { get; set; }
+        public decimal sfbs_sfbs { get; set; }
         [MaxLength(4)]
-        public int fbs_fbs_lvl { get; set; }
+        public int sfbs_sfbs_lvl { get; set; }
         [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
         [ManyToOne]
         public UserTABLE UserTABLE { get; set; }
 
         //reconstruct of sqlite keys + attributes
-        public DiabetesTABLE()
+        public SummaryDiabetesTABLE()
         {
             
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB

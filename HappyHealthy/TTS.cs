@@ -42,7 +42,7 @@ namespace HappyHealthyCSharp
             }
             return myTTS;
         }
-        public void speak(string message)
+        public void Speak(string message)
         {
             this.message = message;
             if (tts == null || !isRunning)
@@ -101,7 +101,6 @@ namespace HappyHealthyCSharp
         {
             //throw new NotImplementedException();
         }
-
         public void OnInit([GeneratedEnum] OperationResult status)
         {
             if(status == OperationResult.Success)
@@ -109,25 +108,42 @@ namespace HappyHealthyCSharp
                 startSpeak();
             }
         }
-
         public void OnUtteranceCompleted(string utteranceId)
         {
             clear();
         }
-
         public override void OnDone(string utteranceId)
         {
             clear();
         }
-
         public override void OnError(string utteranceId)
         {
             clear();
         }
-
         public override void OnStart(string utteranceId)
         {
             //throw new NotImplementedException();
         }
+        /// <summary>
+        /// Use this method to set a custom Locale for Text-to-Speech engine recognization, in most cases you don't have to custom the Locale since it will use default locale for device.
+        /// </summary>
+        /// <param name="l"></param>
+        /// <returns></returns>
+        public TTS SetLocale(Locale newLocale)
+        {
+            locale = newLocale;
+            return this;
+        }
+        /// <summary>
+        /// Use this method to set a custom Text-to-Speech engine, if you have no idea what are you going to do please don't call this method.
+        /// </summary>
+        /// <param name="engine">Engine name</param>
+        /// <returns></returns>
+        public TTS SetEngine(string engine)
+        {
+            enginePackageName = engine;
+            return this;
+        }
+
     }
 }

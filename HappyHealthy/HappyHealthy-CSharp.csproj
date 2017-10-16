@@ -124,13 +124,15 @@
     <Compile Include="Database.cs" />
     <Compile Include="Develop.cs" />
     <Compile Include="Diabetes.cs" />
+    <Compile Include="SummaryDiabetesTABLE.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
     <Compile Include="Forgot.cs" />
     <Compile Include="History_Pill.cs" />
-    <Compile Include="IDatabaseHelper.cs" />
+    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="IMySQL.cs" />
     <Compile Include="Pill.cs" />
-    <Compile Include="PillTABLE.cs" />
+    <Compile Include="MedicineTABLE.cs" />
     <Compile Include="UserTABLE.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="PressureTABLE.cs" />
@@ -141,7 +143,7 @@
     <Compile Include="DiabetesTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />
     <Compile Include="Food_Type_1.cs" />
-    <Compile Include="GlobalFunction.cs" />
+    <Compile Include="Extension.cs" />
     <Compile Include="History_Pressure.cs" />
     <Compile Include="History_Kidney.cs" />
     <Compile Include="History_Diabetes.cs" />
@@ -150,7 +152,6 @@
     <Compile Include="Kidney.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MyClass.cs" />
     <Compile Include="Pressure.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="Register.cs" />
@@ -176,7 +177,9 @@
     <AndroidResource Include="Resources\layout\activity_diabetes.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_display_disease.axml" />
+    <AndroidResource Include="Resources\layout\activity_display_disease.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_display_kidney.axml" />
     <AndroidResource Include="Resources\layout\activity_display_pressure.axml" />
     <AndroidResource Include="Resources\layout\activity_display_user.axml">

@@ -12,6 +12,7 @@ using Android.Widget;
 using Java.IO;
 using Android.Graphics;
 using Android.Provider;
+using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
@@ -24,6 +25,9 @@ namespace HappyHealthyCSharp
             public static Bitmap bitmap;
         }
         ImageView medImage;
+        EditText medName;
+        EditText medDesc;
+        MedicineTABLE medObject;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -31,6 +35,22 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_add_pill);
             var camerabtt = FindViewById<ImageView>(Resource.Id.cameraImageView);
             var backbtt = FindViewById<ImageView>(Resource.Id.pill_back_button);
+            medName = FindViewById<EditText>(Resource.Id.ma_name);
+            medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
+            var addMed = FindViewById<ImageView>(Resource.Id.pill_save_button);
+            //code goes below
+            var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
+            medObject = string.IsNullOrEmpty(flagObjectJson) ? new MedicineTABLE() { ma_name = string.Empty } : JsonConvert.DeserializeObject<MedicineTABLE>(flagObjectJson);
+            if(medObject.ma_name == string.Empty)
+            {
+                addMed.Click += SaveValue;
+            }
+            else
+            {
+                InitialValueForUpdateEvent();
+                addMed.Click += UpdateValue;
+            }
+            //end
             backbtt.Click += delegate {
                 this.Finish();
             };
@@ -41,26 +61,45 @@ namespace HappyHealthyCSharp
                 medImage = FindViewById<ImageView>(Resource.Id.imageView1);
                 //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
-            var addMed = FindViewById<ImageView>(Resource.Id.pill_save_button);
-            var pillTable = new PillTABLE();
-            addMed.Click += delegate {
-                var medName = FindViewById<EditText>(Resource.Id.ma_name);
-                var medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
-                var picPath = string.Empty;
-                if(App._file != null)
-                {
-                    picPath = App._file.AbsolutePath;
-                }
-                //pillTable.InsertPillToSQL(medName.Text, medDesc.Text, DateTime.Now,picPath , GlobalFunction.getPreference("ud_id", "", this));
-                pillTable.ma_name = medName.Text;
-                pillTable.ma_desc = medDesc.Text;
-                pillTable.ma_set_time = DateTime.Now.ToThaiLocale();
-                pillTable.ma_pic = picPath;
-                pillTable.ud_id = GlobalFunction.getPreference("ud_id", 0, this);
-                pillTable.Insert<PillTABLE>(pillTable);
-                this.Finish();
-            };
+            
             // Create your application here
+        }
+
+        private void InitialValueForUpdateEvent()
+        {
+            medName.Text = medObject.ma_name;
+            medDesc.Text = medObject.ma_desc;
+            //Waiting for image initialize
+        }
+
+        private void UpdateValue(object sender, EventArgs e)
+        {
+            medObject.ma_name = medName.Text;
+            medObject.ma_desc = medDesc.Text;
+            medObject.ma_set_time = medObject.ma_set_time;
+            medObject.ma_pic = App._file != null ? App._file.AbsolutePath : medObject.ma_pic;
+            medObject.ud_id = Extension.getPreference("ud_id", 0, this);
+            medObject.Update();
+            Finish();
+        }
+
+        private void SaveValue(object sender, EventArgs e)
+        {
+            
+            var picPath = string.Empty;
+            if (App._file != null)
+            {
+                picPath = App._file.AbsolutePath;
+            }
+            //pillTable.InsertPillToSQL(medName.Text, medDesc.Text, DateTime.Now,picPath , GlobalFunction.getPreference("ud_id", "", this));
+            medObject.ma_name = medName.Text;
+            medObject.ma_desc = medDesc.Text;
+            medObject.ma_set_time = DateTime.Now.ToThaiLocale();
+            medObject.ma_pic = picPath;
+            medObject.ud_id = Extension.getPreference("ud_id", 0, this);
+            medObject.Insert<MedicineTABLE>(medObject);
+            CustomNotification.SetAlarmManager(this, $"ได้เวลาทานยา {medObject.ma_name}", medObject.ma_set_time, Resource.Raw.notialert);
+            this.Finish();
         }
 
         private void cameraClickEvent(object sender, EventArgs e)

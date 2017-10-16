@@ -43,9 +43,8 @@ namespace HappyHealthyCSharp
             return builder;
             
         }
-        public static void Show(Context c,string content,DateTime alertTime,int customSoundResourceID = -9999)
+        public static void Show(Context c,string content,Type target,int customSoundResourceID = -9999)
         {
-            /*
             var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
             if(customSoundResourceID != -9999)
             {
@@ -57,7 +56,10 @@ namespace HappyHealthyCSharp
                 //.SetSound(Android.Net.Uri.Parse(c.Resources.GetResourceName(Resource.Raw.notialert)))
                 .SetSound(filePath)
                 .Build());
-             */
+        }
+        public static void SetAlarmManager(Context c,string content,DateTime alertTime,int customSoundResourceID = -9999)
+        {
+            
             var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification).Path;
             if (customSoundResourceID != -9999)
             {
@@ -73,9 +75,27 @@ namespace HappyHealthyCSharp
             var calendar = Java.Util.Calendar.Instance;
             calendar.TimeInMillis = Java.Lang.JavaSystem.CurrentTimeMillis();
             calendar.Set(time.Year, time.Month - 1, time.Day, time.Hour, time.Minute, time.Second);
-            //var halfMin = (long)(30 * 1000);
+            /*
+            var halfMin = (long)(30 * 1000);
+            manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, halfMin, pendingIntent);
+            */ //This code snippet is worked!!!, so let's assume it's work for IntervalDay as well as halfMin
             manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
             //reference : https://stackoverflow.com/questions/42237920/xamarin-android-how-to-schedule-and-alarm-with-a-broadcastreceiver
+        }
+        public static bool CancelAllAlarmManager(Context c,Intent intent,int requestCode = 0)
+        {
+            var alarmManager = (AlarmManager)c.GetSystemService(Context.AlarmService);
+            var updateServiceIntent = intent;
+            var pendingUpdateIntent = PendingIntent.GetService(c, requestCode, updateServiceIntent, 0);
+            try
+            {
+                alarmManager.Cancel(pendingUpdateIntent);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
     [BroadcastReceiver]

@@ -20,7 +20,7 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Empty);
             TTS DemoTTS = new TTS(this);
-            DemoTTS.speak("ทดสอบเล่นเสียงหลังกดแบนเนอร์การแจ้งเตือน");
+            DemoTTS.Speak("ทดสอบเล่นเสียงหลังกดแบนเนอร์การแจ้งเตือน");
             // Create your application here
         }
     }

@@ -68,7 +68,7 @@ namespace HappyHealthyCSharp
                     //if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
                     if(new UserTABLE().Insert<UserTABLE>(user))
                     {
-                        GlobalFunction.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
+                        Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
                         {
                             this.Finish();
                         }).Show();
@@ -83,17 +83,17 @@ namespace HappyHealthyCSharp
         }
         public bool isFieldValid()
         {
-            var emailRegex = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
             if (string.IsNullOrEmpty(email.Text) || string.IsNullOrEmpty(pw.Text) || string.IsNullOrEmpty(name.Text) || string.IsNullOrEmpty(insertDate))
             {
                 Toast.MakeText(this, "Please fill all the required fields.", ToastLength.Long).Show();
                 return false;
             }
-            if (!Regex.IsMatch(email.Text, emailRegex)) { 
+            if (!email.Text.IsValidEmailFormat()) { 
                 Toast.MakeText(this, "Please fill the email in a valid form.", ToastLength.Long).Show();
                 return false;
             }
             return true;
         }
+        
     }
 }
