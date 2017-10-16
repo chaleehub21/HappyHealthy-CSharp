@@ -23,6 +23,7 @@ namespace HappyHealthyCSharp
         public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         public static readonly string sqliteDBPath = Path.Combine(fileStorePath, "hhcs.db3");
+        public static readonly int flagValue = -9521;
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>

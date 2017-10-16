@@ -142,7 +142,7 @@
     <Compile Include="FoodDetail.cs" />
     <Compile Include="DiabetesTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />
-    <Compile Include="Food_Type_1.cs" />
+    <Compile Include="History_Food.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="History_Pressure.cs" />
     <Compile Include="History_Kidney.cs" />
@@ -204,7 +204,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_intro_healthy.axml" />
-    <AndroidResource Include="Resources\layout\activity_kidney.axml" />
+    <AndroidResource Include="Resources\layout\activity_kidney.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

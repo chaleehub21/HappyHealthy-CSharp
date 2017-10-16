@@ -21,7 +21,7 @@ namespace HappyHealthyCSharp
     {
         
         EditText BloodValue;
-        ImageView micButton,saveButton;
+        ImageView micButton, saveButton, deleteButton;
         private bool isRecording;
         private readonly int VOICE = 10;
         DiabetesTABLE diaObject = null;
@@ -32,19 +32,21 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_diabetes);
             BloodValue = FindViewById<EditText>(Resource.Id.sugar_value);
             micButton = FindViewById<ImageView>(Resource.Id.ic_micro);
-            saveButton = FindViewById<ImageView>(Resource.Id.saveDiabetes);
+            saveButton = FindViewById<ImageView>(Resource.Id.layout_imageview_update_diabetes);
+            deleteButton = FindViewById<ImageView>(Resource.Id.layout_imageview_delete_diabetes);
             // Create your application here
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
-            diaObject = string.IsNullOrEmpty(flagObjectJson) ? new DiabetesTABLE() { fbs_fbs = -9521 } : JsonConvert.DeserializeObject<DiabetesTABLE>(flagObjectJson);
-            if (diaObject.fbs_fbs == -9521)
+            diaObject = string.IsNullOrEmpty(flagObjectJson) ? new DiabetesTABLE() { fbs_fbs = Extension.flagValue } : JsonConvert.DeserializeObject<DiabetesTABLE>(flagObjectJson);
+            if (diaObject.fbs_fbs == Extension.flagValue)
             {
-                //saveButton.Visibility = ViewStates.Invisible;
+                deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
+                deleteButton.Click += DeleteValue;
             }
             //end
             
@@ -72,6 +74,15 @@ namespace HappyHealthyCSharp
                     }
                     //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
+        }
+
+        private void DeleteValue(object sender, EventArgs e)
+        {
+            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
+            {
+                diaObject.Delete<DiabetesTABLE>(diaObject.fbs_id);
+                Finish();
+            }, delegate { }, "Yes", "No").Show();
         }
 
         private void InitialValueForUpdateEvent()

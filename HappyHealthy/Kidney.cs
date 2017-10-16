@@ -26,7 +26,7 @@ namespace HappyHealthyCSharp
         EditText field_albumin_blood;
         EditText field_albumin_urine;
         EditText field_phosphorus_blood;
-        ImageView saveButton;
+        ImageView saveButton, deleteButton;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -41,19 +41,32 @@ namespace HappyHealthyCSharp
             field_albumin_urine = FindViewById<EditText>(Resource.Id.ckd_albumin_urine);
             field_phosphorus_blood = FindViewById<EditText>(Resource.Id.ckd_phosphorus_blood);
             saveButton = FindViewById<ImageView>(Resource.Id.imageView25);
+            deleteButton = FindViewById<ImageView>(Resource.Id.deletekid);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
-            kidneyObject = string.IsNullOrEmpty(flagObjectJson) ? new KidneyTABLE() { ckd_gfr = -9521 } : JsonConvert.DeserializeObject<KidneyTABLE>(flagObjectJson);
-            if(kidneyObject.ckd_gfr == -9521)
+            kidneyObject = string.IsNullOrEmpty(flagObjectJson) ? new KidneyTABLE() { ckd_gfr = Extension.flagValue } : JsonConvert.DeserializeObject<KidneyTABLE>(flagObjectJson);
+            if(kidneyObject.ckd_gfr == Extension.flagValue)
             {
+                deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
+                deleteButton.Click += DeleteValue;
+
             }
             //end
+        }
+
+        private void DeleteValue(object sender, EventArgs e)
+        {
+            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
+            {
+                kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
+                Finish();
+            }, delegate { }, "Yes", "No").Show();
         }
 
         private void InitialValueForUpdateEvent()

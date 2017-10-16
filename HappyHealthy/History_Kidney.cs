@@ -38,6 +38,7 @@ namespace HappyHealthyCSharp
             kidneyList[e.Position].TryGetValue("ckd_id", out object ckdID);
             var kidneyObject = new KidneyTABLE();
             kidneyObject = kidneyObject.Select<KidneyTABLE>($"SELECT * From KidneyTABLE where ckd_id = {ckdID}")[0];
+            /*
             Extension.CreateDialogue(this, $@"The value for this one : {kidneyObject.ckd_gfr}", null, delegate
             {
                 var jsonObject = JsonConvert.SerializeObject(kidneyObject);
@@ -45,6 +46,11 @@ namespace HappyHealthyCSharp
                 Intent.PutExtra("targetObject", jsonObject);
                 StartActivity(Intent);
             }, "OK", "Edit").Show();
+            */
+            var jsonObject = JsonConvert.SerializeObject(kidneyObject);
+            var Intent = new Intent(this, typeof(Kidney));
+            Intent.PutExtra("targetObject", jsonObject);
+            StartActivity(Intent);
         }
         protected override void OnResume()
         {

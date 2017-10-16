@@ -95,14 +95,14 @@
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
-            android:id="@+id/imageView3"
+            android:id="@+id/layout_imageview_update_diabetes"
             android:src="@drawable/buttonsavediba"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10.0dp" />
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
-            android:id="@+id/imageView3"
+            android:id="@+id/layout_imageview_delete_diabetes"
             android:src="@drawable/buttondeletediba"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="10.0dp" />

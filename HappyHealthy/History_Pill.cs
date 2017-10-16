@@ -48,6 +48,7 @@ namespace HappyHealthyCSharp
             pillList[e.Position].TryGetValue("ma_id", out object pillID);
             var pillObject = new MedicineTABLE();
             pillObject = pillObject.Select<MedicineTABLE>($"SELECT * From MedicineTABLE where ma_id = {pillID}")[0];
+            /*
             Extension.CreateDialogue(this, $@"The value for this one : {pillObject.ma_desc}", null, delegate
             {
                 var jsonObject = JsonConvert.SerializeObject(pillObject);
@@ -55,6 +56,11 @@ namespace HappyHealthyCSharp
                 Intent.PutExtra("targetObject", jsonObject);
                 StartActivity(Intent);
             }, "OK", "Edit").Show();
+            */
+            var jsonObject = JsonConvert.SerializeObject(pillObject);
+            var Intent = new Intent(this, typeof(Pill));
+            Intent.PutExtra("targetObject", jsonObject);
+            StartActivity(Intent);
         }
         public void setPillList()
         {

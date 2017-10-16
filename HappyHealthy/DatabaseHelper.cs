@@ -157,4 +157,22 @@ namespace HappyHealthyCSharp
             c.Execute("CREATE TRIGGER SummaryDiabetesTABLE_After_Update_Trigger AFTER UPDATE ON SummaryDiabetesTABLE BEGIN insert into TEMP_SummaryDiabetesTABLE( sfbs_time_old, sfbs_sfbs_old, sfbs_sfbs_lvl_old, sfbs_time_new, sfbs_sfbs_new, sfbs_sfbs_lvl_new, MODE) values( OLD.sfbs_time, OLD.sfbs_sfbs, OLD.sfbs_sfbs_lvl, NEW.sfbs_time, NEW.sfbs_sfbs, NEW.sfbs_sfbs_lvl, 'U'); END");
         }
     }
+    static class MySQLDatabaseHelper
+    {
+        public static bool TestConnection(string url)
+        {
+            try
+            {
+                var MySQLConn = new MySqlConnection(url);
+                MySQLConn.Open();
+                MySQLConn.Close();
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
 }

@@ -82,10 +82,17 @@ namespace HappyHealthyCSharp
         }
         #endregion
 
-    [Export("ClickFood")]
+        [Export("ClickFood")]
         public void ClickFood(View v)
         {
-            StartActivity(new Intent(this, typeof(Food_Type_1)));
+            if (MySQLDatabaseHelper.TestConnection(Extension.remoteAccess) == true)
+            {
+                StartActivity(new Intent(this, typeof(History_Food)));
+            }
+            else
+            {
+                Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
+            }
         }
         [Export("ClickDiabetes")]
         public void ClickDiabetes(View v)

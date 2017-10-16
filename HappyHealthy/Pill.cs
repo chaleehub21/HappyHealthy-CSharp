@@ -37,18 +37,18 @@ namespace HappyHealthyCSharp
             var backbtt = FindViewById<ImageView>(Resource.Id.pill_back_button);
             medName = FindViewById<EditText>(Resource.Id.ma_name);
             medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
-            var addMed = FindViewById<ImageView>(Resource.Id.pill_save_button);
+            var saveButton = FindViewById<ImageView>(Resource.Id.pill_save_button);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             medObject = string.IsNullOrEmpty(flagObjectJson) ? new MedicineTABLE() { ma_name = string.Empty } : JsonConvert.DeserializeObject<MedicineTABLE>(flagObjectJson);
             if(medObject.ma_name == string.Empty)
             {
-                addMed.Click += SaveValue;
+                saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
-                addMed.Click += UpdateValue;
+                saveButton.Click += UpdateValue;
             }
             //end
             backbtt.Click += delegate {
@@ -94,7 +94,7 @@ namespace HappyHealthyCSharp
             //pillTable.InsertPillToSQL(medName.Text, medDesc.Text, DateTime.Now,picPath , GlobalFunction.getPreference("ud_id", "", this));
             medObject.ma_name = medName.Text;
             medObject.ma_desc = medDesc.Text;
-            medObject.ma_set_time = DateTime.Now.ToThaiLocale();
+            medObject.ma_set_time = DateTime.Now;
             medObject.ma_pic = picPath;
             medObject.ud_id = Extension.getPreference("ud_id", 0, this);
             medObject.Insert<MedicineTABLE>(medObject);

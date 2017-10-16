@@ -31,20 +31,32 @@ namespace HappyHealthyCSharp
             BPUp = FindViewById<EditText>(Resource.Id.P_costPressureTop);
             HeartRate = FindViewById<EditText>(Resource.Id.P_HeartRate);
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView29);
+            var deleteButton = FindViewById<ImageView>(Resource.Id.deletefsb);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
-            pressureObject = string.IsNullOrEmpty(flagObjectJson) ? new PressureTABLE() { bp_hr = -9521 } : JsonConvert.DeserializeObject<PressureTABLE>(flagObjectJson);
-            if(pressureObject.bp_hr == -9521)
+            pressureObject = string.IsNullOrEmpty(flagObjectJson) ? new PressureTABLE() { bp_hr = Extension.flagValue } : JsonConvert.DeserializeObject<PressureTABLE>(flagObjectJson);
+            if(pressureObject.bp_hr == Extension.flagValue)
             {
+                deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
+                deleteButton.Click += DeleteValue;
             }
             //end
             
+        }
+
+        private void DeleteValue(object sender, EventArgs e)
+        {
+            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
+            {
+                pressureObject.Delete<PressureTABLE>(pressureObject.bp_id);
+                Finish();
+            }, delegate { }, "Yes", "No").Show();
         }
 
         private void InitialValueForUpdateEvent()

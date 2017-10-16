@@ -15,7 +15,7 @@ using Java.Interop;
 namespace HappyHealthyCSharp
 {
     [Activity]
-    public class Food_Type_1 : ListActivity
+    public class History_Food : ListActivity
     {
         FoodTABLE foodTable;
         //List<Dictionary<string, string>> foodList;

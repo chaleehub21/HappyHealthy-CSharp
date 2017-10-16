@@ -44,7 +44,7 @@ namespace HappyHealthyCSharp
                 view.Model = CreatePlotModel("กราฟ CKD", new KidneyTABLE().GetJavaList<KidneyTABLE>($@"SELECT * FROM KidneyTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY CKD_TIME",new KidneyTABLE().Column), "ckd_time", "ckd_gfr");
             };
             bp.Click += delegate {
-                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().GetJavaList<PressureTABLE>($@"SELECT * FROM PressureTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",new PressureTABLE().Column), "bp_time", "bp_up");
+                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().GetJavaList<PressureTABLE>($@"SELECT * FROM PressureTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",new PressureTABLE().Column), "bp_time", "bp_hr");
             };
             fbs.Checked = true;
             view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new DiabetesTABLE().Column), "fbs_time", "fbs_fbs");
@@ -53,31 +53,17 @@ namespace HappyHealthyCSharp
         {
             var datalength = dataset.Count();
             var plotModel = new PlotModel { Title = title};
-            var LastDateOnDataset = new object();
-            var maxValue = 100.0;
-            var minValue = 0.0;
+            object LastDateOnDataset = DateTime.Now;
+            var maxValue = 0.0; //100.0;
+            var minValue = 0.0;     
             if (datalength > 0)
             {
                 dataset.Last().TryGetValue(key_time, out LastDateOnDataset);
-                for (var index = 0; index < datalength; index++) //try extract list to determine min/max value first
-                {
-                    dataset[index].TryGetValue(key_value, out object candidateValue);
-                    var dCandidateValue = Convert.ToDouble(candidateValue);
-                    if (dCandidateValue > maxValue)
-                        maxValue = dCandidateValue;
-                    if (dCandidateValue < minValue)
-                        minValue = dCandidateValue;
-                }
-            }
-            else
-            {
-                LastDateOnDataset = DateTime.Now;
-            }
-            var startDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(-7);
-            var endDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(0.1);
+            }        
+            var startDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(-15);
+            var endDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(15);
             var minDate = DateTimeAxis.ToDouble(startDate);
             var maxDate = DateTimeAxis.ToDouble(endDate);
-            Console.WriteLine($@"{minValue}/{maxValue}");
             var x = new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minDate, Maximum = maxDate, MajorStep = 10, StringFormat = "d-MMMM" };
             var y = new LinearAxis { Position = AxisPosition.Left, Maximum = maxValue, Minimum = minValue };
             y.IsPanEnabled = false;
@@ -89,19 +75,29 @@ namespace HappyHealthyCSharp
                 MarkerType = MarkerType.Circle,
                 MarkerSize = 4,
                 MarkerStroke = OxyColors.White,
-                Color = OxyColors.Red,
+                Color = OxyColors.Green,
             };
             for (var i = 0; i < datalength; i++)
             {
                 dataset[i].TryGetValue(key_time, out object Time);
                 dataset[i].TryGetValue(key_value, out object Value);
+                var dCandidateValue = Convert.ToDouble(Value);
+                if (dCandidateValue > maxValue)
+                    maxValue = dCandidateValue;
+                if (dCandidateValue < minValue)
+                    minValue = dCandidateValue;
                 DateTime.TryParse(Time.ToString(), out DateTime dateResult);
                 double value = Convert.ToDouble(Value.ToString());
-                //series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult.Year > 2100 ? dateResult.AddYears(-543) : dateResult), value));
                 series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult), value));
                 var textAnnotations = new TextAnnotation() { TextPosition = new DataPoint(series1.Points.Last().X, series1.Points.Last().Y), Text = value.ToString(), Stroke = OxyColors.White };
                 plotModel.Annotations.Add(textAnnotations);
             }
+            #region Conclusion-Initial
+            y.Minimum = minValue;
+            y.Maximum = maxValue+5;
+            if (maxValue > 100)
+                series1.Color = OxyColors.Red;
+            #endregion  
             plotModel.Series.Add(series1);
             return plotModel;
         }

@@ -42,6 +42,7 @@ namespace HappyHealthyCSharp
             bpList[e.Position].TryGetValue("bp_id", out object bpID);
             var pressureObject = new PressureTABLE();
             pressureObject = pressureObject.Select<PressureTABLE>($"SELECT * From PressureTABLE where bp_id = {bpID}")[0];
+            /*
             Extension.CreateDialogue(this, $@"The value for this one : {pressureObject.bp_hr}", null, delegate
             {
                 var jsonObject = JsonConvert.SerializeObject(pressureObject);
@@ -49,6 +50,11 @@ namespace HappyHealthyCSharp
                 Intent.PutExtra("targetObject", jsonObject);
                 StartActivity(Intent);
             }, "OK", "Edit").Show();
+            */
+            var jsonObject = JsonConvert.SerializeObject(pressureObject);
+            var Intent = new Intent(this, typeof(Pressure));
+            Intent.PutExtra("targetObject", jsonObject);
+            StartActivity(Intent);
         }
 
         [Export("ClickAddPre")]
