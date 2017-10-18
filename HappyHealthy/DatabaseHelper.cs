@@ -25,19 +25,6 @@ namespace HappyHealthyCSharp
             conn.Close();
             return result;
         }
-        virtual public bool Insert<T>(T data) where T : class {
-            try
-            {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-                var result = conn.Insert(data);
-                conn.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }   
         virtual public bool Delete<T>(int id) {
             try
             {
@@ -108,6 +95,20 @@ namespace HappyHealthyCSharp
             {
                 var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                 var result = conn.Update(data);
+                conn.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool Insert(this DatabaseHelper data)
+        {
+            try
+            {
+                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var result = conn.Insert(data);
                 conn.Close();
                 return true;
             }

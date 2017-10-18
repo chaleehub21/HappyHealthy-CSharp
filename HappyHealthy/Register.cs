@@ -66,7 +66,7 @@ namespace HappyHealthyCSharp
                         ,ud_pass = pw.Text
                     };
                     //if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
-                    if(new UserTABLE().Insert<UserTABLE>(user))
+                    if(user.Insert())
                     {
                         Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
                         {
