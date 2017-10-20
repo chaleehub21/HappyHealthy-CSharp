@@ -33,11 +33,11 @@ namespace HappyHealthyCSharp
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_add_pill);
-            var camerabtt = FindViewById<ImageView>(Resource.Id.cameraImageView);
-            var backbtt = FindViewById<ImageView>(Resource.Id.pill_back_button);
+            var camerabtt = FindViewById<ImageView>(Resource.Id.imageView_button_camera);
+            var backbtt = FindViewById<ImageView>(Resource.Id.imageView_button_back_pill);
             medName = FindViewById<EditText>(Resource.Id.ma_name);
             medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
-            var saveButton = FindViewById<ImageView>(Resource.Id.pill_save_button);
+            var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_pill);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             medObject = string.IsNullOrEmpty(flagObjectJson) ? new MedicineTABLE() { ma_name = string.Empty } : JsonConvert.DeserializeObject<MedicineTABLE>(flagObjectJson);
@@ -58,7 +58,7 @@ namespace HappyHealthyCSharp
             {
                 CreateDirForPictures();
                 camerabtt.Click += cameraClickEvent;
-                medImage = FindViewById<ImageView>(Resource.Id.imageView1);
+                medImage = FindViewById<ImageView>(Resource.Id.imageView_show_image);
                 //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
             

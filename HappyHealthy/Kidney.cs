@@ -40,8 +40,8 @@ namespace HappyHealthyCSharp
             field_albumin_blood = FindViewById<EditText>(Resource.Id.ckd_albumin_blood);
             field_albumin_urine = FindViewById<EditText>(Resource.Id.ckd_albumin_urine);
             field_phosphorus_blood = FindViewById<EditText>(Resource.Id.ckd_phosphorus_blood);
-            saveButton = FindViewById<ImageView>(Resource.Id.imageView25);
-            deleteButton = FindViewById<ImageView>(Resource.Id.deletekid);
+            saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_kidney);
+            deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_kidney);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             kidneyObject = string.IsNullOrEmpty(flagObjectJson) ? new KidneyTABLE() { ckd_gfr = Extension.flagValue } : JsonConvert.DeserializeObject<KidneyTABLE>(flagObjectJson);

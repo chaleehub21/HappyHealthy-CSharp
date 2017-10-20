@@ -43,7 +43,7 @@
             android:layout_marginRight="25dp"
             android:layout_marginTop="60.0dp"
             android:background="@drawable/my_bg_doc"
-            android:id="Layout_background_doc">
+            android:id="@+id/Layout_background_doc">
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                     android:gravity="center_vertical"
                     android:layout_marginRight="10.0dp"
                     android:layout_marginLeft="10dp"
-                    android:id="textView_detail_date_doc" />
+                    android:id="@+id/textView_detail_date_doc" />
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"

@@ -30,8 +30,8 @@ namespace HappyHealthyCSharp
             BPLow = FindViewById<EditText>(Resource.Id.P_costPressureDown);
             BPUp = FindViewById<EditText>(Resource.Id.P_costPressureTop);
             HeartRate = FindViewById<EditText>(Resource.Id.P_HeartRate);
-            var saveButton = FindViewById<ImageView>(Resource.Id.imageView29);
-            var deleteButton = FindViewById<ImageView>(Resource.Id.deletefsb);
+            var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_pressure);
+            var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pressure);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             pressureObject = string.IsNullOrEmpty(flagObjectJson) ? new PressureTABLE() { bp_hr = Extension.flagValue } : JsonConvert.DeserializeObject<PressureTABLE>(flagObjectJson);

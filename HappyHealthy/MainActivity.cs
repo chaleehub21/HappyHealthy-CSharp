@@ -15,6 +15,7 @@ namespace HappyHealthyCSharp
         protected override void OnCreate(Bundle bundle)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
+            
             base.OnCreate(bundle);
             //GlobalFunction.setPreference("dbPath", Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Database.DB_NAME), this);
             //GlobalFunction.dbPath = GlobalFunction.getPreference("dbPath", null, this);

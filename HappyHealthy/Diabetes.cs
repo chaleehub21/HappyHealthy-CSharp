@@ -19,7 +19,7 @@ namespace HappyHealthyCSharp
     [Activity]
     public class Diabetes : Activity
     {
-        
+
         EditText BloodValue;
         ImageView micButton, saveButton, deleteButton;
         private bool isRecording;
@@ -31,9 +31,9 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_diabetes);
             BloodValue = FindViewById<EditText>(Resource.Id.sugar_value);
-            micButton = FindViewById<ImageView>(Resource.Id.ic_micro);
-            saveButton = FindViewById<ImageView>(Resource.Id.layout_imageview_update_diabetes);
-            deleteButton = FindViewById<ImageView>(Resource.Id.layout_imageview_delete_diabetes);
+            micButton = FindViewById<ImageView>(Resource.Id.ic_microphone_diabetes);
+            saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_diabetes);
+            deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_diabetes);
             // Create your application here
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             diaObject = string.IsNullOrEmpty(flagObjectJson) ? new DiabetesTABLE() { fbs_fbs = Extension.flagValue } : JsonConvert.DeserializeObject<DiabetesTABLE>(flagObjectJson);
