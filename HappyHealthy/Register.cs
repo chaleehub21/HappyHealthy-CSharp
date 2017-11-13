@@ -72,6 +72,10 @@ namespace HappyHealthyCSharp
                         {
                             this.Finish();
                         }).Show();
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "การลงทะเบียนล้มเหลว กรุณาตรวจสอบข้อมูลผู้ใช้อีกครั้ง",ToastLength.Short).Show();
                     }      
                 }
             };

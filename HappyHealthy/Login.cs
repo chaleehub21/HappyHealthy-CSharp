@@ -31,6 +31,7 @@ namespace HappyHealthyCSharp
             if ((Extension.getPreference("ud_id",0,this) != 0))
             {
                 StartActivity(typeof(MainActivity));
+                Finish();
             }
             //
             var id = FindViewById<EditText>(Resource.Id.userID);
@@ -102,7 +103,7 @@ namespace HappyHealthyCSharp
             };
             forgot.Click += delegate {
                 StartActivity(new Intent(this, typeof(PasswordResetActivity)));
-                CustomNotification.SetAlarmManager(this, "Sender!", DateTime.Now,Resource.Raw.notialert);
+                //CustomNotification.SetAlarmManager(this, "Sender!",(int)DateTime.Now.DayOfWeek,DateTime.Now,Resource.Raw.notialert);
                 //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }

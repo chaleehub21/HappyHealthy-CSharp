@@ -13,7 +13,6 @@ using Java.Text;
 using Java.Util;
 using Android.Speech.Tts;
 using SQLite;
-using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {

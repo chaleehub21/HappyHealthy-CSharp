@@ -57,7 +57,15 @@ namespace HappyHealthyCSharp
                 .SetSound(filePath)
                 .Build());
         }
-        public static void SetAlarmManager(Context c,string content,DateTime alertTime,int customSoundResourceID = -9999)
+        /// <summary>
+        /// Set alarm manager for system notificatiion
+        /// </summary>
+        /// <param name="c">Base caller</param>
+        /// <param name="content">Notification string value</param>
+        /// <param name="repeatDateOfWeek">Repeating date for speciific date</param>
+        /// <param name="alertTime">Repeating time for specific time</param>
+        /// <param name="customSoundResourceID">Resource id for sound</param>
+        public static void SetAlarmManager(Context c,string content, int repeatDateOfWeek, DateTime alertTime,int customSoundResourceID = -9999)
         {
             
             var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification).Path;
@@ -74,7 +82,11 @@ namespace HappyHealthyCSharp
             var manager = (AlarmManager)c.GetSystemService(Context.AlarmService);
             var calendar = Java.Util.Calendar.Instance;
             calendar.TimeInMillis = Java.Lang.JavaSystem.CurrentTimeMillis();
-            calendar.Set(time.Year, time.Month - 1, time.Day, time.Hour, time.Minute, time.Second);
+            calendar.Set(Java.Util.CalendarField.DayOfWeek, repeatDateOfWeek);
+            calendar.Set(Java.Util.CalendarField.HourOfDay, time.Hour);
+            calendar.Set(Java.Util.CalendarField.Minute, time.Minute);
+            calendar.Set(Java.Util.CalendarField.Second, time.Second);
+            //calendar.Set(time.Year, time.Month - 1, time.Day, time.Hour, time.Minute, time.Second);
             /*
             var halfMin = (long)(30 * 1000);
             manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, halfMin, pendingIntent);

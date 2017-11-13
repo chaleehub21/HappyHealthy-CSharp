@@ -116,7 +116,13 @@ namespace HappyHealthyCSharp
             var thaiTime = new DateTime(thaiCalendar.GetYear(now), thaiCalendar.GetMonth(now), thaiCalendar.GetDayOfMonth(now), thaiCalendar.GetHour(now), thaiCalendar.GetMinute(now), thaiCalendar.GetSecond(now));
             return thaiTime;
         }
-
+        public static DateTime RevertThaiLocale(this DateTime n)
+        {
+            var gregorianCalendar = new System.Globalization.GregorianCalendar();
+            var now = n;
+            var globalTime = new DateTime(gregorianCalendar.GetYear(now), gregorianCalendar.GetMonth(now), gregorianCalendar.GetDayOfMonth(now), gregorianCalendar.GetHour(now), gregorianCalendar.GetMinute(now), gregorianCalendar.GetSecond(now));
+            return globalTime;
+        }
         public static string GetValidPathForFileStore(string filename)
         {
             return Path.Combine(fileStorePath,filename);
