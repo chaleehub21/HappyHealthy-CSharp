@@ -14,10 +14,8 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
 using SQLiteNetExtensions.Attributes;
-using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
 using System.Threading;
-using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {
@@ -25,7 +23,7 @@ namespace HappyHealthyCSharp
     {
         public override List<string> Column => throw new NotImplementedException();
         SQLitePlatformAndroid platform = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
-        [PrimaryKey,AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int ud_id { get; set; }
         public string ud_iden_number { get; set; }
         public string ud_name { get; set; }
@@ -35,6 +33,7 @@ namespace HappyHealthyCSharp
         public DateTime ud_lu_time { get; set; }
         public DateTime ud_dn_time { get; set; }
         public DateTime ud_usually_meal_time { get; set; }
+        [SQLite.Net.Attributes.Unique]
         public string ud_email { get; set; }
         public string ud_pass { get; set; }
         [OneToMany]

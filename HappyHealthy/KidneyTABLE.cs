@@ -15,9 +15,7 @@ using System.IO;
 using System.Data;
 using SQLiteNetExtensions.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net;
 using System.Threading;
-using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {
@@ -36,30 +34,30 @@ namespace HappyHealthyCSharp
             "ckd_albumin_urine",
             "ckd_phosphorus_blood"
         };
-        [PrimaryKey, AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int ckd_id { get; set; }
         public DateTime ckd_time { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_gfr { get; set; }
-        [MaxLength(4)]
+        [SQLite.Net.Attributes.MaxLength(4)]
         public int ckd_gfr_level { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_creatinine { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_bun { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_sodium { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_potassium { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_albumin_blood { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_albumin_urine { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_phosphorus_blood { get; set; }
         [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
-        [ManyToOne]
+        [SQLiteNetExtensions.Attributes.ManyToOne]
         public UserTABLE UserTABLE { get; set; }
         //reconstruct of sqlite keys + attributes
         public KidneyTABLE()

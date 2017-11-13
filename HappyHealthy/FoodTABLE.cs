@@ -20,8 +20,8 @@ namespace HappyHealthyCSharp
 {
     class FoodTABLE
     {
-        public string Food { get; set; }
-        [PrimaryKey,AutoIncrement]
+        private string Food { get; set; }
+        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int Food_ID { get; set; }
         public string Food_NAME { get; set; }
         public string Food_AMT { get; set; }

@@ -97,6 +97,8 @@ namespace HappyHealthyCSharp
 
         public void ClickFood(object sender, EventArgs e)
         {
+            Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
+            /*
             if (MySQLDatabaseHelper.TestConnection(Extension.remoteAccess) == true)
             {
                 StartActivity(new Intent(this, typeof(History_Food)));
@@ -105,6 +107,7 @@ namespace HappyHealthyCSharp
             {
                 Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             }
+            */
         }
         public void ClickDiabetes(object sender,EventArgs e)
         {
@@ -131,7 +134,7 @@ namespace HappyHealthyCSharp
         }
         public void ClickDoctor(object sender, EventArgs e)
         {
-            Extension.CreateDialogue(this, "Not implemented").Show();
+            StartActivity(typeof(History_Doctor));
         }
     }
 }

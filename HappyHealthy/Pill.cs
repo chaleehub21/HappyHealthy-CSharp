@@ -98,7 +98,7 @@ namespace HappyHealthyCSharp
             medObject.ma_pic = picPath;
             medObject.ud_id = Extension.getPreference("ud_id", 0, this);
             medObject.Insert();
-            CustomNotification.SetAlarmManager(this, $"ได้เวลาทานยา {medObject.ma_name}", medObject.ma_set_time, Resource.Raw.notialert);
+            CustomNotification.SetAlarmManager(this, $"ได้เวลาทานยา {medObject.ma_name}",(int)DateTime.Now.DayOfWeek,medObject.ma_set_time, Resource.Raw.notialert);
             this.Finish();
         }
 

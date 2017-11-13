@@ -6,8 +6,6 @@ using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
 using SQLite;
-using SQLite.Net;
-using SQLite.Net.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
 using SQLiteNetExtensions.Attributes;
 using System;
@@ -29,17 +27,32 @@ namespace HappyHealthyCSharp
             "ma_set_time",
             "ma_pic"
         };
-        [PrimaryKey, AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int ma_id { get; set; }
-        [MaxLength(100)]
+        [SQLite.Net.Attributes.MaxLength(100)]
         public string ma_name { get; set; }
-        [MaxLength(255)]
+        [SQLite.Net.Attributes.MaxLength(255)]
         public string ma_desc { get; set; }
         public DateTime ma_set_time { get; set; }
-        [MaxLength(255)]
+        [SQLite.Net.Attributes.NotNull]
+        public bool ma_repeat_monday { get; set; }
+        [SQLite.Net.Attributes.NotNull]
+        public bool ma_repeat_tuesday { get; set; }
+        [SQLite.Net.Attributes.NotNull]
+        public bool ma_repeat_wednesday { get; set; }
+        [SQLite.Net.Attributes.NotNull]
+        public bool ma_repeat_thursday { get; set; }
+        [SQLite.Net.Attributes.NotNull]
+        public bool ma_repeat_friday { get; set; }
+        [SQLite.Net.Attributes.NotNull]
+        public bool ma_repeat_saturday { get; set; }
+        [SQLite.Net.Attributes.NotNull]
+        public bool ma_repeat_sunday { get; set; }
+        [SQLite.Net.Attributes.MaxLength(255)]
         public string ma_pic { get; set; }
         [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
+        
         [ManyToOne]
         public UserTABLE UserTABLE { get; set; }
         //reconstruct of sqlite keys + attributes
