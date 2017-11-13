@@ -149,7 +149,7 @@
     <Compile Include="SummaryDiabetesTABLE.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
-    <Compile Include="Forgot.cs" />
+    <Compile Include="PasswordReset.cs" />
     <Compile Include="History_Pill.cs" />
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="IMySQL.cs" />
