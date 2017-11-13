@@ -41,7 +41,7 @@ namespace HappyHealthyCSharp
             var camerabtt = FindViewById<ImageView>(Resource.Id.imageView_button_save_pic_doc);
             var backbtt = FindViewById<ImageView>(Resource.Id.imageView_button_back_doc);
             docAttendDate = FindViewById<TextView>(Resource.Id.choosedate_doc);
-            docRegisTime = FindViewById<TextView>(Resource.Id.chooseregistime_doc);
+            docRegisTime = FindViewById<TextView>(Resource.Id.chooseregtime_doc);
             docAppointmentTime = FindViewById<TextView>(Resource.Id.chooseappttime_doc);
             et_docName = FindViewById<EditText>(Resource.Id.da_name);
             et_deptName = FindViewById<EditText>(Resource.Id.da_dept);

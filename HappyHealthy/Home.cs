@@ -27,6 +27,18 @@ namespace HappyHealthyCSharp
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_home);
+            ImageView DiabetesButton = FindViewById<ImageView>(Resource.Id.imageView_button_diabetes);
+            ImageView KidneyButton = FindViewById<ImageView>(Resource.Id.imageView_button_ckd);
+            ImageView PressureButton = FindViewById<ImageView>(Resource.Id.imageView_button_pressure);
+            ImageView FoodButton = FindViewById<ImageView>(Resource.Id.imageView_button_food);
+            ImageView MedicineButton = FindViewById<ImageView>(Resource.Id.imageView_button_pill);
+            ImageView DoctorButton = FindViewById<ImageView>(Resource.Id.imageView_button_doctor);
+            DiabetesButton.Click += ClickDiabetes;
+            KidneyButton.Click += ClickKidney;
+            PressureButton.Click += ClickPressure;
+            FoodButton.Click += ClickFood;
+            MedicineButton.Click += ClickPill;
+            DoctorButton.Click += ClickDoctor;
             #region Speech-To-Text Implementation
             var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
@@ -79,11 +91,11 @@ namespace HappyHealthyCSharp
                 }
             }
             base.OnActivityResult(requestCode, resultVal, data);
+            #endregion
+           
         }
-        #endregion
 
-        [Export("ClickFood")]
-        public void ClickFood(View v)
+        public void ClickFood(object sender, EventArgs e)
         {
             Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             /*
@@ -97,37 +109,30 @@ namespace HappyHealthyCSharp
             }
             */
         }
-        [Export("ClickDiabetes")]
-        public void ClickDiabetes(View v)
+        public void ClickDiabetes(object sender,EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Diabetes)));
         }
-        [Export("ClickKidney")]
-        public void ClickKidney(View v)
+        public void ClickKidney(object sender, EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Kidney)));
         }
-        [Export("ClickPressure")]
-        public void ClickPressure(View v)
+        public void ClickPressure(object sender, EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Pressure)));
         }
-
-        [Export("ClickDevelop")]
-        public void ClickDevelop(View v)
+        public void ClickDevelop(object sender, EventArgs e)
         {
             //StartActivity(new Intent(this, typeof(Develop)));
             //GlobalFunction.createDialog(this, "Not implemented").Show();
            
         }
-        [Export("ClickPill")]
-        public void ClickPill(View v)
+        public void ClickPill(object sender, EventArgs e)
         {
             //GlobalFunction.createDialog(this, "Not implemented").Show();
             StartActivity(new Intent(this, typeof(History_Pill)));
         }
-        [Export("ClickDoctor")]
-        public void ClickDoctor(View v)
+        public void ClickDoctor(object sender, EventArgs e)
         {
             StartActivity(typeof(History_Doctor));
         }

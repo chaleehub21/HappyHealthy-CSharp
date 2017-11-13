@@ -81,11 +81,11 @@ namespace HappyHealthyCSharp
                 }
                 */
 #endregion
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-                var sql = $@"select * from UserTABLE where ud_email = '{id.Text}' and ud_pass = '{pw.Text}'";
-                var result = conn.Query<UserTABLE>(sql);
-                if (result.Count == 1)
+                if (Extension.ComparePassword(id.Text,pw.Text))
                 {
+                    var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                    var sql = $@"select * from UserTABLE where ud_email = '{id.Text}'";
+                    var result = conn.Query<UserTABLE>(sql);
                     Extension.setPreference("ud_email", result[0].ud_email, this);
                     Extension.setPreference("ud_pass", result[0].ud_pass, this);
                     Extension.setPreference("ud_id", result[0].ud_id, this);
