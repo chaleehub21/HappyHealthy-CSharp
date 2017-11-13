@@ -14,10 +14,10 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
 using SQLiteNetExtensions.Attributes;
-using SQLite.Net.Attributes;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
 using System.Threading;
+using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {

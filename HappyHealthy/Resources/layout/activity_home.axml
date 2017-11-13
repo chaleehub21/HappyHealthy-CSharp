@@ -36,7 +36,7 @@
             <ImageView
                 android:layout_width="180dp"
                 android:id="@+id/imageView_button_ckd"
-                android:src="@drawable/Test_button_ไต"
+                android:src="@drawable/Test_button_Kidney"
                 android:nestedScrollingEnabled="false"
                 android:layout_weight="1"
                 android:layout_height="115dp"
@@ -47,7 +47,7 @@
             <ImageView
                 android:layout_width="180dp"
                 android:id="@+id/imageView_button_diabetes"
-                android:src="@drawable/Test_button_เบาหวาน"
+                android:src="@drawable/Test_button_Diabetes"
                 android:nestedScrollingEnabled="false"
                 android:layout_weight="1"
                 android:layout_height="115dp"
@@ -58,7 +58,7 @@
             <ImageView
                 android:layout_width="180dp"
                 android:id="@+id/imageView_button_pressure"
-                android:src="@drawable/Test_button_ความดัน"
+                android:src="@drawable/Test_button_Pressure"
                 android:nestedScrollingEnabled="false"
                 android:layout_weight="1"
                 android:layout_height="115dp"
@@ -68,7 +68,7 @@
             <ImageView
                 android:layout_width="180dp"
                 android:id="@+id/imageView_button_food"
-                android:src="@drawable/Test_button_อาหาร"
+                android:src="@drawable/Test_button_Food"
                 android:nestedScrollingEnabled="false"
                 android:layout_weight="1"
                 android:layout_height="115dp"
@@ -78,7 +78,7 @@
             <ImageView
                 android:layout_width="180dp"
                 android:id="@+id/imageView_button_pill"
-                android:src="@drawable/Test_button_ยา"
+                android:src="@drawable/Test_button_Medicine"
                 android:nestedScrollingEnabled="false"
                 android:layout_weight="1"
                 android:layout_height="115dp"
@@ -88,7 +88,7 @@
             <ImageView
                 android:layout_width="180dp"
                 android:id="@+id/imageView_button_doctor"
-                android:src="@drawable/Test_button_หมอ"
+                android:src="@drawable/Test_button_Doctor"
                 android:nestedScrollingEnabled="false"
                 android:layout_weight="1"
                 android:layout_height="115dp"

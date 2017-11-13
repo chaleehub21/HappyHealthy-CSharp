@@ -15,10 +15,9 @@ using System.IO;
 using System.Data;
 using SQLiteNetExtensions.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net.Attributes;
-using SQLite.Net;
 using Xamarin.Forms.Platform.Android;
 using System.Threading;
+using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {
