@@ -15,14 +15,13 @@ using System.IO;
 using System.Data;
 using SQLiteNetExtensions.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net.Attributes;
-using SQLite.Net;
 using Xamarin.Forms.Platform.Android;
 using System.Threading;
+using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {
-    [Table("DiabetesTABLE")]
+    [SQLite.Net.Attributes.Table("DiabetesTABLE")]
     class DiabetesTABLE : DatabaseHelper
     {
         public override List<string> Column => new List<string>()
@@ -33,12 +32,12 @@ namespace HappyHealthyCSharp
             "fbs_fbs_lvl",
             "ud_id"
         };
-        [PrimaryKey, AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int fbs_id { get; set; }
         public DateTime fbs_time { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal fbs_fbs { get; set; }
-        [MaxLength(4)]
+        [SQLite.Net.Attributes.MaxLength(4)]
         public int fbs_fbs_lvl { get; set; }
         [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }

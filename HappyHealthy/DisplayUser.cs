@@ -17,7 +17,7 @@ namespace HappyHealthyCSharp
 {
     
     [Activity(Theme = "@style/MyMaterialTheme.Base")]
-    class DisplayUser : Activity
+    class UserDetail : Activity
     {
         EditText txtName, txtAge, txtIdenNo, txtSex;
         protected override void OnCreate(Bundle savedInstanceState)

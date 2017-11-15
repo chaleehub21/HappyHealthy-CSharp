@@ -66,23 +66,15 @@ namespace HappyHealthyCSharp
             var dataList = new JavaList<IDictionary<string, object>>();
             var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
             var query = queryCustomized;
-            var backFromSQL = conn.Query<T>(query);
-            backFromSQL.ForEach(x =>
+            var queryResult = conn.Query<T>(query);
+            queryResult.ForEach(dataRow =>
             {
                 var data = new JavaDictionary<string, object>();
-                foreach(var attr in ColumnTags)
-                {
-                    if(x.GetType().GetProperty(attr).PropertyType == typeof(DateTime))
-                    {
-                        data.Add(attr, ((DateTime)x.GetType().GetProperty(attr).GetValue(x)).ToLocalTime());
-                    }
-                    else
-                    {
-                        data.Add(attr, x.GetType().GetProperty(attr).GetValue(x));
-                    }
-                }
+                ColumnTags.ForEach(attribute => {
+                    data.Add(attribute, dataRow.GetType().GetProperty(attribute).PropertyType == typeof(DateTime) ? ((DateTime)dataRow.GetType().GetProperty(attribute).GetValue(dataRow)).ToLocalTime() : dataRow.GetType().GetProperty(attribute).GetValue(dataRow)); 
+                });
                 dataList.Add(data);
-            });
+            }); //a little obfuscate code, try solve it for a little challenge :P
             conn.Close();
             return dataList;
         }
@@ -119,22 +111,24 @@ namespace HappyHealthyCSharp
         }
         public static bool CreateSQLiteTableIfNotExists()
         {
+            
             try
             {
                 var sqliteConn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                 sqliteConn.CreateTable<DiabetesTABLE>();
+                sqliteConn.CreateTable<DoctorTABLE>();
                 sqliteConn.CreateTable<FoodTABLE>();
                 sqliteConn.CreateTable<KidneyTABLE>();
                 sqliteConn.CreateTable<MedicineTABLE>();
                 sqliteConn.CreateTable<PressureTABLE>();
-                sqliteConn.CreateTable<UserTABLE>();
                 sqliteConn.CreateTable<SummaryDiabetesTABLE>();
+                sqliteConn.CreateTable<UserTABLE>();
                 CreateTriggers(sqliteConn);
                 sqliteConn.Close();
                 return true;
             }catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine($@"DEBUG LOG : {e.ToString()}");
                 return false;
             }
         }

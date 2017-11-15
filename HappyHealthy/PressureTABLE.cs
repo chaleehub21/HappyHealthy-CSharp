@@ -15,8 +15,6 @@ using System.IO;
 using System.Data;
 using SQLiteNetExtensions.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net.Attributes;
-using SQLite.Net;
 using System.Threading;
 
 namespace HappyHealthyCSharp
@@ -35,20 +33,20 @@ namespace HappyHealthyCSharp
             "bp_lo_lvl",
             "bp_hr_lvl",
         };
-        [PrimaryKey,AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int bp_id { get; set; }
         public DateTime bp_time { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal bp_up { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public decimal bp_lo { get; set; }
-        [MaxLength(3)]
+        [SQLite.Net.Attributes.MaxLength(3)]
         public int bp_hr { get; set; }
-        [MaxLength(4)]
+        [SQLite.Net.Attributes.MaxLength(4)]
         public int bp_up_lvl { get; set; }
-        [MaxLength(4)]
+        [SQLite.Net.Attributes.MaxLength(4)]
         public int bp_lo_lvl { get; set; }
-        [MaxLength(4)]
+        [SQLite.Net.Attributes.MaxLength(4)]
         public int bp_hr_lvl { get; set; }
         [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }

@@ -37,17 +37,37 @@ namespace HappyHealthyCSharp
             var bp = FindViewById<RadioButton>(Resource.Id.report_bp);
             
             fbs.Click += delegate {
-                view.Model = CreatePlotModel("กราฟ FBS",new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new DiabetesTABLE().Column), "fbs_time", "fbs_fbs");
+                view.Model = CreatePlotModel(
+                    "กราฟ FBS",
+                    new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", 
+                    new DiabetesTABLE().Column), 
+                    "fbs_time", 
+                    "fbs_fbs");
             };
             ckd.Click += delegate
             {
-                view.Model = CreatePlotModel("กราฟ CKD", new KidneyTABLE().GetJavaList<KidneyTABLE>($@"SELECT * FROM KidneyTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY CKD_TIME",new KidneyTABLE().Column), "ckd_time", "ckd_gfr");
+                view.Model = CreatePlotModel(
+                    "กราฟ CKD", 
+                    new KidneyTABLE().GetJavaList<KidneyTABLE>($@"SELECT * FROM KidneyTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY CKD_TIME",
+                    new KidneyTABLE().Column), 
+                    "ckd_time", 
+                    "ckd_gfr");
             };
             bp.Click += delegate {
-                view.Model = CreatePlotModel("กราฟ BP", new PressureTABLE().GetJavaList<PressureTABLE>($@"SELECT * FROM PressureTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",new PressureTABLE().Column), "bp_time", "bp_hr");
+                view.Model = CreatePlotModel(
+                    "กราฟ BP", 
+                    new PressureTABLE().GetJavaList<PressureTABLE>($@"SELECT * FROM PressureTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",
+                    new PressureTABLE().Column), 
+                    "bp_time", 
+                    "bp_hr");
             };
             fbs.Checked = true;
-            view.Model = CreatePlotModel("กราฟ FBS", new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", new DiabetesTABLE().Column), "fbs_time", "fbs_fbs");
+            view.Model = CreatePlotModel(
+                "กราฟ FBS", 
+                new DiabetesTABLE().GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME", 
+                new DiabetesTABLE().Column), 
+                "fbs_time", 
+                "fbs_fbs");
         }
         private PlotModel CreatePlotModel(string title,JavaList<IDictionary<string,object>> dataset,string key_time,string key_value)
         {
@@ -64,8 +84,8 @@ namespace HappyHealthyCSharp
             var endDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(15);
             var minDate = DateTimeAxis.ToDouble(startDate);
             var maxDate = DateTimeAxis.ToDouble(endDate);
-            var x = new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minDate, Maximum = maxDate, MajorStep = 10, StringFormat = "d-MMMM" };
-            var y = new LinearAxis { Position = AxisPosition.Left, Maximum = maxValue, Minimum = minValue };
+            var x = new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minDate, Maximum = maxDate, MajorStep = 10, StringFormat = "d-MMMM",FontSize=25 };
+            var y = new LinearAxis { Position = AxisPosition.Left, Maximum = maxValue, Minimum = minValue ,FontSize = 25};
             y.IsPanEnabled = false;
             y.IsZoomEnabled = false;
             plotModel.Axes.Add(x);
@@ -89,7 +109,7 @@ namespace HappyHealthyCSharp
                 DateTime.TryParse(Time.ToString(), out DateTime dateResult);
                 double value = Convert.ToDouble(Value.ToString());
                 series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult), value));
-                var textAnnotations = new TextAnnotation() { TextPosition = new DataPoint(series1.Points.Last().X, series1.Points.Last().Y), Text = value.ToString(), Stroke = OxyColors.White };
+                var textAnnotations = new TextAnnotation() { TextPosition = new DataPoint(series1.Points.Last().X, series1.Points.Last().Y), Text = value.ToString(), Stroke = OxyColors.White,FontSize = 10 };
                 plotModel.Annotations.Add(textAnnotations);
             }
             #region Conclusion-Initial

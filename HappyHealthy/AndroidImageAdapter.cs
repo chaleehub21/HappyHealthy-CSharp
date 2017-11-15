@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
 using Java.Lang;
+using Android.Graphics.Drawables;
+using Android.Graphics;
 
 namespace HappyHealthyCSharp
 {
@@ -41,7 +43,9 @@ namespace HappyHealthyCSharp
         public override Java.Lang.Object InstantiateItem(ViewGroup containter,int position)
         {
             var imageView = new ImageView(mContext);
-            imageView.SetImageResource(sliderImageId[position]);
+            //imageView.SetImageResource(sliderImageId[position]);
+            var bitmap = BitmapHelpers.Resize(mContext, sliderImageId[position], 375, 500);
+            imageView.SetImageBitmap(bitmap);
             var viewPager = containter.JavaCast<ViewPager>();
             viewPager.AddView(imageView);
             return imageView;
@@ -50,6 +54,7 @@ namespace HappyHealthyCSharp
         {
             var viewPager = container.JavaCast<ViewPager>();
             viewPager.RemoveView(objectValue as View);
+            objectValue.Dispose();
         }
     }
 }
