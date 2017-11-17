@@ -17,6 +17,7 @@ namespace HappyHealthyCSharp
     class Home : Activity
     {
         TextView labelTest;
+        List<string> TESTLIST;
         #region Experimental Section
         private bool isRecording;
         private readonly int VOICE = 10;
@@ -82,9 +83,25 @@ namespace HappyHealthyCSharp
                         if (textInput.Length > 500)
                             textInput = textInput.Substring(0, 500);
                         //GlobalFunction.createDialog(this, textInput).Show();
+
                         Toast.MakeText(this, textInput, ToastLength.Short);
                         labelTest = FindViewById<TextView>(Resource.Id.textView18);
                         labelTest.Text = textInput;
+                        TESTLIST = textInput.Split().ToList();
+                        //List<Dictionary<string, string>> dataList = new List<Dictionary<string, string>>();
+                        string output = string.Empty;
+                        for(var i = 0; i < TESTLIST.Count; i+=2)
+                        {
+                            try
+                            {
+                                output += $"Add Key {TESTLIST[i]} Value {TESTLIST[i + 1]}\n";
+                            }
+                            catch
+                            {
+                                output += "Error\n";
+                            }
+                        }
+                        Extension.CreateDialogue(this, output).Show();
                     }
                     else
                         Toast.MakeText(this, "Unrecognized", ToastLength.Short);

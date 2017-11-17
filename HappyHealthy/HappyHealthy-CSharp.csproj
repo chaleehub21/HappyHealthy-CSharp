@@ -137,6 +137,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountHelper.cs" />
     <Compile Include="Add_Food.cs" />
     <Compile Include="AndroidImageAdapter.cs" />
     <Compile Include="BitmapHelpers.cs" />

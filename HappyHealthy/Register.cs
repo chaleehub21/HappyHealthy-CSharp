@@ -64,7 +64,7 @@ namespace HappyHealthyCSharp
                         , ud_gender = mRadio.Checked ? "M" : "F"
                         , ud_birthdate = DateTime.Parse(insertDate)
                         , ud_email = email.Text
-                        ,ud_pass = Extension.CreatePasswordHash(pw.Text)
+                        ,ud_pass = AccountHelper.CreatePasswordHash(pw.Text)
                     };
                     //if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
                     if(user.Insert())

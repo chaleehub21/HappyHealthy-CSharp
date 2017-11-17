@@ -81,7 +81,7 @@ namespace HappyHealthyCSharp
                 }
                 */
 #endregion
-                if (Extension.ComparePassword(id.Text,pw.Text))
+                if (AccountHelper.ComparePassword(id.Text,pw.Text))
                 {
                     var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                     var sql = $@"select * from UserTABLE where ud_email = '{id.Text}'";

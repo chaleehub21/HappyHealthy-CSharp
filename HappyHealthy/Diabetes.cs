@@ -25,6 +25,7 @@ namespace HappyHealthyCSharp
         private bool isRecording;
         private readonly int VOICE = 10;
         DiabetesTABLE diaObject = null;
+        Dictionary<string, string> dataNLPList;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -49,7 +50,7 @@ namespace HappyHealthyCSharp
                 deleteButton.Click += DeleteValue;
             }
             //end
-            
+
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
             if (rec != "android.hardware.microphone")
             {
@@ -72,7 +73,6 @@ namespace HappyHealthyCSharp
                         voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
                         StartActivityForResult(voiceIntent, VOICE);
                     }
-                    //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
         }
 
@@ -92,7 +92,6 @@ namespace HappyHealthyCSharp
 
         private void UpdateValue(object sender, EventArgs e)
         {
-            //diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             diaObject.fbs_fbs = (decimal)double.Parse(BloodValue.Text);
             diaObject.ud_id = Extension.getPreference("ud_id", 0, this);
             diaObject.fbs_time = DateTime.Now.ToThaiLocale();
@@ -110,8 +109,20 @@ namespace HappyHealthyCSharp
                     if (matches.Count != 0)
                     {
                         string textInput = matches[0];
-                        if (int.TryParse(textInput,out int parseResult))
-                            BloodValue.Text = textInput;
+                        var textInputList = textInput.Split().ToList();
+                        dataNLPList = new Dictionary<string, string>();
+                        for (var i = 0; i < textInputList.Count; i += 2)
+                        {
+                            try
+                            {
+                                dataNLPList.Add(textInputList[i], textInputList[i + 1]);
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                        Extension.MapDictToControls(new[] { "น้ำตาล" },new[] { BloodValue},dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -119,10 +130,12 @@ namespace HappyHealthyCSharp
             }
             base.OnActivityResult(requestCode, resultVal, data);
         }
+
+        
+
         public void SaveValue(object sender, EventArgs e)
         {
             var diaTable = new DiabetesTABLE();
-            //diaTable.InsertFbsToSQL(BloodValue.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             diaTable.fbs_fbs = (decimal)double.Parse(BloodValue.Text);
             if (diaTable.fbs_fbs < 100)
                 diaTable.fbs_fbs_lvl = 0;
@@ -134,12 +147,11 @@ namespace HappyHealthyCSharp
             diaTable.fbs_time = DateTime.Now.ToThaiLocale();
             diaTable.Insert();
             this.Finish();
-
         }
+
         [Export("ClickBackDiaHome")]
         public void ClickBackDiaHome(View v)
         {
-            //StartActivity(new Intent(this, typeof(History_Diabetes)));
             this.Finish();
         }
     }
