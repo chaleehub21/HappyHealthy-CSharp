@@ -67,12 +67,17 @@ namespace HappyHealthyCSharp
                         ,ud_pass = AccountHelper.CreatePasswordHash(pw.Text)
                     };
                     //if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
-                    if(user.Insert())
+                    int getID = user.MySQLRegister();
+                    if (getID!=-999)
                     {
-                        Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
+                        user.ud_id = getID;
+                        if (user.Insert())
                         {
-                            this.Finish();
-                        }).Show();
+                            Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
+                            {
+                                this.Finish();
+                            }).Show();
+                        }
                     }
                     else
                     {

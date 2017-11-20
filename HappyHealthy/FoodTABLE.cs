@@ -50,7 +50,7 @@ namespace HappyHealthyCSharp
             {
                 var sqlconn = new MySqlConnection(Extension.remoteAccess);
                 var command = sqlconn.CreateCommand();
-                command.CommandText = $@"INSERT INTO FOOD VALUES(null,'{foodinstance.Food_NAME}',null,{foodinstance.Food_CAL},'{foodinstance.Food_UNIT}',{foodinstance.Food_NET_WEIGHT},'{foodinstance.Food_NET_UNIT}',{foodinstance.Food_PROTEIN},{foodinstance.Food_FAT},{foodinstance.Food_CARBOHYDRATE},{foodinstance.Food_SUGAR},{foodinstance.Food_SODIUM},'{foodinstance.Food_Detail}');";
+                command.CommandText = $@"INSERT INTO FoodTABLE VALUES(null,'{foodinstance.Food_NAME}',null,{foodinstance.Food_CAL},'{foodinstance.Food_UNIT}',{foodinstance.Food_NET_WEIGHT},'{foodinstance.Food_NET_UNIT}',{foodinstance.Food_PROTEIN},{foodinstance.Food_FAT},{foodinstance.Food_CARBOHYDRATE},{foodinstance.Food_SUGAR},{foodinstance.Food_SODIUM},'{foodinstance.Food_Detail}');";
                 sqlconn.Open();
                 command.ExecuteNonQuery();
                 return true;
@@ -64,7 +64,7 @@ namespace HappyHealthyCSharp
             var sqlconn = new MySqlConnection(Extension.remoteAccess);
             sqlconn.Open();
             var foodList = new JavaList<IDictionary<string, object>>();
-            var query = $@"SELECT * FROM Food where Food_NAME LIKE '%{word}%'";
+            var query = $@"SELECT * FROM FoodTABLE where Food_NAME LIKE '%{word}%'";
             var tickets = new DataSet();
             var adapter = new MySqlDataAdapter(query, sqlconn);
             adapter.Fill(tickets, "Food");

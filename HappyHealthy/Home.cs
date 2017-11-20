@@ -114,7 +114,6 @@ namespace HappyHealthyCSharp
 
         public void ClickFood(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             /*
             if (MySQLDatabaseHelper.TestConnection(Extension.remoteAccess) == true)
             {
@@ -125,11 +124,14 @@ namespace HappyHealthyCSharp
                 Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             }
             */
+            new DiabetesTABLE().Synchronize(this);
+            new PressureTABLE().Synchronize(this);
+            new KidneyTABLE().Synchronize(this);
         }
         public void ClickDiabetes(object sender,EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Diabetes)));
-        }
+        }   
         public void ClickKidney(object sender, EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Kidney)));
@@ -142,7 +144,7 @@ namespace HappyHealthyCSharp
         {
             //StartActivity(new Intent(this, typeof(Develop)));
             //GlobalFunction.createDialog(this, "Not implemented").Show();
-           
+            
         }
         public void ClickPill(object sender, EventArgs e)
         {

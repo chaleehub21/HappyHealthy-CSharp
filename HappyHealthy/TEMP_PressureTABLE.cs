@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+
+namespace HappyHealthyCSharp
+{
+    class TEMP_PressureTABLE
+    {
+        public int      bp_id_pointer   { get; set; }
+        public DateTime bp_time_new     { get; set; }
+        public DateTime bp_time_old     { get; set; }
+        public int      bp_up_new     { get; set; }
+        public int      bp_up_old     { get; set; }
+        public int      bp_lo_new     { get; set; }
+        public int      bp_lo_old     { get; set; }
+        public int      bp_hr_new     { get; set; }
+        public int      bp_hr_old     { get; set; }
+        public int      bp_up_lvl_new { get; set; }
+        public int      bp_up_lvl_old { get; set; }
+        public int      bp_lo_lvl_new { get; set; }
+        public int      bp_lo_lvl_old { get; set; }
+        public int      bp_hr_lvl_new { get; set; }
+        public int      bp_hr_lvl_old { get; set; }
+        public string   mode          { get; set; }
+    }
+}

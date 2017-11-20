@@ -23,7 +23,7 @@ namespace HappyHealthyCSharp
     {
         public override List<string> Column => throw new NotImplementedException();
         SQLitePlatformAndroid platform = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey]
         public int ud_id { get; set; }
         public string ud_iden_number { get; set; }
         public string ud_name { get; set; }
@@ -47,7 +47,30 @@ namespace HappyHealthyCSharp
         public UserTABLE()
         {
 
-        }    
+        }
+        public int MySQLRegister() {
+            try
+            {
+                var mConn = new MySqlConnection(Extension.remoteAccess);
+                mConn.Open();
+                var command = mConn.CreateCommand();
+                command.CommandText = $@"
+                    INSERT INTO UserTABLE
+                    VALUES(
+                        null
+                        ,'{ud_email}'
+                        ,'{ud_pass}'
+                    );
+                ";
+                command.ExecuteNonQuery();
+                command.CommandText = "SELECT MAX(ud_id) FROM UserTABLE";
+                return (int)command.ExecuteScalar();
+            }
+            catch
+            {
+                return -999;
+            }
+        }
 
     }
 }

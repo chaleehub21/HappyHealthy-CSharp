@@ -147,6 +147,7 @@
     <Compile Include="Doctor.cs" />
     <Compile Include="DoctorTABLE.cs" />
     <Compile Include="History_Doctor.cs" />
+    <Compile Include="IDatabaseSync.cs" />
     <Compile Include="SummaryDiabetesTABLE.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
@@ -156,6 +157,9 @@
     <Compile Include="IMySQL.cs" />
     <Compile Include="Pill.cs" />
     <Compile Include="MedicineTABLE.cs" />
+    <Compile Include="TEMP_DiabetestTABLE.cs" />
+    <Compile Include="TEMP_KidneyTABLE.cs" />
+    <Compile Include="TEMP_PressureTABLE.cs" />
     <Compile Include="UserTABLE.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="PressureTABLE.cs" />

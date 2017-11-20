@@ -202,7 +202,6 @@ namespace HappyHealthyCSharp
                     etArray[index].Text = data[keyWord[index]];
                 }
             }
-
         }
 
     }
