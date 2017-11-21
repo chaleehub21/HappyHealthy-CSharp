@@ -18,11 +18,12 @@ using SQLite.Net.Platform.XamarinAndroid;
 using Xamarin.Forms.Platform.Android;
 using System.Threading;
 using SQLite.Net.Attributes;
+using System.Threading.Tasks;
 
 namespace HappyHealthyCSharp
 {
     [SQLite.Net.Attributes.Table("DiabetesTABLE")]
-    class DiabetesTABLE : DatabaseHelper,IDatabaseSync
+    class DiabetesTABLE : DatabaseHelper, IDatabaseSync
     {
         public override List<string> Column => new List<string>()
         {
@@ -32,12 +33,12 @@ namespace HappyHealthyCSharp
             "fbs_fbs_lvl",
             "ud_id"
         };
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement,SQLite.Indexed(Name = "fbs_id",Unique = false)]
+        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement, SQLite.Indexed(Name = "fbs_id", Unique = false)]
         public int fbs_id { get; set; }
         public DateTime fbs_time { get; set; }
         public decimal fbs_fbs { get; set; }
         public int fbs_fbs_lvl { get; set; }
-        [SQLite.Indexed(Name = "ud_id",Unique = false)]
+        [SQLite.Indexed(Name = "ud_id", Unique = false)]
         public int ud_id { get; set; }
         [ManyToOne]
         public UserTABLE UserTABLE { get; set; }
@@ -45,38 +46,47 @@ namespace HappyHealthyCSharp
         //reconstruct of sqlite keys + attributes
         public DiabetesTABLE()
         {
-            
+
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
 
-        public void Synchronize(Context c)
+        public async void SynchronizeDataAsync(Context c)
         {
-            try
+            object threadResult = null;
+            await Task.Run(() =>
             {
-                var syncThread = new Thread(() => {
+                try
+                {
                     var conn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                     var mySQLConn = new MySqlConnection(Extension.remoteAccess);
                     mySQLConn.Open();
                     var MSCommand = mySQLConn.CreateCommand();
                     var result = conn.Query<TEMP_DiabetesTABLE>("SELECT * FROM Temp_DiabetesTABLE");
-                    result.ForEach(row => {
+                    result.ForEach(row =>
+                    {
                         if (row.mode == "I")
                         {
-                            MSCommand.CommandText = $"INSERT INTO ckd.DiabetesTABLE values({row.fbs_id_pointer},'{row.fbs_time_new.ToString("yyyy-MM-dd HH:mm:ss")}',{row.fbs_fbs_new},{row.fbs_fbs_lvl_new},{Extension.getPreference("ud_id", 0, c)})";
+                            MSCommand.CommandText =
+                            $"INSERT INTO ckd.DiabetesTABLE " +
+                            $"values({row.fbs_id_pointer}" +
+                            $",'{row.fbs_time_new.ToString("yyyy-MM-dd HH:mm:ss")}'" +
+                            $",{row.fbs_fbs_new}" +
+                            $",{row.fbs_fbs_lvl_new}" +
+                            $",{Extension.getPreference("ud_id", 0, c)})";
                         }
                         else if (row.mode == "U")
                         {
                             MSCommand.CommandText =
                             $@"UPDATE ckd.DiabetesTABLE 
-                        SET
-                            fbs_fbs = {row.fbs_fbs_new}
-                            ,fbs_time = '{row.fbs_time_new.ToString("yyyy-MM-dd HH:mm:ss")}'
-                            ,fbs_fbs_lvl = {row.fbs_fbs_lvl_new}
-                        WHERE 
-                            fbs_id = {row.fbs_id_pointer}
-                        AND
-                            ud_id = {Extension.getPreference("ud_id", 0, c)};
-                        ";
+                                SET
+                                    fbs_fbs = {row.fbs_fbs_new}
+                                    ,fbs_time = '{row.fbs_time_new.ToString("yyyy-MM-dd HH:mm:ss")}'
+                                    ,fbs_fbs_lvl = {row.fbs_fbs_lvl_new}
+                                WHERE 
+                                    fbs_id = {row.fbs_id_pointer}
+                                AND
+                                    ud_id = {Extension.getPreference("ud_id", 0, c)};
+                                ";
                         }
                         else if (row.mode == "D")
                         {
@@ -96,12 +106,16 @@ namespace HappyHealthyCSharp
                     mySQLConn.Close();
                     conn.DeleteAll<TEMP_DiabetesTABLE>();
                     conn.Close();
-                });
-                syncThread.Start();
-            }
-            catch (Exception e)
+                    threadResult = true;
+                }
+                catch
+                {
+                    threadResult = false;
+                }
+            });
+            if ((bool)threadResult == false)
             {
-                Console.WriteLine(e.ToString());
+                Extension.CreateDialogue(c, "Unable to push data to server").Show();
             }
         }
     }

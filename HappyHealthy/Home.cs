@@ -124,9 +124,6 @@ namespace HappyHealthyCSharp
                 Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             }
             */
-            new DiabetesTABLE().Synchronize(this);
-            new PressureTABLE().Synchronize(this);
-            new KidneyTABLE().Synchronize(this);
         }
         public void ClickDiabetes(object sender,EventArgs e)
         {

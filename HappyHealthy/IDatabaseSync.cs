@@ -14,6 +14,6 @@ namespace HappyHealthyCSharp
 {
     interface IDatabaseSync
     {
-        void Synchronize(Context c);
+        void SynchronizeDataAsync(Context c);
     }
 }

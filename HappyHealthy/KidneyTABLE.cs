@@ -16,21 +16,22 @@ using System.Data;
 using SQLiteNetExtensions.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace HappyHealthyCSharp
 {
-    class KidneyTABLE : DatabaseHelper,IDatabaseSync
+    class KidneyTABLE : DatabaseHelper, IDatabaseSync
     {
         public override List<string> Column => new List<string>() {
-            "ckd_id", 
+            "ckd_id",
             "ckd_time",
             "ckd_gfr",
-            "ckd_gfr_level", 
-            "ckd_creatinine", 
+            "ckd_gfr_level",
+            "ckd_creatinine",
             "ckd_bun",
-            "ckd_sodium", 
-            "ckd_potassium", 
-            "ckd_albumin_blood", 
+            "ckd_sodium",
+            "ckd_potassium",
+            "ckd_albumin_blood",
             "ckd_albumin_urine",
             "ckd_phosphorus_blood"
         };
@@ -65,17 +66,20 @@ namespace HappyHealthyCSharp
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
 
-        public void Synchronize(Context c)
+        public async void SynchronizeDataAsync(Context c)
         {
-            try
+            object threadResult = null;
+            await Task.Run(() =>
             {
-                var syncThread = new Thread(() => {
+                try
+                {
                     var conn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                     var mySQLConn = new MySqlConnection(Extension.remoteAccess);
                     mySQLConn.Open();
                     var MSCommand = mySQLConn.CreateCommand();
                     var result = conn.Query<TEMP_KidneyTABLE>("SELECT * FROM TEMP_KidneyTABLE");
-                    result.ForEach(row => {
+                    result.ForEach(row =>
+                    {
                         if (row.mode == "I")
                         {
                             MSCommand.CommandText = $"" +
@@ -86,12 +90,12 @@ namespace HappyHealthyCSharp
                             $",{row.ckd_gfr_new}" +
                             $",{row.ckd_gfr_level_new}" +
                             $",{row.ckd_creatinine_new}" +
-                            $",{row.ckd_bun_new}"+
-                            $",{row.ckd_sodium_new}"+
-                            $",{row.ckd_potassium_new}"+
-                            $",{row.ckd_albumin_blood_new}"+
-                            $",{row.ckd_albumin_urine_new}"+
-                            $",{row.ckd_phosphorus_blood_new}"+
+                            $",{row.ckd_bun_new}" +
+                            $",{row.ckd_sodium_new}" +
+                            $",{row.ckd_potassium_new}" +
+                            $",{row.ckd_albumin_blood_new}" +
+                            $",{row.ckd_albumin_urine_new}" +
+                            $",{row.ckd_phosphorus_blood_new}" +
                             $",{Extension.getPreference("ud_id", 0, c)})";
                         }
                         else if (row.mode == "U")
@@ -133,12 +137,16 @@ namespace HappyHealthyCSharp
                     mySQLConn.Close();
                     conn.DeleteAll<TEMP_KidneyTABLE>();
                     conn.Close();
-                });
-                syncThread.Start();
-            }
-            catch (Exception e)
+                    threadResult = true;
+                }
+                catch
+                {
+                    threadResult = false;
+                }
+            });
+            if ((bool)threadResult == false)
             {
-                Console.WriteLine(e.ToString());
+                Extension.CreateDialogue(c, "Unable to push data to server").Show();
             }
         }
     }

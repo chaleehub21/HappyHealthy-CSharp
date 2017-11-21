@@ -39,7 +39,7 @@ namespace HappyHealthyCSharp
                 return false;
             }
         }
-        virtual public JavaList<IDictionary<string, object>> GetJavaList<T>(string queryCustomized,List<string> ColumnTags) where T : class
+        virtual public JavaList<IDictionary<string, object>> GetJavaList<T>(string queryCustomized,List<string> columnTag) where T : class
         {
             #region MySQL
             /*
@@ -70,7 +70,7 @@ namespace HappyHealthyCSharp
             queryResult.ForEach(dataRow =>
             {
                 var data = new JavaDictionary<string, object>();
-                ColumnTags.ForEach(attribute => {
+                columnTag.ForEach(attribute => {
                     data.Add(attribute, dataRow.GetType().GetProperty(attribute).PropertyType == typeof(DateTime) ? ((DateTime)dataRow.GetType().GetProperty(attribute).GetValue(dataRow)).ToLocalTime() : dataRow.GetType().GetProperty(attribute).GetValue(dataRow)); 
                 });
                 dataList.Add(data);
@@ -171,6 +171,81 @@ namespace HappyHealthyCSharp
             }
             catch
             {
+                return false;
+            }
+        }
+        public static bool GetDataFromMySQLToSQLite(string email,string password)
+        {
+            try
+            {
+                var mySQLConn = new MySqlConnection(Extension.remoteAccess);
+                mySQLConn.Open();
+                var mySQLCommand = mySQLConn.CreateCommand();
+                mySQLCommand.CommandText = $"SELECT ud_pass FROM UserTABLE WHERE ud_email = '{email}'";
+                var result = (string)mySQLCommand.ExecuteScalar();
+                Console.WriteLine(result);
+                if (AccountHelper.ComparePassword(password,result))
+                {
+                    var query = $"SELECT * FROM UserTABLE WHERE ud_email = '{email}'";
+                    var tickets = new DataSet();
+                    var adapter = new MySqlDataAdapter(query, mySQLConn);
+                    adapter.Fill(tickets, "UserTABLE");
+                    foreach(DataRow row in tickets.Tables["UserTABLE"].Rows)
+                    {
+                        var tempUser = new UserTABLE();
+                        tempUser.ud_id = Convert.ToInt32(row[0].ToString());
+                        tempUser.ud_birthdate = DateTime.Now;
+                        tempUser.ud_gender = "n/a";
+                        tempUser.ud_name = row[1].ToString();
+                        tempUser.ud_email = row[1].ToString();
+                        tempUser.ud_pass = row[2].ToString();
+                        tempUser.Insert();
+                    }
+                    
+                    query = $"SELECT * FROM DiabetesTABLE " +
+                            $"WHERE ud_id = (SELECT ud_id FROM UserTABLE " +
+                            $"               WHERE ud_email = '{email}')";
+                    tickets = new DataSet();
+                    adapter = new MySqlDataAdapter(query, mySQLConn);
+                    adapter.Fill(tickets, "DiabetesTABLE");
+                    foreach(DataRow row in tickets.Tables["DiabetesTABLE"].Rows)
+                    {
+                        var tempDiabetes = new DiabetesTABLE();
+                        tempDiabetes.fbs_id = Convert.ToInt32(row[0].ToString());
+                        tempDiabetes.fbs_time = ((DateTime)row[1]).ToThaiLocale();
+                        tempDiabetes.fbs_fbs = Convert.ToDecimal(row[2].ToString());
+                        tempDiabetes.fbs_fbs_lvl = Convert.ToInt32(row[3].ToString());
+                        tempDiabetes.ud_id = Convert.ToInt32(row[4].ToString());
+                        tempDiabetes.Insert();
+                    }
+
+                    query = $"SELECT * FROM PressureTABLE " +
+                            $"WHERE ud_id = (SELECT ud_id FROM UserTABLE " +
+                            $"               WHERE ud_email = '{email}')";
+                    Console.WriteLine(query);
+                    tickets = new DataSet();
+                    adapter = new MySqlDataAdapter(query, mySQLConn);
+                    adapter.Fill(tickets, "PressureTABLE");
+                    foreach (DataRow row in tickets.Tables["PressureTABLE"].Rows)
+                    {
+                        var tempPressure = new PressureTABLE();
+                        tempPressure.bp_id = Convert.ToInt32(row[0].ToString());
+                        tempPressure.bp_time = ((DateTime)row[1]).ToThaiLocale();
+                        tempPressure.bp_up = Convert.ToDecimal(row[2].ToString());
+                        tempPressure.bp_lo = Convert.ToDecimal(row[3].ToString());
+                        tempPressure.bp_hr = Convert.ToInt32(row[4].ToString());
+                        tempPressure.bp_up_lvl = Convert.ToInt32(row[5].ToString());
+                        tempPressure.bp_lo_lvl = Convert.ToInt32(row[6].ToString());
+                        tempPressure.bp_hr_lvl = Convert.ToInt32(row[7].ToString());
+                        tempPressure.ud_id = Convert.ToInt32(row[8].ToString());
+                        tempPressure.Insert();
+                    }
+                }
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
                 return false;
             }
         }

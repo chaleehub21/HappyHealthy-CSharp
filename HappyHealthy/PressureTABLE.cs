@@ -16,11 +16,12 @@ using System.Data;
 using SQLiteNetExtensions.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace HappyHealthyCSharp
 {
-    
-    class PressureTABLE : DatabaseHelper,IDatabaseSync
+
+    class PressureTABLE : DatabaseHelper, IDatabaseSync
     {
         public override List<string> Column => new List<string>()
         {
@@ -59,17 +60,20 @@ namespace HappyHealthyCSharp
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
 
-        public void Synchronize(Context c)
+        public async void SynchronizeDataAsync(Context c)
         {
-            try
+            object threadResult = null;
+            await Task.Run(() =>
             {
-                var syncThread = new Thread(() => {
+                try
+                {
                     var conn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
                     var mySQLConn = new MySqlConnection(Extension.remoteAccess);
                     mySQLConn.Open();
                     var MSCommand = mySQLConn.CreateCommand();
                     var result = conn.Query<TEMP_PressureTABLE>("SELECT * FROM Temp_PressureTABLE");
-                    result.ForEach(row => {
+                    result.ForEach(row =>
+                    {
                         if (row.mode == "I")
                         {
                             MSCommand.CommandText =
@@ -101,13 +105,17 @@ namespace HappyHealthyCSharp
                             WHERE
                                 bp_id = {row.bp_id_pointer}
                             AND
-                                ud_id = {Extension.getPreference("ud_id",0,c)}
-                        ";       
+                                ud_id = {Extension.getPreference("ud_id", 0, c)}
+                        ";
                         }
                         else if (row.mode == "D")
                         {
                             MSCommand.CommandText =
-                            $@"DELETE FROM ckd.PressureTABLE where bp_id = {row.bp_id_pointer} AND ud_id = {Extension.getPreference("ud_id", 0, c)};";
+                            $@"DELETE FROM ckd.PressureTABLE 
+                            WHERE 
+                                bp_id = {row.bp_id_pointer} 
+                            AND 
+                                ud_id = {Extension.getPreference("ud_id", 0, c)};";
                         }
                         Console.WriteLine(MSCommand.CommandText);
                         try
@@ -122,12 +130,16 @@ namespace HappyHealthyCSharp
                     mySQLConn.Close();
                     conn.DeleteAll<TEMP_PressureTABLE>();
                     conn.Close();
-                });
-                syncThread.Start();
-            }
-            catch (Exception e)
+                    threadResult = true;
+                }
+                catch
+                {
+                    threadResult = false;
+                }
+            });
+            if ((bool)threadResult == false)
             {
-                Console.WriteLine(e.ToString());
+                Extension.CreateDialogue(c, "Unable to push data to server").Show();
             }
         }
     }

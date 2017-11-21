@@ -28,14 +28,11 @@ namespace HappyHealthyCSharp
             Array.Copy(hash, 0, hashBytes, 16, 20);
             return Convert.ToBase64String(hashBytes);
         }
-        public static bool ComparePassword(string email, string password)
+        public static bool ComparePassword(string password,string passwordHash)
         {
             try
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-                var sql = $@"select * from UserTABLE where ud_email = '{email}'";
-                var result = conn.Query<UserTABLE>(sql);
-                byte[] hashBytes = Convert.FromBase64String(result[0].ud_pass);
+                byte[] hashBytes = Convert.FromBase64String(passwordHash);
                 byte[] salt = new byte[16];
                 Array.Copy(hashBytes, 0, salt, 0, 16);
                 var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
