@@ -238,19 +238,14 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var mySQLConn = new MySqlConnection(Extension.remoteAccess);
-                mySQLConn.Open();
-                var mySQLCommand = mySQLConn.CreateCommand();
-                mySQLCommand.CommandText = $"SELECT ud_pass FROM UserTABLE WHERE ud_email = '{email}'";
-                var result = (string)mySQLCommand.ExecuteScalar();
-                Console.WriteLine(result);
-                if (AccountHelper.ComparePassword(password, result))
+                var Service = new HHCSService.HHCSService();
+                var userData = Service.GetData("UserTABLE", email, password);
+                var diabetesData = Service.GetData("DiabetesTABLE", email, password);
+                var kidneyData = Service.GetData("KidneyTABLE", email, password);
+                var pressureData = Service.GetData("PressureTABLE", email, password);
+                if (userData!=null)
                 {
-                    var query = $"SELECT * FROM UserTABLE WHERE ud_email = '{email}'";
-                    var tickets = new DataSet();
-                    var adapter = new MySqlDataAdapter(query, mySQLConn);
-                    adapter.Fill(tickets, "UserTABLE");
-                    foreach (DataRow row in tickets.Tables["UserTABLE"].Rows)
+                    foreach (DataRow row in ((DataSet)userData).Tables["UserTABLE"].Rows)
                     {
                         var tempUser = new UserTABLE();
                         tempUser.ud_id = Convert.ToInt32(row[0].ToString());
@@ -261,14 +256,7 @@ namespace HappyHealthyCSharp
                         tempUser.ud_pass = row[2].ToString();
                         tempUser.Insert();
                     }
-
-                    query = $"SELECT * FROM DiabetesTABLE " +
-                            $"WHERE ud_id = (SELECT ud_id FROM UserTABLE " +
-                            $"               WHERE ud_email = '{email}')";
-                    tickets = new DataSet();
-                    adapter = new MySqlDataAdapter(query, mySQLConn);
-                    adapter.Fill(tickets, "DiabetesTABLE");
-                    foreach (DataRow row in tickets.Tables["DiabetesTABLE"].Rows)
+                    foreach (DataRow row in ((DataSet)diabetesData).Tables["DiabetesTABLE"].Rows)
                     {
                         var tempDiabetes = new DiabetesTABLE();
                         tempDiabetes.fbs_id = Convert.ToInt32(row[0].ToString());
@@ -279,15 +267,7 @@ namespace HappyHealthyCSharp
                         tempDiabetes.ud_id = Convert.ToInt32(row[4].ToString());
                         tempDiabetes.Insert();
                     }
-                    query = $@"SELECT * FROM KidneyTABLE
-                            WHERE ud_id = (SELECT ud_id FROM UserTABLE
-                                            WHERE ud_email = '{email}')";
-                   
-                    Console.WriteLine(query);
-                    tickets = new DataSet();
-                    adapter = new MySqlDataAdapter(query, mySQLConn);
-                    adapter.Fill(tickets, "KidneyTABLE");
-                    foreach(DataRow row in tickets.Tables["KidneyTABLE"].Rows)
+                    foreach(DataRow row in ((DataSet)kidneyData).Tables["KidneyTABLE"].Rows)
                     {
                         var tempKidney = new KidneyTABLE();
                         tempKidney.ckd_id = Convert.ToInt32(row[0].ToString());
@@ -305,15 +285,7 @@ namespace HappyHealthyCSharp
                         tempKidney.ud_id = Convert.ToInt32(row[11].ToString());
                         tempKidney.Insert();
                     }
-                    //
-                    query = $"SELECT * FROM PressureTABLE " +
-                            $"WHERE ud_id = (SELECT ud_id FROM UserTABLE " +
-                            $"               WHERE ud_email = '{email}')";
-                    Console.WriteLine(query);
-                    tickets = new DataSet();
-                    adapter = new MySqlDataAdapter(query, mySQLConn);
-                    adapter.Fill(tickets, "PressureTABLE");
-                    foreach (DataRow row in tickets.Tables["PressureTABLE"].Rows)
+                    foreach (DataRow row in ((DataSet)pressureData).Tables["PressureTABLE"].Rows)
                     {
                         var tempPressure = new PressureTABLE();
                         tempPressure.bp_id = Convert.ToInt32(row[0].ToString());
