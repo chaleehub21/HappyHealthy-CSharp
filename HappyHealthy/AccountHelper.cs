@@ -49,8 +49,6 @@ namespace HappyHealthyCSharp
             catch
             {
                 return false;
-                var str = string.Empty;
-
             }
         }
     }

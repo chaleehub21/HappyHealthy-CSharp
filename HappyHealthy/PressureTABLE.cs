@@ -27,6 +27,7 @@ namespace HappyHealthyCSharp
         {
             "bp_id",
             "bp_time",
+            "bp_time_string",
             "bp_up",
             "bp_lo",
             "bp_hr",
@@ -34,9 +35,10 @@ namespace HappyHealthyCSharp
             "bp_lo_lvl",
             "bp_hr_lvl",
         };
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey]
         public int bp_id { get; set; }
         public DateTime bp_time { get; set; }
+        public string bp_time_string { get; set; }
         [SQLite.Net.Attributes.MaxLength(3)]
         public decimal bp_up { get; set; }
         [SQLite.Net.Attributes.MaxLength(3)]
@@ -49,7 +51,6 @@ namespace HappyHealthyCSharp
         public int bp_lo_lvl { get; set; }
         [SQLite.Net.Attributes.MaxLength(4)]
         public int bp_hr_lvl { get; set; }
-        [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
         [ManyToOne]
         public UserTABLE UserTABLE { get; set; }
@@ -95,7 +96,7 @@ namespace HappyHealthyCSharp
                             MSCommand.CommandText =
                             $@"UPDATE ckd.PressureTABLE
                             SET
-                               bp_time  = '{row.bp_time_new.ToString("yyyy-MM-dd HH:mm:ss")}'
+                               bp_time  = '{row.bp_time_string_new}'
                               ,bp_up    = {row.bp_up_new}
                               ,bp_lo    = {row.bp_lo_new}
                               ,bp_hr    = {row.bp_hr_new}

@@ -25,6 +25,7 @@ namespace HappyHealthyCSharp
         public override List<string> Column => new List<string>() {
             "ckd_id",
             "ckd_time",
+            "ckd_time_string",
             "ckd_gfr",
             "ckd_gfr_level",
             "ckd_creatinine",
@@ -35,9 +36,10 @@ namespace HappyHealthyCSharp
             "ckd_albumin_urine",
             "ckd_phosphorus_blood"
         };
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey]
         public int ckd_id { get; set; }
         public DateTime ckd_time { get; set; }
+        public string ckd_time_string { get; set; }
         [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_gfr { get; set; }
         [SQLite.Net.Attributes.MaxLength(4)]
@@ -56,7 +58,6 @@ namespace HappyHealthyCSharp
         public decimal ckd_albumin_urine { get; set; }
         [SQLite.Net.Attributes.MaxLength(3)]
         public decimal ckd_phosphorus_blood { get; set; }
-        [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
         [SQLiteNetExtensions.Attributes.ManyToOne]
         public UserTABLE UserTABLE { get; set; }
@@ -103,7 +104,7 @@ namespace HappyHealthyCSharp
                             MSCommand.CommandText =
                             $@"UPDATE ckd.KidneyTABLE 
                         SET
-                            ckd_time        = '{row.ckd_time_new.ToString("yyyy-MM-dd HH:mm:ss")}'
+                            ckd_time        = '{row.ckd_time_string_new}'
                             ,ckd_gfr        = {row.ckd_gfr_new}
                             ,ckd_gfr_level  = {row.ckd_gfr_level_new}
                             ,ckd_creatinine = {row.ckd_creatinine_new}

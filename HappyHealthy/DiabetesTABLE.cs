@@ -29,16 +29,17 @@ namespace HappyHealthyCSharp
         {
             "fbs_id",
             "fbs_time",
+            "fbs_time_string",
             "fbs_fbs",
             "fbs_fbs_lvl",
             "ud_id"
         };
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement, SQLite.Indexed(Name = "fbs_id", Unique = false)]
+        [SQLite.Net.Attributes.PrimaryKey]
         public int fbs_id { get; set; }
         public DateTime fbs_time { get; set; }
+        public string fbs_time_string { get; set; }
         public decimal fbs_fbs { get; set; }
         public int fbs_fbs_lvl { get; set; }
-        [SQLite.Indexed(Name = "ud_id", Unique = false)]
         public int ud_id { get; set; }
         [ManyToOne]
         public UserTABLE UserTABLE { get; set; }
@@ -80,7 +81,7 @@ namespace HappyHealthyCSharp
                             $@"UPDATE ckd.DiabetesTABLE 
                                 SET
                                     fbs_fbs = {row.fbs_fbs_new}
-                                    ,fbs_time = '{row.fbs_time_new.ToString("yyyy-MM-dd HH:mm:ss")}'
+                                    ,fbs_time = '{row.fbs_time_string_new}'
                                     ,fbs_fbs_lvl = {row.fbs_fbs_lvl_new}
                                 WHERE 
                                     fbs_id = {row.fbs_id_pointer}
@@ -98,9 +99,9 @@ namespace HappyHealthyCSharp
                         {
                             MSCommand.ExecuteNonQuery();
                         }
-                        catch
+                        catch(Exception e)
                         {
-
+                            Console.WriteLine(e.Message);
                         }
                     });
                     mySQLConn.Close();

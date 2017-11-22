@@ -79,7 +79,14 @@ namespace HappyHealthyCSharp
         public void SaveValue(object sender, EventArgs e)
         {
             var bpTable = new PressureTABLE();
-            //bpTable.InsertPressureToSQL(BPUp.Text, BPLow.Text, HeartRate.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
+            try
+            {
+                bpTable.bp_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(ckd_id)+1 FROM KidneyTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+            }
+            catch
+            {
+                bpTable.bp_id = 1;
+            }
             bpTable.bp_up = Convert.ToDecimal(BPUp.Text);
 #region bp_up_level case
             if (bpTable.bp_up < 120)
@@ -112,10 +119,9 @@ namespace HappyHealthyCSharp
 #endregion
             bpTable.bp_hr = Convert.ToInt32(HeartRate.Text);
 
-            bpTable.bp_time = DateTime.Now.ToThaiLocale();
+            bpTable.bp_time = DateTime.Now;
             bpTable.ud_id = Extension.getPreference("ud_id", 0, this);
             bpTable.Insert();
-            //GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
             this.Finish();
 
         }

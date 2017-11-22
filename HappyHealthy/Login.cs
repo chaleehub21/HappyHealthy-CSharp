@@ -25,11 +25,6 @@ namespace HappyHealthyCSharp
             base.OnCreate(savedInstanceState);
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             SetContentView(Resource.Layout.activity_login);
-            // Synchronize data if possible
-            new DiabetesTABLE().SynchronizeDataAsync(this);
-            new PressureTABLE().SynchronizeDataAsync(this);
-            new KidneyTABLE().SynchronizeDataAsync(this);
-
             // Create your application here
 
             //is Cache data available?
@@ -48,17 +43,24 @@ namespace HappyHealthyCSharp
             pw.Text = "123456";
             login.Click += delegate
             {
-                if((new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0) || (new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE").Count == 0))
+                if(new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE").Count == 0)
                 {
                     MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id.Text, pw.Text);
                 }
-                if (AccountHelper.ComparePassword(pw.Text,new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'")[0].ud_pass))
+                try
                 {
-                    Initialization(id);
-                    StartActivity(typeof(MainActivity));
-                    this.Finish();
+                    if (AccountHelper.ComparePassword(pw.Text, new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'")[0].ud_pass))
+                    {
+                        Initialization(id);
+                        StartActivity(typeof(MainActivity));
+                        this.Finish();
+                    }
+                    else
+                    {
+                        Extension.CreateDialogue(this, "Access Denied").Show();
+                    }
                 }
-                else
+                catch
                 {
                     Extension.CreateDialogue(this, "Access Denied").Show();
                 }

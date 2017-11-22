@@ -136,6 +136,14 @@ namespace HappyHealthyCSharp
         public void SaveValue(object sender, EventArgs e)
         {
             var diaTable = new DiabetesTABLE();
+            try
+            {
+                diaTable.fbs_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(fbs_id)+1 FROM DiabetesTABLE WHERE ud_id = {Extension.getPreference("ud_id",0,this)}");
+            }
+            catch
+            {
+                diaTable.fbs_id = 1;
+            }
             diaTable.fbs_fbs = (decimal)double.Parse(BloodValue.Text);
             if (diaTable.fbs_fbs < 100)
                 diaTable.fbs_fbs_lvl = 0;
@@ -144,7 +152,7 @@ namespace HappyHealthyCSharp
             else if (diaTable.fbs_fbs >= 126)
                 diaTable.fbs_fbs_lvl = 2;
             diaTable.ud_id = Extension.getPreference("ud_id", 0, this);
-            diaTable.fbs_time = DateTime.Now.ToThaiLocale();
+            diaTable.fbs_time = DateTime.Now;
             diaTable.Insert();
             this.Finish();
         }
