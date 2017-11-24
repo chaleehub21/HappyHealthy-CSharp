@@ -107,6 +107,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
@@ -167,7 +168,6 @@
     <Compile Include="PressureTABLE.cs" />
     <Compile Include="KidneyTABLE.cs" />
     <Compile Include="DisplayUser.cs" />
-    <Compile Include="ExerciseType.cs" />
     <Compile Include="FoodDetail.cs" />
     <Compile Include="DiabetesTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />
@@ -1171,10 +1171,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.1.2/HHCSService/HHCSService.asmx">
+    <WebReferenceUrl Include="http://172.20.96.107/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HHCSService\</RelPath>
-      <UpdateFromURL>http://192.168.1.2/HHCSService/HHCSService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://172.20.96.107/HHCSService/HHCSService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

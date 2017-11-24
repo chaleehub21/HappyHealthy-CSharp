@@ -46,7 +46,7 @@ namespace HappyHealthyCSharp
             view_animation = AnimationUtils.LoadAnimation(this, Resource.Animation.fade_in);
             imageView.StartAnimation(view_animation);
             view_animation.AnimationEnd += delegate {
-                t2sEngine.Speak("Hello World!");
+                //t2sEngine.Speak("Hello World!");
                 StartActivity(typeof(Login));
             };
         }

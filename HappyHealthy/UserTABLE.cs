@@ -48,29 +48,5 @@ namespace HappyHealthyCSharp
         {
 
         }
-        public int MySQLRegister() {
-            try
-            {
-                var mConn = new MySqlConnection(Extension.remoteAccess);
-                mConn.Open();
-                var command = mConn.CreateCommand();
-                command.CommandText = $@"
-                    INSERT INTO UserTABLE
-                    VALUES(
-                        null
-                        ,'{ud_email}'
-                        ,'{ud_pass}'
-                    );
-                ";
-                command.ExecuteNonQuery();
-                command.CommandText = "SELECT MAX(ud_id) FROM UserTABLE";
-                return (int)command.ExecuteScalar();
-            }
-            catch
-            {
-                return -999;
-            }
-        }
-
     }
 }

@@ -66,11 +66,12 @@ namespace HappyHealthyCSharp
                         , ud_email = email.Text
                         ,ud_pass = AccountHelper.CreatePasswordHash(pw.Text)
                     };
-                    //if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
-                    int getID = user.MySQLRegister();
-                    if (getID!=-999)
+                    var Service = new HHCSService.HHCSService();
+                    object[] returnData = Service.Register(email.Text, pw.Text);
+                    if (returnData!=null)
                     {
-                        user.ud_id = getID;
+                        user.ud_id = (int)returnData[0];
+                        user.ud_pass = (string)returnData[1];
                         if (user.Insert())
                         {
                             Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate

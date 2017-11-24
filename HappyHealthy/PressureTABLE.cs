@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace HappyHealthyCSharp
 {
 
-    class PressureTABLE : DatabaseHelper, IDatabaseSync
+    class PressureTABLE : DatabaseHelper
     {
         public override List<string> Column => new List<string>()
         {
@@ -59,89 +59,6 @@ namespace HappyHealthyCSharp
         {
 
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
-        }
-
-        public async void SynchronizeDataAsync(Context c)
-        {
-            object threadResult = null;
-            await Task.Run(() =>
-            {
-                try
-                {
-                    var conn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-                    var mySQLConn = new MySqlConnection(Extension.remoteAccess);
-                    mySQLConn.Open();
-                    var MSCommand = mySQLConn.CreateCommand();
-                    var result = conn.Query<TEMP_PressureTABLE>("SELECT * FROM Temp_PressureTABLE");
-                    result.ForEach(row =>
-                    {
-                        if (row.mode == "I")
-                        {
-                            MSCommand.CommandText =
-                            $"INSERT INTO ckd.PressureTABLE " +
-                            $"values(" +
-                            $"{row.bp_id_pointer}" +
-                            $",'{row.bp_time_new.ToString("yyyy-MM-dd HH:mm:ss")}'" +
-                            $",{row.bp_up_new}" +
-                            $",{row.bp_lo_new}" +
-                            $",{row.bp_hr_new}" +
-                            $",{row.bp_up_lvl_new}" +
-                            $",{row.bp_lo_lvl_new}" +
-                            $",{row.bp_hr_lvl_new}" +
-                            $",{Extension.getPreference("ud_id", 0, c)}" +
-                            $")";
-                        }
-                        else if (row.mode == "U")
-                        {
-                            MSCommand.CommandText =
-                            $@"UPDATE ckd.PressureTABLE
-                            SET
-                               bp_time  = '{row.bp_time_string_new}'
-                              ,bp_up    = {row.bp_up_new}
-                              ,bp_lo    = {row.bp_lo_new}
-                              ,bp_hr    = {row.bp_hr_new}
-                              ,bp_up_lvl = {row.bp_up_lvl_new}
-                              ,bp_lo_lvl = {row.bp_lo_lvl_new}
-                              ,bp_hr_lvl = {row.bp_hr_lvl_new}
-                            WHERE
-                                bp_id = {row.bp_id_pointer}
-                            AND
-                                ud_id = {Extension.getPreference("ud_id", 0, c)}
-                        ";
-                        }
-                        else if (row.mode == "D")
-                        {
-                            MSCommand.CommandText =
-                            $@"DELETE FROM ckd.PressureTABLE 
-                            WHERE 
-                                bp_id = {row.bp_id_pointer} 
-                            AND 
-                                ud_id = {Extension.getPreference("ud_id", 0, c)};";
-                        }
-                        Console.WriteLine(MSCommand.CommandText);
-                        try
-                        {
-                            MSCommand.ExecuteNonQuery();
-                        }
-                        catch
-                        {
-
-                        }
-                    });
-                    mySQLConn.Close();
-                    conn.DeleteAll<TEMP_PressureTABLE>();
-                    conn.Close();
-                    threadResult = true;
-                }
-                catch
-                {
-                    threadResult = false;
-                }
-            });
-            if ((bool)threadResult == false)
-            {
-                Extension.CreateDialogue(c, "Unable to push data to server").Show();
-            }
         }
     }
 }

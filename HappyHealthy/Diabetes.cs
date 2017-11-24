@@ -138,7 +138,7 @@ namespace HappyHealthyCSharp
             var diaTable = new DiabetesTABLE();
             try
             {
-                diaTable.fbs_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(fbs_id)+1 FROM DiabetesTABLE WHERE ud_id = {Extension.getPreference("ud_id",0,this)}");
+                diaTable.fbs_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(fbs_id)+1 FROM DiabetesTABLE");
             }
             catch
             {

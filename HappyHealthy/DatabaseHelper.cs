@@ -300,8 +300,13 @@ namespace HappyHealthyCSharp
                         tempPressure.ud_id = Convert.ToInt32(row[8].ToString());
                         tempPressure.Insert();
                     }
+                    var sqliteInstance = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                    sqliteInstance.DeleteAll<TEMP_DiabetesTABLE>();
+                    sqliteInstance.DeleteAll<TEMP_KidneyTABLE>();
+                    sqliteInstance.DeleteAll<TEMP_PressureTABLE>();
+                    return true;
                 }
-                return true;
+                return false;
             }
             catch (Exception e)
             {

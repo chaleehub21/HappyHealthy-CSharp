@@ -43,7 +43,7 @@ namespace HappyHealthyCSharp
             pw.Text = "123456";
             login.Click += delegate
             {
-                if(new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE").Count == 0)
+                if(new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0)
                 {
                     MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id.Text, pw.Text);
                 }
@@ -51,7 +51,7 @@ namespace HappyHealthyCSharp
                 {
                     if (AccountHelper.ComparePassword(pw.Text, new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'")[0].ud_pass))
                     {
-                        Initialization(id);
+                        Initialization(id.Text,pw.Text);
                         StartActivity(typeof(MainActivity));
                         this.Finish();
                     }
@@ -77,13 +77,13 @@ namespace HappyHealthyCSharp
             };
         }
 
-        private void Initialization(EditText id)
+        private void Initialization(string id,string password)
         {
             var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-            var sql = $@"select * from UserTABLE where ud_email = '{id.Text}'";
+            var sql = $@"select * from UserTABLE where ud_email = '{id}'";
             var result = conn.Query<UserTABLE>(sql);
-            Extension.setPreference("ud_email", result[0].ud_email, this);
-            Extension.setPreference("ud_pass", result[0].ud_pass, this);
+            Extension.setPreference("ud_email", id, this);
+            Extension.setPreference("ud_pass", password, this);
             Extension.setPreference("ud_id", result[0].ud_id, this);
         }
     }

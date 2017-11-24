@@ -81,7 +81,7 @@ namespace HappyHealthyCSharp
             var bpTable = new PressureTABLE();
             try
             {
-                bpTable.bp_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(ckd_id)+1 FROM KidneyTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+                bpTable.bp_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(ckd_id)+1 FROM KidneyTABLE");
             }
             catch
             {

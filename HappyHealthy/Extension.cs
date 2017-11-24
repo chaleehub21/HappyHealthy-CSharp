@@ -23,7 +23,7 @@ namespace HappyHealthyCSharp
     public static class Extension
     {
         //public static readonly string remoteAccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
-        public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
+        //public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         public static readonly string sqliteDBPath = Path.Combine(fileStorePath, "hhcs.db3");
         public static readonly int flagValue = -9521;
