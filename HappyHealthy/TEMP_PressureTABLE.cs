@@ -52,7 +52,8 @@ namespace HappyHealthyCSharp
         public int      bp_hr_lvl_old { get; set; }
         [DataMember]
         public string   mode          { get; set; }
-
+        [DataMember]
+        public int ud_id { get; set; }
         public override List<string> Column => throw new NotImplementedException();
     }
 }

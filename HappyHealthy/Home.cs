@@ -135,7 +135,7 @@ namespace HappyHealthyCSharp
                 var diaList = new List<HHCSService.TEMP_DiabetesTABLE>();
                 var kidList = new List<HHCSService.TEMP_KidneyTABLE>();
                 var presList = new List<HHCSService.TEMP_PressureTABLE>();
-                new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE").ForEach(row =>
+                new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id",0,this)}'").ForEach(row =>
                 {
                     var wsObject = new HHCSService.TEMP_DiabetesTABLE();
                     wsObject.fbs_id_pointer = row.fbs_id_pointer;
@@ -149,7 +149,7 @@ namespace HappyHealthyCSharp
                     wsObject.mode = row.mode;
                     diaList.Add(wsObject);
                 });
-                new TEMP_KidneyTABLE().Select<TEMP_KidneyTABLE>($"SELECT * FROM TEMP_KidneyTABLE").ForEach(row => {
+                new TEMP_KidneyTABLE().Select<TEMP_KidneyTABLE>($"SELECT * FROM TEMP_KidneyTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row => {
                     var wsObject = new HHCSService.TEMP_KidneyTABLE();
                     wsObject.ckd_id_pointer = row.ckd_id_pointer;
                     wsObject.ckd_time_new = row.ckd_time_new;
@@ -176,7 +176,7 @@ namespace HappyHealthyCSharp
                     wsObject.mode = row.mode;
                     kidList.Add(wsObject);
                 });
-                new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE").ForEach(row => {
+                new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row => {
                     var wsObject = new HHCSService.TEMP_PressureTABLE();
                     wsObject.bp_id_pointer = row.bp_id_pointer;
                     wsObject.bp_time_new = row.bp_time_new;
@@ -199,15 +199,19 @@ namespace HappyHealthyCSharp
                 });
                 var result = Service.SynchonizeData(Extension.getPreference("ud_email",string.Empty,this), Extension.getPreference("ud_pass",string.Empty,this), diaList.ToArray(), kidList.ToArray(), presList.ToArray());
                 result.ToList().ForEach(r => {
-                    Console.WriteLine(r);
+                    Console.WriteLine("WEB SERVICE RESPONSE : " + r);
                 });
                 if (result.ToList().Count > 0)
                 {
                     Toast.MakeText(this, "Success",ToastLength.Short).Show();
                     var sqliteInstance = new SQLite.SQLiteConnection(Extension.sqliteDBPath);
-                    sqliteInstance.DeleteAll<TEMP_DiabetesTABLE>();
-                    sqliteInstance.DeleteAll<TEMP_KidneyTABLE>();
-                    sqliteInstance.DeleteAll<TEMP_PressureTABLE>();
+                    sqliteInstance.Execute($"DELETE FROM TEMP_DiabetesTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+                    sqliteInstance.Execute($"DELETE FROM TEMP_KidneyTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+                    sqliteInstance.Execute($"DELETE FROM TEMP_PressureTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+                    //sqliteInstance.Query<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
+                    //sqliteInstance.Query<TEMP_KidneyTABLE>($"SELECT * FROM FROM TEMP_KidneyTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
+                    //sqliteInstance.Query<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
+                    MySQLDatabaseHelper.GetDataFromMySQLToSQLite(Extension.getPreference("ud_email",string.Empty,this),Extension.getPreference("ud_pass",string.Empty,this));
                 }
                 else
                 {

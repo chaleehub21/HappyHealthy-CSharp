@@ -1171,10 +1171,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://172.20.96.107/HHCSService/HHCSService.asmx">
+    <WebReferenceUrl Include="http://192.168.1.2/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HHCSService\</RelPath>
-      <UpdateFromURL>http://172.20.96.107/HHCSService/HHCSService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://192.168.1.2/HHCSService/HHCSService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

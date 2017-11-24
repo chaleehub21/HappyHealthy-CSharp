@@ -152,7 +152,7 @@ namespace HappyHealthyCSharp
             else if (diaTable.fbs_fbs >= 126)
                 diaTable.fbs_fbs_lvl = 2;
             diaTable.ud_id = Extension.getPreference("ud_id", 0, this);
-            diaTable.fbs_time = DateTime.Now;
+            diaTable.fbs_time = DateTime.Now.ToThaiLocale();
             diaTable.Insert();
             this.Finish();
         }

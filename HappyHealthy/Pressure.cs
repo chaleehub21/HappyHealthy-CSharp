@@ -119,7 +119,7 @@ namespace HappyHealthyCSharp
 #endregion
             bpTable.bp_hr = Convert.ToInt32(HeartRate.Text);
 
-            bpTable.bp_time = DateTime.Now;
+            bpTable.bp_time = DateTime.Now.ToThaiLocale();
             bpTable.ud_id = Extension.getPreference("ud_id", 0, this);
             bpTable.Insert();
             this.Finish();

@@ -64,7 +64,8 @@ namespace HappyHealthyCSharp
         public double   ckd_phosphorus_blood_old { get; set; }
         [DataMember]
         public string   mode { get; set; }
-
+        [DataMember]
+        public int ud_id { get; set; }
         public override List<string> Column => throw new NotImplementedException();
 
         public TEMP_KidneyTABLE() { }
