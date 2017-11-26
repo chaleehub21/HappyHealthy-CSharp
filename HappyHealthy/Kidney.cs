@@ -84,6 +84,14 @@ namespace HappyHealthyCSharp
         private void SaveValue(object sender, EventArgs e)
         {
             var kidney = new KidneyTABLE();
+            try
+            {
+                kidney.ckd_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(ckd_id)+1 FROM KidneyTABLE");
+            }
+            catch
+            {
+                kidney.ckd_id = 1;
+            }
             //KidneyTable.InsertKidneyToSQL(field_gfr.Text, field_creatinine.Text, field_bun.Text, field_sodium.Text, field_potassium.Text, field_albumin_blood.Text, field_albumin_urine.Text, field_phosphorus_blood.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             kidney.ckd_gfr = Convert.ToDecimal(field_gfr.Text);
             kidney.ckd_creatinine = Convert.ToDecimal(field_creatinine.Text);
@@ -93,7 +101,7 @@ namespace HappyHealthyCSharp
             kidney.ckd_albumin_blood = Convert.ToDecimal(field_albumin_blood.Text);
             kidney.ckd_albumin_urine = Convert.ToDecimal(field_albumin_urine.Text);
             kidney.ckd_phosphorus_blood = Convert.ToDecimal(field_phosphorus_blood.Text);
-            kidney.ckd_time = DateTime.Now.ToThaiLocale();
+            kidney.ckd_time = DateTime.Now;
             kidney.ud_id = Extension.getPreference("ud_id", 0, this);
             kidney.Insert();
             //GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
@@ -102,6 +110,7 @@ namespace HappyHealthyCSharp
 
         private void UpdateValue(object sender, EventArgs e)
         {
+
             kidneyObject.ckd_gfr = Convert.ToDecimal(field_gfr.Text);
             kidneyObject.ckd_creatinine = Convert.ToDecimal(field_creatinine.Text);
             kidneyObject.ckd_bun = Convert.ToDecimal(field_bun.Text);
@@ -110,7 +119,6 @@ namespace HappyHealthyCSharp
             kidneyObject.ckd_albumin_blood = Convert.ToDecimal(field_albumin_blood.Text);
             kidneyObject.ckd_albumin_urine = Convert.ToDecimal(field_albumin_urine.Text);
             kidneyObject.ckd_phosphorus_blood = Convert.ToDecimal(field_phosphorus_blood.Text);
-            kidneyObject.ckd_time = DateTime.Now.ToThaiLocale();
             kidneyObject.ud_id = Extension.getPreference("ud_id", 0, this);
             kidneyObject.Update();
             this.Finish();

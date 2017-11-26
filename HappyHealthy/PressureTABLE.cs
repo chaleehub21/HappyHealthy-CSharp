@@ -16,16 +16,18 @@ using System.Data;
 using SQLiteNetExtensions.Attributes;
 using SQLite.Net.Platform.XamarinAndroid;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace HappyHealthyCSharp
 {
-    
+
     class PressureTABLE : DatabaseHelper
     {
         public override List<string> Column => new List<string>()
         {
             "bp_id",
             "bp_time",
+            "bp_time_string",
             "bp_up",
             "bp_lo",
             "bp_hr",
@@ -33,9 +35,10 @@ namespace HappyHealthyCSharp
             "bp_lo_lvl",
             "bp_hr_lvl",
         };
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
+        [SQLite.Net.Attributes.PrimaryKey]
         public int bp_id { get; set; }
         public DateTime bp_time { get; set; }
+        public string bp_time_string { get; set; }
         [SQLite.Net.Attributes.MaxLength(3)]
         public decimal bp_up { get; set; }
         [SQLite.Net.Attributes.MaxLength(3)]
@@ -48,7 +51,6 @@ namespace HappyHealthyCSharp
         public int bp_lo_lvl { get; set; }
         [SQLite.Net.Attributes.MaxLength(4)]
         public int bp_hr_lvl { get; set; }
-        [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
         [ManyToOne]
         public UserTABLE UserTABLE { get; set; }

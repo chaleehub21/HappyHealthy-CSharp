@@ -64,15 +64,21 @@ namespace HappyHealthyCSharp
                         , ud_gender = mRadio.Checked ? "M" : "F"
                         , ud_birthdate = DateTime.Parse(insertDate)
                         , ud_email = email.Text
-                        ,ud_pass = Extension.CreatePasswordHash(pw.Text)
+                        ,ud_pass = AccountHelper.CreatePasswordHash(pw.Text)
                     };
-                    //if(UserTABLE.InsertUserToSQL(name.Text, mRadio.Checked ? 'M' : 'F', insertDate, email.Text, pw.Text, this))
-                    if(user.Insert())
+                    var Service = new HHCSService.HHCSService();
+                    object[] returnData = Service.Register(email.Text, pw.Text);
+                    if (returnData!=null)
                     {
-                        Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
+                        user.ud_id = (int)returnData[0];
+                        user.ud_pass = (string)returnData[1];
+                        if (user.Insert())
                         {
-                            this.Finish();
-                        }).Show();
+                            Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
+                            {
+                                this.Finish();
+                            }).Show();
+                        }
                     }
                     else
                     {

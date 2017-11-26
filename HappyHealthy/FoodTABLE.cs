@@ -39,18 +39,15 @@ namespace HappyHealthyCSharp
         //private string dbPath = "";
         public FoodTABLE()
         {
-            var sqliteConn = new SQLite.Net.SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-            sqliteConn.CreateTable<FoodTABLE>();
-            sqliteConn.Close();
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
         public bool InsertToSQL(FoodTABLE foodinstance)
         {
             try
             {
-                var sqlconn = new MySqlConnection(Extension.remoteAccess);
+                var sqlconn = new MySqlConnection(string.Empty);
                 var command = sqlconn.CreateCommand();
-                command.CommandText = $@"INSERT INTO FOOD VALUES(null,'{foodinstance.Food_NAME}',null,{foodinstance.Food_CAL},'{foodinstance.Food_UNIT}',{foodinstance.Food_NET_WEIGHT},'{foodinstance.Food_NET_UNIT}',{foodinstance.Food_PROTEIN},{foodinstance.Food_FAT},{foodinstance.Food_CARBOHYDRATE},{foodinstance.Food_SUGAR},{foodinstance.Food_SODIUM},'{foodinstance.Food_Detail}');";
+                command.CommandText = $@"INSERT INTO FoodTABLE VALUES(null,'{foodinstance.Food_NAME}',null,{foodinstance.Food_CAL},'{foodinstance.Food_UNIT}',{foodinstance.Food_NET_WEIGHT},'{foodinstance.Food_NET_UNIT}',{foodinstance.Food_PROTEIN},{foodinstance.Food_FAT},{foodinstance.Food_CARBOHYDRATE},{foodinstance.Food_SUGAR},{foodinstance.Food_SODIUM},'{foodinstance.Food_Detail}');";
                 sqlconn.Open();
                 command.ExecuteNonQuery();
                 return true;
@@ -61,10 +58,10 @@ namespace HappyHealthyCSharp
         }
         public JavaList<IDictionary<string,object>> getFoodList(string word,Context c = null)
         {
-            var sqlconn = new MySqlConnection(Extension.remoteAccess);
+            var sqlconn = new MySqlConnection(string.Empty);
             sqlconn.Open();
             var foodList = new JavaList<IDictionary<string, object>>();
-            var query = $@"SELECT * FROM Food where Food_NAME LIKE '%{word}%'";
+            var query = $@"SELECT * FROM FoodTABLE where Food_NAME LIKE '%{word}%'";
             var tickets = new DataSet();
             var adapter = new MySqlDataAdapter(query, sqlconn);
             adapter.Fill(tickets, "Food");
@@ -90,30 +87,7 @@ namespace HappyHealthyCSharp
         }
         public Dictionary<string,string> selectDetailByID(int id)
         {
-            #region deprecated
-            /*
-            conn = new SQLiteConnection(GlobalFunction.dbPath);
-            var data = conn.Query<FoodTABLE>($@"SELECT * FROM FoodTABLE where Food_ID = {id}");
-            var retValue = new Dictionary<string, string>() {
-                {"food_id", GlobalFunction.stringValidation(data[0].Food_ID) },
-                { "food_name", GlobalFunction.stringValidation(data[0].Food_NAME)},
-                {"food_calories", GlobalFunction.stringValidation(data[0].Food_CAL) },
-                {"food_unit", GlobalFunction.stringValidation(data[0].Food_UNIT)},
-                {"food_netweight", GlobalFunction.stringValidation(data[0].Food_NET_WEIGHT)},
-                {"food_netunit", GlobalFunction.stringValidation(data[0].Food_NET_UNIT)},
-                {"food_protein", GlobalFunction.stringValidation(data[0].Food_PROTEIN)},
-                {"food_fat", GlobalFunction.stringValidation(data[0].Food_FAT)},
-                {"food_carbohydrate", GlobalFunction.stringValidation(data[0].Food_CARBOHYDRATE)},
-                {"food_sugars", GlobalFunction.stringValidation(data[0].Food_SUGAR)},
-                {"food_sodium", GlobalFunction.stringValidation(data[0].Food_SODIUM)},
-                {"food_detail", GlobalFunction.stringValidation(data[0].Food_Detail)}
-
-            };
-            conn.Close();
-            return retValue;
-            */
-            #endregion
-            var sqlconn = new MySqlConnection(Extension.remoteAccess);
+            var sqlconn = new MySqlConnection(string.Empty);
             sqlconn.Open();
             var query = $@"SELECT * FROM Food where Food_ID = {id}";
             var tickets = new DataSet();
