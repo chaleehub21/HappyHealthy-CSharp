@@ -16,7 +16,7 @@ using SQLite;
 
 namespace HappyHealthyCSharp
 {
-    [Activity]
+    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class FoodDetail : Activity 
     {
         [PrimaryKey]

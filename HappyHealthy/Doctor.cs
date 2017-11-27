@@ -18,7 +18,7 @@ using Android.Icu.Text;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Doctor")]
+    [Activity(Label = "Doctor",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Doctor : Activity
     {
         public struct App

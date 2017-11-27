@@ -13,6 +13,8 @@ using Java.Interop;
 using MySql.Data.MySqlClient;
 using Android.Speech;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace HappyHealthyCSharp
 {
@@ -81,6 +83,7 @@ namespace HappyHealthyCSharp
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 diaObject.Delete<DiabetesTABLE>(diaObject.fbs_id);
+                TrySyncWithMySQL();
                 Finish();
             }, delegate { }, "Yes", "No").Show();
         }
@@ -96,6 +99,7 @@ namespace HappyHealthyCSharp
             diaObject.ud_id = Extension.getPreference("ud_id", 0, this);
             diaObject.fbs_time = DateTime.Now.ToThaiLocale();
             diaObject.Update();
+            TrySyncWithMySQL();
             this.Finish();
         }
 
@@ -115,14 +119,14 @@ namespace HappyHealthyCSharp
                         {
                             try
                             {
-                                dataNLPList.Add(textInputList[i], textInputList[i + 1]);
+                                dataNLPList.Add(textInputList[i].ToUpper(), textInputList[i + 1]);
                             }
                             catch
                             {
 
                             }
                         }
-                        Extension.MapDictToControls(new[] { "น้ำตาล" },new[] { BloodValue},dataNLPList);
+                        Extension.MapDictToControls(new[] { "น้ำตาล","SUGAR" },new[] { BloodValue},dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -154,6 +158,7 @@ namespace HappyHealthyCSharp
             diaTable.ud_id = Extension.getPreference("ud_id", 0, this);
             diaTable.fbs_time = DateTime.Now.ToThaiLocale();
             diaTable.Insert();
+            TrySyncWithMySQL();
             this.Finish();
         }
 
@@ -161,6 +166,34 @@ namespace HappyHealthyCSharp
         public void ClickBackDiaHome(View v)
         {
             this.Finish();
+        }
+        public void TrySyncWithMySQL()
+        {
+            var t = new Thread(() => {
+                var Service = new HHCSService.HHCSService();
+                var diaList = new List<HHCSService.TEMP_DiabetesTABLE>();
+                new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                {
+                    var wsObject = new HHCSService.TEMP_DiabetesTABLE();
+                    wsObject.fbs_id_pointer = row.fbs_id_pointer;
+                    wsObject.fbs_time_new = row.fbs_time_new;
+                    wsObject.fbs_time_old = row.fbs_time_old;
+                    wsObject.fbs_time_string_new = row.fbs_time_string_new;
+                    wsObject.fbs_fbs_new = row.fbs_fbs_new;
+                    wsObject.fbs_fbs_old = row.fbs_fbs_old;
+                    wsObject.fbs_fbs_lvl_new = row.fbs_fbs_lvl_new;
+                    wsObject.fbs_fbs_lvl_old = row.fbs_fbs_lvl_old;
+                    wsObject.mode = row.mode;
+                    diaList.Add(wsObject);
+                });
+                Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this)
+                    , Extension.getPreference("ud_pass", string.Empty, this)
+                    , diaList.ToArray()
+                    , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
+                    , new List<HHCSService.TEMP_PressureTABLE>().ToArray());
+                diaList.Clear();
+            });
+            t.Start();
         }
     }
 }

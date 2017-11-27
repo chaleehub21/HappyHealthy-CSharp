@@ -17,7 +17,7 @@ using SQLite.Net;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Login")]
+    [Activity(Label = "Login",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Login : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

@@ -17,7 +17,7 @@ using Android.Speech.Tts;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Theme = "@style/MyMaterialTheme.Base", MainLauncher = true,NoHistory = true)]
+    [Activity(Theme = "@style/MyMaterialTheme.Base", MainLauncher = true,NoHistory = true,ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class SplashScreen : Activity,TextToSpeech.IOnInitListener
     {
         TextToSpeech textToSpeech;

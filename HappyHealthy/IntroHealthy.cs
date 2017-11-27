@@ -13,7 +13,7 @@ using Android.Support.V4.View;
 using Android.Support.V7.AppCompat;
 namespace HappyHealthyCSharp
 {
-    [Activity(Theme = "@style/MyMaterialTheme.Base")]
+    [Activity(Theme = "@style/MyMaterialTheme.Base",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     class IntroHealthy : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

@@ -16,7 +16,7 @@ using MySql.Data.MySqlClient;
 namespace HappyHealthyCSharp
 {
     
-    [Activity(Theme = "@style/MyMaterialTheme.Base")]
+    [Activity(Theme = "@style/MyMaterialTheme.Base",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     class UserDetail : Activity
     {
         EditText txtName, txtAge, txtIdenNo, txtSex;

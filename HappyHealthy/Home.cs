@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Theme = "@style/MyMaterialTheme.Base")]
+    [Activity(Theme = "@style/MyMaterialTheme.Base",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     class Home : Activity
     {
         TextView labelTest;
@@ -198,6 +198,9 @@ namespace HappyHealthyCSharp
                     presList.Add(wsObject);
                 });
                 var result = Service.SynchonizeData(Extension.getPreference("ud_email",string.Empty,this), Extension.getPreference("ud_pass",string.Empty,this), diaList.ToArray(), kidList.ToArray(), presList.ToArray());
+                diaList.Clear();
+                kidList.Clear();
+                presList.Clear();
                 result.ToList().ForEach(r => {
                     Console.WriteLine("WEB SERVICE RESPONSE : " + r);
                 });

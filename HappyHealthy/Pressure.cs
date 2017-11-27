@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace HappyHealthyCSharp
 {
@@ -35,7 +37,7 @@ namespace HappyHealthyCSharp
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             pressureObject = string.IsNullOrEmpty(flagObjectJson) ? new PressureTABLE() { bp_hr = Extension.flagValue } : JsonConvert.DeserializeObject<PressureTABLE>(flagObjectJson);
-            if(pressureObject.bp_hr == Extension.flagValue)
+            if (pressureObject.bp_hr == Extension.flagValue)
             {
                 deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
@@ -47,7 +49,7 @@ namespace HappyHealthyCSharp
                 deleteButton.Click += DeleteValue;
             }
             //end
-            
+
         }
 
         private void DeleteValue(object sender, EventArgs e)
@@ -55,6 +57,7 @@ namespace HappyHealthyCSharp
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 pressureObject.Delete<PressureTABLE>(pressureObject.bp_id);
+                TrySyncWithMySQL();
                 Finish();
             }, delegate { }, "Yes", "No").Show();
         }
@@ -72,6 +75,7 @@ namespace HappyHealthyCSharp
             pressureObject.bp_lo = Convert.ToDecimal(BPLow.Text);
             pressureObject.bp_hr = Convert.ToInt32(HeartRate.Text);
             pressureObject.Update();
+            TrySyncWithMySQL();
             Finish();
 
         }
@@ -81,14 +85,14 @@ namespace HappyHealthyCSharp
             var bpTable = new PressureTABLE();
             try
             {
-                bpTable.bp_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(ckd_id)+1 FROM KidneyTABLE");
+                bpTable.bp_id = new SQLite.SQLiteConnection(Extension.sqliteDBPath).ExecuteScalar<int>($"SELECT MAX(bp_id)+1 FROM PressureTABLE");
             }
             catch
             {
                 bpTable.bp_id = 1;
             }
             bpTable.bp_up = Convert.ToDecimal(BPUp.Text);
-#region bp_up_level case
+            #region bp_up_level case
             if (bpTable.bp_up < 120)
                 bpTable.bp_up_lvl = 0;
             else if (bpTable.bp_up <= 129)
@@ -101,9 +105,9 @@ namespace HappyHealthyCSharp
                 bpTable.bp_up_lvl = 4;
             else if (bpTable.bp_up >= 180)
                 bpTable.bp_up_lvl = 5;
-#endregion
+            #endregion
             bpTable.bp_lo = Convert.ToDecimal(BPLow.Text);
-#region bp_lo_level case
+            #region bp_lo_level case
             if (bpTable.bp_lo < 80)
                 bpTable.bp_lo_lvl = 0;
             else if (bpTable.bp_lo <= 84)
@@ -116,12 +120,13 @@ namespace HappyHealthyCSharp
                 bpTable.bp_lo_lvl = 4;
             else if (bpTable.bp_lo >= 110)
                 bpTable.bp_lo_lvl = 5;
-#endregion
+            #endregion
             bpTable.bp_hr = Convert.ToInt32(HeartRate.Text);
 
             bpTable.bp_time = DateTime.Now.ToThaiLocale();
             bpTable.ud_id = Extension.getPreference("ud_id", 0, this);
             bpTable.Insert();
+            TrySyncWithMySQL();
             this.Finish();
 
         }
@@ -129,6 +134,41 @@ namespace HappyHealthyCSharp
         public void ClickBackPreHome(View v)
         {
             this.Finish();
+        }
+        public void TrySyncWithMySQL()
+        {
+            var t = new Thread(() => {
+                var Service = new HHCSService.HHCSService();
+                var presList = new List<HHCSService.TEMP_PressureTABLE>();
+                new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row => {
+                    var wsObject = new HHCSService.TEMP_PressureTABLE();
+                    wsObject.bp_id_pointer = row.bp_id_pointer;
+                    wsObject.bp_time_new = row.bp_time_new;
+                    wsObject.bp_time_old = row.bp_time_old;
+                    wsObject.bp_time_string_new = row.bp_time_string_new;
+                    wsObject.bp_up_new = row.bp_up_new;
+                    wsObject.bp_up_old = row.bp_up_old;
+                    wsObject.bp_lo_new = row.bp_lo_new;
+                    wsObject.bp_lo_old = row.bp_lo_old;
+                    wsObject.bp_hr_new = row.bp_hr_new;
+                    wsObject.bp_hr_old = row.bp_hr_old;
+                    wsObject.bp_up_lvl_new = row.bp_up_lvl_new;
+                    wsObject.bp_up_lvl_old = row.bp_up_lvl_old;
+                    wsObject.bp_lo_lvl_new = row.bp_lo_lvl_new;
+                    wsObject.bp_lo_lvl_old = row.bp_lo_lvl_old;
+                    wsObject.bp_hr_lvl_new = row.bp_hr_lvl_new;
+                    wsObject.bp_hr_lvl_old = row.bp_hr_lvl_old;
+                    wsObject.mode = row.mode;
+                    presList.Add(wsObject);
+                });
+                Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this)
+                    , Extension.getPreference("ud_pass", string.Empty, this)
+                    , new List<HHCSService.TEMP_DiabetesTABLE>().ToArray()
+                    , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
+                    , presList.ToArray());
+                presList.Clear();
+            });
+            t.Start();
         }
     }
 }

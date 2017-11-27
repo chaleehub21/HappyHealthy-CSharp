@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace HappyHealthyCSharp
 {
-    [Activity]
+    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Develop : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

@@ -167,7 +167,7 @@
     <Compile Include="Notification.cs" />
     <Compile Include="PressureTABLE.cs" />
     <Compile Include="KidneyTABLE.cs" />
-    <Compile Include="DisplayUser.cs" />
+    <Compile Include="UserDetail.cs" />
     <Compile Include="FoodDetail.cs" />
     <Compile Include="DiabetesTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />

@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Doctor")]
+    [Activity(Label = "Doctor",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class History_Doctor : ListActivity
     {
         DoctorTABLE docTable;
