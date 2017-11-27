@@ -34,6 +34,9 @@
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis />
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
@@ -1171,10 +1174,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.1.2/HHCSService/HHCSService.asmx">
+    <WebReferenceUrl Include="http://172.20.103.80/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HHCSService\</RelPath>
-      <UpdateFromURL>http://192.168.1.2/HHCSService/HHCSService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://172.20.103.80/HHCSService/HHCSService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

@@ -45,6 +45,7 @@ namespace HappyHealthyCSharp
             {
                 if(new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0)
                 {
+                    Toast.MakeText(this, "Getting your data from server...", ToastLength.Long);
                     MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id.Text, pw.Text);
                 }
                 try
