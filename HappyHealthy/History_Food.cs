@@ -14,7 +14,7 @@ using Java.Interop;
 
 namespace HappyHealthyCSharp
 {
-    [Activity]
+    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class History_Food : ListActivity
     {
         FoodTABLE foodTable;

@@ -18,7 +18,7 @@ using System.Security.Cryptography;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Register")]
+    [Activity(Label = "Register",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Register : Activity
     {
         DatePickerDialog mDatePicker;

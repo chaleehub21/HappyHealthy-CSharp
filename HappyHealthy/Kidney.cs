@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace HappyHealthyCSharp
 {
@@ -45,7 +47,7 @@ namespace HappyHealthyCSharp
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             kidneyObject = string.IsNullOrEmpty(flagObjectJson) ? new KidneyTABLE() { ckd_gfr = Extension.flagValue } : JsonConvert.DeserializeObject<KidneyTABLE>(flagObjectJson);
-            if(kidneyObject.ckd_gfr == Extension.flagValue)
+            if (kidneyObject.ckd_gfr == Extension.flagValue)
             {
                 deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
@@ -65,6 +67,7 @@ namespace HappyHealthyCSharp
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
+                TrySyncWithMySQL();
                 Finish();
             }, delegate { }, "Yes", "No").Show();
         }
@@ -101,10 +104,10 @@ namespace HappyHealthyCSharp
             kidney.ckd_albumin_blood = Convert.ToDecimal(field_albumin_blood.Text);
             kidney.ckd_albumin_urine = Convert.ToDecimal(field_albumin_urine.Text);
             kidney.ckd_phosphorus_blood = Convert.ToDecimal(field_phosphorus_blood.Text);
-            kidney.ckd_time = DateTime.Now;
+            kidney.ckd_time = DateTime.Now.ToThaiLocale();
             kidney.ud_id = Extension.getPreference("ud_id", 0, this);
             kidney.Insert();
-            //GlobalFunction.CreateDialogue(this, $@"Inserted", delegate { this.Finish(); }).Show();
+            TrySyncWithMySQL();
             this.Finish();
         }
 
@@ -121,6 +124,7 @@ namespace HappyHealthyCSharp
             kidneyObject.ckd_phosphorus_blood = Convert.ToDecimal(field_phosphorus_blood.Text);
             kidneyObject.ud_id = Extension.getPreference("ud_id", 0, this);
             kidneyObject.Update();
+            TrySyncWithMySQL();
             this.Finish();
         }
 
@@ -129,6 +133,55 @@ namespace HappyHealthyCSharp
         {
             this.Finish();
         }
+        public void TrySyncWithMySQL()
+        {
+            var t = new Thread(() =>
+            {
+                try
+                {
+                    var Service = new HHCSService.HHCSService();
+                    var kidList = new List<HHCSService.TEMP_KidneyTABLE>();
+                    new TEMP_KidneyTABLE().Select<TEMP_KidneyTABLE>($"SELECT * FROM TEMP_KidneyTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                    {
+                        var wsObject = new HHCSService.TEMP_KidneyTABLE();
+                        wsObject.ckd_id_pointer = row.ckd_id_pointer;
+                        wsObject.ckd_time_new = row.ckd_time_new;
+                        wsObject.ckd_time_old = row.ckd_time_old;
+                        wsObject.ckd_time_string_new = row.ckd_time_string_new;
+                        wsObject.ckd_gfr_new = row.ckd_gfr_new;
+                        wsObject.ckd_gfr_old = row.ckd_gfr_old;
+                        wsObject.ckd_gfr_level_new = row.ckd_gfr_level_new;
+                        wsObject.ckd_gfr_level_old = row.ckd_gfr_level_old;
+                        wsObject.ckd_creatinine_new = row.ckd_creatinine_new;
+                        wsObject.ckd_creatinine_old = row.ckd_creatinine_old;
+                        wsObject.ckd_bun_new = row.ckd_bun_new;
+                        wsObject.ckd_bun_old = row.ckd_bun_old;
+                        wsObject.ckd_sodium_new = row.ckd_sodium_new;
+                        wsObject.ckd_sodium_old = row.ckd_sodium_old;
+                        wsObject.ckd_potassium_new = row.ckd_potassium_new;
+                        wsObject.ckd_potassium_old = row.ckd_potassium_old;
+                        wsObject.ckd_albumin_blood_new = row.ckd_albumin_blood_new;
+                        wsObject.ckd_albumin_blood_old = row.ckd_albumin_blood_old;
+                        wsObject.ckd_albumin_urine_new = row.ckd_albumin_urine_new;
+                        wsObject.ckd_albumin_urine_old = row.ckd_albumin_urine_old;
+                        wsObject.ckd_phosphorus_blood_new = row.ckd_phosphorus_blood_new;
+                        wsObject.ckd_phosphorus_blood_old = row.ckd_phosphorus_blood_old;
+                        wsObject.mode = row.mode;
+                        kidList.Add(wsObject);
+                    });
+                    Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this)
+                        , Extension.getPreference("ud_pass", string.Empty, this)
+                        , new List<HHCSService.TEMP_DiabetesTABLE>().ToArray()
+                        , kidList.ToArray()
+                        , new List<HHCSService.TEMP_PressureTABLE>().ToArray());
+                    kidList.Clear();
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            });
+            t.Start();
+        }
     }
-   
+
 }

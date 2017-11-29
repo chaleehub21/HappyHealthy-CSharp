@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "History_Diabetes")]
+    [Activity(Label = "History_Diabetes",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class History_Pressure : ListActivity
     {
         ListView listView;

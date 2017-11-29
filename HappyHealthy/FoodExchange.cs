@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "FoodExchange")]
+    [Activity(Label = "FoodExchange",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class FoodExchange : ListActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
