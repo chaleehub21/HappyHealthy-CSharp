@@ -2469,22 +2469,22 @@ namespace HappyHealthyCSharp
 			public const int sumtotal = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int Test_button_ckd = 2130837757;
+			public const int Test_button_Diabetes = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int Test_button_diabetes = 2130837758;
+			public const int Test_button_Doctor = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int Test_button_doc = 2130837759;
+			public const int Test_button_Food = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int Test_button_food = 2130837760;
+			public const int Test_button_Kidney = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int Test_button_pill = 2130837761;
+			public const int Test_button_Medicine = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int Test_button_pressure = 2130837762;
+			public const int Test_button_Pressure = 2130837762;
 			
 			// aapt resource value: 0x7f020103
 			public const int textheart = 2130837763;

@@ -34,9 +34,6 @@
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis />
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
@@ -107,11 +104,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="Xamarin.Android.Support.Design, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71f3e3261ac778b5, processorArchitecture=MSIL">
@@ -143,7 +137,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountHelper.cs" />
     <Compile Include="Add_Food.cs" />
     <Compile Include="AndroidImageAdapter.cs" />
     <Compile Include="BitmapHelpers.cs" />
@@ -153,7 +146,6 @@
     <Compile Include="Doctor.cs" />
     <Compile Include="DoctorTABLE.cs" />
     <Compile Include="History_Doctor.cs" />
-    <Compile Include="IDatabaseSync.cs" />
     <Compile Include="SummaryDiabetesTABLE.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
@@ -163,14 +155,12 @@
     <Compile Include="IMySQL.cs" />
     <Compile Include="Pill.cs" />
     <Compile Include="MedicineTABLE.cs" />
-    <Compile Include="TEMP_DiabetestTABLE.cs" />
-    <Compile Include="TEMP_KidneyTABLE.cs" />
-    <Compile Include="TEMP_PressureTABLE.cs" />
     <Compile Include="UserTABLE.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="PressureTABLE.cs" />
     <Compile Include="KidneyTABLE.cs" />
-    <Compile Include="UserDetail.cs" />
+    <Compile Include="DisplayUser.cs" />
+    <Compile Include="ExerciseType.cs" />
     <Compile Include="FoodDetail.cs" />
     <Compile Include="DiabetesTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />
@@ -192,11 +182,6 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="TTS.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Web References\HHCSService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -327,11 +312,6 @@
     <AndroidResource Include="Resources\layout\activity_add_doc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <None Include="Web References\HHCSService\HHCSService.wsdl" />
-    <None Include="Web References\HHCSService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -1153,43 +1133,22 @@
     <AndroidResource Include="Resources\drawable-hdpi\pictures_ic.png" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferences Include="Web References\" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Diabetes.png" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://172.20.103.80/HHCSService/HHCSService.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\HHCSService\</RelPath>
-      <UpdateFromURL>http://172.20.103.80/HHCSService/HHCSService.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Kidney.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\HHCSService\HHCSService.disco" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Pressure.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_ckd.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Medicine.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_diabetes.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Doctor.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_doc.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_food.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_pill.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_pressure.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Food.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
