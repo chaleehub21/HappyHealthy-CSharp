@@ -24,7 +24,7 @@ namespace HappyHealthyCSharp
         {
             base.OnCreate(savedInstanceState);
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
-            SetContentView(Resource.Layout.activity_login);
+            SetContentView(Resource.Layout.activity_home);
             // Create your application here
 
             //is Cache data available?
