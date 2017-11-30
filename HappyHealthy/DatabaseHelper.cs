@@ -233,7 +233,7 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var Service = new HHCSService.HHCSService();
+                var Service = new HHCSService1.HHCSService();
                 var userData = Service.GetData("UserTABLE", email, password);
                 var diabetesData = Service.GetData("DiabetesTABLE", email, password);
                 var kidneyData = Service.GetData("KidneyTABLE", email, password);
@@ -259,7 +259,7 @@ namespace HappyHealthyCSharp
                         var tempDiabetes = new DiabetesTABLE();
                         tempDiabetes.fbs_id = Convert.ToInt32(row[0].ToString());
                         tempDiabetes.fbs_time = ((DateTime)row[1]).ToThaiLocale();
-                        tempDiabetes.fbs_time_string = row[1].ToString();
+                        //tempDiabetes.fbs_time_string = row[1].ToString();
                         tempDiabetes.fbs_fbs = Convert.ToDecimal(row[2].ToString());
                         tempDiabetes.fbs_fbs_lvl = Convert.ToInt32(row[3].ToString());
                         tempDiabetes.ud_id = Convert.ToInt32(row[4].ToString());

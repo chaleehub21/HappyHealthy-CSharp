@@ -126,7 +126,7 @@ namespace HappyHealthyCSharp
 
                             }
                         }
-                        Extension.MapDictToControls(new[] { "น้ำตาล","SUGAR" },new[] { BloodValue},dataNLPList);
+                        //Extension.MapDictToControls(new[] { "น้ำตาล","SUGAR" },new[] { BloodValue},dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -172,11 +172,11 @@ namespace HappyHealthyCSharp
             var t = new Thread(() => {
                 try
                 {
-                    var Service = new HHCSService.HHCSService();
-                    var diaList = new List<HHCSService.TEMP_DiabetesTABLE>();
+                    var Service = new HHCSService1.HHCSService();
+                    var diaList = new List<HHCSService1.TEMP_DiabetesTABLE>();
                     new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
                     {
-                        var wsObject = new HHCSService.TEMP_DiabetesTABLE();
+                        var wsObject = new HHCSService1.TEMP_DiabetesTABLE();
                         wsObject.fbs_id_pointer = row.fbs_id_pointer;
                         wsObject.fbs_time_new = row.fbs_time_new;
                         wsObject.fbs_time_old = row.fbs_time_old;
@@ -191,8 +191,8 @@ namespace HappyHealthyCSharp
                     Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this)
                         , Extension.getPreference("ud_pass", string.Empty, this)
                         , diaList.ToArray()
-                        , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
-                        , new List<HHCSService.TEMP_PressureTABLE>().ToArray());
+                        , new List<HHCSService1.TEMP_KidneyTABLE>().ToArray()
+                        , new List<HHCSService1.TEMP_PressureTABLE>().ToArray());
                     diaList.Clear();
                 }catch(Exception e)
                 {
