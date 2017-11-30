@@ -23,7 +23,7 @@ namespace HappyHealthyCSharp
     public static class Extension
     {
         //public static readonly string remoteAccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
-        //public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
+        public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         public static readonly string sqliteDBPath = Path.Combine(fileStorePath, "hhcs.db3");
         public static readonly int flagValue = -9521;
@@ -192,17 +192,42 @@ namespace HappyHealthyCSharp
             }
             return false;
         }
-        public static void MapDictToControls(string[] keyWord, EditText[] etArray, Dictionary<string, string> data)
+        public static string CreatePasswordHash(string password)
         {
-            for (var index = 0; index < keyWord.Length; index++)
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            return Convert.ToBase64String(hashBytes);
+        }
+        public static bool ComparePassword(string email,string password)
+        {
+            try
             {
-                data.TryGetValue(keyWord[index], out string value);
-                if (!string.IsNullOrEmpty(value))
+                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var sql = $@"select * from UserTABLE where ud_email = '{email}'";
+                var result = conn.Query<UserTABLE>(sql);
+                byte[] hashBytes = Convert.FromBase64String(result[0].ud_pass);
+                byte[] salt = new byte[16];
+                Array.Copy(hashBytes, 0, salt, 0, 16);
+                var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
+                byte[] hash = pbkdf2.GetBytes(20);
+                for (int i = 0; i < 20; i++)
                 {
-                    etArray[index].Text = data[keyWord[index]];
+                    if (hashBytes[i + 16] != hash[i])
+                    {
+                        return false;
+                    }
                 }
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
-
     }
 }
