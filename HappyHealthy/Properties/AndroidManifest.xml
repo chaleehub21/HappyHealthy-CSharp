@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="deszolate.HappyHealthyCS" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="16" />
+	<uses-permission android:name="android.permission.READ_CALENDAR" />
+	<uses-permission android:name="android.permission.WRITE_CALENDAR" />
 	<application android:label="HappyHealthyCSharp" android:icon="@drawable/Icon" android:largeHeap="true">
-    <receiver android:name=".AlarmReceiver"></receiver>
-  </application>
-  <user-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+		<receiver android:name=".AlarmReceiver"></receiver>
+	</application>
+	<user-permission android:name="com.android.alarm.permission.SET_ALARM" />
 </manifest>
