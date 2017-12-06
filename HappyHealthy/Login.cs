@@ -43,28 +43,7 @@ namespace HappyHealthyCSharp
             pw.Text = "123456";
             login.Click += delegate
             {
-                if(new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0)
-                {
-                    Toast.MakeText(this, "Getting your data from server...", ToastLength.Long);
-                    MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id.Text, pw.Text);
-                }
-                try
-                {
-                    if (AccountHelper.ComparePassword(pw.Text, new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'")[0].ud_pass))
-                    {
-                        Initialization(id.Text,pw.Text);
-                        StartActivity(typeof(MainActivity));
-                        this.Finish();
-                    }
-                    else
-                    {
-                        Extension.CreateDialogue(this, "Access Denied").Show();
-                    }
-                }
-                catch
-                {
-                    Extension.CreateDialogue(this, "Access Denied").Show();
-                }
+                AccountLogin(id.Text, pw.Text);
             };
             register.Click += delegate
             {
@@ -73,9 +52,26 @@ namespace HappyHealthyCSharp
             forgot.Click += delegate
             {
                 StartActivity(new Intent(this, typeof(PasswordResetActivity)));
-                //CustomNotification.SetAlarmManager(this, "Sender!",(int)DateTime.Now.DayOfWeek,DateTime.Now,Resource.Raw.notialert);
-                //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
+        }
+
+        private void AccountLogin(string id, string pw)
+        {
+            if (new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id}'").Count == 0)
+            {
+                Toast.MakeText(this, "Getting your data from server...", ToastLength.Long);
+                MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id, pw);
+            }
+            if (AccountHelper.ComparePassword(pw, new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id}'")[0].ud_pass))
+            {
+                Initialization(id, pw);
+                StartActivity(typeof(MainActivity));
+                this.Finish();
+            }
+            else
+            {
+                Extension.CreateDialogue(this, "Access Denied").Show();
+            }
         }
 
         private void Initialization(string id,string password)
