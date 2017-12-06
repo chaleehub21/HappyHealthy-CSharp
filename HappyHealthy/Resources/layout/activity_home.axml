@@ -14,7 +14,7 @@
             android:orientation="vertical">
             <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbarhome" />
+                layout="@layout/toolbarhome"/>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"

@@ -315,7 +315,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:id="@+id/imageView_button_save_doc"
-                android:src="@drawable/buttonsavedoc"
+                android:src="@drawable/button_save_image_doc"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10.0dp" />
