@@ -24,6 +24,7 @@ namespace HappyHealthyCSharp
             CreateTab(typeof(User), "AlertHealthy", "", Resource.Drawable.ic_foodexe);
             CreateTab(typeof(IntroHealthy), "Intro","" , Resource.Drawable.ic_heart);
             CreateTab(typeof(UserDetail), "User", "", Resource.Drawable.ic_user);
+            TabHost.TabWidget.GetChildTabViewAt(2).Enabled = false; //disable User TAB
         }
         private void CreateTab(System.Type activityType, string tag, string label, int drawableId)
         {

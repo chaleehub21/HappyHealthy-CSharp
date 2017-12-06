@@ -33,7 +33,6 @@ namespace HappyHealthyCSharp
             System.Threading.Thread.CurrentThread.CurrentCulture = en_USLocale;
             t2sEngine = new TTS(this);
             DatabaseHelperExtension.CreateSQLiteTableIfNotExists();
-            Extension.clearAllPreference(this);
         }
         public override void OnBackPressed() { } //override back button to prevent loading process cancellation
         protected override void OnResume()

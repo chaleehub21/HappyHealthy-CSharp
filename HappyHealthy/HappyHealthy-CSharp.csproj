@@ -327,6 +327,11 @@
     <AndroidResource Include="Resources\layout\activity_add_doc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <None Include="Web References\HHCSService\HHCSService.wsdl" />
+    <None Include="Web References\HHCSService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

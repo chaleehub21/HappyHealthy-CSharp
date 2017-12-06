@@ -39,8 +39,15 @@ namespace HappyHealthyCSharp
             FoodButton.Click += ClickFood;
             MedicineButton.Click += ClickPill;
             DoctorButton.Click += ClickDoctor;
-            #region Speech-To-Text Implementation
+
+
             var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
+            imageView.Click += NotImplemented;
+            //TestSTTImplementation(imageView);
+        }
+
+        private void TestSTTImplementation(ImageView imageView)
+        {
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
             if (rec != "android.hardware.microphone")
             {
@@ -63,10 +70,9 @@ namespace HappyHealthyCSharp
                         voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
                         StartActivityForResult(voiceIntent, VOICE);
                     }
-                    //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
-            //Toast.MakeText(this, CustomNotification.CancelAllAlarmManager(this, new Intent(this, typeof(AlarmReceiver))) ? "TRUE" : "FALSE", ToastLength.Long).Show();
         }
+
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
         {
             if (requestCode == VOICE)
@@ -91,15 +97,11 @@ namespace HappyHealthyCSharp
                 }
             }
             base.OnActivityResult(requestCode, resultVal, data);
-            #endregion
-
         }
 
         public void ClickFood(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
-            /*
-            if (MySQLDatabaseHelper.TestConnection(Extension.remoteAccess) == true)
+            if (new HHCSService.HHCSService().TestConnection() == true)
             {
                 StartActivity(new Intent(this, typeof(History_Food)));
             }
@@ -107,7 +109,7 @@ namespace HappyHealthyCSharp
             {
                 Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             }
-            */
+            //NotImplemented(sender, e);
         }
         public void ClickDiabetes(object sender, EventArgs e)
         {
@@ -135,6 +137,10 @@ namespace HappyHealthyCSharp
         public void ClickDoctor(object sender, EventArgs e)
         {
             StartActivity(typeof(History_Doctor));
+        }
+        public void NotImplemented(object sender, EventArgs e)
+        {
+            Extension.CreateDialogue(this, "Not Implemented").Show();
         }
     }
 }
