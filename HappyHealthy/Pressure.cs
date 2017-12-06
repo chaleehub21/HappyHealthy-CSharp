@@ -140,10 +140,10 @@ namespace HappyHealthyCSharp
             var t = new Thread(() => {
                 try
                 {
-                    var Service = new HHCSService.HHCSService();
-                    var presList = new List<HHCSService.TEMP_PressureTABLE>();
+                    var Service = new HHCSService1.HHCSService();
+                    var presList = new List<HHCSService1.TEMP_PressureTABLE>();
                     new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row => {
-                        var wsObject = new HHCSService.TEMP_PressureTABLE();
+                        var wsObject = new HHCSService1.TEMP_PressureTABLE();
                         wsObject.bp_id_pointer = row.bp_id_pointer;
                         wsObject.bp_time_new = row.bp_time_new;
                         wsObject.bp_time_old = row.bp_time_old;
@@ -165,8 +165,8 @@ namespace HappyHealthyCSharp
                     });
                     Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this)
                         , Extension.getPreference("ud_pass", string.Empty, this)
-                        , new List<HHCSService.TEMP_DiabetesTABLE>().ToArray()
-                        , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
+                        , new List<HHCSService1.TEMP_DiabetesTABLE>().ToArray()
+                        , new List<HHCSService1.TEMP_KidneyTABLE>().ToArray()
                         , presList.ToArray());
                     presList.Clear();
                 }catch(Exception e)
