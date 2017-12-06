@@ -327,11 +327,6 @@
     <AndroidResource Include="Resources\layout\activity_add_doc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <None Include="Web References\HHCSService\HHCSService.wsdl" />
-    <None Include="Web References\HHCSService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -1153,25 +1148,22 @@
     <AndroidResource Include="Resources\drawable-hdpi\pictures_ic.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Diabetes.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_ckd.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Kidney.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_diabetes.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Pressure.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_doc.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Medicine.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_food.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Doctor.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_pill.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Test_button_Food.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
+    <AndroidResource Include="Resources\drawable-hdpi\Test_button_pressure.png" />
   </ItemGroup>
   <ItemGroup>
     <WebReferenceUrl Include="http://192.168.1.2/HHCSService/HHCSService.asmx">
@@ -1190,6 +1182,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\HHCSService\HHCSService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\button_save_image_doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\button_save_image_pill.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
