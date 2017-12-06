@@ -10,13 +10,15 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Android.Speech;
+using System.Xml.Serialization;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Theme = "@style/MyMaterialTheme.Base")]
+    [Activity(Theme = "@style/MyMaterialTheme.Base",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     class Home : Activity
     {
         TextView labelTest;
+        List<string> TESTLIST;
         #region Experimental Section
         private bool isRecording;
         private readonly int VOICE = 10;
@@ -39,7 +41,15 @@ namespace HappyHealthyCSharp
             FoodButton.Click += ClickFood;
             MedicineButton.Click += ClickPill;
             DoctorButton.Click += ClickDoctor;
-            #region Speech-To-Text Implementation
+            //TestSTTImplementation();
+            var dev = FindViewById<ImageView>(Resource.Id.imageView4);
+            dev.Click += delegate {
+                Extension.CreateDialogue(this, "Not Implemented").Show();
+            };
+        }
+
+        private void TestSTTImplementation()
+        {
             var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
             if (rec != "android.hardware.microphone")
@@ -67,6 +77,7 @@ namespace HappyHealthyCSharp
                 };
             //Toast.MakeText(this, CustomNotification.CancelAllAlarmManager(this, new Intent(this, typeof(AlarmReceiver))) ? "TRUE" : "FALSE", ToastLength.Long).Show();
         }
+
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
         {
             if (requestCode == VOICE)
@@ -82,22 +93,36 @@ namespace HappyHealthyCSharp
                         if (textInput.Length > 500)
                             textInput = textInput.Substring(0, 500);
                         //GlobalFunction.createDialog(this, textInput).Show();
+
                         Toast.MakeText(this, textInput, ToastLength.Short);
                         labelTest = FindViewById<TextView>(Resource.Id.textView18);
                         labelTest.Text = textInput;
+                        TESTLIST = textInput.Split().ToList();
+                        //List<Dictionary<string, string>> dataList = new List<Dictionary<string, string>>();
+                        string output = string.Empty;
+                        for (var i = 0; i < TESTLIST.Count; i += 2)
+                        {
+                            try
+                            {
+                                output += $"Add Key {TESTLIST[i]} Value {TESTLIST[i + 1]}\n";
+                            }
+                            catch
+                            {
+                                output += "Error\n";
+                            }
+                        }
+                        Extension.CreateDialogue(this, output).Show();
                     }
                     else
                         Toast.MakeText(this, "Unrecognized", ToastLength.Short);
                 }
             }
             base.OnActivityResult(requestCode, resultVal, data);
-            #endregion
-           
+
         }
 
         public void ClickFood(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             /*
             if (MySQLDatabaseHelper.TestConnection(Extension.remoteAccess) == true)
             {
@@ -108,8 +133,117 @@ namespace HappyHealthyCSharp
                 Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             }
             */
+            //new DiabetesTABLE().SynchronizeDataAsync(this);
+            //new KidneyTABLE().SynchronizeDataAsync(this);
+            //new PressureTABLE().SynchronizeDataAsync(this);
+            //var user = new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0,this)}")[0];
+            Extension.CreateDialogue(this, "Not implemented").Show();
         }
-        public void ClickDiabetes(object sender,EventArgs e)
+
+        private void ManualDataSync()
+        {
+            var Service = new HHCSService.HHCSService();
+            try
+            {
+                var diaList = new List<HHCSService.TEMP_DiabetesTABLE>();
+                var kidList = new List<HHCSService.TEMP_KidneyTABLE>();
+                var presList = new List<HHCSService.TEMP_PressureTABLE>();
+                new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                {
+                    var wsObject = new HHCSService.TEMP_DiabetesTABLE();
+                    wsObject.fbs_id_pointer = row.fbs_id_pointer;
+                    wsObject.fbs_time_new = row.fbs_time_new;
+                    wsObject.fbs_time_old = row.fbs_time_old;
+                    wsObject.fbs_time_string_new = row.fbs_time_string_new;
+                    wsObject.fbs_fbs_new = row.fbs_fbs_new;
+                    wsObject.fbs_fbs_old = row.fbs_fbs_old;
+                    wsObject.fbs_fbs_lvl_new = row.fbs_fbs_lvl_new;
+                    wsObject.fbs_fbs_lvl_old = row.fbs_fbs_lvl_old;
+                    wsObject.mode = row.mode;
+                    diaList.Add(wsObject);
+                });
+                new TEMP_KidneyTABLE().Select<TEMP_KidneyTABLE>($"SELECT * FROM TEMP_KidneyTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                {
+                    var wsObject = new HHCSService.TEMP_KidneyTABLE();
+                    wsObject.ckd_id_pointer = row.ckd_id_pointer;
+                    wsObject.ckd_time_new = row.ckd_time_new;
+                    wsObject.ckd_time_old = row.ckd_time_old;
+                    wsObject.ckd_time_string_new = row.ckd_time_string_new;
+                    wsObject.ckd_gfr_new = row.ckd_gfr_new;
+                    wsObject.ckd_gfr_old = row.ckd_gfr_old;
+                    wsObject.ckd_gfr_level_new = row.ckd_gfr_level_new;
+                    wsObject.ckd_gfr_level_old = row.ckd_gfr_level_old;
+                    wsObject.ckd_creatinine_new = row.ckd_creatinine_new;
+                    wsObject.ckd_creatinine_old = row.ckd_creatinine_old;
+                    wsObject.ckd_bun_new = row.ckd_bun_new;
+                    wsObject.ckd_bun_old = row.ckd_bun_old;
+                    wsObject.ckd_sodium_new = row.ckd_sodium_new;
+                    wsObject.ckd_sodium_old = row.ckd_sodium_old;
+                    wsObject.ckd_potassium_new = row.ckd_potassium_new;
+                    wsObject.ckd_potassium_old = row.ckd_potassium_old;
+                    wsObject.ckd_albumin_blood_new = row.ckd_albumin_blood_new;
+                    wsObject.ckd_albumin_blood_old = row.ckd_albumin_blood_old;
+                    wsObject.ckd_albumin_urine_new = row.ckd_albumin_urine_new;
+                    wsObject.ckd_albumin_urine_old = row.ckd_albumin_urine_old;
+                    wsObject.ckd_phosphorus_blood_new = row.ckd_phosphorus_blood_new;
+                    wsObject.ckd_phosphorus_blood_old = row.ckd_phosphorus_blood_old;
+                    wsObject.mode = row.mode;
+                    kidList.Add(wsObject);
+                });
+                new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                {
+                    var wsObject = new HHCSService.TEMP_PressureTABLE();
+                    wsObject.bp_id_pointer = row.bp_id_pointer;
+                    wsObject.bp_time_new = row.bp_time_new;
+                    wsObject.bp_time_old = row.bp_time_old;
+                    wsObject.bp_time_string_new = row.bp_time_string_new;
+                    wsObject.bp_up_new = row.bp_up_new;
+                    wsObject.bp_up_old = row.bp_up_old;
+                    wsObject.bp_lo_new = row.bp_lo_new;
+                    wsObject.bp_lo_old = row.bp_lo_old;
+                    wsObject.bp_hr_new = row.bp_hr_new;
+                    wsObject.bp_hr_old = row.bp_hr_old;
+                    wsObject.bp_up_lvl_new = row.bp_up_lvl_new;
+                    wsObject.bp_up_lvl_old = row.bp_up_lvl_old;
+                    wsObject.bp_lo_lvl_new = row.bp_lo_lvl_new;
+                    wsObject.bp_lo_lvl_old = row.bp_lo_lvl_old;
+                    wsObject.bp_hr_lvl_new = row.bp_hr_lvl_new;
+                    wsObject.bp_hr_lvl_old = row.bp_hr_lvl_old;
+                    wsObject.mode = row.mode;
+                    presList.Add(wsObject);
+                });
+                var result = Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this), Extension.getPreference("ud_pass", string.Empty, this), diaList.ToArray(), kidList.ToArray(), presList.ToArray());
+                diaList.Clear();
+                kidList.Clear();
+                presList.Clear();
+                result.ToList().ForEach(r =>
+                {
+                    Console.WriteLine("WEB SERVICE RESPONSE : " + r);
+                });
+                if (result.ToList().Count > 0)
+                {
+                    Toast.MakeText(this, "Success", ToastLength.Short).Show();
+                    var sqliteInstance = new SQLite.SQLiteConnection(Extension.sqliteDBPath);
+                    sqliteInstance.Execute($"DELETE FROM TEMP_DiabetesTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+                    sqliteInstance.Execute($"DELETE FROM TEMP_KidneyTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+                    sqliteInstance.Execute($"DELETE FROM TEMP_PressureTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
+                    //sqliteInstance.Query<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
+                    //sqliteInstance.Query<TEMP_KidneyTABLE>($"SELECT * FROM FROM TEMP_KidneyTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
+                    //sqliteInstance.Query<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
+                    MySQLDatabaseHelper.GetDataFromMySQLToSQLite(Extension.getPreference("ud_email", string.Empty, this), Extension.getPreference("ud_pass", string.Empty, this));
+                }
+                else
+                {
+                    Toast.MakeText(this, "Failure", ToastLength.Short).Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR : " + ex.ToString());
+            }
+        }
+
+        public void ClickDiabetes(object sender, EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Diabetes)));
         }
@@ -125,7 +259,7 @@ namespace HappyHealthyCSharp
         {
             //StartActivity(new Intent(this, typeof(Develop)));
             //GlobalFunction.createDialog(this, "Not implemented").Show();
-           
+
         }
         public void ClickPill(object sender, EventArgs e)
         {
