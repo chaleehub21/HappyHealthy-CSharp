@@ -17,7 +17,7 @@ using SQLite.Net;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Login")]
+    [Activity(Label = "Login",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Login : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -28,7 +28,7 @@ namespace HappyHealthyCSharp
             // Create your application here
 
             //is Cache data available?
-            if ((Extension.getPreference("ud_id",0,this) != 0))
+            if ((Extension.getPreference("ud_id", 0, this) != 0))
             {
                 StartActivity(typeof(MainActivity));
                 Finish();
@@ -41,72 +41,47 @@ namespace HappyHealthyCSharp
             var forgot = FindViewById<TextView>(Resource.Id.textViewForget);
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
-            login.Click += delegate {
-                #region MySQLLogin
-                /*
-                var sqlconn = new MySqlConnection(GlobalFunction.remoteAccess);
-                var comm = sqlconn.CreateCommand();
-                var userRow = new JavaList<IDictionary<string, object>>();
-                var sqlQuery = $@"select count(ud_id),ud_id from user_detail where ud_email = @id and ud_pass = @pw";
-                comm.CommandText = sqlQuery;
-                comm.Parameters.AddWithValue("@id", id.Text);
-                comm.Parameters.AddWithValue("@pw", pw.Text);
-                try
-                {
-                    sqlconn.Open();
-                    var reader = comm.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        reader.Read();
-                        if (Convert.ToInt32(reader.GetString(0)) == 1)
-                        {
-                            GlobalFunction.setPreference("ud_email",id.Text, this);
-                            GlobalFunction.setPreference("ud_pass", pw.Text, this);
-                            GlobalFunction.setPreference("ud_id", reader.GetString(1),this);
-                            StartActivity(typeof(MainActivity));
-                            this.Finish();
-                        }
-                        else
-                        {
-                            GlobalFunction.CreateDialogue(this, "Access Denied").Show();
-                        }
-                    }
-                    else
-                    {
-                        GlobalFunction.CreateDialogue(this, "Access Denied").Show();
-                    }
-                }
-                catch {
-                    GlobalFunction.CreateDialogue(this,"Database is not available").Show();
-                }
-                */
-#endregion
-                if (Extension.ComparePassword(id.Text,pw.Text))
-                {
-                    var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-                    var sql = $@"select * from UserTABLE where ud_email = '{id.Text}'";
-                    var result = conn.Query<UserTABLE>(sql);
-                    Extension.setPreference("ud_email", result[0].ud_email, this);
-                    Extension.setPreference("ud_pass", result[0].ud_pass, this);
-                    Extension.setPreference("ud_id", result[0].ud_id, this);
-                    StartActivity(typeof(MainActivity));
-                    this.Finish();
-                }
-                else
-                {
-                    Extension.CreateDialogue(this, "Access Denied").Show();
-                }
-
+            login.Click += delegate
+            {
+                AccountLogin(id.Text, pw.Text);
             };
-            register.Click += delegate {
+            register.Click += delegate
+            {
                 StartActivity(new Intent(this, typeof(Register)));
             };
-            forgot.Click += delegate {
+            forgot.Click += delegate
+            {
                 StartActivity(new Intent(this, typeof(PasswordResetActivity)));
-                //CustomNotification.SetAlarmManager(this, "Sender!",(int)DateTime.Now.DayOfWeek,DateTime.Now,Resource.Raw.notialert);
-                //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }
-      
+
+        private void AccountLogin(string id, string pw)
+        {
+            if (new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id}'").Count == 0)
+            {
+                Toast.MakeText(this, "Getting your data from server...", ToastLength.Long);
+                MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id, pw);
+            }
+            if (AccountHelper.ComparePassword(pw, new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id}'")[0].ud_pass))
+            {
+                Initialization(id, pw);
+                StartActivity(typeof(MainActivity));
+                this.Finish();
+            }
+            else
+            {
+                Extension.CreateDialogue(this, "Access Denied").Show();
+            }
+        }
+
+        private void Initialization(string id,string password)
+        {
+            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+            var sql = $@"select * from UserTABLE where ud_email = '{id}'";
+            var result = conn.Query<UserTABLE>(sql);
+            Extension.setPreference("ud_email", id, this);
+            Extension.setPreference("ud_pass", password, this);
+            Extension.setPreference("ud_id", result[0].ud_id, this);
+        }
     }
 }

@@ -10,15 +10,13 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Android.Speech;
-using System.Xml.Serialization;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Theme = "@style/MyMaterialTheme.Base",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Theme = "@style/MyMaterialTheme.Base")]
     class Home : Activity
     {
         TextView labelTest;
-        List<string> TESTLIST;
         #region Experimental Section
         private bool isRecording;
         private readonly int VOICE = 10;
@@ -93,36 +91,20 @@ namespace HappyHealthyCSharp
                         if (textInput.Length > 500)
                             textInput = textInput.Substring(0, 500);
                         //GlobalFunction.createDialog(this, textInput).Show();
-
                         Toast.MakeText(this, textInput, ToastLength.Short);
                         labelTest = FindViewById<TextView>(Resource.Id.textView18);
                         labelTest.Text = textInput;
-                        TESTLIST = textInput.Split().ToList();
-                        //List<Dictionary<string, string>> dataList = new List<Dictionary<string, string>>();
-                        string output = string.Empty;
-                        for (var i = 0; i < TESTLIST.Count; i += 2)
-                        {
-                            try
-                            {
-                                output += $"Add Key {TESTLIST[i]} Value {TESTLIST[i + 1]}\n";
-                            }
-                            catch
-                            {
-                                output += "Error\n";
-                            }
-                        }
-                        Extension.CreateDialogue(this, output).Show();
                     }
                     else
                         Toast.MakeText(this, "Unrecognized", ToastLength.Short);
                 }
             }
             base.OnActivityResult(requestCode, resultVal, data);
-
         }
 
         public void ClickFood(object sender, EventArgs e)
         {
+            Extension.CreateDialogue(this, "Not Implemented").Show();
             /*
             if (MySQLDatabaseHelper.TestConnection(Extension.remoteAccess) == true)
             {
@@ -133,24 +115,18 @@ namespace HappyHealthyCSharp
                 Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
             }
             */
-            //new DiabetesTABLE().SynchronizeDataAsync(this);
-            //new KidneyTABLE().SynchronizeDataAsync(this);
-            //new PressureTABLE().SynchronizeDataAsync(this);
-            //var user = new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0,this)}")[0];
-            Extension.CreateDialogue(this, "Not implemented").Show();
         }
-
         private void ManualDataSync()
         {
-            var Service = new HHCSService.HHCSService();
+            var Service = new HHCSService1.HHCSService();
             try
             {
-                var diaList = new List<HHCSService.TEMP_DiabetesTABLE>();
-                var kidList = new List<HHCSService.TEMP_KidneyTABLE>();
-                var presList = new List<HHCSService.TEMP_PressureTABLE>();
+                var diaList = new List<HHCSService1.TEMP_DiabetesTABLE>();
+                var kidList = new List<HHCSService1.TEMP_KidneyTABLE>();
+                var presList = new List<HHCSService1.TEMP_PressureTABLE>();
                 new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
                 {
-                    var wsObject = new HHCSService.TEMP_DiabetesTABLE();
+                    var wsObject = new HHCSService1.TEMP_DiabetesTABLE();
                     wsObject.fbs_id_pointer = row.fbs_id_pointer;
                     wsObject.fbs_time_new = row.fbs_time_new;
                     wsObject.fbs_time_old = row.fbs_time_old;
@@ -164,7 +140,7 @@ namespace HappyHealthyCSharp
                 });
                 new TEMP_KidneyTABLE().Select<TEMP_KidneyTABLE>($"SELECT * FROM TEMP_KidneyTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
                 {
-                    var wsObject = new HHCSService.TEMP_KidneyTABLE();
+                    var wsObject = new HHCSService1.TEMP_KidneyTABLE();
                     wsObject.ckd_id_pointer = row.ckd_id_pointer;
                     wsObject.ckd_time_new = row.ckd_time_new;
                     wsObject.ckd_time_old = row.ckd_time_old;
@@ -192,7 +168,7 @@ namespace HappyHealthyCSharp
                 });
                 new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
                 {
-                    var wsObject = new HHCSService.TEMP_PressureTABLE();
+                    var wsObject = new HHCSService1.TEMP_PressureTABLE();
                     wsObject.bp_id_pointer = row.bp_id_pointer;
                     wsObject.bp_time_new = row.bp_time_new;
                     wsObject.bp_time_old = row.bp_time_old;
@@ -242,8 +218,7 @@ namespace HappyHealthyCSharp
                 Console.WriteLine($"ERROR : " + ex.ToString());
             }
         }
-
-        public void ClickDiabetes(object sender, EventArgs e)
+        public void ClickDiabetes(object sender,EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Diabetes)));
         }
@@ -259,7 +234,7 @@ namespace HappyHealthyCSharp
         {
             //StartActivity(new Intent(this, typeof(Develop)));
             //GlobalFunction.createDialog(this, "Not implemented").Show();
-
+           
         }
         public void ClickPill(object sender, EventArgs e)
         {

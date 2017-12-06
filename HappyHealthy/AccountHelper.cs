@@ -28,7 +28,7 @@ namespace HappyHealthyCSharp
             Array.Copy(hash, 0, hashBytes, 16, 20);
             return Convert.ToBase64String(hashBytes);
         }
-        public static bool ComparePassword(string password,string passwordHash)
+        public static bool ComparePassword(string password, string passwordHash)
         {
             try
             {
