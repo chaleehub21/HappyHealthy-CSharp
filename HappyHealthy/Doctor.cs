@@ -109,7 +109,7 @@ namespace HappyHealthyCSharp
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 Android.Net.Uri eventUri = Android.Net.Uri.Parse("content://com.android.calendar/events");
-                var deleteUri = ContentUris.WithAppendedId(eventUri, Convert.ToInt32(docObject.da_comment.Substring(docObject.da_comment.LastIndexOf(@"/") + 1)));
+                var deleteUri = ContentUris.WithAppendedId(eventUri, Convert.ToInt32(docObject.da_calendar_uri.Substring(docObject.da_calendar_uri.LastIndexOf(@"/") + 1)));
                 ContentResolver.Delete(deleteUri, null, null);
 
 
@@ -184,7 +184,7 @@ namespace HappyHealthyCSharp
             eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "UTC");
 
             var uri = ContentResolver.Insert(CalendarContract.Events.ContentUri, eventValues);
-            docObject.da_comment = uri.ToString();
+            docObject.da_calendar_uri = uri.ToString();
             docObject.Update();
             //Console.WriteLine("Uri for new event: {0}", uri);
             //end test

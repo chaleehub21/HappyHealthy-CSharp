@@ -44,7 +44,7 @@ namespace HappyHealthyCSharp
         public string da_dept { get; set; }
         public string da_reg_time { get; set; }
         public string da_appt_time { get; set; }
-        public int da_calendar_id { get; set; }
+        public string da_calendar_uri { get; set; }
         [SQLite.Net.Attributes.MaxLength(255)]
         public string da_comment { get; set; }
         [SQLite.Net.Attributes.MaxLength(255)]
