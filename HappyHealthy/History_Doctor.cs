@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Newtonsoft.Json;
+using Android.Provider;
+using Android.Database;
 
 namespace HappyHealthyCSharp
 {

@@ -327,6 +327,10 @@
     <AndroidResource Include="Resources\layout\activity_add_doc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\CalendarList.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CalListItem.axml" />
     <None Include="Web References\HHCSService\HHCSService.wsdl" />
     <None Include="Web References\HHCSService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
