@@ -27,7 +27,7 @@ namespace HappyHealthyCSharp
             "da_dept",
             "da_reg_time",
             "da_appt_time",
-            "da_calendar_id",
+            "da_calendar_uri",
             "da_comment",
             "da_place",
             "da_hospital"
