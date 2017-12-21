@@ -101,14 +101,18 @@ namespace HappyHealthyCSharp
 
         public void ClickFood(object sender, EventArgs e)
         {
-            if (new HHCSService.HHCSService().TestConnection() == true)
+            try
             {
-                StartActivity(new Intent(this, typeof(History_Food)));
+                if (new HHCSService.HHCSService().TestConnection() == true)
+                {
+                    StartActivity(new Intent(this, typeof(History_Food)));
+                }
             }
-            else
+            catch
             {
-                Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
+                Extension.CreateDialogue(this, "Connection timeout").Show();
             }
+
             //NotImplemented(sender, e);
         }
         public void ClickDiabetes(object sender, EventArgs e)

@@ -317,7 +317,7 @@
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:id="@+id/imageView_button_camera"
-                android:src="@drawable/buttonsavepicpill"
+                android:src="@drawable/button_save_image_pill"
                 android:layout_marginTop="9.0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="11.0dp" />
@@ -325,7 +325,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:id="@+id/imageView_button_save_pill"
-                android:src="@drawable/button_save_image_pill"
+                android:src="@drawable/buttonsavepill"
                 android:onClick="Click"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"

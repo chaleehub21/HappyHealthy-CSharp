@@ -35,11 +35,10 @@ namespace HappyHealthyCSharp
         public string Food_SUGAR { get; set; }
         public string Food_SODIUM { get; set; }
         public string Food_Detail { get; set; }
-        //private string localPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-        //private string dbPath = "";
+
         public FoodTABLE()
         {
-            //constructor - no need for args since naming convention for instances variable mapping can be use : CB
+           
         }
         public JavaList<IDictionary<string, object>> getFoodList(string word, Context c = null)
         {

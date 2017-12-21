@@ -13,6 +13,7 @@ using Java.Interop;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Threading;
+using Android.Speech;
 
 namespace HappyHealthyCSharp
 {
@@ -23,6 +24,9 @@ namespace HappyHealthyCSharp
         private EditText BPUp;
         private EditText HeartRate;
         PressureTABLE pressureObject;
+        private bool isRecording;
+        private readonly int VOICE = 10;
+        Dictionary<string, string> dataNLPList;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -34,6 +38,7 @@ namespace HappyHealthyCSharp
             HeartRate = FindViewById<EditText>(Resource.Id.P_HeartRate);
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_pressure);
             var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pressure);
+            var micButton = FindViewById<ImageView>(Resource.Id.ic_microphone_pressure);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             pressureObject = string.IsNullOrEmpty(flagObjectJson) ? new PressureTABLE() { bp_hr = Extension.flagValue } : JsonConvert.DeserializeObject<PressureTABLE>(flagObjectJson);
@@ -49,7 +54,60 @@ namespace HappyHealthyCSharp
                 deleteButton.Click += DeleteValue;
             }
             //end
+            string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
+            if (rec != "android.hardware.microphone")
+            {
+                // no microphone, no recording. Disable the button and output an alert
+                Extension.CreateDialogue(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
+            }
+            else
+                micButton.Click += delegate
+                {
+                    isRecording = !isRecording;
+                    if (isRecording)
+                    {
+                        var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Speak Now!");
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
+                        StartActivityForResult(voiceIntent, VOICE);
+                    }
+                };
+        }
+        protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
+        {
+            if (requestCode == VOICE)
+            {
+                if (resultVal == Result.Ok)
+                {
+                    var matches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
+                    if (matches.Count != 0)
+                    {
+                        string textInput = matches[0];
+                        var textInputList = textInput.Split().ToList();
+                        dataNLPList = new Dictionary<string, string>();
+                        for (var i = 0; i < textInputList.Count; i += 2)
+                        {
+                            try
+                            {
+                                dataNLPList.Add(textInputList[i].ToUpper(), textInputList[i + 1]);
+                            }
+                            catch
+                            {
 
+                            }
+                        }
+                        Extension.MapDictToControls(new[] { "บน","ล่าง","หัวใจ"}, new[] { BPUp,BPLow,HeartRate }, dataNLPList);
+                    }
+                    else
+                        Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
+                }
+            }
+            base.OnActivityResult(requestCode, resultVal, data);
         }
 
         private void DeleteValue(object sender, EventArgs e)

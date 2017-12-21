@@ -70,11 +70,10 @@ namespace HappyHealthyCSharp
             {
                 StartActivity(new Intent(this, typeof(Register)));
             };
+            forgot.Visibility = ViewStates.Invisible;
             forgot.Click += delegate
             {
                 StartActivity(new Intent(this, typeof(PasswordResetActivity)));
-                //CustomNotification.SetAlarmManager(this, "Sender!",(int)DateTime.Now.DayOfWeek,DateTime.Now,Resource.Raw.notialert);
-                //CrossLocalNotifications.Current.Show("HH", "TRUE!!!", 101, DateTime.Now.AddSeconds(10));
             };
         }
 
