@@ -39,16 +39,15 @@ namespace HappyHealthyCSharp
             FoodButton.Click += ClickFood;
             MedicineButton.Click += ClickPill;
             DoctorButton.Click += ClickDoctor;
-            //TestSTTImplementation();
-            var dev = FindViewById<ImageView>(Resource.Id.imageView4);
-            dev.Click += delegate {
-                Extension.CreateDialogue(this, "Not Implemented").Show();
-            };
+
+
+            var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
+            imageView.Click += NotImplemented;
+            //TestSTTImplementation(imageView);
         }
 
-        private void TestSTTImplementation()
+        private void TestSTTImplementation(ImageView imageView)
         {
-            var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
             if (rec != "android.hardware.microphone")
             {
@@ -71,9 +70,7 @@ namespace HappyHealthyCSharp
                         voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
                         StartActivityForResult(voiceIntent, VOICE);
                     }
-                    //GlobalFunction.CreateDialogue(this, GlobalFunction.getPreference("ud_id", "not found", this)).Show();
                 };
-            //Toast.MakeText(this, CustomNotification.CancelAllAlarmManager(this, new Intent(this, typeof(AlarmReceiver))) ? "TRUE" : "FALSE", ToastLength.Long).Show();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
@@ -104,121 +101,21 @@ namespace HappyHealthyCSharp
 
         public void ClickFood(object sender, EventArgs e)
         {
-            Extension.CreateDialogue(this, "Not Implemented").Show();
-            /*
-            if (MySQLDatabaseHelper.TestConnection(Extension.remoteAccess) == true)
-            {
-                StartActivity(new Intent(this, typeof(History_Food)));
-            }
-            else
-            {
-                Toast.MakeText(this, "Server is unavailable right at the moment, please try again later.", ToastLength.Short).Show();
-            }
-            */
-        }
-        private void ManualDataSync()
-        {
-            var Service = new HHCSService1.HHCSService();
             try
             {
-                var diaList = new List<HHCSService1.TEMP_DiabetesTABLE>();
-                var kidList = new List<HHCSService1.TEMP_KidneyTABLE>();
-                var presList = new List<HHCSService1.TEMP_PressureTABLE>();
-                new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                if (new HHCSService.HHCSService().TestConnection() == true)
                 {
-                    var wsObject = new HHCSService1.TEMP_DiabetesTABLE();
-                    wsObject.fbs_id_pointer = row.fbs_id_pointer;
-                    wsObject.fbs_time_new = row.fbs_time_new;
-                    wsObject.fbs_time_old = row.fbs_time_old;
-                    wsObject.fbs_time_string_new = row.fbs_time_string_new;
-                    wsObject.fbs_fbs_new = row.fbs_fbs_new;
-                    wsObject.fbs_fbs_old = row.fbs_fbs_old;
-                    wsObject.fbs_fbs_lvl_new = row.fbs_fbs_lvl_new;
-                    wsObject.fbs_fbs_lvl_old = row.fbs_fbs_lvl_old;
-                    wsObject.mode = row.mode;
-                    diaList.Add(wsObject);
-                });
-                new TEMP_KidneyTABLE().Select<TEMP_KidneyTABLE>($"SELECT * FROM TEMP_KidneyTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
-                {
-                    var wsObject = new HHCSService1.TEMP_KidneyTABLE();
-                    wsObject.ckd_id_pointer = row.ckd_id_pointer;
-                    wsObject.ckd_time_new = row.ckd_time_new;
-                    wsObject.ckd_time_old = row.ckd_time_old;
-                    wsObject.ckd_time_string_new = row.ckd_time_string_new;
-                    wsObject.ckd_gfr_new = row.ckd_gfr_new;
-                    wsObject.ckd_gfr_old = row.ckd_gfr_old;
-                    wsObject.ckd_gfr_level_new = row.ckd_gfr_level_new;
-                    wsObject.ckd_gfr_level_old = row.ckd_gfr_level_old;
-                    wsObject.ckd_creatinine_new = row.ckd_creatinine_new;
-                    wsObject.ckd_creatinine_old = row.ckd_creatinine_old;
-                    wsObject.ckd_bun_new = row.ckd_bun_new;
-                    wsObject.ckd_bun_old = row.ckd_bun_old;
-                    wsObject.ckd_sodium_new = row.ckd_sodium_new;
-                    wsObject.ckd_sodium_old = row.ckd_sodium_old;
-                    wsObject.ckd_potassium_new = row.ckd_potassium_new;
-                    wsObject.ckd_potassium_old = row.ckd_potassium_old;
-                    wsObject.ckd_albumin_blood_new = row.ckd_albumin_blood_new;
-                    wsObject.ckd_albumin_blood_old = row.ckd_albumin_blood_old;
-                    wsObject.ckd_albumin_urine_new = row.ckd_albumin_urine_new;
-                    wsObject.ckd_albumin_urine_old = row.ckd_albumin_urine_old;
-                    wsObject.ckd_phosphorus_blood_new = row.ckd_phosphorus_blood_new;
-                    wsObject.ckd_phosphorus_blood_old = row.ckd_phosphorus_blood_old;
-                    wsObject.mode = row.mode;
-                    kidList.Add(wsObject);
-                });
-                new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
-                {
-                    var wsObject = new HHCSService1.TEMP_PressureTABLE();
-                    wsObject.bp_id_pointer = row.bp_id_pointer;
-                    wsObject.bp_time_new = row.bp_time_new;
-                    wsObject.bp_time_old = row.bp_time_old;
-                    wsObject.bp_time_string_new = row.bp_time_string_new;
-                    wsObject.bp_up_new = row.bp_up_new;
-                    wsObject.bp_up_old = row.bp_up_old;
-                    wsObject.bp_lo_new = row.bp_lo_new;
-                    wsObject.bp_lo_old = row.bp_lo_old;
-                    wsObject.bp_hr_new = row.bp_hr_new;
-                    wsObject.bp_hr_old = row.bp_hr_old;
-                    wsObject.bp_up_lvl_new = row.bp_up_lvl_new;
-                    wsObject.bp_up_lvl_old = row.bp_up_lvl_old;
-                    wsObject.bp_lo_lvl_new = row.bp_lo_lvl_new;
-                    wsObject.bp_lo_lvl_old = row.bp_lo_lvl_old;
-                    wsObject.bp_hr_lvl_new = row.bp_hr_lvl_new;
-                    wsObject.bp_hr_lvl_old = row.bp_hr_lvl_old;
-                    wsObject.mode = row.mode;
-                    presList.Add(wsObject);
-                });
-                var result = Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this), Extension.getPreference("ud_pass", string.Empty, this), diaList.ToArray(), kidList.ToArray(), presList.ToArray());
-                diaList.Clear();
-                kidList.Clear();
-                presList.Clear();
-                result.ToList().ForEach(r =>
-                {
-                    Console.WriteLine("WEB SERVICE RESPONSE : " + r);
-                });
-                if (result.ToList().Count > 0)
-                {
-                    Toast.MakeText(this, "Success", ToastLength.Short).Show();
-                    var sqliteInstance = new SQLite.SQLiteConnection(Extension.sqliteDBPath);
-                    sqliteInstance.Execute($"DELETE FROM TEMP_DiabetesTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
-                    sqliteInstance.Execute($"DELETE FROM TEMP_KidneyTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
-                    sqliteInstance.Execute($"DELETE FROM TEMP_PressureTABLE WHERE ud_id = {Extension.getPreference("ud_id", 0, this)}");
-                    //sqliteInstance.Query<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
-                    //sqliteInstance.Query<TEMP_KidneyTABLE>($"SELECT * FROM FROM TEMP_KidneyTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
-                    //sqliteInstance.Query<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERER ud_id = '{Extension.getPreference("ud_id", 0, this)}'");
-                    MySQLDatabaseHelper.GetDataFromMySQLToSQLite(Extension.getPreference("ud_email", string.Empty, this), Extension.getPreference("ud_pass", string.Empty, this));
-                }
-                else
-                {
-                    Toast.MakeText(this, "Failure", ToastLength.Short).Show();
+                    StartActivity(new Intent(this, typeof(History_Food)));
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"ERROR : " + ex.ToString());
+                Extension.CreateDialogue(this, "Connection timeout").Show();
             }
+
+            //NotImplemented(sender, e);
         }
-        public void ClickDiabetes(object sender,EventArgs e)
+        public void ClickDiabetes(object sender, EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Diabetes)));
         }
@@ -234,7 +131,7 @@ namespace HappyHealthyCSharp
         {
             //StartActivity(new Intent(this, typeof(Develop)));
             //GlobalFunction.createDialog(this, "Not implemented").Show();
-           
+
         }
         public void ClickPill(object sender, EventArgs e)
         {
@@ -244,6 +141,10 @@ namespace HappyHealthyCSharp
         public void ClickDoctor(object sender, EventArgs e)
         {
             StartActivity(typeof(History_Doctor));
+        }
+        public void NotImplemented(object sender, EventArgs e)
+        {
+            Extension.CreateDialogue(this, "Not Implemented").Show();
         }
     }
 }

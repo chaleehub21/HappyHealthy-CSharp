@@ -40,6 +40,7 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_add_doc);
             var camerabtt = FindViewById<ImageView>(Resource.Id.imageView_button_save_pic_doc);
             var backbtt = FindViewById<ImageView>(Resource.Id.imageView_button_back_doc);
+            var deletebtt = FindViewById<ImageView>(Resource.Id.imageView_button_delete_doc);
             docAttendDate = FindViewById<TextView>(Resource.Id.choosedate_doc);
             docRegisTime = FindViewById<TextView>(Resource.Id.chooseregtime_doc);
             docAppointmentTime = FindViewById<TextView>(Resource.Id.chooseappttime_doc);
@@ -60,6 +61,7 @@ namespace HappyHealthyCSharp
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
+                deletebtt.Click += DeleteValue;
             }
             backbtt.Click += delegate {
                 this.Finish();
@@ -100,6 +102,21 @@ namespace HappyHealthyCSharp
             }
 
             // Create your application here
+        }
+
+        private void DeleteValue(object sender, EventArgs e)
+        {
+            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
+            {
+                Android.Net.Uri eventUri = Android.Net.Uri.Parse("content://com.android.calendar/events");
+                var deleteUri = ContentUris.WithAppendedId(eventUri, Convert.ToInt32(docObject.da_calendar_uri.Substring(docObject.da_calendar_uri.LastIndexOf(@"/") + 1)));
+                ContentResolver.Delete(deleteUri, null, null);
+
+
+
+                docObject.Delete<DoctorTABLE>(docObject.da_id);
+                Finish();
+            }, delegate { }, "Yes", "No").Show();
         }
 
         private void InitialValueForUpdateEvent()
@@ -149,6 +166,28 @@ namespace HappyHealthyCSharp
             docObject.da_hospital = et_hospital.Text;
             docObject.Insert();
             //CustomNotification.SetAlarmManager(this, $"ได้เวลาทานยา {docObject.ma_name}", docObject.ma_set_time, Resource.Raw.notialert);
+            //test
+            var year = Convert.ToInt32(docObject.da_date.ToString("yyyy"));
+            var month = Convert.ToInt32(docObject.da_date.ToString("MM"));
+            var date = Convert.ToInt32(docObject.da_date.ToString("dd"));
+
+            ContentValues eventValues = new ContentValues();
+            eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, 4);
+            eventValues.Put(CalendarContract.Events.InterfaceConsts.Title,et_hospital.Text);
+            eventValues.Put(CalendarContract.Events.InterfaceConsts.Description, et_comment.Text);
+            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart, GetDateTimeMS(year, month, date, 10, 0));
+            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend, GetDateTimeMS(year, month, date, 11, 0));
+
+            // GitHub issue #9 : Event start and end times need timezone support.
+            // https://github.com/xamarin/monodroid-samples/issues/9
+            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone, "UTC");
+            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "UTC");
+
+            var uri = ContentResolver.Insert(CalendarContract.Events.ContentUri, eventValues);
+            docObject.da_calendar_uri = uri.ToString();
+            docObject.Update();
+            //Console.WriteLine("Uri for new event: {0}", uri);
+            //end test
             this.Finish();
         }
 
@@ -191,6 +230,19 @@ namespace HappyHealthyCSharp
             var intent = new Intent(MediaStore.ActionImageCapture);
             var availableActivities = PackageManager.QueryIntentActivities(intent, Android.Content.PM.PackageInfoFlags.MatchDefaultOnly);
             return availableActivities != null && availableActivities.Count > 0;
+        }
+
+        private long GetDateTimeMS(int yr, int month, int day, int hr, int min)
+        {
+            Calendar c = Calendar.GetInstance(Java.Util.TimeZone.Default);
+
+            c.Set(Java.Util.CalendarField.DayOfMonth, day-1);
+            c.Set(Java.Util.CalendarField.HourOfDay, hr);
+            c.Set(Java.Util.CalendarField.Minute, min);
+            c.Set(Java.Util.CalendarField.Month, month-1);
+            c.Set(Java.Util.CalendarField.Year, yr);
+
+            return c.TimeInMillis;
         }
     }
     public class TimePickerFragment : DialogFragment, TimePickerDialog.IOnTimeSetListener

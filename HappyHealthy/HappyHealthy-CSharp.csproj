@@ -34,6 +34,9 @@
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis />
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
@@ -107,6 +110,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
@@ -149,6 +153,7 @@
     <Compile Include="Doctor.cs" />
     <Compile Include="DoctorTABLE.cs" />
     <Compile Include="History_Doctor.cs" />
+    <Compile Include="IDatabaseSync.cs" />
     <Compile Include="SummaryDiabetesTABLE.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
@@ -161,11 +166,11 @@
     <Compile Include="TEMP_DiabetestTABLE.cs" />
     <Compile Include="TEMP_KidneyTABLE.cs" />
     <Compile Include="TEMP_PressureTABLE.cs" />
-    <Compile Include="UserDetail.cs" />
     <Compile Include="UserTABLE.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="PressureTABLE.cs" />
     <Compile Include="KidneyTABLE.cs" />
+    <Compile Include="UserDetail.cs" />
     <Compile Include="FoodDetail.cs" />
     <Compile Include="DiabetesTABLE.cs" />
     <Compile Include="FoodTABLE.cs" />
@@ -187,7 +192,7 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="TTS.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Web References\HHCSService1\Reference.cs">
+    <Compile Include="Web References\HHCSService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -322,8 +327,12 @@
     <AndroidResource Include="Resources\layout\activity_add_doc.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <None Include="Web References\HHCSService1\HHCSService.wsdl" />
-    <None Include="Web References\HHCSService1\Reference.map">
+    <AndroidResource Include="Resources\layout\CalendarList.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CalListItem.axml" />
+    <None Include="Web References\HHCSService\HHCSService.wsdl" />
+    <None Include="Web References\HHCSService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -1166,13 +1175,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\Test_button_pressure.png" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://172.20.103.80/HHCSService/HHCSService.asmx">
+    <WebReferenceUrl Include="http://192.168.1.7/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\HHCSService1\</RelPath>
-      <UpdateFromURL>http://172.20.103.80/HHCSService/HHCSService.asmx</UpdateFromURL>
+      <RelPath>Web References\HHCSService\</RelPath>
+      <UpdateFromURL>http://192.168.1.7/HHCSService/HHCSService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -1184,7 +1190,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\HHCSService1\HHCSService.disco" />
+    <None Include="Web References\HHCSService\HHCSService.disco" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\button_save_image_doc.png" />
