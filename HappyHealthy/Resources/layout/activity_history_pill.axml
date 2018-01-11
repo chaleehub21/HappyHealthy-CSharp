@@ -11,7 +11,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbarpill" />
+            layout="@layout/toolbar_yellow" />
     </LinearLayout>
     <ListView
         android:layout_width="fill_parent"
@@ -33,7 +33,7 @@
         android:layout_marginTop="15dp"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="#ffffff" />
+        android:textColor="#979797" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -48,5 +48,5 @@
         android:id="@+id/imageViewAddPill"
         android:src="@drawable/buttonadd"
         android:layout_marginTop="7dp"
-        android:layout_marginLeft="315.5dp"/>
+        android:layout_marginLeft="315.5dp" />
 </RelativeLayout>

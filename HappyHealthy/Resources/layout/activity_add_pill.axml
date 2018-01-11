@@ -9,7 +9,7 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:weightSum="1"
-        android:background="#fcfdff">
+        android:background="#ffffff">
         <LinearLayout
             android:id="@+id/container_toolbar"
             android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:orientation="vertical">
             <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbarpill" />
+                layout="@layout/toolbar_yellow" />
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
             android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:layout_gravity="center_horizontal"
-            android:textColor="#ffffff" />
+            android:textColor="#979797" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -63,7 +63,7 @@
                     android:layout_centerHorizontal="true"
                     android:textSize="12dp"
                     android:textStyle="bold"
-                    android:textColor="#5d5d5d"
+                    android:textColor="#979797"
                     android:gravity="center_vertical"
                     android:layout_marginTop="0.0dp"
                     android:layout_marginBottom="0.0dp"
@@ -99,7 +99,7 @@
                     android:layout_centerHorizontal="true"
                     android:textSize="12dp"
                     android:textStyle="bold"
-                    android:textColor="#5d5d5d"
+                    android:textColor="#979797"
                     android:layout_marginTop="0.0dp"
                     android:layout_marginBottom="0.0dp"
                     android:layout_marginRight="3.0dp" />
@@ -140,7 +140,7 @@
                         android:layout_height="35dp"
                         android:text="เช้า"
                         android:id="@+id/Radio_button_breakfast"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797"
                         android:layout_weight="1"
                         android:checked="false"
                         android:textSize="12dp"
@@ -154,7 +154,7 @@
                         android:layout_height="35dp"
                         android:text="กลางวัน"
                         android:id="@+id/Radio_button_lunch"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797"
                         android:layout_weight="1"
                         android:textSize="12dp"
                         android:textStyle="bold"
@@ -182,7 +182,7 @@
                         android:layout_height="35dp"
                         android:text="เย็น"
                         android:id="@+id/Radio_button_dinner"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797"
                         android:layout_weight="1"
                         android:checked="false"
                         android:textSize="12dp"
@@ -196,7 +196,7 @@
                         android:layout_height="35dp"
                         android:text="ก่อนนอน"
                         android:id="@+id/Radio_button_af_sleep"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797"
                         android:layout_weight="1"
                         android:textSize="12dp"
                         android:textStyle="bold"
@@ -224,7 +224,7 @@
                         android:layout_height="35dp"
                         android:text="ก่อนอาหาร"
                         android:id="@+id/Radio_button_bf_food"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797"
                         android:layout_weight="1"
                         android:checked="false"
                         android:textSize="12dp"
@@ -253,7 +253,7 @@
                         android:layout_centerHorizontal="true"
                         android:textSize="12dp"
                         android:textStyle="bold"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797"
                         android:gravity="center_vertical"
                         android:layout_marginTop="6.0dp"
                         android:layout_marginLeft="8.0dp"
@@ -279,7 +279,7 @@
                         android:layout_height="35dp"
                         android:text="หลังอาหาร"
                         android:id="@+id/Radio_button_af_food"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797"
                         android:layout_weight="1"
                         android:textSize="12dp"
                         android:textStyle="bold"
@@ -306,7 +306,7 @@
                         android:layout_centerHorizontal="true"
                         android:textSize="12dp"
                         android:textStyle="bold"
-                        android:textColor="#5d5d5d"
+                        android:textColor="#979797e"
                         android:gravity="center_vertical"
                         android:layout_marginTop="6.0dp"
                         android:layout_marginLeft="8.0dp"
@@ -325,7 +325,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:id="@+id/imageView_button_save_pill"
-                android:src="@drawable/buttonsavepill"
+                android:src="@drawable/Button_save_yellow"
                 android:onClick="Click"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
@@ -334,7 +334,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:id="@+id/imageView_button_delete_pill"
-                android:src="@drawable/buttondeletepill"
+                android:src="@drawable/Button_delete_yellow"
                 android:onClick="Click"
                 android:layout_marginTop="0.0dp"
                 android:layout_gravity="center_horizontal"

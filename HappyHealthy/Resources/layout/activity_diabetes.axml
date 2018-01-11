@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#fbf3fc">
+    android:background="#ffffff">
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbardiabetes" />
+            layout="@layout/toolbar_yellow" />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_marginTop="15dp"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="#ffffff" />
+        android:textColor="#979797" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -41,7 +41,7 @@
         android:layout_marginTop="105dp"
         android:weightSum="1"
         android:id="@+id/Layout_background_diabetes"
-        android:background="@drawable/my_box_diabetes"
+        android:background="@drawable/my_bg_yellow"
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="horizontal"
@@ -96,14 +96,14 @@
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:id="@+id/imageView_button_save_diabetes"
-            android:src="@drawable/buttonsavediba"
+            android:src="@drawable/Button_save_yellow"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10.0dp" />
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:id="@+id/imageView_button_delete_diabetes"
-            android:src="@drawable/buttondeletediba"
+            android:src="@drawable/Button_delete_yellow"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="10.0dp" />
     </LinearLayout>

@@ -7,7 +7,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#f7fafb"
+        android:background="#ffffff"
         android:layout_marginTop="2dp">
         <ImageView
             android:layout_width="45dp"
@@ -30,6 +30,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="25dp"
             android:hint="DD-MM-YYYY  HH:MM"
-            android:textColor="#8e8e8e" />
+            android:textColor="#979797" />
     </LinearLayout>
 </RelativeLayout>

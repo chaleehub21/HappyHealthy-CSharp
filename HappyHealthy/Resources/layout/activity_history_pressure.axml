@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jiraporn.nut.happyhealthy.History_Pressure"
-    android:background="#f7ebeb">
+    android:background="#ffffff">
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbarpre" />
+            layout="@layout/toolbar_orange" />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_marginTop="15dp"
         android:textSize="17dp"
         android:textStyle="bold"
-        android:textColor="#ffffff" />
+        android:textColor="#979797" />
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

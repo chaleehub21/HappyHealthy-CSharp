@@ -4,137 +4,137 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#fef9f9">
-  <LinearLayout
-      android:id="@+id/container_toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbarpre" />
-  </LinearLayout>
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="ความดันโลหิต"
-      android:id="@+id/textView_header_name_pressure"
-      android:layout_centerHorizontal="true"
-      android:textSize="20dp"
-      android:layout_marginTop="15dp"
-      android:textStyle="bold"
-      android:layout_gravity="center_horizontal"
-      android:textColor="#ffffff" />
-  <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/Layout_background_pressure"
-      android:layout_marginLeft="25dp"
-      android:layout_marginRight="25dp"
-      android:layout_marginTop="115dp"
-      android:background="@drawable/my_box_pre">
+    android:background="#ffffff">
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-      <ImageView
-          android:layout_width="fill_parent"
-          android:layout_height="30dp"
-          android:id="@+id/imageView_detail_pressure"
-          android:src="@drawable/txtpretop"
-          android:layout_marginTop="15.5dp"
-          android:layout_marginLeft="5dp" />
+        android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_orange" />
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ความดันโลหิต"
+        android:id="@+id/textView_header_name_pressure"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="2.0dp">
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="26dp"
-          android:id="@+id/imageView_pressure_top"
-          android:src="@drawable/top2" />
-      <EditText
-          android:layout_width="126dp"
-          android:layout_height="match_parent"
-          android:inputType="number"
-          android:ems="10"
-          android:id="@+id/P_costPressureTop"
-          android:textColor="#000000"
-          android:layout_gravity="center_vertical"
-          android:textSize="20dp"
-          android:layout_marginLeft="5dp"
-          android:background="@drawable/my_box_dis"
-          android:gravity="center_vertical|center_horizontal"
-          android:textStyle="bold" />
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:id="@+id/imageView_measurement_unit_top_pressure"
-          android:layout_gravity="center_horizontal"
-          android:src="@drawable/mlpre"
-          android:layout_marginLeft="2dp"
-          android:layout_marginRight="5dp" />
-    </LinearLayout>
+        android:textColor="#979797" />
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="7dp">
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="26dp"
-          android:id="@+id/imageView_pressure_down"
-          android:src="@drawable/down2" />
-      <EditText
-          android:layout_width="126dp"
-          android:layout_height="match_parent"
-          android:inputType="number"
-          android:ems="10"
-          android:id="@+id/P_costPressureDown"
-          android:textColor="#000000"
-          android:background="@drawable/my_box_dis"
-          android:layout_gravity="center_vertical"
-          android:textSize="20dp"
-          android:layout_marginLeft="5dp"
-          android:gravity="center_vertical|center_horizontal"
-          android:textStyle="bold" />
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:id="@+id/imageView_measurement_unit_down_pressure"
-          android:layout_gravity="center_horizontal"
-          android:src="@drawable/mlpre"
-          android:layout_marginLeft="2dp"
-          android:layout_marginRight="5dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-      <ImageView
-          android:layout_width="fill_parent"
-          android:layout_height="30dp"
-          android:id="@+id/imageView_detail_heartrate_pressure"
-          android:layout_marginLeft="20dp"
-          android:src="@drawable/textheart" />
-    </LinearLayout>
-    <LinearLayout
+        android:id="@+id/Layout_background_pressure"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="115dp"
+        android:background="@drawable/my_bg_orange">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:id="@+id/imageView_detail_pressure"
+                android:src="@drawable/txtpretop"
+                android:layout_marginTop="15.5dp"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="2.0dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:id="@+id/imageView_pressure_top"
+                android:src="@drawable/top2" />
+            <EditText
+                android:layout_width="126dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/P_costPressureTop"
+                android:textColor="#000000"
+                android:layout_gravity="center_vertical"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/my_box_dis"
+                android:gravity="center_vertical|center_horizontal"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_measurement_unit_top_pressure"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/mlpre"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="7dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:id="@+id/imageView_pressure_down"
+                android:src="@drawable/down2" />
+            <EditText
+                android:layout_width="126dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/P_costPressureDown"
+                android:textColor="#000000"
+                android:background="@drawable/my_box_dis"
+                android:layout_gravity="center_vertical"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_measurement_unit_down_pressure"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/mlpre"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:id="@+id/imageView_detail_heartrate_pressure"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/textheart" />
+        </LinearLayout>
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -142,56 +142,56 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp">
-      <EditText
-          android:layout_width="126dp"
-          android:layout_height="wrap_content"
-          android:inputType="number"
-          android:ems="10"
-          android:id="@+id/P_HeartRate"
-          android:textColor="#000000"
-          android:background="@drawable/my_box_dis"
-          android:layout_gravity="center_horizontal"
-          android:textSize="20dp"
-          android:layout_marginLeft="0.0dp"
-          android:gravity="center_vertical|center_horizontal"
-          android:textStyle="bold" />
-      <ImageView
-          android:layout_width="20dp"
-          android:layout_height="30dp"
-          android:id="@+id/ic_microphone_pressure"
-          android:src="@drawable/ic_microphone"
-          android:layout_marginLeft="6.0dp" />
+            <EditText
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/P_HeartRate"
+                android:textColor="#000000"
+                android:background="@drawable/my_box_dis"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:layout_marginLeft="0.0dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:id="@+id/ic_microphone_pressure"
+                android:src="@drawable/ic_microphone"
+                android:layout_marginLeft="6.0dp" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:id="@+id/imageView_measurement_unit_heartrate_pressure"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/mlh"
+            android:layout_marginLeft="0.0dp" />
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/imageView_button_save_pressure"
+            android:src="@drawable/Button_login_orange"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="10.0dp" />
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/imageView_button_delete_pressure"
+            android:src="@drawable/Button_delete_orange"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0.0dp"
+            android:layout_marginBottom="10.0dp" />
     </LinearLayout>
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:id="@+id/imageView_measurement_unit_heartrate_pressure"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/mlh"
-        android:layout_marginLeft="0.0dp" />
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:id="@+id/imageView_button_save_pressure"
-        android:src="@drawable/buttonsave"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="40dp"
+        android:id="@+id/imageView_button_back_pressure"
+        android:src="@drawable/arowback"
         android:layout_marginTop="7dp"
-        android:layout_marginBottom="10.0dp" />
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:id="@+id/imageView_button_delete_pressure"
-        android:src="@drawable/buttondeletefsb"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="0.0dp"
-        android:layout_marginBottom="10.0dp" />
-  </LinearLayout>
-  <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="40dp"
-      android:id="@+id/imageView_button_back_pressure"
-      android:src="@drawable/arowback"
-      android:layout_marginTop="7dp"
-      android:layout_marginLeft="3dp"
-      android:onClick="ClickBackPreHome" />
+        android:layout_marginLeft="3dp"
+        android:onClick="ClickBackPreHome" />
 </RelativeLayout>

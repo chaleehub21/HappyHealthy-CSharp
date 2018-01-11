@@ -16,7 +16,8 @@
             android:textSize="14dp"
             android:layout_marginLeft="70dp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textColor="#979797" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="รายละเอียดยา"
+            android:textColor="#979797"
             android:id="@+id/his_pill_desc"
             android:textSize="13dp"
             android:layout_marginTop="4dp"
