@@ -25,6 +25,7 @@ namespace HappyHealthyCSharp
             "ma_name",
             "ma_desc", 
             "ma_set_time",
+            "ma_calendar_uri",
             "ma_pic"
         };
         [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
@@ -48,6 +49,7 @@ namespace HappyHealthyCSharp
         public bool ma_repeat_saturday { get; set; }
         [SQLite.Net.Attributes.NotNull]
         public bool ma_repeat_sunday { get; set; }
+        public string ma_calendar_uri { get; set; }
         [SQLite.Net.Attributes.MaxLength(255)]
         public string ma_pic { get; set; }
         [ForeignKey(typeof(UserTABLE))]

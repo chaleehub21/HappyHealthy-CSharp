@@ -38,6 +38,7 @@ namespace HappyHealthyCSharp
             medName = FindViewById<EditText>(Resource.Id.ma_name);
             medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_pill);
+            var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pill);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             medObject = string.IsNullOrEmpty(flagObjectJson) ? new MedicineTABLE() { ma_name = string.Empty } : JsonConvert.DeserializeObject<MedicineTABLE>(flagObjectJson);
@@ -49,6 +50,7 @@ namespace HappyHealthyCSharp
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
+                deleteButton.Click += DeleteValue;
             }
             //end
             backbtt.Click += delegate {
@@ -63,6 +65,19 @@ namespace HappyHealthyCSharp
             }
             
             // Create your application here
+        }
+
+        private void DeleteValue(object sender, EventArgs e)
+        {
+            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
+            {
+                // Android.Net.Uri eventUri = Android.Net.Uri.Parse("content://com.android.calendar/events");
+                //var deleteUri = ContentUris.WithAppendedId(eventUri, Convert.ToInt32(docObject.da_calendar_uri.Substring(docObject.da_calendar_uri.LastIndexOf(@"/") + 1)));
+                var deleteUri = CalendarHelper.GetDeleteEventURI(medObject.ma_calendar_uri);
+                ContentResolver.Delete(deleteUri, null, null);
+                medObject.Delete<MedicineTABLE>(medObject.ma_id);
+                Finish();
+            }, delegate { }, "Yes", "No").Show();
         }
 
         private void InitialValueForUpdateEvent()
@@ -98,7 +113,12 @@ namespace HappyHealthyCSharp
             medObject.ma_pic = picPath;
             medObject.ud_id = Extension.getPreference("ud_id", 0, this);
             medObject.Insert();
-            CustomNotification.SetAlarmManager(this, $"ได้เวลาทานยา {medObject.ma_name}",(int)DateTime.Now.DayOfWeek,medObject.ma_set_time, Resource.Raw.notialert);
+            var testRRULE = "FREQ=WEEKLY";
+            var insertUri = CalendarHelper.GetEventContentValues(1, medName.Text, medDesc.Text, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 12, false,"UTC+7",testRRULE);
+            var savedUri = ContentResolver.Insert(CalendarContract.Events.ContentUri, insertUri);
+            medObject.ma_calendar_uri = savedUri.ToString();
+            medObject.Update();
+            //CustomNotification.SetAlarmManager(this, $"ได้เวลาทานยา {medObject.ma_name}",(int)DateTime.Now.DayOfWeek,medObject.ma_set_time, Resource.Raw.notialert);
             this.Finish();
         }
 

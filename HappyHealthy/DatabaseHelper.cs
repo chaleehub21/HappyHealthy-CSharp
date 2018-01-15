@@ -14,6 +14,7 @@ using SQLite.Net.Platform.XamarinAndroid;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Threading;
+using System.Reflection;
 
 namespace HappyHealthyCSharp
 {

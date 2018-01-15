@@ -31,7 +31,13 @@ namespace HappyHealthyCSharp
             txt_search = FindViewById<EditText>(Resource.Id.tv_Sfood);
             var img_back = FindViewById<ImageView>(Resource.Id.imageView44);
             foodTable = new FoodTABLE();
+            /*
             btn_search.Click += delegate {
+                setListFood(txt_search.Text);
+            };
+            */
+            txt_search.TextChanged += delegate
+            {
                 setListFood(txt_search.Text);
             };
             img_back.Click += delegate {
@@ -70,7 +76,7 @@ namespace HappyHealthyCSharp
         [Export("ClickAddFood")]
         public void ClickAddFood(View v)
         {
-            StartActivity(new Intent(this, typeof(Add_Food)));
+            //StartActivity(new Intent(this, typeof(Add_Food)));
         }
         public void setListFood(string what_to_search)
         {
