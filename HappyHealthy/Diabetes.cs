@@ -80,12 +80,20 @@ namespace HappyHealthyCSharp
 
         private void DeleteValue(object sender, EventArgs e)
         {
-            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
-            {
-                diaObject.Delete<DiabetesTABLE>(diaObject.fbs_id);
-                TrySyncWithMySQL();
-                Finish();
-            }, delegate { }, "Yes", "No").Show();
+            Extension.CreateDialogue2(
+                 this
+                 , "Do you want to delete this value?"
+                 , Android.Graphics.Color.LightGreen, Android.Graphics.Color.White
+                 , Android.Graphics.Color.Red, Android.Graphics.Color.White
+                 , delegate
+                 {
+                     diaObject.Delete<DiabetesTABLE>(diaObject.fbs_id);
+                     TrySyncWithMySQL();
+                     Finish();
+                 }
+                 , delegate { }
+                 , "\u2713"
+                 , "X");
         }
 
         private void InitialValueForUpdateEvent()
@@ -126,7 +134,7 @@ namespace HappyHealthyCSharp
 
                             }
                         }
-                        Extension.MapDictToControls(new[] { "น้ำตาล","SUGAR" },new[] { BloodValue},dataNLPList);
+                        Extension.MapDictToControls(new[] { "น้ำตาล", "SUGAR" }, new[] { BloodValue }, dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -135,7 +143,7 @@ namespace HappyHealthyCSharp
             base.OnActivityResult(requestCode, resultVal, data);
         }
 
-        
+
 
         public void SaveValue(object sender, EventArgs e)
         {
@@ -169,7 +177,8 @@ namespace HappyHealthyCSharp
         }
         public void TrySyncWithMySQL()
         {
-            var t = new Thread(() => {
+            var t = new Thread(() =>
+            {
                 try
                 {
                     var Service = new HHCSService.HHCSService();
@@ -194,7 +203,8 @@ namespace HappyHealthyCSharp
                         , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
                         , new List<HHCSService.TEMP_PressureTABLE>().ToArray());
                     diaList.Clear();
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message); //Exception mostly throw only when the server is down
                     //or device is not able to reach the server

@@ -59,7 +59,8 @@
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
     <Reference Include="MySql.Data.CF">
-      <HintPath>..\..\..\..\Downloads\MySQL-Plugin-1.0\MySQL-Plugin-1.0\lib\android\MySql.Data.CF.dll</HintPath>
+      <HintPath>..\..\Users\kunvu\Downloads\MySQL-Plugin-1.0\MySQL-Plugin-1.0\lib\android\MySql.Data.CF.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
@@ -162,7 +163,7 @@
     <Compile Include="History_Pill.cs" />
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="IMySQL.cs" />
-    <Compile Include="Pill.cs" />
+    <Compile Include="Medicine.cs" />
     <Compile Include="MedicineTABLE.cs" />
     <Compile Include="TEMP_DiabetestTABLE.cs" />
     <Compile Include="TEMP_KidneyTABLE.cs" />
@@ -1176,10 +1177,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\Test_button_pressure.png" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://172.20.97.219/HHCSService/HHCSService.asmx">
+    <WebReferenceUrl Include="http://172.16.23.82/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HHCSService\</RelPath>
-      <UpdateFromURL>http://172.20.97.219/HHCSService/HHCSService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://172.16.23.82/HHCSService/HHCSService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

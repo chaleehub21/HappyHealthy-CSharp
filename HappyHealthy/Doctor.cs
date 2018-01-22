@@ -106,6 +106,7 @@ namespace HappyHealthyCSharp
 
         private void DeleteValue(object sender, EventArgs e)
         {
+            /*
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 // Android.Net.Uri eventUri = Android.Net.Uri.Parse("content://com.android.calendar/events");
@@ -115,6 +116,22 @@ namespace HappyHealthyCSharp
                 docObject.Delete<DoctorTABLE>(docObject.da_id);
                 Finish();
             }, delegate { }, "Yes", "No").Show();
+            */
+            Extension.CreateDialogue2(
+                 this
+                 , "ต้องการลบข้อมูลนี้หรือไม่?"
+                 , Android.Graphics.Color.LightGreen, Android.Graphics.Color.White
+                 , Android.Graphics.Color.Red, Android.Graphics.Color.White
+                 , delegate
+                 {
+                     var deleteUri = CalendarHelper.GetDeleteEventURI(docObject.da_calendar_uri);
+                     ContentResolver.Delete(deleteUri, null, null);
+                     docObject.Delete<DoctorTABLE>(docObject.da_id);
+                     Finish();
+                 }
+                 , delegate { }
+                 , "\u2713"
+                 , "X");
         }
 
         private void InitialValueForUpdateEvent()

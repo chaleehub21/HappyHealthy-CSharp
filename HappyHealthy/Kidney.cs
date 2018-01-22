@@ -64,12 +64,28 @@ namespace HappyHealthyCSharp
 
         private void DeleteValue(object sender, EventArgs e)
         {
+            /*
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
                 TrySyncWithMySQL();
                 Finish();
             }, delegate { }, "Yes", "No").Show();
+            */
+            Extension.CreateDialogue2(
+                 this
+                 , "ต้องการลบข้อมูลนี้หรือไม่?"
+                 , Android.Graphics.Color.LightGreen, Android.Graphics.Color.White
+                 , Android.Graphics.Color.Red, Android.Graphics.Color.White
+                 , delegate
+                 {
+                     kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
+                     TrySyncWithMySQL();
+                     Finish();
+                 }
+                 , delegate { }
+                 , "\u2713"
+                 , "X");
         }
 
         private void InitialValueForUpdateEvent()
