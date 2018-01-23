@@ -25,10 +25,7 @@ namespace HappyHealthyCSharp
         private string message;
         private Boolean isRunning;
         private int speakCount;
-        public TTS()
-        {
 
-        }
         public TTS(Context c)
         {
     

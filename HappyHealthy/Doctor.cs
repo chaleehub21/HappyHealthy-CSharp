@@ -98,7 +98,6 @@ namespace HappyHealthyCSharp
                 CreateDirForPictures();
                 camerabtt.Click += cameraClickEvent;
                 docAttendPicture = FindViewById<ImageView>(Resource.Id.imageView_show_image);
-                //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
 
             // Create your application here
@@ -106,22 +105,12 @@ namespace HappyHealthyCSharp
 
         private void DeleteValue(object sender, EventArgs e)
         {
-            /*
-            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
-            {
-                // Android.Net.Uri eventUri = Android.Net.Uri.Parse("content://com.android.calendar/events");
-                //var deleteUri = ContentUris.WithAppendedId(eventUri, Convert.ToInt32(docObject.da_calendar_uri.Substring(docObject.da_calendar_uri.LastIndexOf(@"/") + 1)));
-                var deleteUri = CalendarHelper.GetDeleteEventURI(docObject.da_calendar_uri);
-                ContentResolver.Delete(deleteUri, null, null);
-                docObject.Delete<DoctorTABLE>(docObject.da_id);
-                Finish();
-            }, delegate { }, "Yes", "No").Show();
-            */
             Extension.CreateDialogue2(
                  this
                  , "ต้องการลบข้อมูลนี้หรือไม่?"
-                 , Android.Graphics.Color.LightGreen, Android.Graphics.Color.White
-                 , Android.Graphics.Color.Red, Android.Graphics.Color.White
+                 , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                 , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                 , Extension.adFontSize
                  , delegate
                  {
                      var deleteUri = CalendarHelper.GetDeleteEventURI(docObject.da_calendar_uri);

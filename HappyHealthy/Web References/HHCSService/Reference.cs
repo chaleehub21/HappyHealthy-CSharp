@@ -49,7 +49,7 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         public HHCSService() {
-            this.Url = "http://172.16.23.82/HHCSService/HHCSService.asmx";
+            this.Url = "http://192.168.137.1/HHCSService/HHCSService.asmx";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

@@ -25,6 +25,7 @@ namespace HappyHealthyCSharp
         public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         public static readonly string sqliteDBPath = Path.Combine(fileStorePath, "hhcs.db3");
         public static readonly int flagValue = -9521;
+        public static readonly int adFontSize = 70;
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
@@ -45,8 +46,28 @@ namespace HappyHealthyCSharp
             }
             return nDLG;
         }
-        public static void CreateDialogue2(Context t, string message, Android.Graphics.Color neutralBtnColor, Android.Graphics.Color neutralTxtColor, Android.Graphics.Color negativeBtnColor, Android.Graphics.Color negativeTxtColor,
-            EventHandler<DialogClickEventArgs> action = null, EventHandler<DialogClickEventArgs> cancelAction = null, string actionMessage = "OK", string cancelActionMessage = "Cancel")
+        /// <summary>
+        /// Similar to CreateDialogue function but is able to modify the color of background,text and text size 
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="message"></param>
+        /// <param name="neutralBtnColor"></param>
+        /// <param name="neutralTxtColor"></param>
+        /// <param name="negativeBtnColor"></param>
+        /// <param name="negativeTxtColor"></param>
+        /// <param name="action"></param>
+        /// <param name="cancelAction"></param>
+        /// <param name="actionMessage"></param>
+        /// <param name="cancelActionMessage"></param>
+        public static void CreateDialogue2(
+            Context t, string message,
+            Android.Graphics.Color neutralBtnColor, Android.Graphics.Color neutralTxtColor,
+            Android.Graphics.Color negativeBtnColor, Android.Graphics.Color negativeTxtColor,
+            float fontSize = 42,
+            EventHandler<DialogClickEventArgs> action = null,
+            EventHandler<DialogClickEventArgs> cancelAction = null,
+            string actionMessage = "OK",
+            string cancelActionMessage = "Cancel")
         {
             var isCancelAble = cancelAction == null ? false : true; //is cancel action function defined? if yes then the cancel button should be available.
             var nDLG = new AlertDialog.Builder(t);
@@ -60,6 +81,9 @@ namespace HappyHealthyCSharp
                 .SetNegativeButton(cancelActionMessage, cancelAction);
             }
             var createdButton = nDLG.Show();
+            //Console.WriteLine(createdButton.GetButton((int)DialogButtonType.Positive).TextSize); //default font size is 42px
+            createdButton.GetButton((int)DialogButtonType.Neutral).SetTextSize(Android.Util.ComplexUnitType.Px, fontSize);
+            createdButton.GetButton((int)DialogButtonType.Negative).SetTextSize(Android.Util.ComplexUnitType.Px, fontSize);
             createdButton.GetButton((int)DialogButtonType.Neutral).SetBackgroundColor(neutralBtnColor);
             createdButton.GetButton((int)DialogButtonType.Negative).SetBackgroundColor(negativeBtnColor);
             createdButton.GetButton((int)DialogButtonType.Neutral).SetTextColor(neutralTxtColor);
@@ -211,15 +235,35 @@ namespace HappyHealthyCSharp
             }
             return false;
         }
-        public static void MapDictToControls(string[] keyWord, EditText[] etArray, Dictionary<string, string> data)
+        public static void MapDictToControls(string[] keyword, EditText[] etArray, Dictionary<string, string> data)
         {
-            for (var index = 0; index < keyWord.Length; index++)
+            /*
+            for (var index = 0; index < keyword.Length; index++)
             {
-                data.TryGetValue(keyWord[index], out string value);
-                if (!string.IsNullOrEmpty(value))
+                data.TryGetValue(keyword[index], out string value);
+                //if (value.ToLower().Contains(keyword[index].ToLower()))
+                if(value.Contains(keyword[index]))
                 {
-                    etArray[index].Text = data[keyWord[index]];
+                    etArray[index].Text = data[keyword[index]];
                 }
+            }
+            */
+            var tempKeywords = new List<string>(data.Keys);
+            for (var index = 0; index < keyword.Length; index++) //index to iterate over keyword array
+            {
+                for (var keyIndex = 0; keyIndex < tempKeywords.Count; keyIndex++) //kwindex to iterate over dictionary key
+                {
+                    if (tempKeywords[keyIndex].Contains(keyword[index]))
+                    {
+                        data.TryGetValue(tempKeywords[keyIndex], out var value);
+                        etArray[index].Text = value;
+                        //Console.WriteLine($@"Key {keyword[index]} : {value}");
+                        tempKeywords.RemoveAt(keyIndex); //the keyword has been used, so jut remove these fcking keyword
+                        goto breakloop; //we found the value we're looking for, so just remove these fcking keyword
+                        //these 2 above lines is about to make the code run 2 times faster at best case, so just leave it be
+                    }
+                }
+                breakloop:;
             }
         }
 

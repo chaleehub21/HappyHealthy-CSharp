@@ -101,7 +101,7 @@ namespace HappyHealthyCSharp
 
                             }
                         }
-                        Extension.MapDictToControls(new[] { "บน","ล่าง","หัวใจ"}, new[] { BPUp,BPLow,HeartRate }, dataNLPList);
+                        Extension.MapDictToControls(new[] { "บน", "ล่าง", "หัวใจ" }, new[] { BPUp, BPLow, HeartRate }, dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -123,8 +123,9 @@ namespace HappyHealthyCSharp
             Extension.CreateDialogue2(
                  this
                  , "ต้องการลบข้อมูลนี้หรือไม่?"
-                 , Android.Graphics.Color.LightGreen, Android.Graphics.Color.White
-                 , Android.Graphics.Color.Red, Android.Graphics.Color.White
+                 , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                 , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                 , Extension.adFontSize
                  , delegate
                  {
                      pressureObject.Delete<PressureTABLE>(pressureObject.bp_id);
@@ -211,12 +212,14 @@ namespace HappyHealthyCSharp
         }
         public void TrySyncWithMySQL()
         {
-            var t = new Thread(() => {
+            var t = new Thread(() =>
+            {
                 try
                 {
                     var Service = new HHCSService.HHCSService();
                     var presList = new List<HHCSService.TEMP_PressureTABLE>();
-                    new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row => {
+                    new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                    {
                         var wsObject = new HHCSService.TEMP_PressureTABLE();
                         wsObject.bp_id_pointer = row.bp_id_pointer;
                         wsObject.bp_time_new = row.bp_time_new;
@@ -243,7 +246,8 @@ namespace HappyHealthyCSharp
                         , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
                         , presList.ToArray());
                     presList.Clear();
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }

@@ -85,8 +85,9 @@ namespace HappyHealthyCSharp
             Extension.CreateDialogue2(
                  this
                  , "ต้องการลบข้อมูลนี้หรือไม่?"
-                 , Android.Graphics.Color.LightGreen, Android.Graphics.Color.White
-                 , Android.Graphics.Color.Red, Android.Graphics.Color.White
+                 , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                 , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                 , Extension.adFontSize
                  , delegate
                  {
                      var deleteUri = CalendarHelper.GetDeleteEventURI(medObject.ma_calendar_uri);
