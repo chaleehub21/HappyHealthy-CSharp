@@ -229,15 +229,21 @@ namespace HappyHealthyCSharp
                 return false;
             }
         }
-        public static bool GetDataFromMySQLToSQLite(string email, string password)
+        public static async System.Threading.Tasks.Task<bool> GetDataFromMySQLToSQLite(string email, string password)
         {
             try
             {
+                DataSet userData = null;
+                DataSet diabetesData = null;
+                DataSet kidneyData = null;
+                DataSet pressureData = null;
                 var Service = new HHCSService.HHCSService();
-                var userData = Service.GetData("UserTABLE", email, password);
-                var diabetesData = Service.GetData("DiabetesTABLE", email, password);
-                var kidneyData = Service.GetData("KidneyTABLE", email, password);
-                var pressureData = Service.GetData("PressureTABLE", email, password);
+                await System.Threading.Tasks.Task.Run(delegate {
+                    userData = Service.GetData("UserTABLE", email, password);
+                    diabetesData = Service.GetData("DiabetesTABLE", email, password);
+                    kidneyData = Service.GetData("KidneyTABLE", email, password);
+                    pressureData = Service.GetData("PressureTABLE", email, password);
+                });
                 if (userData != null)
                 {
                     var userID = -999;
@@ -246,11 +252,12 @@ namespace HappyHealthyCSharp
                     {
                         var tempUser = new UserTABLE();
                         tempUser.ud_id = Convert.ToInt32(row[0].ToString());
-                        tempUser.ud_birthdate = DateTime.Now;
-                        tempUser.ud_gender = "n/a";
-                        tempUser.ud_name = row[1].ToString();
                         tempUser.ud_email = row[1].ToString();
                         tempUser.ud_pass = row[2].ToString();
+                        tempUser.ud_iden_number = row[3].ToString();
+                        tempUser.ud_gender = row[4].ToString();
+                        tempUser.ud_name = row[5].ToString();
+                        tempUser.ud_birthdate = DateTime.Parse(row[6].ToString());
                         userID = tempUser.ud_id;
                         tempUser.Insert();
                     }

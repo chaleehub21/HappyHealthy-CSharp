@@ -67,8 +67,12 @@ namespace HappyHealthyCSharp
                         ,ud_pass = AccountHelper.CreatePasswordHash(pw.Text)
                     };
                     var Service = new HHCSService.HHCSService();
-                    object[] returnData = Service.Register(email.Text, pw.Text);
-                    if (returnData!=null)
+                    object[] returnData = Service.Register(email.Text, pw.Text
+                        , user.ud_iden_number
+                        , user.ud_gender
+                        , user.ud_name
+                        , user.ud_birthdate);
+                    if (returnData.Length == 2)
                     {
                         user.ud_id = (int)returnData[0];
                         user.ud_pass = (string)returnData[1];

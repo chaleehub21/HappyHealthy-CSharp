@@ -103,10 +103,19 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                if (new HHCSService.HHCSService().TestConnection() == true)
-                {
+                var progressDialog = new ProgressDialog(this); 
+                progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+                progressDialog.SetTitle("ดาวน์โหลดข้อมูล");
+                progressDialog.SetMessage("กำลังดาวน์โหลดข้อมูลของท่าน กรุณารอสักครู่");
+                progressDialog.Indeterminate = true;
+                progressDialog.SetCancelable(false);
+                progressDialog.Show();
+                var service = new HHCSService.HHCSService();
+                service.TestConnectionCompleted += delegate {
                     StartActivity(new Intent(this, typeof(History_Food)));
-                }
+                    progressDialog.Dismiss();
+                };
+                service.TestConnectionAsync();
             }
             catch
             {

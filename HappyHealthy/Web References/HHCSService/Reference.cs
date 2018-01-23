@@ -106,26 +106,34 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Register", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public object[] Register(string ud_email, string ud_pass) {
+        public object[] Register(string ud_email, string ud_pass, string ud_iden_number, string ud_gender, string ud_name, System.DateTime ud_datetime) {
             object[] results = this.Invoke("Register", new object[] {
                         ud_email,
-                        ud_pass});
+                        ud_pass,
+                        ud_iden_number,
+                        ud_gender,
+                        ud_name,
+                        ud_datetime});
             return ((object[])(results[0]));
         }
         
         /// <remarks/>
-        public void RegisterAsync(string ud_email, string ud_pass) {
-            this.RegisterAsync(ud_email, ud_pass, null);
+        public void RegisterAsync(string ud_email, string ud_pass, string ud_iden_number, string ud_gender, string ud_name, System.DateTime ud_datetime) {
+            this.RegisterAsync(ud_email, ud_pass, ud_iden_number, ud_gender, ud_name, ud_datetime, null);
         }
         
         /// <remarks/>
-        public void RegisterAsync(string ud_email, string ud_pass, object userState) {
+        public void RegisterAsync(string ud_email, string ud_pass, string ud_iden_number, string ud_gender, string ud_name, System.DateTime ud_datetime, object userState) {
             if ((this.RegisterOperationCompleted == null)) {
                 this.RegisterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRegisterOperationCompleted);
             }
             this.InvokeAsync("Register", new object[] {
                         ud_email,
-                        ud_pass}, this.RegisterOperationCompleted, userState);
+                        ud_pass,
+                        ud_iden_number,
+                        ud_gender,
+                        ud_name,
+                        ud_datetime}, this.RegisterOperationCompleted, userState);
         }
         
         private void OnRegisterOperationCompleted(object arg) {
