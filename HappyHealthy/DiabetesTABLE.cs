@@ -13,16 +13,12 @@ using SQLite;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
-using SQLiteNetExtensions.Attributes;
-using SQLite.Net.Platform.XamarinAndroid;
 using Xamarin.Forms.Platform.Android;
 using System.Threading;
-using SQLite.Net.Attributes;
 using System.Threading.Tasks;
 
 namespace HappyHealthyCSharp
 {
-    [SQLite.Net.Attributes.Table("DiabetesTABLE")]
     class DiabetesTABLE : DatabaseHelper
     {
         public override List<string> Column => new List<string>()
@@ -34,14 +30,14 @@ namespace HappyHealthyCSharp
             "fbs_fbs_lvl",
             "ud_id"
         };
-        [SQLite.Net.Attributes.PrimaryKey]
+        [SQLite.PrimaryKey,SQLite.AutoIncrement]
         public int fbs_id { get; set; }
         public DateTime fbs_time { get; set; }
         public string fbs_time_string { get; set; }
         public decimal fbs_fbs { get; set; }
         public int fbs_fbs_lvl { get; set; }
         public int ud_id { get; set; }
-        [ManyToOne]
+        [Ignore]
         public UserTABLE UserTABLE { get; set; }
 
         //reconstruct of sqlite keys + attributes

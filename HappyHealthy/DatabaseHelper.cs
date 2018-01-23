@@ -9,30 +9,29 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Threading;
 using System.Reflection;
+using SQLite;
 
 namespace HappyHealthyCSharp
 {
     abstract class DatabaseHelper
     {
         public abstract List<string> Column { get; }
-        virtual public List<T> Select<T>(string query) where T : class
+        virtual public List<T> Select<T>(string query) where T : new()
         {
-            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+            var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var result = conn.Query<T>(query);
             conn.Close();
             return result;
         }
-        virtual public bool Delete<T>(int id)
+        virtual public bool Delete<T>(int id) where T : new()
         {
             try
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var conn = new SQLiteConnection(Extension.sqliteDBPath);
                 var result = conn.Delete<T>(id);
                 conn.Close();
                 return true;
@@ -42,7 +41,7 @@ namespace HappyHealthyCSharp
                 return false;
             }
         }
-        virtual public JavaList<IDictionary<string, object>> GetJavaList<T>(string queryCustomized, List<string> columnTag) where T : class
+        virtual public JavaList<IDictionary<string, object>> GetJavaList<T>(string queryCustomized, List<string> columnTag) where T : new()
         {
             #region MySQL
             /*
@@ -68,7 +67,7 @@ namespace HappyHealthyCSharp
             */
             #endregion
             var dataList = new JavaList<IDictionary<string, object>>();
-            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+            var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var queryResult = conn.Query<T>(queryCustomized);
             queryResult.ForEach(dataRow =>
             {
@@ -89,7 +88,7 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var conn = new SQLiteConnection(Extension.sqliteDBPath);
                 var result = conn.Update(data);
                 conn.Close();
                 return true;
@@ -103,7 +102,7 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var conn = new SQLiteConnection(Extension.sqliteDBPath);
                 var result = conn.Insert(data);
                 conn.Close();
                 return true;
@@ -119,7 +118,7 @@ namespace HappyHealthyCSharp
 
             try
             {
-                var sqliteConn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var sqliteConn = new SQLiteConnection(Extension.sqliteDBPath);
                 sqliteConn.CreateTable<DiabetesTABLE>();
                 sqliteConn.CreateTable<DoctorTABLE>();
                 sqliteConn.CreateTable<FoodTABLE>();
@@ -242,7 +241,7 @@ namespace HappyHealthyCSharp
                 if (userData != null)
                 {
                     var userID = -999;
-                    var sqliteInstance = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                    var sqliteInstance = new SQLiteConnection(Extension.sqliteDBPath);
                     foreach (DataRow row in ((DataSet)userData).Tables["UserTABLE"].Rows)
                     {
                         var tempUser = new UserTABLE();

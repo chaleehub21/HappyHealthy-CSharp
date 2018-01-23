@@ -12,8 +12,7 @@ using Android.Widget;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Plugin.LocalNotifications;
-using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net;
+using SQLite;
 
 namespace HappyHealthyCSharp
 {
@@ -45,7 +44,6 @@ namespace HappyHealthyCSharp
             {
                 if(new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0)
                 {
-                    Toast.MakeText(this, "Getting your data from server...", ToastLength.Long);
                     MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id.Text, pw.Text);
                 }
                 try
@@ -79,7 +77,7 @@ namespace HappyHealthyCSharp
 
         private void Initialization(string id,string password)
         {
-            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+            var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var sql = $@"select * from UserTABLE where ud_email = '{id}'";
             var result = conn.Query<UserTABLE>(sql);
             Extension.setPreference("ud_email", id, this);

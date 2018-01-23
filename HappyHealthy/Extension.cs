@@ -15,8 +15,6 @@ using System.Net;
 using System.IO;
 using System.Globalization;
 using System.Security.Cryptography;
-using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net;
 
 namespace HappyHealthyCSharp
 {

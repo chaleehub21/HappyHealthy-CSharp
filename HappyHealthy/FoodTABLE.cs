@@ -9,12 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using SQLite;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
-using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net.Attributes;
 
 namespace HappyHealthyCSharp
 {

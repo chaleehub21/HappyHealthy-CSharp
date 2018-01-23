@@ -13,8 +13,6 @@ using SQLite;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
-using SQLiteNetExtensions.Attributes;
-using SQLite.Net.Platform.XamarinAndroid;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,24 +33,24 @@ namespace HappyHealthyCSharp
             "bp_lo_lvl",
             "bp_hr_lvl",
         };
-        [SQLite.Net.Attributes.PrimaryKey]
+        [SQLite.PrimaryKey]
         public int bp_id { get; set; }
         public DateTime bp_time { get; set; }
         public string bp_time_string { get; set; }
-        [SQLite.Net.Attributes.MaxLength(3)]
+        [SQLite.MaxLength(3)]
         public decimal bp_up { get; set; }
-        [SQLite.Net.Attributes.MaxLength(3)]
+        [SQLite.MaxLength(3)]
         public decimal bp_lo { get; set; }
-        [SQLite.Net.Attributes.MaxLength(3)]
+        [SQLite.MaxLength(3)]
         public int bp_hr { get; set; }
-        [SQLite.Net.Attributes.MaxLength(4)]
+        [SQLite.MaxLength(4)]
         public int bp_up_lvl { get; set; }
-        [SQLite.Net.Attributes.MaxLength(4)]
+        [SQLite.MaxLength(4)]
         public int bp_lo_lvl { get; set; }
-        [SQLite.Net.Attributes.MaxLength(4)]
+        [SQLite.MaxLength(4)]
         public int bp_hr_lvl { get; set; }
         public int ud_id { get; set; }
-        [ManyToOne]
+        [Ignore]
         public UserTABLE UserTABLE { get; set; }
         //reconstruct of sqlite keys + attributes
         public PressureTABLE()
