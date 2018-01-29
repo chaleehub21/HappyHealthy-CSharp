@@ -32,7 +32,7 @@ namespace HappyHealthyCSharp
             var addbtt = FindViewById<ImageView>(Resource.Id.imageViewAddPill);
             addbtt.Click += delegate
             {
-                StartActivity(typeof(Pill));
+                StartActivity(typeof(Medicine));
             };
             ListView.ItemClick += onItemClick;
             pillTable = new MedicineTABLE();
@@ -58,7 +58,7 @@ namespace HappyHealthyCSharp
             }, "OK", "Edit").Show();
             */
             var jsonObject = JsonConvert.SerializeObject(pillObject);
-            var Intent = new Intent(this, typeof(Pill));
+            var Intent = new Intent(this, typeof(Medicine));
             Intent.PutExtra("targetObject", jsonObject);
             StartActivity(Intent);
         }

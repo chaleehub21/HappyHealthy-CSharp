@@ -17,9 +17,10 @@ using Newtonsoft.Json;
 namespace HappyHealthyCSharp
 {
     [Activity(Label = "Pill")]
-    public class Pill : Activity
+    public class Medicine : Activity
     {
-        public struct App {
+        public struct App
+        {
             public static File _file;
             public static File _dir;
             public static Bitmap bitmap;
@@ -42,7 +43,7 @@ namespace HappyHealthyCSharp
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             medObject = string.IsNullOrEmpty(flagObjectJson) ? new MedicineTABLE() { ma_name = string.Empty } : JsonConvert.DeserializeObject<MedicineTABLE>(flagObjectJson);
-            if(medObject.ma_name == string.Empty)
+            if (medObject.ma_name == string.Empty)
             {
                 saveButton.Click += SaveValue;
             }
@@ -53,7 +54,8 @@ namespace HappyHealthyCSharp
                 deleteButton.Click += DeleteValue;
             }
             //end
-            backbtt.Click += delegate {
+            backbtt.Click += delegate
+            {
                 this.Finish();
             };
             if (IsAppToTakePicturesAvailable())
@@ -63,12 +65,13 @@ namespace HappyHealthyCSharp
                 medImage = FindViewById<ImageView>(Resource.Id.imageView_show_image);
                 //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
-            
+
             // Create your application here
         }
 
         private void DeleteValue(object sender, EventArgs e)
         {
+            /*
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 // Android.Net.Uri eventUri = Android.Net.Uri.Parse("content://com.android.calendar/events");
@@ -78,6 +81,23 @@ namespace HappyHealthyCSharp
                 medObject.Delete<MedicineTABLE>(medObject.ma_id);
                 Finish();
             }, delegate { }, "Yes", "No").Show();
+            */
+            Extension.CreateDialogue2(
+                 this
+                 , "ต้องการลบข้อมูลนี้หรือไม่?"
+                 , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                 , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                 , Extension.adFontSize
+                 , delegate
+                 {
+                     var deleteUri = CalendarHelper.GetDeleteEventURI(medObject.ma_calendar_uri);
+                     ContentResolver.Delete(deleteUri, null, null);
+                     medObject.Delete<MedicineTABLE>(medObject.ma_id);
+                     Finish();
+                 }
+                 , delegate { }
+                 , "\u2713"
+                 , "X");
         }
 
         private void InitialValueForUpdateEvent()
@@ -100,7 +120,7 @@ namespace HappyHealthyCSharp
 
         private void SaveValue(object sender, EventArgs e)
         {
-            
+
             var picPath = string.Empty;
             if (App._file != null)
             {
@@ -114,7 +134,7 @@ namespace HappyHealthyCSharp
             medObject.ud_id = Extension.getPreference("ud_id", 0, this);
             medObject.Insert();
             var testRRULE = "FREQ=WEEKLY";
-            var insertUri = CalendarHelper.GetEventContentValues(1, medName.Text, medDesc.Text, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 12, false,"UTC+7",testRRULE);
+            var insertUri = CalendarHelper.GetEventContentValues(1, medName.Text, medDesc.Text, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 12, false, "UTC+7", testRRULE);
             var savedUri = ContentResolver.Insert(CalendarContract.Events.ContentUri, insertUri);
             medObject.ma_calendar_uri = savedUri.ToString();
             medObject.Update();
@@ -133,7 +153,7 @@ namespace HappyHealthyCSharp
         }
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
-            
+
             base.OnActivityResult(requestCode, resultCode, data);
             var mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
             var contentUri = Android.Net.Uri.FromFile(App._file);
@@ -142,14 +162,14 @@ namespace HappyHealthyCSharp
             var height = Resources.DisplayMetrics.HeightPixels;
             var width = medImage.Width;
             App.bitmap = App._file.Path.LoadBitmap(width, height);//LoadBitmap(App._file.Path, width, height);
-            if(App.bitmap != null)
+            if (App.bitmap != null)
             {
                 medImage.SetImageBitmap(App.bitmap);
                 App.bitmap = null;
             }
             GC.Collect();
         }
-        
+
         private void CreateDirForPictures()
         {
             App._dir = new File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "HappyHealthyCSharp");

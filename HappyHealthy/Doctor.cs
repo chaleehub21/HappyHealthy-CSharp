@@ -71,7 +71,7 @@ namespace HappyHealthyCSharp
                 docDatePicker = new DatePickerDialog(this, delegate {
                     docCarlendar.Set(docDatePicker.DatePicker.Year, docDatePicker.DatePicker.Month, docDatePicker.DatePicker.DayOfMonth);
                     Date date = docCarlendar.Time;
-                    var textDate = new SimpleDateFormat("dd-MMMM-yyyy").Format(date);
+                    var textDate = new SimpleDateFormat("MM-dd-yyyy").Format(date);
                     docObject.da_date = Convert.ToDateTime(textDate).AddDays(1);
                     docAttendDate.Text = Convert.ToDateTime(textDate).ToThaiLocale().ToString("dd/MM/yyyy");
                 }, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
@@ -98,7 +98,6 @@ namespace HappyHealthyCSharp
                 CreateDirForPictures();
                 camerabtt.Click += cameraClickEvent;
                 docAttendPicture = FindViewById<ImageView>(Resource.Id.imageView_show_image);
-                //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
 
             // Create your application here
@@ -106,17 +105,22 @@ namespace HappyHealthyCSharp
 
         private void DeleteValue(object sender, EventArgs e)
         {
-            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
-            {
-                Android.Net.Uri eventUri = Android.Net.Uri.Parse("content://com.android.calendar/events");
-                var deleteUri = ContentUris.WithAppendedId(eventUri, Convert.ToInt32(docObject.da_calendar_uri.Substring(docObject.da_calendar_uri.LastIndexOf(@"/") + 1)));
-                ContentResolver.Delete(deleteUri, null, null);
-
-
-
-                docObject.Delete<DoctorTABLE>(docObject.da_id);
-                Finish();
-            }, delegate { }, "Yes", "No").Show();
+            Extension.CreateDialogue2(
+                 this
+                 , "ต้องการลบข้อมูลนี้หรือไม่?"
+                 , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                 , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                 , Extension.adFontSize
+                 , delegate
+                 {
+                     var deleteUri = CalendarHelper.GetDeleteEventURI(docObject.da_calendar_uri);
+                     ContentResolver.Delete(deleteUri, null, null);
+                     docObject.Delete<DoctorTABLE>(docObject.da_id);
+                     Finish();
+                 }
+                 , delegate { }
+                 , "\u2713"
+                 , "X");
         }
 
         private void InitialValueForUpdateEvent()
@@ -170,23 +174,11 @@ namespace HappyHealthyCSharp
             var year = Convert.ToInt32(docObject.da_date.ToString("yyyy"));
             var month = Convert.ToInt32(docObject.da_date.ToString("MM"));
             var date = Convert.ToInt32(docObject.da_date.ToString("dd"));
-
-            ContentValues eventValues = new ContentValues();
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, 4);
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Title,et_hospital.Text);
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Description, et_comment.Text);
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart, GetDateTimeMS(year, month, date, 10, 0));
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend, GetDateTimeMS(year, month, date, 11, 0));
-
-            // GitHub issue #9 : Event start and end times need timezone support.
-            // https://github.com/xamarin/monodroid-samples/issues/9
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone, "UTC");
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "UTC");
-
+            var eventValues = CalendarHelper.GetEventContentValues(4, et_hospital.Text, et_comment.Text, year, month-1, date-1, 10, 11, true);
             var uri = ContentResolver.Insert(CalendarContract.Events.ContentUri, eventValues);
             docObject.da_calendar_uri = uri.ToString();
             docObject.Update();
-            //Console.WriteLine("Uri for new event: {0}", uri);
+            //Extension.CreateDialogue(this, $@"Uri for new event: {uri }",delegate { this.Finish(); }).Show();
             //end test
             this.Finish();
         }

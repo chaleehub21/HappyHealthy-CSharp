@@ -12,12 +12,12 @@ using Android.Widget;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Plugin.LocalNotifications;
-using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net;
+using SQLite;
+using System.Threading;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Login",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Login", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Login : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -41,9 +41,25 @@ namespace HappyHealthyCSharp
             var forgot = FindViewById<TextView>(Resource.Id.textViewForget);
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
-            login.Click += delegate
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            login.Click += async delegate
             {
-                AccountLogin(id.Text, pw.Text);
+                if (new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0)
+                {
+                    progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+                    progressDialog.SetTitle("ดาวน์โหลดข้อมูล");
+                    progressDialog.SetMessage("กำลังดาวน์โหลดข้อมูลของท่าน กรุณารอสักครู่");
+                    progressDialog.Indeterminate = true;
+                    progressDialog.SetCancelable(false);
+                    progressDialog.Show();
+                    await MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id.Text, pw.Text);
+                    LogIn(id.Text, pw.Text);
+                    progressDialog.Dismiss();
+                }
+                else
+                {
+                    LogIn(id.Text, pw.Text);
+                }
             };
             register.Click += delegate
             {
@@ -56,28 +72,30 @@ namespace HappyHealthyCSharp
             };
         }
 
-        private void AccountLogin(string id, string pw)
+        private void LogIn(string id, string pw)
         {
-            if (new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id}'").Count == 0)
+            try
             {
-                Toast.MakeText(this, "Getting your data from server...", ToastLength.Long);
-                MySQLDatabaseHelper.GetDataFromMySQLToSQLite(id, pw);
+                if (AccountHelper.ComparePassword(pw, new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id}'")[0].ud_pass))
+                {
+                    Initialization(id, pw);
+                    StartActivity(typeof(MainActivity));
+                    this.Finish();
+                }
+                else
+                {
+                    Extension.CreateDialogue(this, "ข้อมูลเข้าสู่ระบบของท่านผิดพลาด กรุณาตรวจสอบอีกครั้ง").Show();
+                }
             }
-            if (AccountHelper.ComparePassword(pw, new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id}'")[0].ud_pass))
+            catch
             {
-                Initialization(id, pw);
-                StartActivity(typeof(MainActivity));
-                this.Finish();
-            }
-            else
-            {
-                Extension.CreateDialogue(this, "Access Denied").Show();
+                Extension.CreateDialogue(this, "ข้อมูลเข้าสู่ระบบของท่านผิดพลาด กรุณาตรวจสอบอีกครั้ง").Show();
             }
         }
 
-        private void Initialization(string id,string password)
+        private void Initialization(string id, string password)
         {
-            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+            var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var sql = $@"select * from UserTABLE where ud_email = '{id}'";
             var result = conn.Query<UserTABLE>(sql);
             Extension.setPreference("ud_email", id, this);

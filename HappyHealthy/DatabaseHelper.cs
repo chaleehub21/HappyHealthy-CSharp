@@ -9,29 +9,29 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Threading;
+using System.Reflection;
+using SQLite;
 
 namespace HappyHealthyCSharp
 {
     abstract class DatabaseHelper
     {
         public abstract List<string> Column { get; }
-        virtual public List<T> Select<T>(string query) where T : class
+        virtual public List<T> Select<T>(string query) where T : new()
         {
-            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+            var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var result = conn.Query<T>(query);
             conn.Close();
             return result;
         }
-        virtual public bool Delete<T>(int id)
+        virtual public bool Delete<T>(int id) where T : new()
         {
             try
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var conn = new SQLiteConnection(Extension.sqliteDBPath);
                 var result = conn.Delete<T>(id);
                 conn.Close();
                 return true;
@@ -41,7 +41,7 @@ namespace HappyHealthyCSharp
                 return false;
             }
         }
-        virtual public JavaList<IDictionary<string, object>> GetJavaList<T>(string queryCustomized, List<string> columnTag) where T : class
+        virtual public JavaList<IDictionary<string, object>> GetJavaList<T>(string queryCustomized, List<string> columnTag) where T : new()
         {
             #region MySQL
             /*
@@ -67,7 +67,7 @@ namespace HappyHealthyCSharp
             */
             #endregion
             var dataList = new JavaList<IDictionary<string, object>>();
-            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+            var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var queryResult = conn.Query<T>(queryCustomized);
             queryResult.ForEach(dataRow =>
             {
@@ -88,7 +88,7 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var conn = new SQLiteConnection(Extension.sqliteDBPath);
                 var result = conn.Update(data);
                 conn.Close();
                 return true;
@@ -102,7 +102,7 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var conn = new SQLiteConnection(Extension.sqliteDBPath);
                 var result = conn.Insert(data);
                 conn.Close();
                 return true;
@@ -118,7 +118,7 @@ namespace HappyHealthyCSharp
 
             try
             {
-                var sqliteConn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                var sqliteConn = new SQLiteConnection(Extension.sqliteDBPath);
                 sqliteConn.CreateTable<DiabetesTABLE>();
                 sqliteConn.CreateTable<DoctorTABLE>();
                 sqliteConn.CreateTable<FoodTABLE>();
@@ -229,28 +229,35 @@ namespace HappyHealthyCSharp
                 return false;
             }
         }
-        public static bool GetDataFromMySQLToSQLite(string email, string password)
+        public static async System.Threading.Tasks.Task<bool> GetDataFromMySQLToSQLite(string email, string password)
         {
             try
             {
-                var Service = new HHCSService1.HHCSService();
-                var userData = Service.GetData("UserTABLE", email, password);
-                var diabetesData = Service.GetData("DiabetesTABLE", email, password);
-                var kidneyData = Service.GetData("KidneyTABLE", email, password);
-                var pressureData = Service.GetData("PressureTABLE", email, password);
+                DataSet userData = null;
+                DataSet diabetesData = null;
+                DataSet kidneyData = null;
+                DataSet pressureData = null;
+                var Service = new HHCSService.HHCSService();
+                await System.Threading.Tasks.Task.Run(delegate {
+                    userData = Service.GetData("UserTABLE", email, password);
+                    diabetesData = Service.GetData("DiabetesTABLE", email, password);
+                    kidneyData = Service.GetData("KidneyTABLE", email, password);
+                    pressureData = Service.GetData("PressureTABLE", email, password);
+                });
                 if (userData != null)
                 {
                     var userID = -999;
-                    var sqliteInstance = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
+                    var sqliteInstance = new SQLiteConnection(Extension.sqliteDBPath);
                     foreach (DataRow row in ((DataSet)userData).Tables["UserTABLE"].Rows)
                     {
                         var tempUser = new UserTABLE();
                         tempUser.ud_id = Convert.ToInt32(row[0].ToString());
-                        tempUser.ud_birthdate = DateTime.Now;
-                        tempUser.ud_gender = "n/a";
-                        tempUser.ud_name = row[1].ToString();
                         tempUser.ud_email = row[1].ToString();
                         tempUser.ud_pass = row[2].ToString();
+                        tempUser.ud_iden_number = row[3].ToString();
+                        tempUser.ud_gender = row[4].ToString();
+                        tempUser.ud_name = row[5].ToString();
+                        tempUser.ud_birthdate = DateTime.Parse(row[6].ToString());
                         userID = tempUser.ud_id;
                         tempUser.Insert();
                     }
@@ -259,7 +266,7 @@ namespace HappyHealthyCSharp
                         var tempDiabetes = new DiabetesTABLE();
                         tempDiabetes.fbs_id = Convert.ToInt32(row[0].ToString());
                         tempDiabetes.fbs_time = ((DateTime)row[1]).ToThaiLocale();
-                        //tempDiabetes.fbs_time_string = row[1].ToString();
+                        tempDiabetes.fbs_time_string = row[1].ToString();
                         tempDiabetes.fbs_fbs = Convert.ToDecimal(row[2].ToString());
                         tempDiabetes.fbs_fbs_lvl = Convert.ToInt32(row[3].ToString());
                         tempDiabetes.ud_id = Convert.ToInt32(row[4].ToString());

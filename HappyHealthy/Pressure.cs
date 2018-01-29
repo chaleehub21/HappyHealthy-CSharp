@@ -101,7 +101,7 @@ namespace HappyHealthyCSharp
 
                             }
                         }
-                        Extension.MapDictToControls(new[] { "บน","ล่าง","หัวใจ"}, new[] { BPUp,BPLow,HeartRate }, dataNLPList);
+                        Extension.MapDictToControls(new[] { "บน", "ล่าง", "หัวใจ" }, new[] { BPUp, BPLow, HeartRate }, dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -112,12 +112,29 @@ namespace HappyHealthyCSharp
 
         private void DeleteValue(object sender, EventArgs e)
         {
+            /*
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 pressureObject.Delete<PressureTABLE>(pressureObject.bp_id);
                 TrySyncWithMySQL();
                 Finish();
             }, delegate { }, "Yes", "No").Show();
+            */
+            Extension.CreateDialogue2(
+                 this
+                 , "ต้องการลบข้อมูลนี้หรือไม่?"
+                 , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                 , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                 , Extension.adFontSize
+                 , delegate
+                 {
+                     pressureObject.Delete<PressureTABLE>(pressureObject.bp_id);
+                     TrySyncWithMySQL();
+                     Finish();
+                 }
+                 , delegate { }
+                 , "\u2713"
+                 , "X");
         }
 
         private void InitialValueForUpdateEvent()
@@ -195,13 +212,15 @@ namespace HappyHealthyCSharp
         }
         public void TrySyncWithMySQL()
         {
-            var t = new Thread(() => {
+            var t = new Thread(() =>
+            {
                 try
                 {
-                    var Service = new HHCSService1.HHCSService();
-                    var presList = new List<HHCSService1.TEMP_PressureTABLE>();
-                    new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row => {
-                        var wsObject = new HHCSService1.TEMP_PressureTABLE();
+                    var Service = new HHCSService.HHCSService();
+                    var presList = new List<HHCSService.TEMP_PressureTABLE>();
+                    new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, this)}'").ForEach(row =>
+                    {
+                        var wsObject = new HHCSService.TEMP_PressureTABLE();
                         wsObject.bp_id_pointer = row.bp_id_pointer;
                         wsObject.bp_time_new = row.bp_time_new;
                         wsObject.bp_time_old = row.bp_time_old;
@@ -223,11 +242,12 @@ namespace HappyHealthyCSharp
                     });
                     Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, this)
                         , Extension.getPreference("ud_pass", string.Empty, this)
-                        , new List<HHCSService1.TEMP_DiabetesTABLE>().ToArray()
-                        , new List<HHCSService1.TEMP_KidneyTABLE>().ToArray()
+                        , new List<HHCSService.TEMP_DiabetesTABLE>().ToArray()
+                        , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
                         , presList.ToArray());
                     presList.Clear();
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }

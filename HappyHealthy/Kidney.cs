@@ -13,12 +13,23 @@ using Java.Interop;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Threading;
+using Android.Speech.Tts;
+using Android.Speech;
 
 namespace HappyHealthyCSharp
 {
     [Activity]
     public class Kidney : Activity
     {
+        TextToSpeech textToSpeech;
+        private readonly int CheckCode = 101, NeedLang = 103;
+        Java.Util.Locale lang;
+        ImageView imageView;
+        TTS t2sEngine;
+        EditText currentControl;
+        private bool isRecording;
+        private readonly int VOICE = 10;
+        //Edit Below
         KidneyTABLE kidneyObject = null;
         EditText field_gfr;
         EditText field_creatinine;
@@ -29,6 +40,7 @@ namespace HappyHealthyCSharp
         EditText field_albumin_urine;
         EditText field_phosphorus_blood;
         ImageView saveButton, deleteButton;
+        TextView micButton;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -44,6 +56,7 @@ namespace HappyHealthyCSharp
             field_phosphorus_blood = FindViewById<EditText>(Resource.Id.ckd_phosphorus_blood);
             saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_kidney);
             deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_kidney);
+            micButton = FindViewById<TextView>(Resource.Id.textView_detail_gfr);    
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             kidneyObject = string.IsNullOrEmpty(flagObjectJson) ? new KidneyTABLE() { ckd_gfr = Extension.flagValue } : JsonConvert.DeserializeObject<KidneyTABLE>(flagObjectJson);
@@ -60,16 +73,57 @@ namespace HappyHealthyCSharp
 
             }
             //end
+            string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
+            if (rec != "android.hardware.microphone")
+            {
+                // no microphone, no recording. Disable the button and output an alert
+                Extension.CreateDialogue(this, "ไม่พบไมโครโฟนบนระบบของคุณ").Show();
+            }
+            else
+                micButton.Click += delegate
+                {
+                    isRecording = !isRecording;
+                    if (isRecording)
+                    {
+                        var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Speak Now!");
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+                        voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
+                        StartActivityForResult(voiceIntent, VOICE);
+                    }
+                };
+            t2sEngine = new TTS(this);
         }
 
         private void DeleteValue(object sender, EventArgs e)
         {
+            /*
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
             {
                 kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
                 TrySyncWithMySQL();
                 Finish();
             }, delegate { }, "Yes", "No").Show();
+            */
+            Extension.CreateDialogue2(
+                 this
+                 , "ต้องการลบข้อมูลนี้หรือไม่?"
+                 , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                 , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                 , Extension.adFontSize
+                 , delegate
+                 {
+                     kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
+                     TrySyncWithMySQL();
+                     Finish();
+                 }
+                 , delegate { }
+                 , "\u2713"
+                 , "X");
         }
 
         private void InitialValueForUpdateEvent()
@@ -181,6 +235,39 @@ namespace HappyHealthyCSharp
                 }
             });
             t.Start();
+        }
+        protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
+        {
+            if (requestCode == VOICE)
+            {
+                if (resultVal == Result.Ok)
+                {
+                    var matches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
+                    if (matches.Count != 0)
+                    {
+                        string textInput = matches[0];
+                        var textInputList = textInput.Split().ToList();
+                        var dataNLPList = new Dictionary<string, string>();
+                        for (var i = 0; i < textInputList.Count; i += 2)
+                        {
+                            try
+                            {
+                                dataNLPList.Add(textInputList[i].ToUpper(), textInputList[i + 1]);
+                                Console.WriteLine(textInputList[i].ToUpper());
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                        //Extension.MapDictToControls(new[] { "" }, new[] { BloodValue }, dataNLPList);
+
+                    }
+                    else
+                        Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
+                }
+            }
+            base.OnActivityResult(requestCode, resultVal, data);
         }
     }
 

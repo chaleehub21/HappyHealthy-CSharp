@@ -13,8 +13,6 @@ using SQLite;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
-using SQLiteNetExtensions.Attributes;
-using SQLite.Net.Platform.XamarinAndroid;
 using Xamarin.Forms.Platform.Android;
 using System.Threading;
 
@@ -31,16 +29,15 @@ namespace HappyHealthyCSharp
             "sfbs_sfbs_lvl",
             "ud_id"
         };
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
+        [SQLite.PrimaryKey, SQLite.AutoIncrement]
         public int sfbs_id { get; set; }
         public DateTime sfbs_time { get; set; }
-        [SQLite.Net.Attributes.MaxLength(3)]
+        [SQLite.MaxLength(3)]
         public decimal sfbs_sfbs { get; set; }
-        [SQLite.Net.Attributes.MaxLength(4)]
+        [SQLite.MaxLength(4)]
         public int sfbs_sfbs_lvl { get; set; }
-        [ForeignKey(typeof(UserTABLE))]
         public int ud_id { get; set; }
-        [ManyToOne]
+        [Ignore]
         public UserTABLE UserTABLE { get; set; }
 
         //reconstruct of sqlite keys + attributes

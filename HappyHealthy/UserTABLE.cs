@@ -13,8 +13,6 @@ using SQLite;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Data;
-using SQLiteNetExtensions.Attributes;
-using SQLite.Net.Platform.XamarinAndroid;
 using System.Threading;
 
 namespace HappyHealthyCSharp
@@ -22,8 +20,7 @@ namespace HappyHealthyCSharp
     class UserTABLE : DatabaseHelper
     {
         public override List<string> Column => throw new NotImplementedException();
-        SQLitePlatformAndroid platform = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
-        [SQLite.Net.Attributes.PrimaryKey]
+        [SQLite.PrimaryKey]
         public int ud_id { get; set; }
         public string ud_iden_number { get; set; }
         public string ud_name { get; set; }
@@ -33,16 +30,16 @@ namespace HappyHealthyCSharp
         public DateTime ud_lu_time { get; set; }
         public DateTime ud_dn_time { get; set; }
         public DateTime ud_usually_meal_time { get; set; }
-        [SQLite.Net.Attributes.Unique]
+        [SQLite.Unique]
         public string ud_email { get; set; }
         public string ud_pass { get; set; }
-        [OneToMany]
+        [Ignore]
         public List<DiabetesTABLE> diabetesList { get; set; }
-        [OneToMany]
+        [Ignore]
         public List<KidneyTABLE> kidneyList { get; set; }
-        [OneToMany]
+        [Ignore]
         public List<MedicineTABLE> pillList { get; set; }
-        [OneToMany]
+        [Ignore]
         public List<PressureTABLE> pressureList { get; set; }
         public UserTABLE()
         {

@@ -15,18 +15,15 @@ using System.Net;
 using System.IO;
 using System.Globalization;
 using System.Security.Cryptography;
-using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net;
 
 namespace HappyHealthyCSharp
 {
     public static class Extension
     {
-        //public static readonly string remoteAccess = "server=192.168.137.1;port=3306;database=ckd;User Id=root;Password=thisisapassword;charset=utf8";//192.168.137.1
-        public static readonly string remoteAccess = "server=10.0.2.2;port=3306;database=ckd;User Id=root;Password=lovelove12;charset=utf8";
         public static readonly string fileStorePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         public static readonly string sqliteDBPath = Path.Combine(fileStorePath, "hhcs.db3");
         public static readonly int flagValue = -9521;
+        public static readonly int adFontSize = 70;
         /// <summary>
         /// Simple dialog box for just showing the message.
         /// </summary>
@@ -38,7 +35,7 @@ namespace HappyHealthyCSharp
             var nDLG = new AlertDialog.Builder(t);
             nDLG
                 .SetMessage(message)
-                .SetNeutralButton(actionMessage, action);          
+                .SetNeutralButton(actionMessage, action);
             if (isCancelAble == true)
             {
                 nDLG
@@ -46,6 +43,49 @@ namespace HappyHealthyCSharp
                 .SetNegativeButton(cancelActionMessage, cancelAction);
             }
             return nDLG;
+        }
+        /// <summary>
+        /// Similar to CreateDialogue function but is able to modify the color of background,text and text size 
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="message"></param>
+        /// <param name="neutralBtnColor"></param>
+        /// <param name="neutralTxtColor"></param>
+        /// <param name="negativeBtnColor"></param>
+        /// <param name="negativeTxtColor"></param>
+        /// <param name="action"></param>
+        /// <param name="cancelAction"></param>
+        /// <param name="actionMessage"></param>
+        /// <param name="cancelActionMessage"></param>
+        public static void CreateDialogue2(
+            Context t, string message,
+            Android.Graphics.Color neutralBtnColor, Android.Graphics.Color neutralTxtColor,
+            Android.Graphics.Color negativeBtnColor, Android.Graphics.Color negativeTxtColor,
+            float fontSize = 42,
+            EventHandler<DialogClickEventArgs> action = null,
+            EventHandler<DialogClickEventArgs> cancelAction = null,
+            string actionMessage = "OK",
+            string cancelActionMessage = "Cancel")
+        {
+            var isCancelAble = cancelAction == null ? false : true; //is cancel action function defined? if yes then the cancel button should be available.
+            var nDLG = new AlertDialog.Builder(t);
+            nDLG
+                .SetMessage(message)
+                .SetNeutralButton(actionMessage, action);
+            if (isCancelAble == true)
+            {
+                nDLG
+                .SetCancelable(isCancelAble)
+                .SetNegativeButton(cancelActionMessage, cancelAction);
+            }
+            var createdButton = nDLG.Show();
+            //Console.WriteLine(createdButton.GetButton((int)DialogButtonType.Positive).TextSize); //default font size is 42px
+            createdButton.GetButton((int)DialogButtonType.Neutral).SetTextSize(Android.Util.ComplexUnitType.Px, fontSize);
+            createdButton.GetButton((int)DialogButtonType.Negative).SetTextSize(Android.Util.ComplexUnitType.Px, fontSize);
+            createdButton.GetButton((int)DialogButtonType.Neutral).SetBackgroundColor(neutralBtnColor);
+            createdButton.GetButton((int)DialogButtonType.Negative).SetBackgroundColor(negativeBtnColor);
+            createdButton.GetButton((int)DialogButtonType.Neutral).SetTextColor(neutralTxtColor);
+            createdButton.GetButton((int)DialogButtonType.Negative).SetTextColor(negativeTxtColor);
         }
 
         public static void setPreference(string key, string value, Context c)
@@ -103,11 +143,11 @@ namespace HappyHealthyCSharp
         }
         public static string StringValidation<T>(this T t)
         {
-            if(Double.TryParse(t.ToString(),out double val) == true)
+            if (Double.TryParse(t.ToString(), out double val) == true)
             {
                 return (Math.Round(Convert.ToDouble(t), 2)).ToString();
             }
-            if (ReferenceEquals(t,null))
+            if (ReferenceEquals(t, null))
             {
                 return "";
             }
@@ -129,9 +169,9 @@ namespace HappyHealthyCSharp
         }
         public static string GetValidPathForFileStore(string filename)
         {
-            return Path.Combine(fileStorePath,filename);
+            return Path.Combine(fileStorePath, filename);
         }
-#region Test
+        #region Test
         // '' <summary>
         // '' Send email using SMTP can be use with @hotmail,@outlook,@gmail and @icloud and return True when send complete, return False when failed to send.
         // '' </summary>
@@ -145,7 +185,8 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                MailMessage Msg = new MailMessage() {
+                MailMessage Msg = new MailMessage()
+                {
                     From = new MailAddress(sendfrom),
                     Subject = subject,
                     IsBodyHtml = true,
@@ -192,42 +233,37 @@ namespace HappyHealthyCSharp
             }
             return false;
         }
-        public static string CreatePasswordHash(string password)
+        public static void MapDictToControls(string[] keyword, EditText[] etArray, Dictionary<string, string> data)
         {
-            byte[] salt;
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
-            byte[] hash = pbkdf2.GetBytes(20);
-            byte[] hashBytes = new byte[36];
-            Array.Copy(salt, 0, hashBytes, 0, 16);
-            Array.Copy(hash, 0, hashBytes, 16, 20);
-            return Convert.ToBase64String(hashBytes);
-        }
-        public static bool ComparePassword(string email,string password)
-        {
-            try
+            /*
+            for (var index = 0; index < keyword.Length; index++)
             {
-                var conn = new SQLiteConnection(new SQLitePlatformAndroid(), Extension.sqliteDBPath);
-                var sql = $@"select * from UserTABLE where ud_email = '{email}'";
-                var result = conn.Query<UserTABLE>(sql);
-                byte[] hashBytes = Convert.FromBase64String(result[0].ud_pass);
-                byte[] salt = new byte[16];
-                Array.Copy(hashBytes, 0, salt, 0, 16);
-                var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
-                byte[] hash = pbkdf2.GetBytes(20);
-                for (int i = 0; i < 20; i++)
+                data.TryGetValue(keyword[index], out string value);
+                //if (value.ToLower().Contains(keyword[index].ToLower()))
+                if(value.Contains(keyword[index]))
                 {
-                    if (hashBytes[i + 16] != hash[i])
+                    etArray[index].Text = data[keyword[index]];
+                }
+            }
+            */
+            var tempKeywords = new List<string>(data.Keys);
+            for (var index = 0; index < keyword.Length; index++) //index to iterate over keyword array
+            {
+                for (var keyIndex = 0; keyIndex < tempKeywords.Count; keyIndex++) //kwindex to iterate over dictionary key
+                {
+                    if (tempKeywords[keyIndex].Contains(keyword[index]))
                     {
-                        return false;
+                        data.TryGetValue(tempKeywords[keyIndex], out var value);
+                        etArray[index].Text = value;
+                        //Console.WriteLine($@"Key {keyword[index]} : {value}");
+                        tempKeywords.RemoveAt(keyIndex); //the keyword has been used, so jut remove these fcking keyword
+                        goto breakloop; //we found the value we're looking for, so just remove these fcking keyword
+                        //these 2 above lines is about to make the code run 2 times faster at best case, so just leave it be
                     }
                 }
-                return true;
-            }
-            catch
-            {
-                return false;
+                breakloop:;
             }
         }
+
     }
 }

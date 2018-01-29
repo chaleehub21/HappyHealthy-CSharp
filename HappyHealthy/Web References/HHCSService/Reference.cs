@@ -24,7 +24,7 @@ namespace HappyHealthyCSharp.HHCSService {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="HHCSServiceSoap", Namespace="http://tempuri.org/")]
@@ -34,6 +34,8 @@ namespace HappyHealthyCSharp.HHCSService {
         private System.Threading.SendOrPostCallback RegisterOperationCompleted;
         
         private System.Threading.SendOrPostCallback TestConnectionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetFoodExchangeDataOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetFoodDataOperationCompleted;
         
@@ -47,7 +49,7 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         public HHCSService() {
-            this.Url = "http://192.168.1.7/HHCSService/HHCSService.asmx";
+            this.Url = "http://192.168.1.5/HHCSService/HHCSService.asmx";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -88,6 +90,9 @@ namespace HappyHealthyCSharp.HHCSService {
         public event TestConnectionCompletedEventHandler TestConnectionCompleted;
         
         /// <remarks/>
+        public event GetFoodExchangeDataCompletedEventHandler GetFoodExchangeDataCompleted;
+        
+        /// <remarks/>
         public event GetFoodDataCompletedEventHandler GetFoodDataCompleted;
         
         /// <remarks/>
@@ -101,26 +106,34 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Register", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public object[] Register(string ud_email, string ud_pass) {
+        public object[] Register(string ud_email, string ud_pass, string ud_iden_number, string ud_gender, string ud_name, System.DateTime ud_datetime) {
             object[] results = this.Invoke("Register", new object[] {
                         ud_email,
-                        ud_pass});
+                        ud_pass,
+                        ud_iden_number,
+                        ud_gender,
+                        ud_name,
+                        ud_datetime});
             return ((object[])(results[0]));
         }
         
         /// <remarks/>
-        public void RegisterAsync(string ud_email, string ud_pass) {
-            this.RegisterAsync(ud_email, ud_pass, null);
+        public void RegisterAsync(string ud_email, string ud_pass, string ud_iden_number, string ud_gender, string ud_name, System.DateTime ud_datetime) {
+            this.RegisterAsync(ud_email, ud_pass, ud_iden_number, ud_gender, ud_name, ud_datetime, null);
         }
         
         /// <remarks/>
-        public void RegisterAsync(string ud_email, string ud_pass, object userState) {
+        public void RegisterAsync(string ud_email, string ud_pass, string ud_iden_number, string ud_gender, string ud_name, System.DateTime ud_datetime, object userState) {
             if ((this.RegisterOperationCompleted == null)) {
                 this.RegisterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRegisterOperationCompleted);
             }
             this.InvokeAsync("Register", new object[] {
                         ud_email,
-                        ud_pass}, this.RegisterOperationCompleted, userState);
+                        ud_pass,
+                        ud_iden_number,
+                        ud_gender,
+                        ud_name,
+                        ud_datetime}, this.RegisterOperationCompleted, userState);
         }
         
         private void OnRegisterOperationCompleted(object arg) {
@@ -158,23 +171,54 @@ namespace HappyHealthyCSharp.HHCSService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFoodData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetFoodData() {
-            object[] results = this.Invoke("GetFoodData", new object[0]);
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFoodExchangeData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetFoodExchangeData(int id) {
+            object[] results = this.Invoke("GetFoodExchangeData", new object[] {
+                        id});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void GetFoodDataAsync() {
-            this.GetFoodDataAsync(null);
+        public void GetFoodExchangeDataAsync(int id) {
+            this.GetFoodExchangeDataAsync(id, null);
         }
         
         /// <remarks/>
-        public void GetFoodDataAsync(object userState) {
+        public void GetFoodExchangeDataAsync(int id, object userState) {
+            if ((this.GetFoodExchangeDataOperationCompleted == null)) {
+                this.GetFoodExchangeDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFoodExchangeDataOperationCompleted);
+            }
+            this.InvokeAsync("GetFoodExchangeData", new object[] {
+                        id}, this.GetFoodExchangeDataOperationCompleted, userState);
+        }
+        
+        private void OnGetFoodExchangeDataOperationCompleted(object arg) {
+            if ((this.GetFoodExchangeDataCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetFoodExchangeDataCompleted(this, new GetFoodExchangeDataCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFoodData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetFoodData(string search_query) {
+            object[] results = this.Invoke("GetFoodData", new object[] {
+                        search_query});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetFoodDataAsync(string search_query) {
+            this.GetFoodDataAsync(search_query, null);
+        }
+        
+        /// <remarks/>
+        public void GetFoodDataAsync(string search_query, object userState) {
             if ((this.GetFoodDataOperationCompleted == null)) {
                 this.GetFoodDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFoodDataOperationCompleted);
             }
-            this.InvokeAsync("GetFoodData", new object[0], this.GetFoodDataOperationCompleted, userState);
+            this.InvokeAsync("GetFoodData", new object[] {
+                        search_query}, this.GetFoodDataOperationCompleted, userState);
         }
         
         private void OnGetFoodDataOperationCompleted(object arg) {
@@ -307,7 +351,7 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -520,7 +564,7 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -805,7 +849,7 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -922,11 +966,11 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void RegisterCompletedEventHandler(object sender, RegisterCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class RegisterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -948,11 +992,11 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void TestConnectionCompletedEventHandler(object sender, TestConnectionCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TestConnectionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -974,11 +1018,37 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    public delegate void GetFoodExchangeDataCompletedEventHandler(object sender, GetFoodExchangeDataCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetFoodExchangeDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetFoodExchangeDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void GetFoodDataCompletedEventHandler(object sender, GetFoodDataCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetFoodDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1000,11 +1070,11 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void GetDataCompletedEventHandler(object sender, GetDataCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1026,11 +1096,11 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void SynchonizeDataCompletedEventHandler(object sender, SynchonizeDataCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SynchonizeDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1052,11 +1122,11 @@ namespace HappyHealthyCSharp.HHCSService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void ClassXMLGenerateTestCompletedEventHandler(object sender, ClassXMLGenerateTestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ClassXMLGenerateTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

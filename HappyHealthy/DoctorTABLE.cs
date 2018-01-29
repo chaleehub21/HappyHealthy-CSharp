@@ -6,7 +6,6 @@ using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
 using SQLite;
-using SQLite.Net.Platform.XamarinAndroid;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -32,24 +31,24 @@ namespace HappyHealthyCSharp
             "da_place",
             "da_hospital"
         };
-        [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
+        [SQLite.PrimaryKey, SQLite.AutoIncrement]
         public int da_id { get; set; }
-        [SQLite.Net.Attributes.MaxLength(100)]
+        [SQLite.MaxLength(100)]
         public DateTime da_date { get; set; }
-        [SQLite.Net.Attributes.MaxLength(255)]
+        [SQLite.MaxLength(255)]
         public string da_pic { get; set; }
-        [SQLite.Net.Attributes.MaxLength(255)]
+        [SQLite.MaxLength(255)]
         public string da_name { get; set; }
-        [SQLite.Net.Attributes.MaxLength(255)]
+        [SQLite.MaxLength(255)]
         public string da_dept { get; set; }
         public string da_reg_time { get; set; }
         public string da_appt_time { get; set; }
         public string da_calendar_uri { get; set; }
-        [SQLite.Net.Attributes.MaxLength(255)]
+        [SQLite.MaxLength(255)]
         public string da_comment { get; set; }
-        [SQLite.Net.Attributes.MaxLength(255)]
+        [SQLite.MaxLength(255)]
         public string da_place { get; set; }
-        [SQLite.Net.Attributes.MaxLength(255)]
+        [SQLite.MaxLength(255)]
         public string da_hospital { get; set; }
         //reconstruct of sqlite keys + attributes
         public DoctorTABLE()

@@ -31,10 +31,18 @@ namespace HappyHealthyCSharp
             txt_search = FindViewById<EditText>(Resource.Id.tv_Sfood);
             var img_back = FindViewById<ImageView>(Resource.Id.imageView44);
             foodTable = new FoodTABLE();
-            btn_search.Click += delegate {
+
+            btn_search.Click += delegate
+            {
                 setListFood(txt_search.Text);
             };
-            img_back.Click += delegate {
+
+            txt_search.TextChanged += delegate
+            {
+                //setListFood(txt_search.Text);
+            };
+            img_back.Click += delegate
+            {
                 //StartActivity(new Intent(this, typeof(MainActivity)));
                 this.Finish();
             };
@@ -43,7 +51,7 @@ namespace HappyHealthyCSharp
             // Create your application here
 
         }
-        private void onItemClick(object sender,AdapterView.ItemClickEventArgs e)
+        private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             foodList[e.Position].TryGetValue("food_id", out object FoodID);
             foodList[e.Position].TryGetValue("food_name", out object FoodName);
@@ -70,12 +78,12 @@ namespace HappyHealthyCSharp
         [Export("ClickAddFood")]
         public void ClickAddFood(View v)
         {
-            StartActivity(new Intent(this, typeof(Add_Food)));
+            //StartActivity(new Intent(this, typeof(Add_Food)));
         }
         public void setListFood(string what_to_search)
         {
-            foodList = foodTable.getFoodList(what_to_search,this);
-            ListAdapter = new SimpleAdapter(this, foodList, Resource.Layout.food_1, new string[] { "food_name", "food_calories", "food_unit", "food_detail" }, new int[] { Resource.Id.food_name,Resource.Id.food_calories,Resource.Id.food_unit,Resource.Id.food_detail});
+            foodList = foodTable.getFoodList(what_to_search, this);
+            ListAdapter = new SimpleAdapter(this, foodList, Resource.Layout.food_1, new string[] { "food_name", "food_calories", "food_unit", "food_detail" }, new int[] { Resource.Id.food_name, Resource.Id.food_calories, Resource.Id.food_unit, Resource.Id.food_detail });
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)
             var data = new JavaList<IDictionary<string, object>>();
