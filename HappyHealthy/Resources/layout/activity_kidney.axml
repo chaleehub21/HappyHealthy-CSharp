@@ -35,13 +35,15 @@
         android:onClick="ClickBackKidHome" />
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="80.0dp"
+        android:layout_marginLeft="0.0dp"
+        android:layout_marginRight="0.0dp"
+        android:layout_marginTop="0.0dp"
         android:background="@drawable/my_bg_orange"
-        android:id="@+id/Layout_background_kidney">
+        android:id="@+id/Layout_background_kidney"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -51,8 +53,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -62,12 +64,12 @@
                 android:id="@+id/textView_detail_gfr"
                 android:layout_centerHorizontal="true"
                 android:textSize="14dp"
-                android:textStyle="bold"
                 android:textColor="#979797"
                 android:gravity="center_vertical"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="25.0dp" />
+                android:layout_marginRight="25.0dp"
+                android:textStyle="bold" />
             <EditText
                 android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
@@ -87,8 +89,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -123,8 +125,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -159,8 +161,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -195,8 +197,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -231,8 +233,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -248,7 +250,7 @@
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
                 android:layout_marginRight="0.0dp"
-                android:layout_marginLeft="25dp" />
+                android:layout_marginLeft="0.0dp" />
             <EditText
                 android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
@@ -269,7 +271,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="0.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -285,7 +287,7 @@
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
                 android:layout_marginRight="0.0dp"
-                android:layout_marginLeft="25dp" />
+                android:layout_marginLeft="0.0dp" />
             <EditText
                 android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
@@ -306,7 +308,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="0.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -322,7 +324,7 @@
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
                 android:layout_marginRight="0.0dp"
-                android:layout_marginLeft="25.0dp" />
+                android:layout_marginLeft="0.0dp" />
             <EditText
                 android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
@@ -353,6 +355,6 @@
             android:src="@drawable/Button_delete_orange"
             android:layout_marginTop="0.0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10.0dp" />
+            android:layout_marginBottom="20.0dp" />
     </LinearLayout>
 </RelativeLayout>

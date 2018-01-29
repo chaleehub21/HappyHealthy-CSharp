@@ -91,7 +91,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView_measurement_unit_diabetes"
             android:src="@drawable/ml2"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="11.0dp" />
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="45dp"
