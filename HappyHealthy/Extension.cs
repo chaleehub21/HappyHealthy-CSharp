@@ -233,31 +233,52 @@ namespace HappyHealthyCSharp
             }
             return false;
         }
-        public static void MapDictToControls(string[] keyword, EditText[] etArray, Dictionary<string, string> data)
+        public static Dictionary<string, string> CreateDictionaryPair(List<string> textInputList)
         {
-            /*
-            for (var index = 0; index < keyword.Length; index++)
+            var dataNLPList = new Dictionary<string, string>();
+            for (var i = 0; i < textInputList.Count; i += 2)
             {
-                data.TryGetValue(keyword[index], out string value);
-                //if (value.ToLower().Contains(keyword[index].ToLower()))
-                if(value.Contains(keyword[index]))
+                try
                 {
-                    etArray[index].Text = data[keyword[index]];
+                    dataNLPList.Add(textInputList[i].ToUpper(), textInputList[i + 1]);
+                }
+                catch
+                {
+
                 }
             }
-            */
-            var tempKeywords = new List<string>(data.Keys);
+            return dataNLPList;
+        }
+        public static Dictionary<string, string> CreateDictionaryPair(string  textInput)
+        {
+            var textInputList = textInput.Split().ToList();
+            var dataNLPList = new Dictionary<string, string>();
+            for (var i = 0; i < textInputList.Count(); i += 2)
+            {
+                try
+                {
+                    dataNLPList.Add(textInputList[i].ToUpper(), textInputList[i + 1]);
+                }
+                catch
+                {
+
+                }
+            }
+            return dataNLPList;
+        }
+        public static void MapDictToControls(string[] keyword, EditText[] etArray, Dictionary<string, string> data)
+        {
+            var listKeywords = new List<string>(data.Keys);
             for (var index = 0; index < keyword.Length; index++) //index to iterate over keyword array
             {
-                for (var keyIndex = 0; keyIndex < tempKeywords.Count; keyIndex++) //kwindex to iterate over dictionary key
+                for (var keyIndex = 0; keyIndex < listKeywords.Count; keyIndex++) //kindex to iterate over dictionary key
                 {
-                    if (tempKeywords[keyIndex].Contains(keyword[index]))
+                    if (listKeywords[keyIndex].Contains(keyword[index])) //the dictionary keys seem to contain the keyword
                     {
-                        data.TryGetValue(tempKeywords[keyIndex], out var value);
-                        etArray[index].Text = value;
-                        //Console.WriteLine($@"Key {keyword[index]} : {value}");
-                        tempKeywords.RemoveAt(keyIndex); //the keyword has been used, so jut remove these fcking keyword
-                        goto breakloop; //we found the value we're looking for, so just remove these fcking keyword
+                        data.TryGetValue(listKeywords[keyIndex], out var value); //let's extract the value
+                        etArray[index].Text = value; //assign it to that control
+                        listKeywords.RemoveAt(keyIndex); //the keyword has been used, so jut remove these fcking keyword
+                        goto breakloop; //we found the value we're looking for, so just get out of the loop
                         //these 2 above lines is about to make the code run 2 times faster at best case, so just leave it be
                     }
                 }

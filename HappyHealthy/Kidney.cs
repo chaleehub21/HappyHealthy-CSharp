@@ -18,7 +18,7 @@ using Android.Speech;
 
 namespace HappyHealthyCSharp
 {
-    [Activity]
+    [Activity(Label = "Kidney", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = SoftInput.StateHidden)]
     public class Kidney : Activity
     {
         TextToSpeech textToSpeech;
@@ -85,18 +85,31 @@ namespace HappyHealthyCSharp
                     isRecording = !isRecording;
                     if (isRecording)
                     {
-                        var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-                        voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
-                        voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Speak Now!");
-                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
-                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
-                        voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
-                        voiceIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
-                        voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
-                        StartActivityForResult(voiceIntent, VOICE);
+                        StartMicrophone("");
                     }
                 };
             t2sEngine = new TTS(this);
+        }
+        private void StartMicrophone(string speakValue)
+        {
+            try
+            {
+                var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Speak Now!");
+                voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
+                //t2sEngine.Speak(speakValue);
+                //Thread.Sleep(1000);
+                StartActivityForResult(voiceIntent, VOICE);
+            }
+            catch
+            {
+                Extension.CreateDialogue(this, "อุปกรณ์ของคุณไม่รองรับการสั่งการด้วยเสียง").Show();
+            }
         }
 
         private void DeleteValue(object sender, EventArgs e)

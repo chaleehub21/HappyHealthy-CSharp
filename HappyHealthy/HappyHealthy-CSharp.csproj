@@ -146,6 +146,7 @@
     <Compile Include="DoctorTABLE.cs" />
     <Compile Include="History_Doctor.cs" />
     <Compile Include="IDatabaseSync.cs" />
+    <Compile Include="ILocalActivity.cs" />
     <Compile Include="SummaryDiabetesTABLE.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
@@ -1167,10 +1168,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\Test_button_pressure.png" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.1.5/HHCSService/HHCSService.asmx">
+    <WebReferenceUrl Include="http://172.20.97.62/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HHCSService\</RelPath>
-      <UpdateFromURL>http://192.168.1.5/HHCSService/HHCSService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://172.20.97.62/HHCSService/HHCSService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

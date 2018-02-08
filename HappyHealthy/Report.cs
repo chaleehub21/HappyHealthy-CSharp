@@ -69,12 +69,14 @@ namespace HappyHealthyCSharp
                 "fbs_time", 
                 "fbs_fbs");
         }
-        private PlotModel CreatePlotModel(string title,JavaList<IDictionary<string,object>> dataset,string key_time,string key_value)
+        private PlotModel CreatePlotModel(string title,JavaList<IDictionary<string,object>> dataset,string key_time,string key_value,int exceedValue = 1000)
         {
+            var metrics = Resources.DisplayMetrics;
+            var widthInDp = ConvertPixelsToDp(metrics.WidthPixels);
             var datalength = dataset.Count();
             var plotModel = new PlotModel { Title = title};
             object LastDateOnDataset = DateTime.Now;
-            var maxValue = 0.0; //100.0;
+            var maxValue = 0.0;
             var minValue = 0.0;     
             if (datalength > 0)
             {
@@ -84,8 +86,18 @@ namespace HappyHealthyCSharp
             var endDate = DateTime.Parse(LastDateOnDataset.ToString()).AddDays(15);
             var minDate = DateTimeAxis.ToDouble(startDate);
             var maxDate = DateTimeAxis.ToDouble(endDate);
-            var x = new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = minDate, Maximum = maxDate, MajorStep = 10, StringFormat = "d-MMMM",FontSize=25 };
-            var y = new LinearAxis { Position = AxisPosition.Left, Maximum = maxValue, Minimum = minValue ,FontSize = 25};
+            var x = new DateTimeAxis {
+                Position = AxisPosition.Bottom,
+                Minimum = minDate,
+                Maximum = maxDate,
+                MajorStep = 10,
+                StringFormat = "d-MMMM",
+                FontSize = widthInDp*0.07 };
+            var y = new LinearAxis {
+                Position = AxisPosition.Left,
+                Maximum = maxValue,
+                Minimum = minValue,
+                FontSize = widthInDp*0.07};
             y.IsPanEnabled = false;
             y.IsZoomEnabled = false;
             plotModel.Axes.Add(x);
@@ -109,17 +121,28 @@ namespace HappyHealthyCSharp
                 DateTime.TryParse(Time.ToString(), out DateTime dateResult);
                 double value = Convert.ToDouble(Value.ToString());
                 series1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateResult), value));
-                var textAnnotations = new TextAnnotation() { TextPosition = new DataPoint(series1.Points.Last().X, series1.Points.Last().Y), Text = value.ToString(), Stroke = OxyColors.White,FontSize = 10 };
+                var textAnnotations = new TextAnnotation() {
+                    TextPosition = new DataPoint(
+                        series1.Points.Last().X, 
+                        series1.Points.Last().Y),
+                    Text = value.ToString(),
+                    Stroke = OxyColors.White,
+                    FontSize = widthInDp*0.05 };
                 plotModel.Annotations.Add(textAnnotations);
             }
             #region Conclusion-Initial
             y.Minimum = minValue;
             y.Maximum = maxValue+5;
-            if (maxValue > 100)
+            if (maxValue > exceedValue)
                 series1.Color = OxyColors.Red;
             #endregion  
             plotModel.Series.Add(series1);
             return plotModel;
+        }
+        private int ConvertPixelsToDp(float pixelValue)
+        {
+            var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
+            return dp;
         }
     }
 }

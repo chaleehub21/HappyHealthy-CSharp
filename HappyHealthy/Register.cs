@@ -71,7 +71,7 @@ namespace HappyHealthyCSharp
                     var Service = new HHCSService.HHCSService();
                     ProgressDialog progressDialog = new ProgressDialog(this);
                     progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-                    progressDialog.SetMessage("กำลังลงทะเบียนข้อมูลของท่าน กรุณารอสักครู่");
+                    progressDialog.SetMessage("ระบบกำลังทำการลงทะเบียนข้อมูลของท่าน กรุณารอสักครู่");
                     progressDialog.Indeterminate = true;
                     progressDialog.SetCancelable(false);
                     progressDialog.Show();
