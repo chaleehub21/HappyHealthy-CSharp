@@ -1673,6 +1673,9 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f07004e
 			public const int notification_subtext_size = 2131165262;
 			
+			// aapt resource value: 0x7f070078
+			public const int text_size = 2131165304;
+			
 			// aapt resource value: 0x7f070077
 			public const int z1_linearlayout_icon = 2131165303;
 			

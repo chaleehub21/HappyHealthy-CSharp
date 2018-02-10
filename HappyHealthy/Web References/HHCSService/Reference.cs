@@ -45,11 +45,13 @@ namespace HappyHealthyCSharp.HHCSService {
         
         private System.Threading.SendOrPostCallback ClassXMLGenerateTestOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FoodRequestOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
         public HHCSService() {
-            this.Url = "http://172.20.97.62/HHCSService/HHCSService.asmx";
+            this.Url = "http://192.168.1.2/HHCSService/HHCSService.asmx";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -103,6 +105,9 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         public event ClassXMLGenerateTestCompletedEventHandler ClassXMLGenerateTestCompleted;
+        
+        /// <remarks/>
+        public event FoodRequestCompletedEventHandler FoodRequestCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Register", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -328,6 +333,35 @@ namespace HappyHealthyCSharp.HHCSService {
             if ((this.ClassXMLGenerateTestCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ClassXMLGenerateTestCompleted(this, new ClassXMLGenerateTestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FoodRequest", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool FoodRequest(string food_name) {
+            object[] results = this.Invoke("FoodRequest", new object[] {
+                        food_name});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FoodRequestAsync(string food_name) {
+            this.FoodRequestAsync(food_name, null);
+        }
+        
+        /// <remarks/>
+        public void FoodRequestAsync(string food_name, object userState) {
+            if ((this.FoodRequestOperationCompleted == null)) {
+                this.FoodRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFoodRequestOperationCompleted);
+            }
+            this.InvokeAsync("FoodRequest", new object[] {
+                        food_name}, this.FoodRequestOperationCompleted, userState);
+        }
+        
+        private void OnFoodRequestOperationCompleted(object arg) {
+            if ((this.FoodRequestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FoodRequestCompleted(this, new FoodRequestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1143,6 +1177,32 @@ namespace HappyHealthyCSharp.HHCSService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    public delegate void FoodRequestCompletedEventHandler(object sender, FoodRequestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FoodRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FoodRequestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }

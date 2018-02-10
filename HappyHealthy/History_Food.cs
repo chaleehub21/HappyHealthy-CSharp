@@ -70,7 +70,7 @@ namespace HappyHealthyCSharp
         [Export("ClickAddFood")]
         public void ClickAddFood(View v)
         {
-            //StartActivity(new Intent(this, typeof(Add_Food)));
+            StartActivity(new Intent(this, typeof(Add_Food)));
         }
         public void setListFood(string what_to_search)
         {
