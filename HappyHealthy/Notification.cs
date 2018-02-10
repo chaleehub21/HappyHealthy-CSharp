@@ -41,7 +41,6 @@ namespace HappyHealthyCSharp
                 .SetVibrate(new long[0])
                 .SetContentText(content);                
             return builder;
-            
         }
         public static void Show(Context c,string content,Type target,int customSoundResourceID = -9999)
         {
@@ -91,7 +90,8 @@ namespace HappyHealthyCSharp
             var halfMin = (long)(30 * 1000);
             manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, halfMin, pendingIntent);
             */ //This code snippet is worked!!!, so let's assume it's work for IntervalDay as well as halfMin
-            manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
+            var fiveMin =  1 * 1000;
+            manager.SetRepeating(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime() + calendar.TimeInMillis, fiveMin, pendingIntent);
             //reference : https://stackoverflow.com/questions/42237920/xamarin-android-how-to-schedule-and-alarm-with-a-broadcastreceiver
         }
         public static bool CancelAllAlarmManager(Context c,Intent intent,int requestCode = 0)

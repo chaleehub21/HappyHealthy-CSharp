@@ -16,8 +16,8 @@ using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Pill")]
-    public class Medicine : Activity
+    [Activity(Label = "Pill", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = SoftInput.StateHidden)]
+    public class Medicine : Activity,ILocalActivity
     {
         public struct App
         {
@@ -29,6 +29,7 @@ namespace HappyHealthyCSharp
         EditText medName;
         EditText medDesc;
         MedicineTABLE medObject;
+        string filePath;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -38,6 +39,7 @@ namespace HappyHealthyCSharp
             var backbtt = FindViewById<ImageView>(Resource.Id.imageView_button_back_pill);
             medName = FindViewById<EditText>(Resource.Id.ma_name);
             medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
+            medImage = FindViewById<ImageView>(Resource.Id.imageView_show_image);
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_pill);
             var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pill);
             //code goes below
@@ -49,9 +51,11 @@ namespace HappyHealthyCSharp
             }
             else
             {
-                InitialValueForUpdateEvent();
+                InitialForUpdateEvent();
                 saveButton.Click += UpdateValue;
                 deleteButton.Click += DeleteValue;
+                App._file = new File(medObject.ma_pic);
+                LoadImage();
             }
             //end
             backbtt.Click += delegate
@@ -62,14 +66,13 @@ namespace HappyHealthyCSharp
             {
                 CreateDirForPictures();
                 camerabtt.Click += cameraClickEvent;
-                medImage = FindViewById<ImageView>(Resource.Id.imageView_show_image);
                 //System.Console.WriteLine(IsAppToTakePicturesAvailable());
             }
 
             // Create your application here
         }
 
-        private void DeleteValue(object sender, EventArgs e)
+        public void DeleteValue(object sender, EventArgs e)
         {
             /*
             Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
@@ -100,14 +103,14 @@ namespace HappyHealthyCSharp
                  , "X");
         }
 
-        private void InitialValueForUpdateEvent()
+        public void InitialForUpdateEvent()
         {
             medName.Text = medObject.ma_name;
             medDesc.Text = medObject.ma_desc;
             //Waiting for image initialize
         }
 
-        private void UpdateValue(object sender, EventArgs e)
+        public void UpdateValue(object sender, EventArgs e)
         {
             medObject.ma_name = medName.Text;
             medObject.ma_desc = medDesc.Text;
@@ -118,13 +121,14 @@ namespace HappyHealthyCSharp
             Finish();
         }
 
-        private void SaveValue(object sender, EventArgs e)
+        public void SaveValue(object sender, EventArgs e)
         {
 
             var picPath = string.Empty;
             if (App._file != null)
             {
-                picPath = App._file.AbsolutePath;
+                picPath = filePath;
+                //picPath = App._file.AbsolutePath;
             }
             //pillTable.InsertPillToSQL(medName.Text, medDesc.Text, DateTime.Now,picPath , GlobalFunction.getPreference("ud_id", "", this));
             medObject.ma_name = medName.Text;
@@ -146,7 +150,7 @@ namespace HappyHealthyCSharp
         {
             var intent = new Intent(MediaStore.ActionImageCapture);
             //App._file = new File(App._dir, string.Format($@"HappyHealthyCS_{Guid.NewGuid()}.jpg"));
-            var filePath = System.IO.Path.Combine(App._dir.AbsolutePath, $@"HappyHealthyCS_{Guid.NewGuid()}.jpg");
+            filePath = System.IO.Path.Combine(App._dir.AbsolutePath, $@"HappyHealthyCS_{Guid.NewGuid()}.jpg");
             App._file = new File(filePath);
             intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(App._file));
             StartActivityForResult(intent, 0);
@@ -155,6 +159,11 @@ namespace HappyHealthyCSharp
         {
 
             base.OnActivityResult(requestCode, resultCode, data);
+            LoadImage();
+        }
+
+        private void LoadImage()
+        {
             var mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
             var contentUri = Android.Net.Uri.FromFile(App._file);
             mediaScanIntent.SetData(contentUri);

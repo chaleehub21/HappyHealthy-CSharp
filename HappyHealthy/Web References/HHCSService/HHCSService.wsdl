@@ -216,6 +216,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="FoodRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="food_name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FoodRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FoodRequestResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="RegisterSoapIn">
@@ -260,6 +274,12 @@
   <wsdl:message name="ClassXMLGenerateTestSoapOut">
     <wsdl:part name="parameters" element="tns:ClassXMLGenerateTestResponse" />
   </wsdl:message>
+  <wsdl:message name="FoodRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:FoodRequest" />
+  </wsdl:message>
+  <wsdl:message name="FoodRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:FoodRequestResponse" />
+  </wsdl:message>
   <wsdl:portType name="HHCSServiceSoap">
     <wsdl:operation name="Register">
       <wsdl:input message="tns:RegisterSoapIn" />
@@ -288,6 +308,10 @@
     <wsdl:operation name="ClassXMLGenerateTest">
       <wsdl:input message="tns:ClassXMLGenerateTestSoapIn" />
       <wsdl:output message="tns:ClassXMLGenerateTestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FoodRequest">
+      <wsdl:input message="tns:FoodRequestSoapIn" />
+      <wsdl:output message="tns:FoodRequestSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="HHCSServiceSoap" type="tns:HHCSServiceSoap">
@@ -348,6 +372,15 @@
     </wsdl:operation>
     <wsdl:operation name="ClassXMLGenerateTest">
       <soap:operation soapAction="http://tempuri.org/ClassXMLGenerateTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FoodRequest">
+      <soap:operation soapAction="http://tempuri.org/FoodRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -421,13 +454,22 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FoodRequest">
+      <soap12:operation soapAction="http://tempuri.org/FoodRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="HHCSService">
     <wsdl:port name="HHCSServiceSoap" binding="tns:HHCSServiceSoap">
-      <soap:address location="http://172.20.97.62/HHCSService/HHCSService.asmx" />
+      <soap:address location="http://192.168.1.2/HHCSService/HHCSService.asmx" />
     </wsdl:port>
     <wsdl:port name="HHCSServiceSoap12" binding="tns:HHCSServiceSoap12">
-      <soap12:address location="http://172.20.97.62/HHCSService/HHCSService.asmx" />
+      <soap12:address location="http://192.168.1.2/HHCSService/HHCSService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -20,7 +20,7 @@ using Android.Speech.Tts;
 namespace HappyHealthyCSharp
 {
 
-    [Activity]
+    [Activity(Label = "Diabetes", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = SoftInput.StateHidden)]
     public class Diabetes : Activity, TextToSpeech.IOnInitListener
     {
         TextToSpeech textToSpeech;
@@ -82,17 +82,24 @@ namespace HappyHealthyCSharp
 
         private void StartMicrophone(string speakValue)
         {
-            var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-            voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
-            voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Speak Now!");
-            voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
-            voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
-            voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
-            voiceIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
-            voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
-            t2sEngine.Speak(speakValue);
-            Thread.Sleep(1000);
-            StartActivityForResult(voiceIntent, VOICE);
+            try
+            {
+                var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, "Speak Now!");
+                voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+                voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
+                //t2sEngine.Speak(speakValue);
+                //Thread.Sleep(1000);
+                StartActivityForResult(voiceIntent, VOICE);
+            }
+            catch
+            {
+                Extension.CreateDialogue(this, "อุปกรณ์ของคุณไม่รองรับการสั่งการด้วยเสียง").Show();
+            }
         }
 
         private void DeleteValue(object sender, EventArgs e)
@@ -145,21 +152,11 @@ namespace HappyHealthyCSharp
                     if (matches.Count != 0)
                     {
                         string textInput = matches[0];
-                        var textInputList = textInput.Split().ToList();
-                        dataNLPList = new Dictionary<string, string>();
-                        for (var i = 0; i < textInputList.Count; i += 2)
-                        {
-                            try
-                            {
-                                dataNLPList.Add(textInputList[i].ToUpper(), textInputList[i + 1]);
-                            }
-                            catch
-                            {
-
-                            }
-                        }
+                        //var textInputList = textInput.Split().ToList();
+                        //dataNLPList = Extension.CreateDictionaryPair(textInputList);
+                        dataNLPList = Extension.CreateDictionaryPair(textInput);
                         Extension.MapDictToControls(new[] { "น้ำตาล" }, new[] { BloodValue }, dataNLPList);
-
+                        Toast.MakeText(this, textInput, ToastLength.Long).Show();
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -265,7 +262,6 @@ namespace HappyHealthyCSharp
             });
             t.Start();
         }
-        //Edit above here
         #region Experiment TTS methods
         public void OnInit([GeneratedEnum] OperationResult status)
         {
@@ -277,7 +273,4 @@ namespace HappyHealthyCSharp
         }
         #endregion
     }
-
-
-
 }

@@ -15,11 +15,12 @@ using Android.Provider;
 using Newtonsoft.Json;
 using Java.Util;
 using Android.Icu.Text;
+using Android.Views.InputMethods;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "Doctor",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class Doctor : Activity
+    [Activity(Label = "Doctor", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = SoftInput.StateHidden)]
+    public class Doctor : Activity,ILocalActivity
     {
         public struct App
         {
@@ -49,6 +50,7 @@ namespace HappyHealthyCSharp
             et_place = FindViewById<EditText>(Resource.Id.da_place);
             et_hospital = FindViewById<EditText>(Resource.Id.da_hospital);
             et_comment = FindViewById<EditText>(Resource.Id.da_comment);
+            docAttendPicture = FindViewById<ImageView>(Resource.Id.imageView_show_image);
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_doc);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
@@ -59,7 +61,7 @@ namespace HappyHealthyCSharp
             }
             else
             {
-                InitialValueForUpdateEvent();
+                InitialForUpdateEvent();
                 saveButton.Click += UpdateValue;
                 deletebtt.Click += DeleteValue;
             }
@@ -97,13 +99,22 @@ namespace HappyHealthyCSharp
             {
                 CreateDirForPictures();
                 camerabtt.Click += cameraClickEvent;
-                docAttendPicture = FindViewById<ImageView>(Resource.Id.imageView_show_image);
+   
             }
 
             // Create your application here
         }
-
-        private void DeleteValue(object sender, EventArgs e)
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
+        private void HideKeyboard()
+        {
+            InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            if(CurrentFocus != null)
+                inputManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, HideSoftInputFlags.None);
+        }
+        public void DeleteValue(object sender, EventArgs e)
         {
             Extension.CreateDialogue2(
                  this
@@ -123,7 +134,7 @@ namespace HappyHealthyCSharp
                  , "X");
         }
 
-        private void InitialValueForUpdateEvent()
+        public void InitialForUpdateEvent()
         {
             docAttendDate.Text = docObject.da_date.ToThaiLocale().ToString("dd/MM/yyyy");
             et_docName.Text = docObject.da_name;
@@ -136,7 +147,7 @@ namespace HappyHealthyCSharp
             //Waiting for image initialize
         }
 
-        private void UpdateValue(object sender, EventArgs e)
+        public void UpdateValue(object sender, EventArgs e)
         {
             docObject.da_name = et_docName.Text;
             docObject.da_dept = et_deptName.Text;
@@ -151,7 +162,7 @@ namespace HappyHealthyCSharp
             Finish();
         }
 
-        private void SaveValue(object sender, EventArgs e)
+        public void SaveValue(object sender, EventArgs e)
         {
 
             var picPath = string.Empty;
@@ -236,6 +247,7 @@ namespace HappyHealthyCSharp
 
             return c.TimeInMillis;
         }
+
     }
     public class TimePickerFragment : DialogFragment, TimePickerDialog.IOnTimeSetListener
     {

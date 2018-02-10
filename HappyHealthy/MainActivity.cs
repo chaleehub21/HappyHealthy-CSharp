@@ -17,8 +17,6 @@ namespace HappyHealthyCSharp
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             
             base.OnCreate(bundle);
-            //GlobalFunction.setPreference("dbPath", Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Database.DB_NAME), this);
-            //GlobalFunction.dbPath = GlobalFunction.getPreference("dbPath", null, this);
             CreateTab(typeof(Home), "Home", "", Resource.Drawable.ic_home);
             CreateTab(typeof(Report), "Report", "", Resource.Drawable.ic_report);
             CreateTab(typeof(User), "AlertHealthy", "", Resource.Drawable.ic_foodexe);

@@ -29,7 +29,7 @@ namespace HappyHealthyCSharp
         }
         public void setListFood(int id)
         {
-            var foodList = new FoodTABLE().getFoodList(id, this);
+            var foodList = new FoodTABLE().getFoodList(this,id);
             ListAdapter = new SimpleAdapter(this, foodList, Resource.Layout.food_1, new string[] { "food_name", "food_calories", "food_unit", "food_detail" }, new int[] { Resource.Id.food_name, Resource.Id.food_calories, Resource.Id.food_unit, Resource.Id.food_detail });
             ListView.Adapter = ListAdapter;
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)

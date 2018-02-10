@@ -62,9 +62,9 @@ namespace HappyHealthyCSharp
         /// <param name="word"></param>
         /// <param name="c"></param>
         /// <returns></returns>
-        public JavaList<IDictionary<string, object>> getFoodList(string word, Context c = null)
+        public JavaList<IDictionary<string, object>> getFoodList(Context c,string word)
         {
-            var service = new HHCSService.HHCSService();
+             var service = new HHCSService.HHCSService();
             var tickets = service.GetFoodData(word);
             var foodList = new JavaList<IDictionary<string, object>>();
             foreach (DataRow x in tickets.Tables["FoodTABLE"].Rows)
@@ -75,11 +75,15 @@ namespace HappyHealthyCSharp
                     food.Add(Column[i], Extension.StringValidation(x[i].ToString()));
                 }
                 foodList.Add(food);
+                
             }
             return foodList;
         }
-        public JavaList<IDictionary<string, object>> getFoodList(int exchangeId, Context c = null)
+        public JavaList<IDictionary<string, object>> getFoodList(Context c,int exchangeId)
         {
+            //var sodium = new KidneyTABLE().Select<double>($@"SELECT SUM(ckd_sodium) FROM KidneyTABLE WHERE UD_ID = '{Extension.getPreference("ud_id", 0, c)}")[0];
+            //var potassium = new KidneyTABLE().Select<double>($@"SELECT SUM(ckd_potassium) FROM KidneyTABLE WHERE UD_ID = '{Extension.getPreference("ud_id", 0, c)}")[0];
+            //var phosphorus = new KidneyTABLE().Select<double>($@"SELECT SUM(ckd_phosphorus_blood) FROM KidneyTABLE WHERE UD_ID = '{Extension.getPreference("ud_id", 0, c)}")[0];
             var service = new HHCSService.HHCSService();
             var tickets = service.GetFoodExchangeData(exchangeId);
             var foodList = new JavaList<IDictionary<string, object>>();
@@ -90,7 +94,15 @@ namespace HappyHealthyCSharp
                 {
                     food.Add(Column[i], Extension.StringValidation(x[i].ToString()));
                 }
-                foodList.Add(food);
+                //food.TryGetValue("sodium", out var fsodium);
+                //food.TryGetValue("potassium", out var fpotassium);
+                //food.TryGetValue("phosphorus", out var fphosphorus);
+                //var threshold = 100.0; //dummy threshold
+                //if(sodium > threshold || potassium > threshold || phosphorus > threshold)
+                //{
+                //    //we will not allow this food to be show
+                //}else
+                //    foodList.Add(food);
             }
             return foodList;
         }
@@ -112,7 +124,6 @@ namespace HappyHealthyCSharp
                     }
                     return retValue;
                 }
-
             }
             return null;
         }

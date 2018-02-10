@@ -10,6 +10,10 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Android.Speech;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Threading;
 
 namespace HappyHealthyCSharp
 {
@@ -17,6 +21,7 @@ namespace HappyHealthyCSharp
     class Home : Activity
     {
         TextView labelTest;
+        TextView homeHeaderText;
         #region Experimental Section
         private bool isRecording;
         private readonly int VOICE = 10;
@@ -33,19 +38,20 @@ namespace HappyHealthyCSharp
             ImageView FoodButton = FindViewById<ImageView>(Resource.Id.imageView_button_food);
             ImageView MedicineButton = FindViewById<ImageView>(Resource.Id.imageView_button_pill);
             ImageView DoctorButton = FindViewById<ImageView>(Resource.Id.imageView_button_doctor);
+            homeHeaderText = FindViewById<TextView>(Resource.Id.textView18);
+
             DiabetesButton.Click += ClickDiabetes;
             KidneyButton.Click += ClickKidney;
             PressureButton.Click += ClickPressure;
             FoodButton.Click += ClickFood;
             MedicineButton.Click += ClickPill;
             DoctorButton.Click += ClickDoctor;
-
-
             var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
             imageView.Click += NotImplemented;
+            
             //TestSTTImplementation(imageView);
         }
-
+        
         private void TestSTTImplementation(ImageView imageView)
         {
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
@@ -99,30 +105,54 @@ namespace HappyHealthyCSharp
             base.OnActivityResult(requestCode, resultVal, data);
         }
 
-        public void ClickFood(object sender, EventArgs e)
+        public async void ClickFood(object sender, EventArgs e)
         {
+            ProgressDialog progressDialog = null;
             try
             {
-                var progressDialog = new ProgressDialog(this); 
-                progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-                progressDialog.SetTitle("ดาวน์โหลดข้อมูล");
-                progressDialog.SetMessage("กำลังดาวน์โหลดข้อมูลของท่าน กรุณารอสักครู่");
-                progressDialog.Indeterminate = true;
-                progressDialog.SetCancelable(false);
-                progressDialog.Show();
+                progressDialog = ProgressDialog.Show(this, "ดาวน์โหลดข้อมูล", "กำลังดาวน์โหลดข้อมูล กรุณารอสักครู่", true);
                 var service = new HHCSService.HHCSService();
-                service.TestConnectionCompleted += delegate {
+                service.Timeout = 10;
+                var result = await TestConnectionValidate(service);
+                if (result.Result == true)
+                {
                     StartActivity(new Intent(this, typeof(History_Food)));
                     progressDialog.Dismiss();
-                };
-                service.TestConnectionAsync();
+                }
+                else
+                {
+                    Extension.CreateDialogue(this, "Failed to connect to database").Show();
+                    progressDialog.Dismiss();
+                }
             }
             catch
             {
                 Extension.CreateDialogue(this, "Connection timeout").Show();
             }
-
             //NotImplemented(sender, e);
+        }
+        private static void TransferCompletion<T>(TaskCompletionSource<T> tcs, System.ComponentModel.AsyncCompletedEventArgs e, Func<T> getResult)
+        {
+            if (e.Error != null)
+            {
+                tcs.TrySetException(e.Error);
+            }
+            else if (e.Cancelled)
+            {
+                tcs.TrySetCanceled();
+            }
+            else
+            {
+                tcs.TrySetResult(getResult());
+            }
+        }
+
+        public static Task<HHCSService.TestConnectionCompletedEventArgs> TestConnectionValidate(HHCSService.HHCSService serviceInstance)
+        {
+            var result = new TaskCompletionSource<HHCSService.TestConnectionCompletedEventArgs>();
+            serviceInstance.TestConnectionCompleted += (s, e) => TransferCompletion(result, e, () => e);
+            serviceInstance.TestConnectionAsync();
+            return result.Task;
         }
         public void ClickDiabetes(object sender, EventArgs e)
         {
@@ -153,7 +183,23 @@ namespace HappyHealthyCSharp
         }
         public void NotImplemented(object sender, EventArgs e)
         {
-            Extension.CreateDialogue(this, "Not Implemented").Show();
+            //Extension.CreateDialogue(this, "Not Implemented").Show();
+            /*
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://192.168.1.7/RESTservice/");
+                var response = client.GetAsync($@"api/Encryption/{Extension.getPreference("ud_id", 0, this)}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    Extension.CreateDialogue(this, response.Content.ReadAsStringAsync().Result).Show();
+                }
+            }
+            */
+            var notifTime = DateTime.Now;
+            notifTime.AddHours(-6);
+            notifTime.AddSeconds(20);
+            CustomNotification.SetAlarmManager(this, "TEST", 1, notifTime);
+            Extension.CreateDialogue(this, notifTime.ToString()).Show();
         }
     }
 }

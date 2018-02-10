@@ -86,16 +86,6 @@ namespace HappyHealthyCSharp
         public void SetFoodDetail(double t)
         {
             f_name.Text = detailFood["food_name"];
-            //f_cal.Text = (Convert.ToDouble(detailFood["food_calories"])*t).ToString();
-            //f_unit.Text = detailFood["food_unit"];
-            //f_netweight.Text = (Convert.ToDouble(detailFood["food_netweight"]) * t).ToString();
-            //f_netunit.Text = detailFood["food_netunit"];
-            //f_pro.Text = (Convert.ToDouble(detailFood["food_protein"]) * t).ToString();
-            //f_fat.Text = (Convert.ToDouble(detailFood["food_fat"]) * t).ToString();
-            //f_car.Text = (Convert.ToDouble(detailFood["food_carbohydrate"]) * t).ToString();
-            //f_sugar.Text = (Convert.ToDouble(detailFood["food_sugars"]) * t).ToString();
-            //f_sodium.Text = (Convert.ToDouble(detailFood["food_sodium"]) * t).ToString();
-            //f_detail.Text = detailFood["food_detail"];
             
         }
         protected override void OnPause()

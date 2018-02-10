@@ -93,7 +93,7 @@ namespace HappyHealthyCSharp
             }
         }
 
-        private void Initialization(string id, string password)
+        public void Initialization(string id, string password)
         {
             var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var sql = $@"select * from UserTABLE where ud_email = '{id}'";

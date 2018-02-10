@@ -15,6 +15,8 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using Java.Text;
 using System.Security.Cryptography;
+using SQLite;
+
 
 namespace HappyHealthyCSharp
 {
@@ -56,7 +58,7 @@ namespace HappyHealthyCSharp
                 }, 2000, DateTime.Now.Month, DateTime.Now.Day);
                 mDatePicker.Show();
             };
-            register.Click += delegate {
+            register.Click += async delegate {
                 if (isFieldValid())
                 {
                     var user = new UserTABLE() {
@@ -67,20 +69,38 @@ namespace HappyHealthyCSharp
                         ,ud_pass = AccountHelper.CreatePasswordHash(pw.Text)
                     };
                     var Service = new HHCSService.HHCSService();
-                    object[] returnData = Service.Register(email.Text, pw.Text
+                    ProgressDialog progressDialog = new ProgressDialog(this);
+                    progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+                    progressDialog.SetMessage("ระบบกำลังทำการลงทะเบียนข้อมูลของท่าน กรุณารอสักครู่");
+                    progressDialog.Indeterminate = true;
+                    progressDialog.SetCancelable(false);
+                    progressDialog.Show();
+                    object[] returnData = null;
+                    await System.Threading.Tasks.Task.Run(delegate {
+                        returnData = Service.Register(email.Text, pw.Text
                         , user.ud_iden_number
                         , user.ud_gender
                         , user.ud_name
                         , user.ud_birthdate);
+                    });
+                    progressDialog.Dismiss();
                     if (returnData.Length == 2)
                     {
                         user.ud_id = (int)returnData[0];
                         user.ud_pass = (string)returnData[1];
                         if (user.Insert())
                         {
-                            Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์ กลับไปยังหน้าเข้าใช้งาน", delegate
+                            Extension.CreateDialogue(this, "การลงทะเบียนเสร็จสมบูรณ์", delegate
                             {
+                                var conn = new SQLiteConnection(Extension.sqliteDBPath);
+                                var sql = $@"select * from UserTABLE where ud_email = '{email}'";
+                                var result = conn.Query<UserTABLE>(sql);
+                                Extension.setPreference("ud_email", email.Text, this);
+                                Extension.setPreference("ud_pass", pw.Text, this);
+                                Extension.setPreference("ud_id", user.ud_id, this);
+                                StartActivity(typeof(MainActivity));
                                 this.Finish();
+
                             }).Show();
                         }
                     }
