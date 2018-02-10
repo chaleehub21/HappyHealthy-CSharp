@@ -17,7 +17,7 @@
             android:orientation="vertical">
             <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbar_yellow" />
+                layout="@layout/toolbarpill" />
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"

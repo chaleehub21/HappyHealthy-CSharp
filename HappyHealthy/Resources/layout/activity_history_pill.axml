@@ -11,7 +11,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_yellow" />
+            layout="@layout/toolbarpill" />
     </LinearLayout>
     <ListView
         android:layout_width="fill_parent"

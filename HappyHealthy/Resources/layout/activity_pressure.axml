@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_orange" />
+            layout="@layout/toolbarpre" />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="115dp"
-        android:background="@drawable/my_bg_orange">
+        android:background="@drawable/my_bg_pre">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
