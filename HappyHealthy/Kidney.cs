@@ -55,21 +55,21 @@ namespace HappyHealthyCSharp
             field_albumin_urine = FindViewById<EditText>(Resource.Id.ckd_albumin_urine);
             field_phosphorus_blood = FindViewById<EditText>(Resource.Id.ckd_phosphorus_blood);
             saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_kidney);
-            deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_kidney);
-            micButton = FindViewById<TextView>(Resource.Id.textView_detail_gfr);    
+            //deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_kidney);
+            micButton = FindViewById<TextView>(Resource.Id.textView_detail_gfr);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             kidneyObject = string.IsNullOrEmpty(flagObjectJson) ? new KidneyTABLE() { ckd_gfr = Extension.flagValue } : JsonConvert.DeserializeObject<KidneyTABLE>(flagObjectJson);
             if (kidneyObject.ckd_gfr == Extension.flagValue)
             {
-                deleteButton.Visibility = ViewStates.Invisible;
+                //deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
-                deleteButton.Click += DeleteValue;
+                //deleteButton.Click += DeleteValue;
 
             }
             //end

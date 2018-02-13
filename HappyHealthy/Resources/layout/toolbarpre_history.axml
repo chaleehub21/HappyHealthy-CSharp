@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
-    android:background="#34b08b"
+    android:background="#e86868"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
     <LinearLayout
@@ -13,19 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
-        
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView_button_back_doc"
+            android:layout_height="40dp"
+            android:id="@+id/imageView38"
             android:src="@drawable/arowback"
+            android:layout_marginTop="0.0dp"
             android:layout_marginLeft="3dp"
-            android:adjustViewBounds="false" />
-      <TextView
+            android:layout_alignParentLeft="true"
+            android:onClick="ClickBackHisKidHome"
+            android:layout_gravity="center_vertical" />
+        <TextView
             android:layout_width="290.0dp"
             android:layout_height="wrap_content"
-            android:text="นัดแพทย์"
-            android:id="@+id/textView_header_name_doc"
+            android:text="ประวัติบันทึกความดัน"
+            android:id="@+id/textView_header_name_pressure"
             android:layout_centerHorizontal="true"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -33,5 +35,15 @@
             android:layout_gravity="center_vertical"
             android:textColor="#ffffff"
             android:gravity="center" />
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/imageView41"
+            android:src="@drawable/buttonadd"
+            android:onClick="ClickAddKid"
+            android:layout_marginTop="0.0dp"
+            android:layout_marginRight="0.0dp"
+            android:layout_gravity="center_vertical"
+            android:verticalScrollbarPosition="right" />
     </LinearLayout>
 </android.support.v7.widget.Toolbar>

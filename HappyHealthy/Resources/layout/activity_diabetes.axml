@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#ffffff">
+    android:background="#66f7e3bb">
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
@@ -14,32 +14,12 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbardiabetes" />
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="เบาหวาน"
-        android:id="@+id/textView_header_name_diabetes"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="#979797" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/imageView_button_back_diabetes"
-        android:src="@drawable/arowback"
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="3dp"
-        android:onClick="ClickBackDiaHome"
-        android:adjustViewBounds="false" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="105dp"
-        android:weightSum="1"
+        android:layout_marginTop="115dp"
         android:id="@+id/Layout_background_diabetes"
         android:background="@drawable/my_bg_dia"
         android:layout_height="wrap_content">
@@ -47,16 +27,19 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:id="@+id/imageView_detail_sugar_diabetes"
-                android:src="@drawable/tstsugarbefore"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15.5dp"
-                android:layout_marginBottom="0.0dp" />
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ค่าระดับน้ำตาลในเลือดของผู้ใช้งาน"
+                android:id="@+id/textView_detail_sugar_diabetes"
+                android:layout_centerHorizontal="true"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:gravity="center_vertical" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -65,7 +48,8 @@
             android:weightSum="1"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20.0dp">
             <EditText
                 android:layout_width="160dp"
                 android:layout_height="match_parent"
@@ -86,26 +70,26 @@
                 android:src="@drawable/ic_microphone"
                 android:layout_marginLeft="6.0dp" />
         </LinearLayout>
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView_measurement_unit_diabetes"
-            android:src="@drawable/ml2"
+            android:text="มก./ดล."
+            android:id="@+id/unit__dia"
+            android:layout_centerHorizontal="true"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:gravity="fill_horizontal"
             android:layout_gravity="center_horizontal"
-            android:layout_marginRight="11.0dp" />
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:id="@+id/imageView_button_save_diabetes"
-            android:src="@drawable/Button_save_yellow"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10.0dp" />
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:id="@+id/imageView_button_delete_diabetes"
-            android:src="@drawable/Button_delete_yellow"
-            android:layout_marginTop="0dp"
             android:layout_marginBottom="10.0dp" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:id="@+id/imageView_button_save_diabetes"
+        android:src="@drawable/save_button"
+        android:layout_below="@+id/Layout_background_diabetes"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10.0dp" />
 </RelativeLayout>

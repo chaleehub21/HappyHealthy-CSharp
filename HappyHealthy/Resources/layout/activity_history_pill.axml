@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+                android:background="#66f7e3bb"
     tools:context="com.jiraporn.nut.happyhealthy.History_Food">
     <LinearLayout
         android:id="@+id/container_toolbar"
@@ -11,7 +12,7 @@
         android:orientation="vertical">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbarpill" />
+            layout="@layout/toolbarpill_history" />
     </LinearLayout>
     <ListView
         android:layout_width="fill_parent"
@@ -24,29 +25,4 @@
         android:layout_alignParentEnd="false"
         android:layout_marginTop="58dp"
         android:drawSelectorOnTop="false" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ข้อมูลยา"
-        android:id="@+id/textViewInfopill"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="#979797" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/imageViewbackpill"
-        android:src="@drawable/arowback"
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="3dp"
-        android:onClick="ClickBackHome" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/imageViewAddPill"
-        android:src="@drawable/buttonadd"
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="315.5dp" />
 </RelativeLayout>

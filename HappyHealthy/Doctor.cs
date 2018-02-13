@@ -41,7 +41,7 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_add_doc);
             var camerabtt = FindViewById<ImageView>(Resource.Id.imageView_button_save_pic_doc);
             var backbtt = FindViewById<ImageView>(Resource.Id.imageView_button_back_doc);
-            var deletebtt = FindViewById<ImageView>(Resource.Id.imageView_button_delete_doc);
+            //var deletebtt = FindViewById<ImageView>(Resource.Id.imageView_button_delete_doc);
             docAttendDate = FindViewById<TextView>(Resource.Id.choosedate_doc);
             docRegisTime = FindViewById<TextView>(Resource.Id.chooseregtime_doc);
             docAppointmentTime = FindViewById<TextView>(Resource.Id.chooseappttime_doc);
@@ -63,7 +63,7 @@ namespace HappyHealthyCSharp
             {
                 InitialForUpdateEvent();
                 saveButton.Click += UpdateValue;
-                deletebtt.Click += DeleteValue;
+                //deletebtt.Click += DeleteValue;
             }
             backbtt.Click += delegate {
                 this.Finish();
