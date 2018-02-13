@@ -99,7 +99,7 @@
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:id="@+id/loginBtt"
-            android:src="@drawable/Button_login_orange"
+            android:src="@drawable/loginbutton"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="20.5dp" />
     </LinearLayout>
