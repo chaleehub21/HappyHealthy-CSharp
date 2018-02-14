@@ -20,7 +20,7 @@
             android:src="@drawable/arowback"
             android:layout_marginTop="0.0dp"
             android:layout_marginLeft="3dp"
-            android:onClick="ClickBackDiaHome"
+            android:onClick="ClickBackPreHome"
             android:adjustViewBounds="false" />
         <TextView
             android:layout_width="290.0dp"
