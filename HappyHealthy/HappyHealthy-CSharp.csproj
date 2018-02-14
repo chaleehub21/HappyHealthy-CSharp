@@ -201,7 +201,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_add__exe.axml" />
-    <AndroidResource Include="Resources\layout\activity_add__food.axml" />
+    <AndroidResource Include="Resources\layout\activity_add__food.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_data_user.axml" />
     <AndroidResource Include="Resources\layout\activity_develop.axml" />
     <AndroidResource Include="Resources\layout\activity_diabetes.axml">
@@ -1168,10 +1170,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\Test_button_pressure.png" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.1.2/HHCSService/HHCSService.asmx">
+    <WebReferenceUrl Include="http://172.16.23.82/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HHCSService\</RelPath>
-      <UpdateFromURL>http://192.168.1.2/HHCSService/HHCSService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://172.16.23.82/HHCSService/HHCSService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
