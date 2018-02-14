@@ -14,6 +14,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace HappyHealthyCSharp
 {
@@ -48,10 +50,10 @@ namespace HappyHealthyCSharp
             DoctorButton.Click += ClickDoctor;
             var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
             imageView.Click += NotImplemented;
-            
+
             //TestSTTImplementation(imageView);
         }
-        
+
         private void TestSTTImplementation(ImageView imageView)
         {
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
@@ -113,15 +115,16 @@ namespace HappyHealthyCSharp
                 progressDialog = ProgressDialog.Show(this, "ดาวน์โหลดข้อมูล", "กำลังดาวน์โหลดข้อมูล กรุณารอสักครู่", true);
                 var service = new HHCSService.HHCSService();
                 service.Timeout = 10;
-                var result = await TestConnectionValidate(service);
-                if (result.Result == true)
+                var serverAddr = "https://www.google.com";
+                var result = await TestConnectionValidate(serverAddr);
+                if (result == true)
                 {
                     StartActivity(new Intent(this, typeof(History_Food)));
                     progressDialog.Dismiss();
                 }
                 else
                 {
-                    Extension.CreateDialogue(this, "Failed to connect to database").Show();
+                    Extension.CreateDialogue(this, "เกิดความล้มเหลวในการเชื่อมต่อไปยังฐานข้อมูล").Show();
                     progressDialog.Dismiss();
                 }
             }
@@ -131,28 +134,26 @@ namespace HappyHealthyCSharp
             }
             //NotImplemented(sender, e);
         }
-        private static void TransferCompletion<T>(TaskCompletionSource<T> tcs, System.ComponentModel.AsyncCompletedEventArgs e, Func<T> getResult)
-        {
-            if (e.Error != null)
-            {
-                tcs.TrySetException(e.Error);
-            }
-            else if (e.Cancelled)
-            {
-                tcs.TrySetCanceled();
-            }
-            else
-            {
-                tcs.TrySetResult(getResult());
-            }
-        }
 
-        public static Task<HHCSService.TestConnectionCompletedEventArgs> TestConnectionValidate(HHCSService.HHCSService serviceInstance)
+        public static async Task<bool> TestConnectionValidate(string addr)
         {
-            var result = new TaskCompletionSource<HHCSService.TestConnectionCompletedEventArgs>();
-            serviceInstance.TestConnectionCompleted += (s, e) => TransferCompletion(result, e, () => e);
-            serviceInstance.TestConnectionAsync();
-            return result.Task;
+            return true;
+            try
+            {
+                var isPingable = false;
+                await Task.Run(delegate {
+                    var ip = Dns.GetHostAddresses(new Uri(addr).Host)[0].ToString();
+                    var pinger = new Ping();
+                    var reply = pinger.Send(ip,10000);
+                    isPingable = reply.Status == IPStatus.Success;
+                });
+                return isPingable;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
         public void ClickDiabetes(object sender, EventArgs e)
         {
