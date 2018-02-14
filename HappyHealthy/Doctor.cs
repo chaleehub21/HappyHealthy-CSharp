@@ -164,6 +164,13 @@ namespace HappyHealthyCSharp
 
         public void SaveValue(object sender, EventArgs e)
         {
+            if (!Extension.TextFieldValidate(new List<object>() {
+                et_docName,et_deptName,docRegisTime,docAppointmentTime,et_comment,et_place,et_hospital
+            }))
+            {
+                Toast.MakeText(this, "กรุณากรอกค่าให้ครบ ก่อนทำการบันทึก", ToastLength.Short).Show();
+                return;
+            }
 
             var picPath = string.Empty;
             if (App._file != null)

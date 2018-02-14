@@ -41,7 +41,6 @@ namespace HappyHealthyCSharp
             var forgot = FindViewById<TextView>(Resource.Id.textViewForget);
             id.Text = "kunvutloveza@hotmail.com";
             pw.Text = "123456";
-            Extension.clearAllPreference(this);
             ProgressDialog progressDialog = new ProgressDialog(this);
             login.Click += async delegate
             {

@@ -285,6 +285,19 @@ namespace HappyHealthyCSharp
                 breakloop:;
             }
         }
+        public static bool IsNull(this string objValue)
+        {
+            return objValue == string.Empty;
+        }
+        public static bool TextFieldValidate(List<object> controlList)
+        {
+            foreach (var control in controlList)
+            {
+                if (((string)control.GetType().GetProperty("Text").GetValue(control)).IsNull())
+                    return false;
+            };
+            return true;
+        }
 
     }
 }

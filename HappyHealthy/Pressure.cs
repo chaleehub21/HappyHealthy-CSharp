@@ -114,7 +114,17 @@ namespace HappyHealthyCSharp
 
                             }
                         }
-                        Extension.MapDictToControls(new[] { "บน", "ล่าง", "หัวใจ" }, new[] { BPUp, BPLow, HeartRate }, dataNLPList);
+                        Extension.MapDictToControls(
+                        new[] {
+                            "บน",
+                            "ล่าง",
+                            "หัวใจ","เต้น"
+                        }, 
+                        new[] {
+                            BPUp,
+                            BPLow,
+                            HeartRate,HeartRate
+                        }, dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -170,6 +180,13 @@ namespace HappyHealthyCSharp
 
         public void SaveValue(object sender, EventArgs e)
         {
+            if (!Extension.TextFieldValidate(new List<object>() {
+                BPUp,BPLow,HeartRate
+            }))
+            {
+                Toast.MakeText(this, "กรุณากรอกค่าให้ครบ ก่อนทำการบันทึก", ToastLength.Short).Show();
+                return;
+            }
             var bpTable = new PressureTABLE();
             try
             {

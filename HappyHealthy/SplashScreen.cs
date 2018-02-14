@@ -41,7 +41,7 @@ namespace HappyHealthyCSharp
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             RequestWindowFeature(Android.Views.WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.activity_splash_screen);
-            imageView = FindViewById<ImageView>(Resource.Id.imageView9);
+            var imageView = FindViewById<ImageView>(Resource.Id.splashScreenImg);
             view_animation = AnimationUtils.LoadAnimation(this, Resource.Animation.fade_in);
             imageView.StartAnimation(view_animation);
             view_animation.AnimationEnd += delegate {
