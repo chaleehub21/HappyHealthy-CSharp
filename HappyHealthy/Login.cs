@@ -43,9 +43,8 @@ namespace HappyHealthyCSharp
             pw.Text = "123456";
             Extension.clearAllPreference(this);
             ProgressDialog progressDialog = new ProgressDialog(this);
-            login.Click += delegate
+            login.Click += async delegate
             {
-                /*
                 if (new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0)
                 {
                     progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
@@ -62,11 +61,6 @@ namespace HappyHealthyCSharp
                 {
                     LogIn(id.Text, pw.Text);
                 }
-                */
-                var user = new UserTABLE() { ud_id = 3,ud_email = id.Text,ud_pass = AccountHelper.CreatePasswordHash(pw.Text),ud_birthdate = DateTime.Now};
-                Initialization(user.ud_email,user.ud_pass);
-                StartActivity(typeof(MainActivity));
-                this.Finish();
             };
             register.Click += delegate
             {

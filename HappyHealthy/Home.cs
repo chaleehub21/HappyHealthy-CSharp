@@ -14,8 +14,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading;
-using System.Net;
-using System.Net.NetworkInformation;
 
 namespace HappyHealthyCSharp
 {
@@ -115,16 +113,15 @@ namespace HappyHealthyCSharp
                 progressDialog = ProgressDialog.Show(this, "ดาวน์โหลดข้อมูล", "กำลังดาวน์โหลดข้อมูล กรุณารอสักครู่", true);
                 var service = new HHCSService.HHCSService();
                 service.Timeout = 10;
-                var serverAddr = "https://www.google.com";
-                var result = await TestConnectionValidate(serverAddr);
-                if (result == true)
+                var result = await TestConnectionValidate(service);
+                if (result.Result == true)
                 {
                     StartActivity(new Intent(this, typeof(History_Food)));
                     progressDialog.Dismiss();
                 }
                 else
                 {
-                    Extension.CreateDialogue(this, "เกิดความล้มเหลวในการเชื่อมต่อไปยังฐานข้อมูล").Show();
+                    Extension.CreateDialogue(this, "Failed to connect to database").Show();
                     progressDialog.Dismiss();
                 }
             }
@@ -134,26 +131,28 @@ namespace HappyHealthyCSharp
             }
             //NotImplemented(sender, e);
         }
-
-        public static async Task<bool> TestConnectionValidate(string addr)
+        private static void TransferCompletion<T>(TaskCompletionSource<T> tcs, System.ComponentModel.AsyncCompletedEventArgs e, Func<T> getResult)
         {
-            return true;
-            try
+            if (e.Error != null)
             {
-                var isPingable = false;
-                await Task.Run(delegate {
-                    var ip = Dns.GetHostAddresses(new Uri(addr).Host)[0].ToString();
-                    var pinger = new Ping();
-                    var reply = pinger.Send(ip,10000);
-                    isPingable = reply.Status == IPStatus.Success;
-                });
-                return isPingable;
+                tcs.TrySetException(e.Error);
             }
-            catch
+            else if (e.Cancelled)
             {
-                return false;
+                tcs.TrySetCanceled();
             }
+            else
+            {
+                tcs.TrySetResult(getResult());
+            }
+        }
 
+        public static Task<HHCSService.TestConnectionCompletedEventArgs> TestConnectionValidate(HHCSService.HHCSService serviceInstance)
+        {
+            var result = new TaskCompletionSource<HHCSService.TestConnectionCompletedEventArgs>();
+            serviceInstance.TestConnectionCompleted += (s, e) => TransferCompletion(result, e, () => e);
+            serviceInstance.TestConnectionAsync();
+            return result.Task;
         }
         public void ClickDiabetes(object sender, EventArgs e)
         {
@@ -196,6 +195,7 @@ namespace HappyHealthyCSharp
                 }
             }
             */
+            return;
             var notifTime = DateTime.Now;
             notifTime.AddHours(-6);
             notifTime.AddSeconds(20);

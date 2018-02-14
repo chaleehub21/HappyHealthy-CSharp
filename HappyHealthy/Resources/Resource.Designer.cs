@@ -2767,11 +2767,11 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f08003c
 			public const int action_mode_close_button = 2131230780;
 			
-			// aapt resource value: 0x7f0801d1
-			public const int action_search = 2131231185;
+			// aapt resource value: 0x7f0801d3
+			public const int action_search = 2131231187;
 			
-			// aapt resource value: 0x7f0801d2
-			public const int action_settings = 2131231186;
+			// aapt resource value: 0x7f0801d4
+			public const int action_settings = 2131231188;
 			
 			// aapt resource value: 0x7f080069
 			public const int activity_add__exe = 2131230825;
@@ -3088,8 +3088,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f08012b
 			public const int food_unit2 = 2131231019;
 			
-			// aapt resource value: 0x7f0801c4
-			public const int forget_back_btt = 2131231172;
+			// aapt resource value: 0x7f0801c6
+			public const int forget_back_btt = 2131231174;
 			
 			// aapt resource value: 0x7f08013c
 			public const int forget_email = 2131231036;
@@ -3208,8 +3208,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f080147
 			public const int imageView4 = 2131231047;
 			
-			// aapt resource value: 0x7f0801c7
-			public const int imageView41 = 2131231175;
+			// aapt resource value: 0x7f0801c9
+			public const int imageView41 = 2131231177;
 			
 			// aapt resource value: 0x7f080124
 			public const int imageView43 = 2131231012;
@@ -3277,8 +3277,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f08017a
 			public const int imageView9 = 2131231098;
 			
-			// aapt resource value: 0x7f0801cb
-			public const int imageViewAddPill = 2131231179;
+			// aapt resource value: 0x7f0801cd
+			public const int imageViewAddPill = 2131231181;
 			
 			// aapt resource value: 0x7f080172
 			public const int imageViewBirthday = 2131231090;
@@ -3292,11 +3292,11 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0801c0
 			public const int imageView_button_back_doc = 2131231168;
 			
-			// aapt resource value: 0x7f0801c8
-			public const int imageView_button_back_pill = 2131231176;
+			// aapt resource value: 0x7f0801ca
+			public const int imageView_button_back_pill = 2131231178;
 			
-			// aapt resource value: 0x7f0801cc
-			public const int imageView_button_back_pressure = 2131231180;
+			// aapt resource value: 0x7f0801ce
+			public const int imageView_button_back_pressure = 2131231182;
 			
 			// aapt resource value: 0x7f0800c5
 			public const int imageView_button_camera = 2131230917;
@@ -3364,8 +3364,14 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0801c2
 			public const int imageViewbackdoc = 2131231170;
 			
-			// aapt resource value: 0x7f0801ca
-			public const int imageViewbackpill = 2131231178;
+			// aapt resource value: 0x7f0801cc
+			public const int imageViewbackpill = 2131231180;
+			
+			// aapt resource value: 0x7f0801c5
+			public const int imageViewfoodAdd = 2131231173;
+			
+			// aapt resource value: 0x7f0801c4
+			public const int imageViewfoodDelete = 2131231172;
 			
 			// aapt resource value: 0x7f08013a
 			public const int imageViewfoodadd = 2131231034;
@@ -3550,8 +3556,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f080075
 			public const int recExe = 2131230837;
 			
-			// aapt resource value: 0x7f0801ce
-			public const int register_back_btt = 2131231182;
+			// aapt resource value: 0x7f0801d0
+			public const int register_back_btt = 2131231184;
 			
 			// aapt resource value: 0x7f080174
 			public const int register_button = 2131231092;
@@ -3652,8 +3658,8 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f080045
 			public const int spacer = 2131230789;
 			
-			// aapt resource value: 0x7f0801d0
-			public const int splashAnimation = 2131231184;
+			// aapt resource value: 0x7f0801d2
+			public const int splashAnimation = 2131231186;
 			
 			// aapt resource value: 0x7f080008
 			public const int split_action_bar = 2131230728;
@@ -3880,20 +3886,20 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f0801c1
 			public const int textView_header_name_doc = 2131231169;
 			
-			// aapt resource value: 0x7f0801c5
-			public const int textView_header_name_forgetpass = 2131231173;
+			// aapt resource value: 0x7f0801c7
+			public const int textView_header_name_forgetpass = 2131231175;
 			
-			// aapt resource value: 0x7f0801c6
-			public const int textView_header_name_kidey = 2131231174;
+			// aapt resource value: 0x7f0801c8
+			public const int textView_header_name_kidey = 2131231176;
 			
-			// aapt resource value: 0x7f0801c9
-			public const int textView_header_name_pill = 2131231177;
-			
-			// aapt resource value: 0x7f0801cd
-			public const int textView_header_name_pressure = 2131231181;
+			// aapt resource value: 0x7f0801cb
+			public const int textView_header_name_pill = 2131231179;
 			
 			// aapt resource value: 0x7f0801cf
-			public const int textView_header_name_regis = 2131231183;
+			public const int textView_header_name_pressure = 2131231183;
+			
+			// aapt resource value: 0x7f0801d1
+			public const int textView_header_name_regis = 2131231185;
 			
 			// aapt resource value: 0x7f0800ac
 			public const int textView_hospital_doc = 2131230892;

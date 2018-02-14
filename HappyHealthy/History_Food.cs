@@ -29,9 +29,11 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_food__type_1);
             btn_search = FindViewById<Button>(Resource.Id.bFoodSearch);
             txt_search = FindViewById<EditText>(Resource.Id.tv_Sfood);
-            var img_back = FindViewById<ImageView>(Resource.Id.imageView44);
-            foodTable = new FoodTABLE();
-
+            var img_back = FindViewById<ImageView>(Resource.Id.imageViewfoodDelete);
+            var addBtt = FindViewById<ImageView>(Resource.Id.imageViewfoodAdd);
+            addBtt.Click += delegate {
+                StartActivity(new Intent(this, typeof(Add_Food)));
+            };
             btn_search.Click += delegate
             {
                 setListFood(txt_search.Text);
@@ -47,7 +49,9 @@ namespace HappyHealthyCSharp
                 this.Finish();
             };
             base.ListView.ItemClick += onItemClick;
+            foodTable = new FoodTABLE();
             setListFood("");
+
             // Create your application here
 
         }
@@ -67,11 +71,7 @@ namespace HappyHealthyCSharp
         {
             base.OnDestroy();
         }
-        [Export("ClickAddFood")]
-        public void ClickAddFood(View v)
-        {
-            StartActivity(new Intent(this, typeof(Add_Food)));
-        }
+
         public void setListFood(string what_to_search)
         {
             foodList = foodTable.getFoodList(this,what_to_search);
