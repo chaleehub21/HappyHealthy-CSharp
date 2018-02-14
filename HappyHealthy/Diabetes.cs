@@ -45,20 +45,20 @@ namespace HappyHealthyCSharp
             BloodValue = FindViewById<EditText>(Resource.Id.sugar_value);
             micButton = FindViewById<ImageView>(Resource.Id.ic_microphone_diabetes);
             saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_diabetes);
-            deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_diabetes);
+           //deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_diabetes);
             // Create your application here
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             diaObject = string.IsNullOrEmpty(flagObjectJson) ? new DiabetesTABLE() { fbs_fbs = Extension.flagValue } : JsonConvert.DeserializeObject<DiabetesTABLE>(flagObjectJson);
             if (diaObject.fbs_fbs == Extension.flagValue)
             {
-                deleteButton.Visibility = ViewStates.Invisible;
+                //deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
-                deleteButton.Click += DeleteValue;
+                //deleteButton.Click += DeleteValue;
             }
             //end
 
@@ -197,6 +197,13 @@ namespace HappyHealthyCSharp
 
         public void SaveValue(object sender, EventArgs e)
         {
+            if (!Extension.TextFieldValidate(new List<object>() {
+                BloodValue
+            }))
+            {
+                Toast.MakeText(this, "กรุณากรอกค่าให้ครบ ก่อนทำการบันทึก", ToastLength.Short).Show();
+                return;
+            }
             var diaTable = new DiabetesTABLE();
             try
             {

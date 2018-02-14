@@ -100,35 +100,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10.5dp">
-            <ImageView
-                android:id="@+id/imageViewIden"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1.5dp"
-                android:src="@drawable/ic_iden"
-                android:layout_marginLeft="26.0dp" />
-            <EditText
-                android:id="@+id/ud_iden"
-                android:layout_width="150dp"
-                android:layout_height="22dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20.0dp"
-                android:layout_marginTop="0.0dp"
-                android:autoText="false"
-                android:background="@drawable/my_border_box"
-                android:gravity="center_vertical|center_horizontal"
-                android:inputType="number"
-                android:numeric="integer"
-                android:hint="กรูณาเพิ่มหมายเลขบัตรประชาชน"
-                android:textColor="#505050"
-                android:textSize="10dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/imageView20"

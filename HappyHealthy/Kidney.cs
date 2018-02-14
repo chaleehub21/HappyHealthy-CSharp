@@ -40,7 +40,7 @@ namespace HappyHealthyCSharp
         EditText field_albumin_urine;
         EditText field_phosphorus_blood;
         ImageView saveButton, deleteButton;
-        TextView micButton;
+        ImageView micButton;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
@@ -55,21 +55,21 @@ namespace HappyHealthyCSharp
             field_albumin_urine = FindViewById<EditText>(Resource.Id.ckd_albumin_urine);
             field_phosphorus_blood = FindViewById<EditText>(Resource.Id.ckd_phosphorus_blood);
             saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_kidney);
-            deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_kidney);
-            micButton = FindViewById<TextView>(Resource.Id.textView_detail_gfr);    
+            //deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_kidney);
+            micButton = FindViewById<ImageView>(Resource.Id.ic_microphone_diabetes);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             kidneyObject = string.IsNullOrEmpty(flagObjectJson) ? new KidneyTABLE() { ckd_gfr = Extension.flagValue } : JsonConvert.DeserializeObject<KidneyTABLE>(flagObjectJson);
             if (kidneyObject.ckd_gfr == Extension.flagValue)
             {
-                deleteButton.Visibility = ViewStates.Invisible;
+                //deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
-                deleteButton.Click += DeleteValue;
+                //deleteButton.Click += DeleteValue;
 
             }
             //end
@@ -85,12 +85,12 @@ namespace HappyHealthyCSharp
                     isRecording = !isRecording;
                     if (isRecording)
                     {
-                        StartMicrophone("");
+                        StartMicrophone();
                     }
                 };
             t2sEngine = new TTS(this);
         }
-        private void StartMicrophone(string speakValue)
+        private void StartMicrophone()
         {
             try
             {
@@ -114,14 +114,6 @@ namespace HappyHealthyCSharp
 
         private void DeleteValue(object sender, EventArgs e)
         {
-            /*
-            Extension.CreateDialogue(this, "Do you want to delete this value?", delegate
-            {
-                kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
-                TrySyncWithMySQL();
-                Finish();
-            }, delegate { }, "Yes", "No").Show();
-            */
             Extension.CreateDialogue2(
                  this
                  , "ต้องการลบข้อมูลนี้หรือไม่?"
@@ -153,6 +145,13 @@ namespace HappyHealthyCSharp
 
         private void SaveValue(object sender, EventArgs e)
         {
+            if (!Extension.TextFieldValidate(new List<object>() {
+                field_gfr,field_creatinine,field_bun,field_sodium,field_potassium,field_albumin_blood,field_albumin_urine,field_phosphorus_blood
+            }))
+            {
+                Toast.MakeText(this, "กรุณากรอกค่าให้ครบ ก่อนทำการบันทึก", ToastLength.Short).Show();
+                return;
+            }
             var kidney = new KidneyTABLE();
             try
             {
@@ -162,7 +161,6 @@ namespace HappyHealthyCSharp
             {
                 kidney.ckd_id = 1;
             }
-            //KidneyTable.InsertKidneyToSQL(field_gfr.Text, field_creatinine.Text, field_bun.Text, field_sodium.Text, field_potassium.Text, field_albumin_blood.Text, field_albumin_urine.Text, field_phosphorus_blood.Text, Convert.ToInt32(GlobalFunction.getPreference("ud_id", "", this)));
             kidney.ckd_gfr = Convert.ToDecimal(field_gfr.Text);
             kidney.ckd_creatinine = Convert.ToDecimal(field_creatinine.Text);
             kidney.ckd_bun = Convert.ToDecimal(field_bun.Text);
@@ -177,6 +175,8 @@ namespace HappyHealthyCSharp
             TrySyncWithMySQL();
             this.Finish();
         }
+
+
 
         private void UpdateValue(object sender, EventArgs e)
         {
@@ -242,7 +242,8 @@ namespace HappyHealthyCSharp
                         , kidList.ToArray()
                         , new List<HHCSService.TEMP_PressureTABLE>().ToArray());
                     kidList.Clear();
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -273,11 +274,29 @@ namespace HappyHealthyCSharp
 
                             }
                         }
-                        //Extension.MapDictToControls(new[] { "" }, new[] { BloodValue }, dataNLPList);
+                        Extension.MapDictToControls(new[] {
+                            "GFR","จีเอฟอาร์",
+                            "Creatinine","ครีอาตินิน",
+                            "BUN","บัน","บียูเอ็น",
+                            "Sodium","โซเดียม",
+                            "Potassium","โพแทสเซียม",
+                            "Phosphorus","ฟอสฟอรัส",
+                            "เลือด",
+                            "ปัสสาวะ"
+                        }, new[] {
+                            field_gfr,field_gfr,
+                            field_creatinine,field_creatinine,
+                            field_bun,field_bun,
+                            field_sodium,field_sodium,
+                            field_potassium,field_potassium,
+                            field_phosphorus_blood,field_phosphorus_blood,
+                            field_albumin_blood,
+                            field_albumin_urine
+                        }, dataNLPList);
 
                     }
                     else
-                        Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
+                        Toast.MakeText(this, "ไม่สามารถทำงานด้วยเสียงได้ในขณะนี้", ToastLength.Short);
                 }
             }
             base.OnActivityResult(requestCode, resultVal, data);

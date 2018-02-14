@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#fcfdff">
+    android:background="#66f7e3bb">
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="match_parent"
@@ -14,45 +14,20 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbarkidney" />
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ไต"
-        android:id="@+id/textView_header_name_kidey"
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/imageView_button_back_kidney"
-        android:src="@drawable/arowback"
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="3dp"
-        android:onClick="ClickBackKidHome" />
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="80.0dp"
-        android:background="@drawable/my_box_kidney"
-        android:id="@+id/Layout_background_kidney">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+        android:background="@drawable/my_bg_kidney"
+        android:id="@+id/Layout_background_kidney"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="115dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -61,20 +36,20 @@
                 android:text="ค่า GFR"
                 android:id="@+id/textView_detail_gfr"
                 android:layout_centerHorizontal="true"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:textColor="#6f6f6f"
+                android:textSize="14dp"
+                android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
+                android:layout_marginRight="25.0dp"
+                android:textStyle="bold" />
             <EditText
-                android:layout_width="119.0dp"
+                android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/ckd_gfr"
-                android:textColor="#6f6f6f"
+                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
                 android:textStyle="bold"
@@ -82,13 +57,19 @@
                 android:background="@drawable/my_box_dis"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:id="@+id/ic_microphone_diabetes"
+                android:src="@drawable/ic_microphone"
+                android:layout_marginLeft="20.0dp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -97,20 +78,20 @@
                 android:text="ค่า Creatinine"
                 android:id="@+id/textView_detail_creatinine"
                 android:layout_centerHorizontal="true"
-                android:textSize="10dp"
+                android:textSize="14dp"
                 android:textStyle="bold"
-                android:textColor="#6f6f6f"
+                android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
+                android:layout_marginRight="25.0dp" />
             <EditText
-                android:layout_width="119.0dp"
+                android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/ckd_creatinine"
-                android:textColor="#6f6f6f"
+                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
                 android:textStyle="bold"
@@ -123,8 +104,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -133,20 +114,20 @@
                 android:text="ค่า BUN"
                 android:id="@+id/textView_detail_bun"
                 android:layout_centerHorizontal="true"
-                android:textSize="10dp"
+                android:textSize="14dp"
                 android:textStyle="bold"
-                android:textColor="#6f6f6f"
+                android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
+                android:layout_marginRight="25.0dp" />
             <EditText
-                android:layout_width="119.0dp"
+                android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/ckd_bun"
-                android:textColor="#6f6f6f"
+                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
                 android:textStyle="bold"
@@ -159,8 +140,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -169,20 +150,20 @@
                 android:text="ค่า Sodium"
                 android:id="@+id/textView_detail_sodium"
                 android:layout_centerHorizontal="true"
-                android:textSize="10dp"
+                android:textSize="14dp"
                 android:textStyle="bold"
-                android:textColor="#6f6f6f"
+                android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
+                android:layout_marginRight="25.0dp" />
             <EditText
-                android:layout_width="119.0dp"
+                android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/ckd_sodium"
-                android:textColor="#6f6f6f"
+                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
                 android:textStyle="bold"
@@ -195,8 +176,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
@@ -205,20 +186,20 @@
                 android:text="ค่า Potassium"
                 android:id="@+id/textView_detail_potassium"
                 android:layout_centerHorizontal="true"
-                android:textSize="10dp"
+                android:textSize="14dp"
                 android:textStyle="bold"
-                android:textColor="#6f6f6f"
+                android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
+                android:layout_marginRight="25.0dp" />
             <EditText
-                android:layout_width="119.0dp"
+                android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/ckd_potassium"
-                android:textColor="#6f6f6f"
+                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
                 android:textStyle="bold"
@@ -231,102 +212,31 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0.0dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal">
             <TextView
-                android:layout_width="100.0dp"
-                android:layout_height="30.0dp"
-                android:text="ค่า Albumin ในเลือด"
-                android:id="@+id/textView_detail_albumin_blood"
-                android:layout_centerHorizontal="true"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:textColor="#6f6f6f"
-                android:gravity="center_vertical"
-                android:layout_marginTop="0.0dp"
-                android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
-            <EditText
-                android:layout_width="119.0dp"
-                android:layout_height="26.0dp"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/ckd_albumin_blood"
-                android:textColor="#6f6f6f"
-                android:layout_gravity="center_vertical"
-                android:textSize="19dp"
-                android:textStyle="bold"
-                android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/my_box_dis"
-                android:layout_marginTop="0.0dp"
-                android:layout_marginBottom="0.0dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical|center_horizontal">
-            <TextView
-                android:layout_width="100.0dp"
-                android:layout_height="30.0dp"
-                android:text="ค่า Albumin ในปัสสาวะ"
-                android:id="@+id/textView_detail_albumin_urine"
-                android:layout_centerHorizontal="true"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:textColor="#6f6f6f"
-                android:gravity="center_vertical"
-                android:layout_marginTop="0.0dp"
-                android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
-            <EditText
-                android:layout_width="119.0dp"
-                android:layout_height="26.0dp"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/ckd_albumin_urine"
-                android:textColor="#6f6f6f"
-                android:layout_gravity="center_vertical"
-                android:textSize="19dp"
-                android:textStyle="bold"
-                android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/my_box_dis"
-                android:layout_marginTop="0.0dp"
-                android:layout_marginBottom="0.0dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical|center_horizontal">
-            <TextView
-                android:layout_width="100.0dp"
+                android:layout_width="150.0dp"
                 android:layout_height="30.0dp"
                 android:text="ค่า Phosphorus"
                 android:id="@+id/textView_detail_phosphorus"
                 android:layout_centerHorizontal="true"
-                android:textSize="10dp"
+                android:textSize="14dp"
                 android:textStyle="bold"
-                android:textColor="#6f6f6f"
+                android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp"
-                android:layout_marginRight="3.0dp" />
+                android:layout_marginRight="0.0dp"
+                android:layout_marginLeft="0.0dp" />
             <EditText
-                android:layout_width="119.0dp"
+                android:layout_width="100.0dp"
                 android:layout_height="26.0dp"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/ckd_phosphorus_blood"
-                android:textColor="#6f6f6f"
+                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
                 android:textSize="19dp"
                 android:textStyle="bold"
@@ -335,21 +245,89 @@
                 android:layout_marginTop="0.0dp"
                 android:layout_marginBottom="0.0dp" />
         </LinearLayout>
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:id="@+id/imageView_button_save_kidney"
-            android:src="@drawable/buttonsavekid"
-            android:layout_marginTop="20dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10.0dp" />
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:id="@+id/imageView_button_delete_kidney"
-            android:src="@drawable/buttondeletekid"
-            android:layout_marginTop="0.0dp"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical|center_horizontal">
+            <TextView
+                android:layout_width="150.0dp"
+                android:layout_height="30.0dp"
+                android:text="ค่า Albumin ในเลือด"
+                android:id="@+id/textView_detail_albumin_blood"
+                android:layout_centerHorizontal="true"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:gravity="center_vertical"
+                android:layout_marginTop="0.0dp"
+                android:layout_marginBottom="0.0dp"
+                android:layout_marginRight="0.0dp"
+                android:layout_marginLeft="0.0dp" />
+            <EditText
+                android:layout_width="100.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/ckd_albumin_blood"
+                android:textColor="#000000"
+                android:layout_gravity="center_vertical"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis"
+                android:layout_marginTop="0.0dp"
+                android:layout_marginBottom="0.0dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10.0dp" />
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="5.5dp">
+            <TextView
+                android:layout_width="150.0dp"
+                android:layout_height="30.0dp"
+                android:text="ค่า Albumin ในปัสสาวะ"
+                android:id="@+id/textView_detail_albumin_urine"
+                android:layout_centerHorizontal="true"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:gravity="center_vertical"
+                android:layout_marginTop="0.0dp"
+                android:layout_marginBottom="0.0dp"
+                android:layout_marginRight="0.0dp"
+                android:layout_marginLeft="0.0dp" />
+            <EditText
+                android:layout_width="100.0dp"
+                android:layout_height="26.0dp"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/ckd_albumin_urine"
+                android:textColor="#000000"
+                android:layout_gravity="center_vertical"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/my_box_dis"
+                android:layout_marginTop="0.0dp"
+                android:layout_marginBottom="0.0dp" />
+        </LinearLayout>
     </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:id="@+id/imageView_button_save_kidney"
+        android:src="@drawable/save_button"
+        android:layout_below="@+id/Layout_background_kidney"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10.0dp" />
 </RelativeLayout>

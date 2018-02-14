@@ -41,7 +41,7 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_add_doc);
             var camerabtt = FindViewById<ImageView>(Resource.Id.imageView_button_save_pic_doc);
             var backbtt = FindViewById<ImageView>(Resource.Id.imageView_button_back_doc);
-            var deletebtt = FindViewById<ImageView>(Resource.Id.imageView_button_delete_doc);
+            //var deletebtt = FindViewById<ImageView>(Resource.Id.imageView_button_delete_doc);
             docAttendDate = FindViewById<TextView>(Resource.Id.choosedate_doc);
             docRegisTime = FindViewById<TextView>(Resource.Id.chooseregtime_doc);
             docAppointmentTime = FindViewById<TextView>(Resource.Id.chooseappttime_doc);
@@ -63,7 +63,7 @@ namespace HappyHealthyCSharp
             {
                 InitialForUpdateEvent();
                 saveButton.Click += UpdateValue;
-                deletebtt.Click += DeleteValue;
+                //deletebtt.Click += DeleteValue;
             }
             backbtt.Click += delegate {
                 this.Finish();
@@ -164,6 +164,13 @@ namespace HappyHealthyCSharp
 
         public void SaveValue(object sender, EventArgs e)
         {
+            if (!Extension.TextFieldValidate(new List<object>() {
+                et_docName,et_deptName,docRegisTime,docAppointmentTime,et_comment,et_place,et_hospital
+            }))
+            {
+                Toast.MakeText(this, "กรุณากรอกค่าให้ครบ ก่อนทำการบันทึก", ToastLength.Short).Show();
+                return;
+            }
 
             var picPath = string.Empty;
             if (App._file != null)

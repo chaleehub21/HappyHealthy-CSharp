@@ -41,7 +41,7 @@ namespace HappyHealthyCSharp
             medDesc = FindViewById<EditText>(Resource.Id.ma_desc);
             medImage = FindViewById<ImageView>(Resource.Id.imageView_show_image);
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_pill);
-            var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pill);
+            //var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pill);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             medObject = string.IsNullOrEmpty(flagObjectJson) ? new MedicineTABLE() { ma_name = string.Empty } : JsonConvert.DeserializeObject<MedicineTABLE>(flagObjectJson);
@@ -53,7 +53,7 @@ namespace HappyHealthyCSharp
             {
                 InitialForUpdateEvent();
                 saveButton.Click += UpdateValue;
-                deleteButton.Click += DeleteValue;
+                //deleteButton.Click += DeleteValue;
                 App._file = new File(medObject.ma_pic);
                 LoadImage();
             }
@@ -123,7 +123,13 @@ namespace HappyHealthyCSharp
 
         public void SaveValue(object sender, EventArgs e)
         {
-
+            if (!Extension.TextFieldValidate(new List<object>() {
+                medName
+            }))
+            {
+                Toast.MakeText(this, "กรุณากรอกค่าให้ครบ ก่อนทำการบันทึก", ToastLength.Short).Show();
+                return;
+            }
             var picPath = string.Empty;
             if (App._file != null)
             {

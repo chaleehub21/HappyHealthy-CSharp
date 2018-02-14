@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
-    android:background="#fab7b9"
+    android:background="#e86868"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/imageView_button_back_pressure"
+            android:src="@drawable/arowback"
+            android:layout_marginTop="0.0dp"
+            android:layout_marginLeft="3dp"
+            android:onClick="ClickBackPreHome"
+            android:adjustViewBounds="false" />
+        <TextView
+            android:layout_width="290.0dp"
+            android:layout_height="wrap_content"
+            android:text="ความดัน"
+            android:id="@+id/textView_header_name_pressure"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="0.0dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#ffffff"
+            android:gravity="center" />
+    </LinearLayout>
+</android.support.v7.widget.Toolbar>

@@ -25,8 +25,10 @@ namespace HappyHealthyCSharp
             SetContentView(Resource.Layout.activity_add__food);
             // Create your application here
             foodname = FindViewById<EditText>(Resource.Id.f_name);
-            var saveButton = FindViewById<ImageView>(Resource.Id.imageView30);
+            var saveButton = FindViewById<ImageView>(Resource.Id.buttonsavefoodex);
+            var backButton = FindViewById<ImageView>(Resource.Id.imageView46);
             saveButton.Click += RequestFood;
+            backButton.Click += delegate { Finish(); };
         }
 
         private void RequestFood(object sender, EventArgs e)

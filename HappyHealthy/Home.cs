@@ -14,8 +14,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading;
-using System.Net;
-using System.Net.NetworkInformation;
 
 namespace HappyHealthyCSharp
 {
@@ -40,6 +38,7 @@ namespace HappyHealthyCSharp
             ImageView FoodButton = FindViewById<ImageView>(Resource.Id.imageView_button_food);
             ImageView MedicineButton = FindViewById<ImageView>(Resource.Id.imageView_button_pill);
             ImageView DoctorButton = FindViewById<ImageView>(Resource.Id.imageView_button_doctor);
+            ImageView DevButton = FindViewById<ImageView>(Resource.Id.imageView4);
             homeHeaderText = FindViewById<TextView>(Resource.Id.textView18);
 
             DiabetesButton.Click += ClickDiabetes;
@@ -48,10 +47,16 @@ namespace HappyHealthyCSharp
             FoodButton.Click += ClickFood;
             MedicineButton.Click += ClickPill;
             DoctorButton.Click += ClickDoctor;
+            DevButton.Click += ClickDev;
             var imageView = FindViewById<ImageView>(Resource.Id.imageView4);
             imageView.Click += NotImplemented;
 
             //TestSTTImplementation(imageView);
+        }
+
+        private void ClickDev(object sender, EventArgs e)
+        {
+            StartActivity(new Intent(this, typeof(Develop)));
         }
 
         private void TestSTTImplementation(ImageView imageView)
@@ -114,46 +119,41 @@ namespace HappyHealthyCSharp
             {
                 progressDialog = ProgressDialog.Show(this, "ดาวน์โหลดข้อมูล", "กำลังดาวน์โหลดข้อมูล กรุณารอสักครู่", true);
                 var service = new HHCSService.HHCSService();
-                service.Timeout = 10;
-                var serverAddr = "https://www.google.com";
-                var result = await TestConnectionValidate(serverAddr);
+                service.Timeout = 30 * 1000;
+                var result = await TestConnectionValidate(this,service);
                 if (result == true)
                 {
                     StartActivity(new Intent(this, typeof(History_Food)));
-                    progressDialog.Dismiss();
                 }
                 else
                 {
-                    Extension.CreateDialogue(this, "เกิดความล้มเหลวในการเชื่อมต่อไปยังฐานข้อมูล").Show();
-                    progressDialog.Dismiss();
+                    Extension.CreateDialogue(this, "เกิดความผิดพลาดในการเชื่อมต่อฐานข้อมูล").Show();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                Extension.CreateDialogue(this, "Connection timeout").Show();
+                Extension.CreateDialogue(this, ex.Message).Show();
+            }
+            finally
+            {
+                progressDialog.Dismiss();
             }
             //NotImplemented(sender, e);
         }
 
-        public static async Task<bool> TestConnectionValidate(string addr)
-        {
-            return true;
-            try
-            {
-                var isPingable = false;
-                await Task.Run(delegate {
-                    var ip = Dns.GetHostAddresses(new Uri(addr).Host)[0].ToString();
-                    var pinger = new Ping();
-                    var reply = pinger.Send(ip,10000);
-                    isPingable = reply.Status == IPStatus.Success;
-                });
-                return isPingable;
-            }
-            catch
-            {
-                return false;
-            }
 
+        public static async Task<bool> TestConnectionValidate(Context c,HHCSService.HHCSService serviceInstance)
+        {
+            /*
+            var result = new TaskCompletionSource<HHCSService.TestConnectionCompletedEventArgs>();
+            serviceInstance.TestConnectionCompleted += (s, e) => TransferCompletion(result, e, () => e);
+            serviceInstance.TestConnectionAsync();
+            */
+            bool result = false;
+            await Task.Run(delegate {
+                result = serviceInstance.TestConnection();
+            });
+            return result;
         }
         public void ClickDiabetes(object sender, EventArgs e)
         {
@@ -166,12 +166,6 @@ namespace HappyHealthyCSharp
         public void ClickPressure(object sender, EventArgs e)
         {
             StartActivity(new Intent(this, typeof(History_Pressure)));
-        }
-        public void ClickDevelop(object sender, EventArgs e)
-        {
-            //StartActivity(new Intent(this, typeof(Develop)));
-            //GlobalFunction.createDialog(this, "Not implemented").Show();
-
         }
         public void ClickPill(object sender, EventArgs e)
         {
@@ -196,6 +190,7 @@ namespace HappyHealthyCSharp
                 }
             }
             */
+            return;
             var notifTime = DateTime.Now;
             notifTime.AddHours(-6);
             notifTime.AddSeconds(20);

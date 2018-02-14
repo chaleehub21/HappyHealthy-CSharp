@@ -37,21 +37,21 @@ namespace HappyHealthyCSharp
             BPUp = FindViewById<EditText>(Resource.Id.P_costPressureTop);
             HeartRate = FindViewById<EditText>(Resource.Id.P_HeartRate);
             var saveButton = FindViewById<ImageView>(Resource.Id.imageView_button_save_pressure);
-            var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pressure);
+            //var deleteButton = FindViewById<ImageView>(Resource.Id.imageView_button_delete_pressure);
             var micButton = FindViewById<ImageView>(Resource.Id.ic_microphone_pressure);
             //code goes below
             var flagObjectJson = Intent.GetStringExtra("targetObject") ?? string.Empty;
             pressureObject = string.IsNullOrEmpty(flagObjectJson) ? new PressureTABLE() { bp_hr = Extension.flagValue } : JsonConvert.DeserializeObject<PressureTABLE>(flagObjectJson);
             if (pressureObject.bp_hr == Extension.flagValue)
             {
-                deleteButton.Visibility = ViewStates.Invisible;
+                //deleteButton.Visibility = ViewStates.Invisible;
                 saveButton.Click += SaveValue;
             }
             else
             {
                 InitialValueForUpdateEvent();
                 saveButton.Click += UpdateValue;
-                deleteButton.Click += DeleteValue;
+                //deleteButton.Click += DeleteValue;
             }
             //end
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
@@ -114,7 +114,17 @@ namespace HappyHealthyCSharp
 
                             }
                         }
-                        Extension.MapDictToControls(new[] { "บน", "ล่าง", "หัวใจ" }, new[] { BPUp, BPLow, HeartRate }, dataNLPList);
+                        Extension.MapDictToControls(
+                        new[] {
+                            "บน",
+                            "ล่าง",
+                            "หัวใจ","เต้น"
+                        }, 
+                        new[] {
+                            BPUp,
+                            BPLow,
+                            HeartRate,HeartRate
+                        }, dataNLPList);
                     }
                     else
                         Toast.MakeText(this, "Unrecognized value", ToastLength.Short);
@@ -170,6 +180,13 @@ namespace HappyHealthyCSharp
 
         public void SaveValue(object sender, EventArgs e)
         {
+            if (!Extension.TextFieldValidate(new List<object>() {
+                BPUp,BPLow,HeartRate
+            }))
+            {
+                Toast.MakeText(this, "กรุณากรอกค่าให้ครบ ก่อนทำการบันทึก", ToastLength.Short).Show();
+                return;
+            }
             var bpTable = new PressureTABLE();
             try
             {
