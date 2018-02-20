@@ -94,15 +94,7 @@ namespace HappyHealthyCSharp
                 {
                     food.Add(Column[i], Extension.StringValidation(x[i].ToString()));
                 }
-                //food.TryGetValue("sodium", out var fsodium);
-                //food.TryGetValue("potassium", out var fpotassium);
-                //food.TryGetValue("phosphorus", out var fphosphorus);
-                //var threshold = 100.0; //dummy threshold
-                //if(sodium > threshold || potassium > threshold || phosphorus > threshold)
-                //{
-                //    //we will not allow this food to be show
-                //}else
-                //    foodList.Add(food);
+                foodList.Add(food);
             }
             return foodList;
         }

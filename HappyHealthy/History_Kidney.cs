@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace HappyHealthyCSharp
 {
-    [Activity(Label = "History_Diabetes",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "History_Diabetes", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class History_Kidney : ListActivity
     {
         KidneyTABLE kidneyTable;
@@ -30,32 +30,44 @@ namespace HappyHealthyCSharp
             ListView.ItemClick += onItemClick;
 
             // Create your application here
-            setKidneyList();
+            SetListView();
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            //kidneyList[e.Position].TryGetValue("ckd_gfr_level", out object gfrLevel);
             kidneyList[e.Position].TryGetValue("ckd_id", out object ckdID);
             var kidneyObject = new KidneyTABLE();
             kidneyObject = kidneyObject.Select<KidneyTABLE>($"SELECT * From KidneyTABLE where ckd_id = {ckdID}")[0];
-            /*
-            Extension.CreateDialogue(this, $@"The value for this one : {kidneyObject.ckd_gfr}", null, delegate
-            {
-                var jsonObject = JsonConvert.SerializeObject(kidneyObject);
-                var Intent = new Intent(this, typeof(Kidney));
-                Intent.PutExtra("targetObject", jsonObject);
-                StartActivity(Intent);
-            }, "OK", "Edit").Show();
-            */
-            var jsonObject = JsonConvert.SerializeObject(kidneyObject);
-            var Intent = new Intent(this, typeof(Kidney));
-            Intent.PutExtra("targetObject", jsonObject);
-            StartActivity(Intent);
+            Extension.CreateDialogue(this, "กรุณาเลือกรายการที่ต้องการจะดำเนินการ",
+                delegate
+                {
+                    var jsonObject = JsonConvert.SerializeObject(kidneyObject);
+                    var Intent = new Intent(this, typeof(Kidney));
+                    Intent.PutExtra("targetObject", jsonObject);
+                    StartActivity(Intent);
+                }, 
+                delegate
+                {
+                    Extension.CreateDialogue2(
+                    this
+                    , "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"
+                    , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                    , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                    , Extension.adFontSize
+                    , delegate
+                    {
+                        kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
+                        DiabetesTABLE.TrySyncWithMySQL(this);
+                        SetListView();
+                    }
+                    , delegate { }
+                    , "\u2713"
+                    , "X");
+                }, "ดูข้อมูล", "ลบข้อมูล").Show();
         }
         protected override void OnResume()
         {
             base.OnResume();
-            setKidneyList();
+            SetListView();
         }
         [Export("ClickAddKid")]
         public void ClickAddKid(View v)
@@ -67,13 +79,13 @@ namespace HappyHealthyCSharp
         {
             this.Finish();
         }
-        public void setKidneyList()
+        public void SetListView()
         {
             //kidneyList = kidneyTable.getKidneyList($"SELECT * FROM KidneyTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)}"); //must changed
-            kidneyList = kidneyTable.GetJavaList<KidneyTABLE>($"SELECT * FROM KidneyTABLE WHERE UD_ID = {Extension.getPreference("ud_id",0,this)}",new KidneyTABLE().Column); //must changed
+            kidneyList = kidneyTable.GetJavaList<KidneyTABLE>($"SELECT * FROM KidneyTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)}", new KidneyTABLE().Column); //must changed
             ListAdapter = new SimpleAdapter(this, kidneyList, Resource.Layout.history_kidney, new string[] { "ckd_time" }, new int[] { Resource.Id.dateKidney }); //"D_DateTime",date
             ListView.Adapter = ListAdapter;
-            
+
             /* for reference on how to work with simpleadapter (it's ain't simple as its name, fuck off)
             var data = new JavaList<IDictionary<string, object>>();
             data.Add(new JavaDictionary<string, object> {

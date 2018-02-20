@@ -29,12 +29,12 @@ namespace HappyHealthyCSharp
             //ListView = FindViewById<ListView>(Resource.Id.listView);
             bpTable = new PressureTABLE();
             ListView.ItemClick += onItemClick;
-            setDiabetesList();
+            SetListView();
         }
         protected override void OnResume()
         {
             base.OnResume();
-            setDiabetesList();
+            SetListView();
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
@@ -42,19 +42,31 @@ namespace HappyHealthyCSharp
             bpList[e.Position].TryGetValue("bp_id", out object bpID);
             var pressureObject = new PressureTABLE();
             pressureObject = pressureObject.Select<PressureTABLE>($"SELECT * From PressureTABLE where bp_id = {bpID}")[0];
-            /*
-            Extension.CreateDialogue(this, $@"The value for this one : {pressureObject.bp_hr}", null, delegate
-            {
-                var jsonObject = JsonConvert.SerializeObject(pressureObject);
-                var Intent = new Intent(this, typeof(Pressure));
-                Intent.PutExtra("targetObject", jsonObject);
-                StartActivity(Intent);
-            }, "OK", "Edit").Show();
-            */
-            var jsonObject = JsonConvert.SerializeObject(pressureObject);
-            var Intent = new Intent(this, typeof(Pressure));
-            Intent.PutExtra("targetObject", jsonObject);
-            StartActivity(Intent);
+            Extension.CreateDialogue(this, "กรุณาเลือกรายการที่ต้องการจะดำเนินการ",
+                delegate
+                {
+                    var jsonObject = JsonConvert.SerializeObject(pressureObject);
+                    var Intent = new Intent(this, typeof(Pressure));
+                    Intent.PutExtra("targetObject", jsonObject);
+                    StartActivity(Intent);
+                }, delegate
+                {
+                    Extension.CreateDialogue2(
+                    this
+                    , "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"
+                    , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                    , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                    , Extension.adFontSize
+                    , delegate
+                    {
+                        pressureObject.Delete<PressureTABLE>(pressureObject.bp_id);
+                        DiabetesTABLE.TrySyncWithMySQL(this);
+                        SetListView();
+                    }
+                    , delegate { }
+                    , "\u2713"
+                    , "X");
+                }, "ดูข้อมูล", "ลบข้อมูล").Show();
         }
 
         [Export("ClickAddPre")]
@@ -67,7 +79,7 @@ namespace HappyHealthyCSharp
         {
             this.Finish();
         }
-        public void setDiabetesList()
+        public void SetListView()
         {
             bpList = bpTable.GetJavaList<PressureTABLE>($"SELECT * FROM PressureTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY BP_TIME",bpTable.Column);
             //bpList = bpTable.getPressureList($"SELECT * FROM PressureTABLE WHERE UD_ID = {GlobalFunction.getPreference("ud_id", "", this)} ORDER BY BP_TIME");

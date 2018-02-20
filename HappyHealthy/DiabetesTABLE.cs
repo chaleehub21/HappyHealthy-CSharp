@@ -46,5 +46,42 @@ namespace HappyHealthyCSharp
 
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
+        public static void TrySyncWithMySQL(Context c)
+        {
+            var t = new Thread(() =>
+            {
+                try
+                {
+                    var Service = new HHCSService.HHCSService();
+                    var diaList = new List<HHCSService.TEMP_DiabetesTABLE>();
+                    new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, c)}'").ForEach(row =>
+                    {
+                        var wsObject = new HHCSService.TEMP_DiabetesTABLE();
+                        wsObject.fbs_id_pointer = row.fbs_id_pointer;
+                        wsObject.fbs_time_new = row.fbs_time_new;
+                        wsObject.fbs_time_old = row.fbs_time_old;
+                        wsObject.fbs_time_string_new = row.fbs_time_string_new;
+                        wsObject.fbs_fbs_new = row.fbs_fbs_new;
+                        wsObject.fbs_fbs_old = row.fbs_fbs_old;
+                        wsObject.fbs_fbs_lvl_new = row.fbs_fbs_lvl_new;
+                        wsObject.fbs_fbs_lvl_old = row.fbs_fbs_lvl_old;
+                        wsObject.mode = row.mode;
+                        diaList.Add(wsObject);
+                    });
+                    Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, c)
+                        , Extension.getPreference("ud_pass", string.Empty, c)
+                        , diaList.ToArray()
+                        , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
+                        , new List<HHCSService.TEMP_PressureTABLE>().ToArray());
+                    diaList.Clear();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message); //Exception mostly throw only when the server is down
+                    //or device is not able to reach the server
+                }
+            });
+            t.Start();
+        }
     }
 }

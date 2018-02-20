@@ -32,22 +32,43 @@ namespace HappyHealthyCSharp
             //ListView = FindViewById<ListView>(Resource.Id.listView);
             diaTable = new DiabetesTABLE();
             ListView.ItemClick += onItemClick;
-            setDiabetesList();
+            SetListView();
         }
         protected override void OnResume()
         {
             base.OnResume();
-            setDiabetesList();
+            SetListView();
         }
         private void onItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             diabList[e.Position].TryGetValue("fbs_id", out object fbsID);
             var diaObject = new DiabetesTABLE();
             diaObject = diaObject.Select<DiabetesTABLE>($@"SELECT * FROM DiabetesTABLE WHERE fbs_id = {fbsID}")[0];
-            var jsonObject = JsonConvert.SerializeObject(diaObject);
-            var diabetesIntent = new Intent(this, typeof(Diabetes));
-            diabetesIntent.PutExtra("targetObject", jsonObject);
-            StartActivity(diabetesIntent);
+            Extension.CreateDialogue(this, "กรุณาเลือกรายการที่ต้องการจะดำเนินการ",
+                delegate
+                {      
+                    var jsonObject = JsonConvert.SerializeObject(diaObject);
+                    var diabetesIntent = new Intent(this, typeof(Diabetes));
+                    diabetesIntent.PutExtra("targetObject", jsonObject);
+                    StartActivity(diabetesIntent);
+                }, delegate
+                {
+                    Extension.CreateDialogue2(
+                    this
+                    , "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"
+                    , Android.Graphics.Color.White, Android.Graphics.Color.LightGreen
+                    , Android.Graphics.Color.White, Android.Graphics.Color.Red
+                    , Extension.adFontSize
+                    , delegate
+                    {
+                        diaObject.Delete<DiabetesTABLE>(diaObject.fbs_id);
+                        DiabetesTABLE.TrySyncWithMySQL(this);
+                        SetListView();
+                    }
+                    , delegate { }
+                    , "\u2713"
+                    , "X");
+                }, "ดูข้อมูล", "ลบข้อมูล").Show();
         }
         
         [Export("ClickAddDia")]
@@ -60,7 +81,7 @@ namespace HappyHealthyCSharp
         {
             this.Finish();
         }
-        public void setDiabetesList()
+        public void SetListView()
         {
             diabList = diaTable.GetJavaList<DiabetesTABLE>($"SELECT * FROM DiabetesTABLE WHERE UD_ID = {Extension.getPreference("ud_id", 0, this)} ORDER BY FBS_TIME",new DiabetesTABLE().Column);
             ListAdapter = new SimpleAdapter(this, diabList, Resource.Layout.history_diabetes, new string[] { "fbs_time" }, new int[] { Resource.Id.date }); //"D_DateTime",date
@@ -74,5 +95,6 @@ namespace HappyHealthyCSharp
             ListView.Adapter = adapter;
             */
         }
+
     }
 }
