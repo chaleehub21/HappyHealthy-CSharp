@@ -197,37 +197,8 @@ namespace HappyHealthyCSharp
                 bpTable.bp_id = 1;
             }
             bpTable.bp_up = Convert.ToDecimal(BPUp.Text);
-            #region bp_up_level case
-            if (bpTable.bp_up < 120)
-                bpTable.bp_up_lvl = 0;
-            else if (bpTable.bp_up <= 129)
-                bpTable.bp_up_lvl = 1;
-            else if (bpTable.bp_up <= 139)
-                bpTable.bp_up_lvl = 2;
-            else if (bpTable.bp_up <= 159)
-                bpTable.bp_up_lvl = 3;
-            else if (bpTable.bp_up <= 179)
-                bpTable.bp_up_lvl = 4;
-            else if (bpTable.bp_up >= 180)
-                bpTable.bp_up_lvl = 5;
-            #endregion
             bpTable.bp_lo = Convert.ToDecimal(BPLow.Text);
-            #region bp_lo_level case
-            if (bpTable.bp_lo < 80)
-                bpTable.bp_lo_lvl = 0;
-            else if (bpTable.bp_lo <= 84)
-                bpTable.bp_lo_lvl = 1;
-            else if (bpTable.bp_lo <= 89)
-                bpTable.bp_lo_lvl = 2;
-            else if (bpTable.bp_lo <= 99)
-                bpTable.bp_lo_lvl = 3;
-            else if (bpTable.bp_lo <= 109)
-                bpTable.bp_lo_lvl = 4;
-            else if (bpTable.bp_lo >= 110)
-                bpTable.bp_lo_lvl = 5;
-            #endregion
             bpTable.bp_hr = Convert.ToInt32(HeartRate.Text);
-
             bpTable.bp_time = DateTime.Now.ToThaiLocale();
             bpTable.ud_id = Extension.getPreference("ud_id", 0, this);
             bpTable.Insert();

@@ -34,14 +34,31 @@ namespace HappyHealthyCSharp
             "ckd_albumin_urine",
             "ckd_phosphorus_blood"
         };
+        public static dynamic caseLevel = new { Low = 100, Mid = 125, High = 126 };
         [SQLite.PrimaryKey]
         public int ckd_id { get; set; }
         public DateTime ckd_time { get; set; }
         public string ckd_time_string { get; set; }
+        private decimal _gfr;
         [SQLite.MaxLength(3)]
-        public decimal ckd_gfr { get; set; }
+        public decimal ckd_gfr {
+            get
+            {
+                return _gfr;
+            }
+            set
+            {
+                _gfr = value;
+                if (_gfr < caseLevel.Low)
+                    ckd_gfr_level = 0;
+                else if (_gfr <= caseLevel.Mid)
+                    ckd_gfr_level = 1;
+                else if (_gfr >= caseLevel.High)
+                    ckd_gfr_level = 2;
+            }
+        }      
         [SQLite.MaxLength(4)]
-        public int ckd_gfr_level { get; set; }
+        public int ckd_gfr_level{ get;private set;}
         [SQLite.MaxLength(3)]
         public decimal ckd_creatinine { get; set; }
         [SQLite.MaxLength(3)]

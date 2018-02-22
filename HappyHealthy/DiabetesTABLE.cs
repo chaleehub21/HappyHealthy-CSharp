@@ -30,12 +30,30 @@ namespace HappyHealthyCSharp
             "fbs_fbs_lvl",
             "ud_id"
         };
+        public static dynamic caseLevel = new { Low = 100,Mid = 125,High = 126};
         [SQLite.PrimaryKey,SQLite.AutoIncrement]
         public int fbs_id { get; set; }
         public DateTime fbs_time { get; set; }
         public string fbs_time_string { get; set; }
-        public decimal fbs_fbs { get; set; }
-        public int fbs_fbs_lvl { get; set; }
+        private decimal _fbs;
+        public decimal fbs_fbs
+        {
+            get
+            {
+                return _fbs;
+            }
+            set
+            {
+                _fbs = value;
+                if (_fbs < caseLevel.Low)
+                    fbs_fbs_lvl = 0;
+                else if (_fbs <= caseLevel.Mid)
+                    fbs_fbs_lvl = 1;
+                else if (_fbs >= caseLevel.High)
+                    fbs_fbs_lvl = 2;
+            }
+        }
+        public int fbs_fbs_lvl { get; private set; }
         public int ud_id { get; set; }
         [Ignore]
         public UserTABLE UserTABLE { get; set; }

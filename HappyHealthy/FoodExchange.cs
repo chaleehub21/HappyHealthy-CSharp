@@ -20,7 +20,9 @@ namespace HappyHealthyCSharp
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_food_exchange);
-            var backBtt = FindViewById<ImageView>(Resource.Id.backBttFoodExchange);
+            var title = FindViewById<TextView>(Resource.Id.textView27);
+            title.Text = "รายการอาหารทดแทน";
+            var backBtt = FindViewById<ImageView>(Resource.Id.imageView46);
             backBtt.Click +=delegate{
                 Finish();
             };

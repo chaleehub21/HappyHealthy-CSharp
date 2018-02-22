@@ -268,7 +268,7 @@ namespace HappyHealthyCSharp
                         tempDiabetes.fbs_time = ((DateTime)row[1]).ToThaiLocale();
                         tempDiabetes.fbs_time_string = row[1].ToString();
                         tempDiabetes.fbs_fbs = Convert.ToDecimal(row[2].ToString());
-                        tempDiabetes.fbs_fbs_lvl = Convert.ToInt32(row[3].ToString());
+                        //tempDiabetes.fbs_fbs_lvl = Convert.ToInt32(row[3].ToString());
                         tempDiabetes.ud_id = Convert.ToInt32(row[4].ToString());
                         tempDiabetes.Insert();
                     }
@@ -279,7 +279,7 @@ namespace HappyHealthyCSharp
                         tempKidney.ckd_time = ((DateTime)row[1]).ToThaiLocale();
                         tempKidney.ckd_time_string = row[1].ToString();
                         tempKidney.ckd_gfr = Convert.ToDecimal(row[2].ToString());
-                        tempKidney.ckd_gfr_level = Convert.ToInt32(row[3].ToString());
+                        //tempKidney.ckd_gfr_level = Convert.ToInt32(row[3].ToString());
                         tempKidney.ckd_creatinine = Convert.ToDecimal(row[4].ToString());
                         tempKidney.ckd_bun = Convert.ToDecimal(row[5].ToString());
                         tempKidney.ckd_sodium = Convert.ToDecimal(row[6].ToString());
@@ -299,8 +299,8 @@ namespace HappyHealthyCSharp
                         tempPressure.bp_up = Convert.ToDecimal(row[2].ToString());
                         tempPressure.bp_lo = Convert.ToDecimal(row[3].ToString());
                         tempPressure.bp_hr = Convert.ToInt32(row[4].ToString());
-                        tempPressure.bp_up_lvl = Convert.ToInt32(row[5].ToString());
-                        tempPressure.bp_lo_lvl = Convert.ToInt32(row[6].ToString());
+                        //tempPressure.bp_up_lvl = Convert.ToInt32(row[5].ToString());
+                        //tempPressure.bp_lo_lvl = Convert.ToInt32(row[6].ToString());
                         tempPressure.bp_hr_lvl = Convert.ToInt32(row[7].ToString());
                         tempPressure.ud_id = Convert.ToInt32(row[8].ToString());
                         tempPressure.Insert();

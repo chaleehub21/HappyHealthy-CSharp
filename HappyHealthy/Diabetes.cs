@@ -214,12 +214,6 @@ namespace HappyHealthyCSharp
                 diaTable.fbs_id = 1;
             }
             diaTable.fbs_fbs = (decimal)double.Parse(BloodValue.Text);
-            if (diaTable.fbs_fbs < 100)
-                diaTable.fbs_fbs_lvl = 0;
-            else if (diaTable.fbs_fbs <= 125)
-                diaTable.fbs_fbs_lvl = 1;
-            else if (diaTable.fbs_fbs >= 126)
-                diaTable.fbs_fbs_lvl = 2;
             diaTable.ud_id = Extension.getPreference("ud_id", 0, this);
             diaTable.fbs_time = DateTime.Now.ToThaiLocale();
             diaTable.Insert();
