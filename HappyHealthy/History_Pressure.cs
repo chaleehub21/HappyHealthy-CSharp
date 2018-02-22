@@ -60,7 +60,7 @@ namespace HappyHealthyCSharp
                     , delegate
                     {
                         pressureObject.Delete<PressureTABLE>(pressureObject.bp_id);
-                        DiabetesTABLE.TrySyncWithMySQL(this);
+                        pressureObject.TrySyncWithMySQL(this);
                         SetListView();
                     }
                     , delegate { }

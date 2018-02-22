@@ -56,7 +56,7 @@ namespace HappyHealthyCSharp
                     , delegate
                     {
                         kidneyObject.Delete<KidneyTABLE>(kidneyObject.ckd_id);
-                        DiabetesTABLE.TrySyncWithMySQL(this);
+                        kidneyObject.TrySyncWithMySQL(this);
                         SetListView();
                     }
                     , delegate { }

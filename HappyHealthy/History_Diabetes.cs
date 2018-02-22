@@ -62,7 +62,7 @@ namespace HappyHealthyCSharp
                     , delegate
                     {
                         diaObject.Delete<DiabetesTABLE>(diaObject.fbs_id);
-                        DiabetesTABLE.TrySyncWithMySQL(this);
+                        diaObject.TrySyncWithMySQL(this);
                         SetListView();
                     }
                     , delegate { }

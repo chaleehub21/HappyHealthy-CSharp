@@ -113,7 +113,7 @@ namespace HappyHealthyCSharp
                  , delegate
                  {
                      diaObject.Delete<DiabetesTABLE>(diaObject.fbs_id);
-                     DiabetesTABLE.TrySyncWithMySQL(this);
+                     diaObject.TrySyncWithMySQL(this);
                      Finish();
                  }
                  , delegate { }
@@ -132,7 +132,7 @@ namespace HappyHealthyCSharp
             diaObject.ud_id = Extension.getPreference("ud_id", 0, this);
             diaObject.fbs_time = DateTime.Now.ToThaiLocale();
             diaObject.Update();
-            DiabetesTABLE.TrySyncWithMySQL(this);
+            diaObject.TrySyncWithMySQL(this);
             this.Finish();
         }
         private void AutomationTalker()
@@ -217,7 +217,7 @@ namespace HappyHealthyCSharp
             diaTable.ud_id = Extension.getPreference("ud_id", 0, this);
             diaTable.fbs_time = DateTime.Now.ToThaiLocale();
             diaTable.Insert();
-            DiabetesTABLE.TrySyncWithMySQL(this);
+            diaTable.TrySyncWithMySQL(this);
             this.Finish();
         }
 

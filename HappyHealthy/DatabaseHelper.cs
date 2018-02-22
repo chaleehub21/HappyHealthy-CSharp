@@ -20,6 +20,7 @@ namespace HappyHealthyCSharp
     abstract class DatabaseHelper
     {
         public abstract List<string> Column { get; }
+        virtual public void TrySyncWithMySQL(Context c) { throw new NotImplementedException(); }
         virtual public List<T> Select<T>(string query) where T : new()
         {
             var conn = new SQLiteConnection(Extension.sqliteDBPath);

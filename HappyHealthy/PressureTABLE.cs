@@ -117,7 +117,7 @@ namespace HappyHealthyCSharp
         {
             //constructor - no need for args since naming convention for instances variable mapping can be use : CB
         }
-        public static void TrySyncWithMySQL(Context c)
+        public override void TrySyncWithMySQL(Context c)
         {
             var t = new Thread(() =>
             {
