@@ -87,7 +87,7 @@ namespace HappyHealthyCSharp
             {
                 try
                 {
-                    var Service = new HHCSService.HHCSService();
+                    var ws = new HHCSService.HHCSService();
                     var kidList = new List<HHCSService.TEMP_KidneyTABLE>();
                     new TEMP_KidneyTABLE().Select<TEMP_KidneyTABLE>($"SELECT * FROM TEMP_KidneyTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, c)}'").ForEach(row =>
                     {
@@ -117,8 +117,8 @@ namespace HappyHealthyCSharp
                         wsObject.mode = row.mode;
                         kidList.Add(wsObject);
                     });
-                    Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, c)
-                        , Extension.getPreference("ud_pass", string.Empty, c)
+                    ws.SynchonizeData(
+                        Service.GetInstance.WebServiceAuthentication
                         , new List<HHCSService.TEMP_DiabetesTABLE>().ToArray()
                         , kidList.ToArray()
                         , new List<HHCSService.TEMP_PressureTABLE>().ToArray());

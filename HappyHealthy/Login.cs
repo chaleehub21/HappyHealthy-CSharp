@@ -20,13 +20,14 @@ namespace HappyHealthyCSharp
     [Activity(Label = "Login", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Login : Activity
     {
+        private static Context _loginContext;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetTheme(Resource.Style.Base_Theme_AppCompat_Light);
             SetContentView(Resource.Layout.activity_login);
             // Create your application here
-
+            _loginContext = this;
             //is Cache data available?
             if ((Extension.getPreference("ud_id", 0, this) != 0))
             {
@@ -44,6 +45,8 @@ namespace HappyHealthyCSharp
             ProgressDialog progressDialog = new ProgressDialog(this);
             login.Click += async delegate
             {
+                Extension.setPreference("ud_email", id.Text, this);
+                Extension.setPreference("ud_pass", pw.Text, this);
                 if (new UserTABLE().Select<UserTABLE>($"SELECT * FROM UserTABLE WHERE ud_email = '{id.Text}'").Count == 0)
                 {
                     progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
@@ -87,8 +90,9 @@ namespace HappyHealthyCSharp
                     Extension.CreateDialogue(this, "ข้อมูลเข้าสู่ระบบของท่านผิดพลาด กรุณาตรวจสอบอีกครั้ง").Show();
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                
                 Extension.CreateDialogue(this, "ข้อมูลเข้าสู่ระบบของท่านผิดพลาด กรุณาตรวจสอบอีกครั้ง").Show();
             }
         }
@@ -98,9 +102,13 @@ namespace HappyHealthyCSharp
             var conn = new SQLiteConnection(Extension.sqliteDBPath);
             var sql = $@"select * from UserTABLE where ud_email = '{id}'";
             var result = conn.Query<UserTABLE>(sql);
-            Extension.setPreference("ud_email", id, this);
-            Extension.setPreference("ud_pass", password, this);
+            //Extension.setPreference("ud_email", id, this);
+            //Extension.setPreference("ud_pass", password, this);
             Extension.setPreference("ud_id", result[0].ud_id, this);
+        }
+        public static Context getContext()
+        {
+            return _loginContext;
         }
     }
 }

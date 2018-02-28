@@ -150,22 +150,24 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/TestConnection", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool TestConnection() {
-            object[] results = this.Invoke("TestConnection", new object[0]);
+        public bool TestConnection(AuthHeader Authentication) {
+            object[] results = this.Invoke("TestConnection", new object[] {
+                        Authentication});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void TestConnectionAsync() {
-            this.TestConnectionAsync(null);
+        public void TestConnectionAsync(AuthHeader Authentication) {
+            this.TestConnectionAsync(Authentication, null);
         }
         
         /// <remarks/>
-        public void TestConnectionAsync(object userState) {
+        public void TestConnectionAsync(AuthHeader Authentication, object userState) {
             if ((this.TestConnectionOperationCompleted == null)) {
                 this.TestConnectionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTestConnectionOperationCompleted);
             }
-            this.InvokeAsync("TestConnection", new object[0], this.TestConnectionOperationCompleted, userState);
+            this.InvokeAsync("TestConnection", new object[] {
+                        Authentication}, this.TestConnectionOperationCompleted, userState);
         }
         
         private void OnTestConnectionOperationCompleted(object arg) {
@@ -177,23 +179,25 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFoodExchangeData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetFoodExchangeData(int id) {
+        public System.Data.DataSet GetFoodExchangeData(AuthHeader Authentication, int id) {
             object[] results = this.Invoke("GetFoodExchangeData", new object[] {
+                        Authentication,
                         id});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void GetFoodExchangeDataAsync(int id) {
-            this.GetFoodExchangeDataAsync(id, null);
+        public void GetFoodExchangeDataAsync(AuthHeader Authentication, int id) {
+            this.GetFoodExchangeDataAsync(Authentication, id, null);
         }
         
         /// <remarks/>
-        public void GetFoodExchangeDataAsync(int id, object userState) {
+        public void GetFoodExchangeDataAsync(AuthHeader Authentication, int id, object userState) {
             if ((this.GetFoodExchangeDataOperationCompleted == null)) {
                 this.GetFoodExchangeDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFoodExchangeDataOperationCompleted);
             }
             this.InvokeAsync("GetFoodExchangeData", new object[] {
+                        Authentication,
                         id}, this.GetFoodExchangeDataOperationCompleted, userState);
         }
         
@@ -206,23 +210,25 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetFoodData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetFoodData(string search_query) {
+        public System.Data.DataSet GetFoodData(AuthHeader Authentication, string search_query) {
             object[] results = this.Invoke("GetFoodData", new object[] {
+                        Authentication,
                         search_query});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void GetFoodDataAsync(string search_query) {
-            this.GetFoodDataAsync(search_query, null);
+        public void GetFoodDataAsync(AuthHeader Authentication, string search_query) {
+            this.GetFoodDataAsync(Authentication, search_query, null);
         }
         
         /// <remarks/>
-        public void GetFoodDataAsync(string search_query, object userState) {
+        public void GetFoodDataAsync(AuthHeader Authentication, string search_query, object userState) {
             if ((this.GetFoodDataOperationCompleted == null)) {
                 this.GetFoodDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFoodDataOperationCompleted);
             }
             this.InvokeAsync("GetFoodData", new object[] {
+                        Authentication,
                         search_query}, this.GetFoodDataOperationCompleted, userState);
         }
         
@@ -235,28 +241,26 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetData(string tableName, string email, string password) {
+        public System.Data.DataSet GetData(AuthHeader Authentication, string tableName) {
             object[] results = this.Invoke("GetData", new object[] {
-                        tableName,
-                        email,
-                        password});
+                        Authentication,
+                        tableName});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void GetDataAsync(string tableName, string email, string password) {
-            this.GetDataAsync(tableName, email, password, null);
+        public void GetDataAsync(AuthHeader Authentication, string tableName) {
+            this.GetDataAsync(Authentication, tableName, null);
         }
         
         /// <remarks/>
-        public void GetDataAsync(string tableName, string email, string password, object userState) {
+        public void GetDataAsync(AuthHeader Authentication, string tableName, object userState) {
             if ((this.GetDataOperationCompleted == null)) {
                 this.GetDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDataOperationCompleted);
             }
             this.InvokeAsync("GetData", new object[] {
-                        tableName,
-                        email,
-                        password}, this.GetDataOperationCompleted, userState);
+                        Authentication,
+                        tableName}, this.GetDataOperationCompleted, userState);
         }
         
         private void OnGetDataOperationCompleted(object arg) {
@@ -268,10 +272,9 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SynchonizeData", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string[] SynchonizeData(string email, string password, TEMP_DiabetesTABLE[] tempDiabetes, TEMP_KidneyTABLE[] tempKidney, TEMP_PressureTABLE[] tempPressure) {
+        public string[] SynchonizeData(AuthHeader Authentication, TEMP_DiabetesTABLE[] tempDiabetes, TEMP_KidneyTABLE[] tempKidney, TEMP_PressureTABLE[] tempPressure) {
             object[] results = this.Invoke("SynchonizeData", new object[] {
-                        email,
-                        password,
+                        Authentication,
                         tempDiabetes,
                         tempKidney,
                         tempPressure});
@@ -279,18 +282,17 @@ namespace HappyHealthyCSharp.HHCSService {
         }
         
         /// <remarks/>
-        public void SynchonizeDataAsync(string email, string password, TEMP_DiabetesTABLE[] tempDiabetes, TEMP_KidneyTABLE[] tempKidney, TEMP_PressureTABLE[] tempPressure) {
-            this.SynchonizeDataAsync(email, password, tempDiabetes, tempKidney, tempPressure, null);
+        public void SynchonizeDataAsync(AuthHeader Authentication, TEMP_DiabetesTABLE[] tempDiabetes, TEMP_KidneyTABLE[] tempKidney, TEMP_PressureTABLE[] tempPressure) {
+            this.SynchonizeDataAsync(Authentication, tempDiabetes, tempKidney, tempPressure, null);
         }
         
         /// <remarks/>
-        public void SynchonizeDataAsync(string email, string password, TEMP_DiabetesTABLE[] tempDiabetes, TEMP_KidneyTABLE[] tempKidney, TEMP_PressureTABLE[] tempPressure, object userState) {
+        public void SynchonizeDataAsync(AuthHeader Authentication, TEMP_DiabetesTABLE[] tempDiabetes, TEMP_KidneyTABLE[] tempKidney, TEMP_PressureTABLE[] tempPressure, object userState) {
             if ((this.SynchonizeDataOperationCompleted == null)) {
                 this.SynchonizeDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSynchonizeDataOperationCompleted);
             }
             this.InvokeAsync("SynchonizeData", new object[] {
-                        email,
-                        password,
+                        Authentication,
                         tempDiabetes,
                         tempKidney,
                         tempPressure}, this.SynchonizeDataOperationCompleted, userState);
@@ -338,23 +340,25 @@ namespace HappyHealthyCSharp.HHCSService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FoodRequest", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool FoodRequest(string food_name) {
+        public bool FoodRequest(AuthHeader Authentication, string food_name) {
             object[] results = this.Invoke("FoodRequest", new object[] {
+                        Authentication,
                         food_name});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void FoodRequestAsync(string food_name) {
-            this.FoodRequestAsync(food_name, null);
+        public void FoodRequestAsync(AuthHeader Authentication, string food_name) {
+            this.FoodRequestAsync(Authentication, food_name, null);
         }
         
         /// <remarks/>
-        public void FoodRequestAsync(string food_name, object userState) {
+        public void FoodRequestAsync(AuthHeader Authentication, string food_name, object userState) {
             if ((this.FoodRequestOperationCompleted == null)) {
                 this.FoodRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFoodRequestOperationCompleted);
             }
             this.InvokeAsync("FoodRequest", new object[] {
+                        Authentication,
                         food_name}, this.FoodRequestOperationCompleted, userState);
         }
         
@@ -995,6 +999,39 @@ namespace HappyHealthyCSharp.HHCSService {
             }
             set {
                 this.modeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class AuthHeader {
+        
+        private string usernameField;
+        
+        private string passwordField;
+        
+        /// <remarks/>
+        public string Username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                this.usernameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
             }
         }
     }

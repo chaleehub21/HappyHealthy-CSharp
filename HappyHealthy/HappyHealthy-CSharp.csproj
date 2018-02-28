@@ -147,6 +147,7 @@
     <Compile Include="History_Doctor.cs" />
     <Compile Include="IDatabaseSync.cs" />
     <Compile Include="ILocalActivity.cs" />
+    <Compile Include="Service.cs" />
     <Compile Include="SummaryDiabetesTABLE.cs" />
     <Compile Include="EmptyDemo.cs" />
     <Compile Include="FoodExchange.cs" />
@@ -1235,6 +1236,9 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\buttonsavefoodex.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WebReferenceUrl Include="http://172.20.97.7/HHCSService/HHCSService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HHCSService\</RelPath>
@@ -1251,9 +1255,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\HHCSService\HHCSService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\buttonsavefoodex.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

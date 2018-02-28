@@ -123,7 +123,7 @@ namespace HappyHealthyCSharp
             {
                 try
                 {
-                    var Service = new HHCSService.HHCSService();
+                    var ws = new HHCSService.HHCSService();
                     var presList = new List<HHCSService.TEMP_PressureTABLE>();
                     new TEMP_PressureTABLE().Select<TEMP_PressureTABLE>($"SELECT * FROM TEMP_PressureTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, c)}'").ForEach(row =>
                     {
@@ -147,8 +147,8 @@ namespace HappyHealthyCSharp
                         wsObject.mode = row.mode;
                         presList.Add(wsObject);
                     });
-                    Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, c)
-                        , Extension.getPreference("ud_pass", string.Empty, c)
+                    ws.SynchonizeData(
+                        Service.GetInstance.WebServiceAuthentication
                         , new List<HHCSService.TEMP_DiabetesTABLE>().ToArray()
                         , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
                         , presList.ToArray());

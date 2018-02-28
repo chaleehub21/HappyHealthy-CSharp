@@ -27,8 +27,18 @@
         </s:sequence>
       </s:complexType>
       <s:element name="TestConnection">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:AuthHeader" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="TestConnectionResponse">
         <s:complexType>
           <s:sequence>
@@ -39,6 +49,7 @@
       <s:element name="GetFoodExchangeData">
         <s:complexType>
           <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:AuthHeader" />
             <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
           </s:sequence>
         </s:complexType>
@@ -60,6 +71,7 @@
       <s:element name="GetFoodData">
         <s:complexType>
           <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:AuthHeader" />
             <s:element minOccurs="0" maxOccurs="1" name="search_query" type="s:string" />
           </s:sequence>
         </s:complexType>
@@ -81,9 +93,8 @@
       <s:element name="GetData">
         <s:complexType>
           <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:AuthHeader" />
             <s:element minOccurs="0" maxOccurs="1" name="tableName" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -104,8 +115,7 @@
       <s:element name="SynchonizeData">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:AuthHeader" />
             <s:element minOccurs="0" maxOccurs="1" name="tempDiabetes" type="tns:ArrayOfTEMP_DiabetesTABLE" />
             <s:element minOccurs="0" maxOccurs="1" name="tempKidney" type="tns:ArrayOfTEMP_KidneyTABLE" />
             <s:element minOccurs="0" maxOccurs="1" name="tempPressure" type="tns:ArrayOfTEMP_PressureTABLE" />
@@ -219,6 +229,7 @@
       <s:element name="FoodRequest">
         <s:complexType>
           <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:AuthHeader" />
             <s:element minOccurs="0" maxOccurs="1" name="food_name" type="s:string" />
           </s:sequence>
         </s:complexType>

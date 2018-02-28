@@ -34,7 +34,7 @@ namespace HappyHealthyCSharp
         private void RequestFood(object sender, EventArgs e)
         {
             var service = new HHCSService.HHCSService();
-            var result = service.FoodRequest(foodname.Text);
+            var result = service.FoodRequest(Service.GetInstance.WebServiceAuthentication,foodname.Text);
             if (result == true)
                 Extension.CreateDialogue(this, "รายการอาหารของคุณได้ทำการเพิ่มเข้าสู่ระบบพิจารณาจากผู้ดูแล", delegate
                 {

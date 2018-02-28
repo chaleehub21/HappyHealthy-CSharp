@@ -65,7 +65,7 @@ namespace HappyHealthyCSharp
         public JavaList<IDictionary<string, object>> getFoodList(Context c,string word)
         {
              var service = new HHCSService.HHCSService();
-            var tickets = service.GetFoodData(word);
+            var tickets = service.GetFoodData(Service.GetInstance.WebServiceAuthentication, word);
             var foodList = new JavaList<IDictionary<string, object>>();
             foreach (DataRow x in tickets.Tables["FoodTABLE"].Rows)
             {
@@ -85,7 +85,7 @@ namespace HappyHealthyCSharp
             //var potassium = new KidneyTABLE().Select<double>($@"SELECT SUM(ckd_potassium) FROM KidneyTABLE WHERE UD_ID = '{Extension.getPreference("ud_id", 0, c)}")[0];
             //var phosphorus = new KidneyTABLE().Select<double>($@"SELECT SUM(ckd_phosphorus_blood) FROM KidneyTABLE WHERE UD_ID = '{Extension.getPreference("ud_id", 0, c)}")[0];
             var service = new HHCSService.HHCSService();
-            var tickets = service.GetFoodExchangeData(exchangeId);
+            var tickets = service.GetFoodExchangeData(Service.GetInstance.WebServiceAuthentication,exchangeId);
             var foodList = new JavaList<IDictionary<string, object>>();
             foreach (DataRow x in tickets.Tables["FoodTABLE"].Rows)
             {
@@ -101,7 +101,7 @@ namespace HappyHealthyCSharp
         public Dictionary<string, string> selectDetailByID(int id)
         {
             var service = new HHCSService.HHCSService();
-            var tickets = service.GetFoodData("");
+            var tickets = service.GetFoodData(Service.GetInstance.WebServiceAuthentication, "");
             var query = $@"SELECT * FROM Food where Food_ID = {id}";
             var retValue = new Dictionary<string, string>();
             foreach (DataRow x in tickets.Tables["FoodTABLE"].Rows)

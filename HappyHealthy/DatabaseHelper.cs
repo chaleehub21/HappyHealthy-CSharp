@@ -238,12 +238,13 @@ namespace HappyHealthyCSharp
                 DataSet diabetesData = null;
                 DataSet kidneyData = null;
                 DataSet pressureData = null;
-                var Service = new HHCSService.HHCSService();
+                var ws = new HHCSService.HHCSService();
+
                 await System.Threading.Tasks.Task.Run(delegate {
-                    userData = Service.GetData("UserTABLE", email, password);
-                    diabetesData = Service.GetData("DiabetesTABLE", email, password);
-                    kidneyData = Service.GetData("KidneyTABLE", email, password);
-                    pressureData = Service.GetData("PressureTABLE", email, password);
+                    userData = ws.GetData(Service.GetInstance.WebServiceAuthentication, "UserTABLE");
+                    diabetesData = ws.GetData(Service.GetInstance.WebServiceAuthentication, "DiabetesTABLE");
+                    kidneyData = ws.GetData(Service.GetInstance.WebServiceAuthentication, "KidneyTABLE");
+                    pressureData = ws.GetData(Service.GetInstance.WebServiceAuthentication, "PressureTABLE");
                 });
                 if (userData != null)
                 {

@@ -31,7 +31,7 @@ namespace HappyHealthyCSharp
             "ud_id"
         };
         public static dynamic caseLevel = new { Low = 100,Mid = 125,High = 126};
-        [SQLite.PrimaryKey,SQLite.AutoIncrement]
+        [SQLite.PrimaryKey]
         public int fbs_id { get; set; }
         public DateTime fbs_time { get; set; }
         public string fbs_time_string { get; set; }
@@ -70,7 +70,7 @@ namespace HappyHealthyCSharp
             {
                 try
                 {
-                    var Service = new HHCSService.HHCSService();
+                    var ws = new HHCSService.HHCSService();
                     var diaList = new List<HHCSService.TEMP_DiabetesTABLE>();
                     new TEMP_DiabetesTABLE().Select<TEMP_DiabetesTABLE>($"SELECT * FROM TEMP_DiabetesTABLE WHERE ud_id = '{Extension.getPreference("ud_id", 0, c)}'").ForEach(row =>
                     {
@@ -86,8 +86,8 @@ namespace HappyHealthyCSharp
                         wsObject.mode = row.mode;
                         diaList.Add(wsObject);
                     });
-                    Service.SynchonizeData(Extension.getPreference("ud_email", string.Empty, c)
-                        , Extension.getPreference("ud_pass", string.Empty, c)
+                    var result = ws.SynchonizeData(
+                        Service.GetInstance.WebServiceAuthentication
                         , diaList.ToArray()
                         , new List<HHCSService.TEMP_KidneyTABLE>().ToArray()
                         , new List<HHCSService.TEMP_PressureTABLE>().ToArray());

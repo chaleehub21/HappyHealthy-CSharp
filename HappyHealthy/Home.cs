@@ -151,7 +151,7 @@ namespace HappyHealthyCSharp
             */
             bool result = false;
             await Task.Run(delegate {
-                result = serviceInstance.TestConnection();
+                result = serviceInstance.TestConnection(Service.GetInstance.WebServiceAuthentication);
             });
             return result;
         }
