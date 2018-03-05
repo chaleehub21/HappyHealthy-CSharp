@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
-using MySql.Data.MySqlClient;
 using Android.Speech;
 using Newtonsoft.Json;
 using System.Threading.Tasks;

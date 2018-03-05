@@ -9,11 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MySql.Data.MySqlClient;
 using System.Data;
 using Plugin.LocalNotifications;
 using SQLite;
 using System.Threading;
+
 
 namespace HappyHealthyCSharp
 {

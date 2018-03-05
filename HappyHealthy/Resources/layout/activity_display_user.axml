@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#f4f0f0"
-    tools:context="com.jiraporn.nut.happyhealthy.DisplayUser">
+    android:background="#f4f0f0">
     <LinearLayout
         android:id="@+id/container_toolbar"
         android:layout_width="fill_parent"
@@ -57,7 +56,7 @@
                 android:layout_marginTop="3dp"
                 android:src="@drawable/da5" />
             <EditText
-                android:id="@+id/tv_Name"
+                android:id="@+id/user_detail_name"
                 android:layout_width="150dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_vertical"
@@ -109,7 +108,7 @@
                 android:layout_marginTop="10.0dp"
                 android:src="@drawable/da7" />
             <EditText
-                android:id="@+id/tv_Age"
+                android:id="@+id/user_detail_age"
                 android:layout_width="70dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_vertical"

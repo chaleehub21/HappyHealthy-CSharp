@@ -12,7 +12,6 @@ using Android.Widget;
 using Java.Util;
 using Java.Text;
 using OxyPlot.Xamarin.Android;
-using MySql.Data.MySqlClient;
 using System.Data;
 using OxyPlot;
 using OxyPlot.Axes;

@@ -11,12 +11,11 @@ using Android.Views;
 using Android.Widget;
 using SQLite;
 using Java.Text;
-using MySql.Data.MySqlClient;
 
 namespace HappyHealthyCSharp
 {
     
-    [Activity(Theme = "@style/MyMaterialTheme.Base",ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     class UserDetail : Activity
     {
         EditText txtName, txtAge, txtIdenNo, txtSex;
@@ -24,8 +23,8 @@ namespace HappyHealthyCSharp
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_display_user);
-            txtName = FindViewById<EditText>(Resource.Id.tv_Name);
-            txtAge = FindViewById<EditText>(Resource.Id.tv_Age);
+            txtName = FindViewById<EditText>(Resource.Id.user_detail_name);
+            txtAge = FindViewById<EditText>(Resource.Id.user_detail_age);
             //txtIdenNo = FindViewById<EditText>(Resource.Id.ud_iden);
             txtSex = FindViewById<EditText>(Resource.Id.ud_gen);
             var tempLogOut = FindViewById<ImageView>(Resource.Id.logout);         

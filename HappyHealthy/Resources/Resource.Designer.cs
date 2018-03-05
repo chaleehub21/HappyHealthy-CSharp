@@ -3931,9 +3931,6 @@ namespace HappyHealthyCSharp
 			// aapt resource value: 0x7f080047
 			public const int topPanel = 2131230791;
 			
-			// aapt resource value: 0x7f080112
-			public const int tv_Age = 2131230994;
-			
 			// aapt resource value: 0x7f0800ed
 			public const int tv_D_CostSugar = 2131230957;
 			
@@ -3951,9 +3948,6 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f0800f9
 			public const int tv_K_LevelCostGFR = 2131230969;
-			
-			// aapt resource value: 0x7f080110
-			public const int tv_Name = 2131230992;
 			
 			// aapt resource value: 0x7f080104
 			public const int tv_P_CostPressureDown = 2131230980;
@@ -4017,6 +4011,12 @@ namespace HappyHealthyCSharp
 			
 			// aapt resource value: 0x7f080158
 			public const int userPW = 2131231064;
+			
+			// aapt resource value: 0x7f080112
+			public const int user_detail_age = 2131230994;
+			
+			// aapt resource value: 0x7f080110
+			public const int user_detail_name = 2131230992;
 			
 			// aapt resource value: 0x7f080143
 			public const int viewPageAndroid = 2131231043;

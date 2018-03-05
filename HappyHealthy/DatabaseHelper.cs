@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MySql.Data.MySqlClient;
 using System.Data;
 using System.Threading;
 using System.Reflection;
@@ -219,9 +218,9 @@ namespace HappyHealthyCSharp
         {
             try
             {
-                var MySQLConn = new MySqlConnection(url);
-                MySQLConn.Open();
-                MySQLConn.Close();
+                //var MySQLConn = new MySqlConnection(url);
+                //MySQLConn.Open();
+                //MySQLConn.Close();
                 return true;
 
             }
