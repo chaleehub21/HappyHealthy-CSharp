@@ -170,7 +170,7 @@ namespace HappyHealthyCSharp
         public void ClickPill(object sender, EventArgs e)
         {
             //GlobalFunction.createDialog(this, "Not implemented").Show();
-            StartActivity(new Intent(this, typeof(History_Pill)));
+            StartActivity(new Intent(this, typeof(History_Medicine)));
         }
         public void ClickDoctor(object sender, EventArgs e)
         {
@@ -191,11 +191,6 @@ namespace HappyHealthyCSharp
             }
             */
             return;
-            var notifTime = DateTime.Now;
-            notifTime.AddHours(-6);
-            notifTime.AddSeconds(20);
-            CustomNotification.SetAlarmManager(this, "TEST", 1, notifTime);
-            Extension.CreateDialogue(this, notifTime.ToString()).Show();
         }
     }
 }

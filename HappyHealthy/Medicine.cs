@@ -95,6 +95,8 @@ namespace HappyHealthyCSharp
                  {
                      var deleteUri = CalendarHelper.GetDeleteEventURI(medObject.ma_calendar_uri);
                      ContentResolver.Delete(deleteUri, null, null);
+                     var time = MedicineTABLE.Morning;
+                     CustomNotification.CancelAllAlarmManager(this, medObject.ma_id, medObject.ma_name, time);
                      medObject.Delete<MedicineTABLE>(medObject.ma_id);
                      Finish();
                  }
@@ -143,10 +145,15 @@ namespace HappyHealthyCSharp
             medObject.ma_pic = picPath;
             medObject.ud_id = Extension.getPreference("ud_id", 0, this);
             medObject.Insert();
+            /*
             var testRRULE = "FREQ=WEEKLY";
             var insertUri = CalendarHelper.GetEventContentValues(1, medName.Text, medDesc.Text, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 12, false, "UTC+7", testRRULE);
             var savedUri = ContentResolver.Insert(CalendarContract.Events.ContentUri, insertUri);
             medObject.ma_calendar_uri = savedUri.ToString();
+            */
+            var time = MedicineTABLE.Morning;
+            CustomNotification.SetAlarmManager(this,medObject.ma_id, medObject.ma_name,time );
+            //if(a) morning if(b) lunch and so on...
             medObject.Update();
             //CustomNotification.SetAlarmManager(this, $"ได้เวลาทานยา {medObject.ma_name}",(int)DateTime.Now.DayOfWeek,medObject.ma_set_time, Resource.Raw.notialert);
             this.Finish();

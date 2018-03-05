@@ -64,9 +64,9 @@ namespace HappyHealthyCSharp
         /// <param name="repeatDateOfWeek">Repeating date for speciific date</param>
         /// <param name="alertTime">Repeating time for specific time</param>
         /// <param name="customSoundResourceID">Resource id for sound</param>
-        public static void SetAlarmManager(Context c,string content, int repeatDateOfWeek, DateTime alertTime,int customSoundResourceID = -9999)
+        public static void SetAlarmManager(Context c,int requestId,string content, DateTime alertTime)
         {
-            
+            /*
             var filePath = RingtoneManager.GetDefaultUri(RingtoneType.Notification).Path;
             if (customSoundResourceID != -9999)
             {
@@ -85,29 +85,41 @@ namespace HappyHealthyCSharp
             calendar.Set(Java.Util.CalendarField.HourOfDay, time.Hour);
             calendar.Set(Java.Util.CalendarField.Minute, time.Minute);
             calendar.Set(Java.Util.CalendarField.Second, time.Second);
-            //calendar.Set(time.Year, time.Month - 1, time.Day, time.Hour, time.Minute, time.Second);
-            /*
-            var halfMin = (long)(30 * 1000);
-            manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, halfMin, pendingIntent);
-            */ //This code snippet is worked!!!, so let's assume it's work for IntervalDay as well as halfMin
+            //This code snippet is worked!!!, so let's assume it's work for IntervalDay as well as halfMin
             var fiveMin =  1 * 1000;
             manager.SetRepeating(AlarmType.RtcWakeup, SystemClock.ElapsedRealtime() + calendar.TimeInMillis, fiveMin, pendingIntent);
             //reference : https://stackoverflow.com/questions/42237920/xamarin-android-how-to-schedule-and-alarm-with-a-broadcastreceiver
+            */
+            var calendar = Calendar.Instance;
+            calendar.Set(CalendarField.HourOfDay, alertTime.Hour);
+            calendar.Set(CalendarField.Minute, alertTime.Minute);
+            calendar.Set(CalendarField.Second, 0);
+            var intent = new Intent(c, typeof(AlarmReceiver));
+            intent.PutExtra("content", content);
+            var pendingIntent = PendingIntent.GetBroadcast(c, requestId, intent, PendingIntentFlags.UpdateCurrent);
+            var am = (AlarmManager)c.GetSystemService(AlarmService);
+            am.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
         }
-        public static bool CancelAllAlarmManager(Context c,Intent intent,int requestCode = 0)
+        public static bool CancelAllAlarmManager(Context c, int requestId, string content, DateTime alertTime)
         {
-            var alarmManager = (AlarmManager)c.GetSystemService(Context.AlarmService);
-            var updateServiceIntent = intent;
-            var pendingUpdateIntent = PendingIntent.GetService(c, requestCode, updateServiceIntent, 0);
             try
             {
-                alarmManager.Cancel(pendingUpdateIntent);
+                var calendar = Calendar.Instance;
+                calendar.Set(CalendarField.HourOfDay, alertTime.Hour);
+                calendar.Set(CalendarField.Minute, alertTime.Minute);
+                calendar.Set(CalendarField.Second, 0);
+                var intent = new Intent(c, typeof(AlarmReceiver));
+                intent.PutExtra("content", content);
+                var pendingIntent = PendingIntent.GetBroadcast(c, requestId, intent, PendingIntentFlags.UpdateCurrent);
+                var am = (AlarmManager)c.GetSystemService(AlarmService);
+                am.Cancel(pendingIntent);
                 return true;
             }
-            catch
+            catch(System.Exception ex)
             {
-                return false;
+                Console.WriteLine(ex);
             }
+            return false;
         }
     }
     [BroadcastReceiver]
@@ -115,6 +127,7 @@ namespace HappyHealthyCSharp
     {
         public override void OnReceive(Context context, Intent intent)
         {
+            /*
             var message = intent.GetStringExtra("message");
             var title = intent.GetStringExtra("title");
             var sPath = intent.GetStringExtra("sound");
@@ -132,7 +145,22 @@ namespace HappyHealthyCSharp
             var notification = builder.Build();
             var manager = NotificationManager.FromContext(context);
             manager.Notify(1337, notification);
-
+            */
+            var alertContent = intent.GetStringExtra("content");
+            var when = JavaSystem.CurrentTimeMillis();
+            var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
+            var notificationIntent = new Intent(context, typeof(EmptyDemo));
+            notificationIntent.SetFlags(ActivityFlags.ClearTop);
+            var pendingIntent = PendingIntent.GetActivity(context, 0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            var alarmSound = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
+            var mNotifyBuilder = new NotificationCompat.Builder(context);
+            mNotifyBuilder.SetSmallIcon(Resource.Drawable.logormutsb);
+            mNotifyBuilder.SetContentTitle("HHCS");
+            mNotifyBuilder.SetContentText(alertContent).SetSound(alarmSound);
+            mNotifyBuilder.SetAutoCancel(true).SetWhen(when);
+            mNotifyBuilder.SetContentIntent(pendingIntent);
+            mNotifyBuilder.SetVibrate(new long[] {1000,1000,1000,1000,1000 });
+            notificationManager.Notify(1000, mNotifyBuilder.Build());
         }
     }
 }

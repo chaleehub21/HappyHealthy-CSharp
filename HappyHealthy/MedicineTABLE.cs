@@ -18,13 +18,17 @@ namespace HappyHealthyCSharp
     class MedicineTABLE : DatabaseHelper
     {
         public override List<string> Column => new List<string> {
-            "ma_id", 
+            "ma_id",
             "ma_name",
-            "ma_desc", 
+            "ma_desc",
             "ma_set_time",
             "ma_calendar_uri",
             "ma_pic"
         };
+        public static DateTime Morning => DateTime.Parse("07:00 AM");
+        public static DateTime Lunch => DateTime.Parse("12:00 PM");
+        public static DateTime Dinner => DateTime.Parse("6:00 PM");
+        public static DateTime Sleep => DateTime.Parse("10:00 PM");
         [SQLite.PrimaryKey, SQLite.AutoIncrement]
         public int ma_id { get; set; }
         [SQLite.MaxLength(100)]
