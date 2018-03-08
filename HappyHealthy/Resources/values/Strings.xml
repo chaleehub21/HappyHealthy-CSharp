@@ -20,4 +20,11 @@
     <string name="title_messages">Messages</string>
     <string name="title_friends">Friends</string>
     <string name="title_home">Home</string>
+
+  <string name="planet_prompt">กรุณาเลือกกราฟ</string>
+  <string-array name="ckd_array">
+    <item>ไต</item>
+    <item>เบาหวาน</item>
+    <item>ความดันโลหิต</item>
+  </string-array>
 </resources>
