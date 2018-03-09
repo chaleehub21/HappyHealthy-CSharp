@@ -35,6 +35,7 @@
         android:layout_marginTop="20dp"
         android:onClick="ClickSaveDataUser"
         android:text="บันทึก"
+        android:textStyle="bold"
         android:textColor="#ffffff"
         android:textSize="16dp" />
     <LinearLayout
@@ -81,7 +82,7 @@
                 android:src="@drawable/da6" />
             <EditText
                 android:id="@+id/ud_gen"
-                android:layout_width="70dp"
+                android:layout_width="150dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="12.0dp"
@@ -109,7 +110,7 @@
                 android:src="@drawable/da7" />
             <EditText
                 android:id="@+id/user_detail_age"
-                android:layout_width="70dp"
+                android:layout_width="150dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="13.5dp"
@@ -135,89 +136,154 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="left"
             android:layout_marginTop="19.0dp"
-            android:layout_marginLeft="0.0dp">
+            android:layout_marginLeft="65.5dp">
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:id="@+id/imageview_ud_bf_time"
+                android:id="@+id/imageview_ud_sl_time"
                 android:src="@drawable/ic_clock"
                 android:layout_marginTop="0.0dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="เช้า"
-                android:id="@+id/ud_bf_time"
+                android:id="@+id/textview_ud_bf_time"
                 android:textColor="#f2787b"
                 android:textSize="16dp"
                 android:layout_marginLeft="5.0dp" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="left"
-                android:layout_marginTop="9.5dp"
-                android:layout_marginLeft="35.0dp">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/imageview_ud_lu_time"
-                    android:src="@drawable/ic_clock"
-                    android:layout_marginTop="0.0dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="กลางวัน"
-                    android:id="@+id/ud_lu_time"
-                    android:textColor="#f2787b"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="5.0dp" />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/ud_bf_time"
+                android:layout_width="150dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="0.0dp"
+                android:autoText="false"
+                android:background="@drawable/my_border_box"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:numeric="integer"
+                android:textColor="#505050"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:enabled="false" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="9.5dp"
-            android:layout_marginLeft="0.0dp">
+            android:layout_gravity="left"
+            android:layout_marginTop="12.5dp"
+            android:layout_marginLeft="65.5dp">
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:id="@+id/imageview_ud_dn_time"
+                android:id="@+id/imageview_ud_sl_time"
+                android:src="@drawable/ic_clock"
+                android:layout_marginTop="0.0dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="กลางวัน"
+                android:id="@+id/text_viwe ud_lu_time"
+                android:textColor="#f2787b"
+                android:textSize="16dp"
+                android:layout_marginLeft="5.0dp" />
+            <EditText
+                android:id="@+id/ud_lu_time"
+                android:layout_width="150dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="13.0dp"
+                android:layout_marginTop="0.0dp"
+                android:autoText="false"
+                android:background="@drawable/my_border_box"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:numeric="integer"
+                android:textColor="#505050"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:enabled="false" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left"
+            android:layout_marginTop="9.5dp"
+            android:layout_marginLeft="65.5dp"
+            android:id="@+id/linearLayout2">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageview_ud_sl_time"
                 android:src="@drawable/ic_clock"
                 android:layout_marginTop="0.0dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="เย็น"
-                android:id="@+id/ud_dn_time"
+                android:id="@+id/textview_ud_dn_time"
                 android:textColor="#f2787b"
                 android:textSize="16dp"
                 android:layout_marginLeft="5.0dp" />
-            <LinearLayout
+            <EditText
+                android:id="@+id/ud_dn_time"
+                android:layout_width="150dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="41dp"
+                android:layout_marginTop="0.0dp"
+                android:autoText="false"
+                android:background="@drawable/my_border_box"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:numeric="integer"
+                android:textColor="#505050"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:enabled="false" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left"
+            android:layout_marginTop="9.5dp"
+            android:layout_marginLeft="65.5dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageview_ud_sl_time"
+                android:src="@drawable/ic_clock"
+                android:layout_marginTop="0.0dp" />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="left"
-                android:layout_marginTop="9.5dp"
-                android:layout_marginLeft="35.0dp">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/imageview_ud_sl_time"
-                    android:src="@drawable/ic_clock"
-                    android:layout_marginTop="0.0dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ก่อนนอน"
-                    android:id="@+id/ud_sl_time"
-                    android:textColor="#f2787b"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="5.0dp" />
-            </LinearLayout>
+                android:text="ก่อนนอน"
+                android:id="@+id/textview_ud_sl_time"
+                android:textColor="#f2787b"
+                android:textSize="16dp"
+                android:layout_marginLeft="5.0dp" />
+            <EditText
+                android:id="@+id/ud_sl_time"
+                android:layout_width="150dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8.0dp"
+                android:layout_marginTop="0.0dp"
+                android:autoText="false"
+                android:background="@drawable/my_border_box"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:numeric="integer"
+                android:textColor="#505050"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:enabled="false" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -237,7 +303,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10.0dp"
                 android:onClick="ClickLogout"
-                android:src="@drawable/ButtonLogout" />
+                android:src="@drawable/logout_button_ac-user" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
